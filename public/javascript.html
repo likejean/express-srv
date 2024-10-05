@@ -33,7 +33,10 @@
             />
             <small class="form-alert"></small>
           </div>
-          <button type="submit" class="block submit-btn">submit</button>
+          <div class="form-row">
+            <button type="submit" class="block submit-btn">submit</button>            
+          </div>
+
         </form>
         <div class="result"></div>
       </section>
@@ -53,7 +56,7 @@
           const people = data.data.map((person) => {
             return `<h5>${person.name}</h5>`
           })
-          result.innerHTML = people.join('')
+          result.innerHTML = people.join('')          
         } catch (error) {
           result.innerHTML = `<div class="alert alert-danger">Can't Fetch Data</div>`
         }
@@ -71,9 +74,8 @@
           const { data } = await axios.post('/api/people', { name: nameValue })
           const h5 = document.createElement('h5')
           h5.textContent = data.person
-          result.appendChild(h5)
-        } catch (error) {
-          // console.log(error.response)
+          result.appendChild(h5)          
+        } catch (error) {          
           formAlert.textContent = error.response.data.msg
         }
         input.value = ''
