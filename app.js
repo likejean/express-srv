@@ -15,8 +15,11 @@ app.get('/api/people',(req, res)=>{
 })
 
 app.post('/login',(req, res)=>{
-    console.log(req.body)
-    res.end('POST');
+    const {name} = req.body;
+    if(name){
+        return res.status(200).send(`Welcome, ${name}`)
+    }
+    res.status(403).send("please, provide crendentials");
 })
 
 app.listen(5000, ()=>{
