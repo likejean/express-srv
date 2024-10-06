@@ -3,16 +3,11 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 
-async function connect(){
-    try{        
-        await mongoose.connect(process.env.ATLAS_DATABASE);
-        console.log("Succesfully connected to MongoDB Atlas database")
-    }catch (error){
-        console.log(error);
-    }
-}
-
-connect();
+//Establish DB connection
+mongoose.connect(
+    process.env.ATLAS_DATABASE).then(connect => 
+        console.log(`Successfully connected to Atlas MongoDB {${process.env.ATLAS_DATABASE_NAME}}`))
+    .catch(err => console.log('ERROR: could not connect to MongoDB database...', err));
 
 let {people} = require('./data');
 
@@ -52,7 +47,6 @@ app.post('/login',(req, res)=>{
     res.status(403).send("please, provide crendentials");
 })
 
-app.listen(5000, ()=>{
-    console.log('Server is listening on port 5000....')
-})
 
+
+module.exports = app;
