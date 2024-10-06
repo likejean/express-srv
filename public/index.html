@@ -10,23 +10,36 @@
   </head>
   <body>
     <nav>
-      <div class="nav-center">
-        <h5>HTTP Methods</h5>
-        <div>
-          <a href="index.html">regular </a>
-          <a href="javascript.html">javascript </a>
-        </div>
+      <div class="navbar navbar-dark bg-primary">
+        <h5>Intec Sensors</h5>
+       
       </div>
     </nav>
     <main>
-      <form action="/login" method="POST">
-        <h3>Traditional Form</h3>
-        <div class="form-row">
-          <label for="name"> enter name </label>
-          <input type="text" name="name" id="name" autocomplete="false" />
-        </div>
-        <button type="submit" class="block">submit</button>
-      </form>
+      <div class="result"></div>
     </main>
+    
   </body>
+  <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const result = document.querySelector('.result');
+      const fetchSensors = async () => {
+        try {
+          const { data } = await axios.get('/sensors'); 
+          const sensors = data.sensors.map((sensor) => {            
+            return `<h5>${sensor.EID}-${sensor.description}</h5>`;
+          })
+          result.innerHTML = sensors.join('');
+        } catch (error) {
+          result.innerHTML = `<div class="alert alert-danger">ERROR! Can't Fetch Data</div>`;
+        }
+      };
+      
+      fetchSensors();
+
+    </script>
 </html>

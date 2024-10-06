@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 require('dotenv').config();  //get access to environmental variables & secret keys
 
+
 //Establish DB connection
 mongoose.connect(
     process.env.NODE_ENV_ATLAS_DATABASE).then(connect => 
@@ -18,6 +19,7 @@ app.use(express.urlencoded({extended: false}));
 
 //middleware: module parses incoming requests with JSON payloads and is based on body-parser
 app.use(express.json());
+
 
 //Intec Sensors Routes
 const sensorRoutes = require('./api/routes/sensors');
