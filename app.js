@@ -1,5 +1,19 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
+
+async function connect(){
+    try{        
+        await mongoose.connect(process.env.ATLAS_DATABASE);
+        console.log("Succesfully connected to MongoDB Atlas database")
+    }catch (error){
+        console.log(error);
+    }
+}
+
+connect();
+
 let {people} = require('./data');
 
 //middleware: exposes a directory or a file to 
