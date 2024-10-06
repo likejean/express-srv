@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 //Establish DB connection
 mongoose.connect(
-    process.env.ATLAS_DATABASE).then(connect => 
+    process.env.NODE_ENV_ATLAS_DATABASE).then(connect => 
         console.log(`Successfully connected to Atlas MongoDB {${process.env.ATLAS_DATABASE_NAME}}`))
     .catch(err => console.log('ERROR: could not connect to MongoDB database...', err));
 
@@ -25,6 +25,6 @@ app.use(express.json());
 const sensorRoutes = require('./api/routes/sensors');
 app.use('/sensors', sensorRoutes);
 
-console.log(process.env.ATLAS_DATABASE)
+console.log(process.env.NODE_ENV_ATLAS_DATABASE)
 
 module.exports = app;
