@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
         .then(docs => {
             res.status(200).json({
                 count: docs.length,
-                sensors: docs.map(doc => {
+                sensors: docs.map(doc => {                    
                     return {
                         EID: doc.EID,
                         type: doc.type,    
@@ -29,16 +29,17 @@ router.get('/', (req, res, next) => {
                         comment: doc.comment,
                         units: doc.units,
                         manufacturer: doc.manufacturer,
-                        createdAt:req.doc.createdAt,
+                        createdAt: doc.createdAt,
                         request: {
                             type: 'GET'
                         }
-                    };
+                    };                    
                 })
             });
         })
         .catch(err => {
             res.status(500).json({
+                comment: 'something is wrong...',
                 error: err
             });
         });
