@@ -5,7 +5,43 @@ const router = express.Router();
 
 
 
-
+//Routers
+router.get('/', (req, res, next) => {
+    Sensor
+        .find()
+        .exec()
+        .then(docs => {
+            res.status(200).json({
+                count: docs.length,
+                sensors: docs.map(doc => {
+                    return {
+                        EID: doc.EID,
+                        type: doc.type,    
+                        priority: doc.priority,
+                        calibrationDate: doc.calibrationDate,
+                        expirationDate: doc.expirationDate,
+                        calibrationExtended: doc.calibrationExtended,
+                        maxCalibrationExtension: doc.maxCalExtension,
+                        location: doc.location,
+                        description: doc.description,
+                        calibrationRange: doc.calRange,
+                        comment: doc.comment,
+                        units: doc.units,
+                        manufacturer: doc.manufacturer,
+                        createdAt:req.doc.createdAt,
+                        request: {
+                            type: 'GET'
+                        }
+                    };
+                })
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            });
+        });
+});
 
 router.post('/', (req, res, next) => {
     const sensor = new Sensor({
@@ -22,7 +58,8 @@ router.post('/', (req, res, next) => {
         calibrationRange: req.body.calRange,
         comment: req.body.comment,
         units: req.body.units,
-        manufacturer: req.body.manufacturer
+        manufacturer: req.body.manufacturer,
+        createdAt:req.body.createdAt
     });
    
     sensor.save()
@@ -44,7 +81,7 @@ router.post('/', (req, res, next) => {
         })
         .catch(err => {
             res.status(500).json({
-                message: "Failed to add Sensor",
+                message: "Failed to add Sensor to Database",
                 error: err
             });
         });
