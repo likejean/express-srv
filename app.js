@@ -1,15 +1,13 @@
-require('dotenv').config();  //get access to environmental variables & secret keys
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+require('dotenv').config();  //get access to environmental variables & secret keys
 
 //Establish DB connection
 mongoose.connect(
     process.env.NODE_ENV_ATLAS_DATABASE).then(connect => 
-        console.log(`Successfully connected to Atlas MongoDB {${process.env.ATLAS_DATABASE_NAME}}`))
+        console.log(`Successfully connected to Atlas MongoDB: ${process.env.NODE_ENV_ATLAS_CLUSTER_NAME}/${process.env.NODE_ENV_ATLAS_DATABASE_NAME}`))
     .catch(err => console.log('ERROR: could not connect to MongoDB database...', err));
-
-let {people} = require('./data');
 
 //middleware: exposes a directory or a file to 
 //a particular URL so its contents can be publicly accessed (thru inspection in browser)
