@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config();  //get access to environmental variables & secret keys
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
