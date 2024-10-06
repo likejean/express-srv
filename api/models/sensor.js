@@ -9,6 +9,7 @@ const sensorSchema = mongoose.Schema({
     expirationDate: { type: Date, default: Date.now, required: true },
     createdAt: { type: Date, default: Date.now, required: true },
     calibrationExtended: { type: Boolean, required: true },
+    calibratedBy: { type: String, required: false }, 
     maxCalibrationExtension: { type: String, required: false },
     location: { type: String, required: false },
     description: { type: String, required: false },
