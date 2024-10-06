@@ -21,7 +21,7 @@ app.use(express.urlencoded({extended: false}));
 //middleware: module parses incoming requests with JSON payloads and is based on body-parser
 app.use(express.json());
 
-
+//Intec Sensors Routes
 const sensorRoutes = require('./api/routes/sensors');
 app.use('/sensors', sensorRoutes);
 
