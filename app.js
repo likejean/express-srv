@@ -25,4 +25,6 @@ app.use(express.json());
 const sensorRoutes = require('./api/routes/sensors');
 app.use('/sensors', sensorRoutes);
 
+console.log(process.env.ATLAS_DATABASE)
+
 module.exports = app;
