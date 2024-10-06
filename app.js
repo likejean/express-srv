@@ -22,4 +22,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
 
+const sensorRoutes = require('./api/routes/sensors');
+app.use('/sensors', sensorRoutes);
+
 module.exports = app;
