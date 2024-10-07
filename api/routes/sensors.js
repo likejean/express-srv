@@ -25,7 +25,7 @@ router.get('/', (req, res, next) => {
                         calibratedBy: doc.calibratedBy,
                         location: doc.location,
                         description: doc.description,
-                        calibrationRange: doc.calRange,
+                        calibrationRange: doc.calibrationRange,
                         comment: doc.comment,
                         units: doc.units,
                         manufacturer: doc.manufacturer,
