@@ -22,8 +22,7 @@
   </head>
   <body>
     
-    <main>
-      
+    <main>      
       <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +34,7 @@
         <div class="bg-light p-4">
           <h5 class="mb-4 text-body-emphasis h4">Intec Sensors</h5>
           <div class="mb-3 text-body-secondary">The table below lists calibration status of Intec devices used for measurements</div>
-          
+          <div class="notification"></div>
           <table class="table data-result">
             <thead>
               <tr>
@@ -43,17 +42,40 @@
                 <th scope="col">EID</th>
                 <th scope="col">Description</th>
                 <th scope="col">Device Range</th>
-                <th scope="col">Options</th>                
+                <th scope="col">Settings</th>                
               </tr>
             </thead>            
-          </table>          
+          </table>
         </div>        
-      </div>        
-      </div> 
-    </main>
-    <div scope="col">      
+      </div>       
       
-    </div>
+    
+
+      <div scope="col" id="sensor-details" style="visibility: hidden;">
+        <div class="card text-center m-4">
+          
+          <div class="card-header">
+            Featured
+            <img src="..." class="card-img-top" alt="...">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+          <div class="card-footer text-body-secondary">
+            2 days ago
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">An item</li>
+            <li class="list-group-item">A second item</li>
+            <li class="list-group-item">A third item</li>
+          </ul>
+        </div>
+      </div>
+
+      
+    </main>
     
   </body>
   <script
@@ -62,55 +84,6 @@
     crossorigin="anonymous"
   ></script>
     
-  <script>
-    const result = document.querySelector('.data-result');
-    const tableBody = document.createElement("tbody");
-
-    const fetchSensors = async () => {
-      try {
-        // fetch data using POST API endpoint        
-        const { data } = await axios.get('/sensors'); 
-       
-        
-             
-
-        // creating all table cells
-        for (let i = 0; i < data.sensors.length; i++) {
-        // creates a table row         
-
-          // add the row to the end of the table body
-          const row = document.createElement("tr");
-          row.appendChild(createTableCell(`${i+1}`));
-          row.appendChild(createTableCell(`${data.sensors[i].EID}`));
-          row.appendChild(createTableCell(`${data.sensors[i].description}`));
-          row.appendChild(createTableCell(`${data.sensors[i].calibrationRange}`));
-          row.appendChild(createIcon());            
-          tableBody.appendChild(row);
-        }
-
-        function createTableCell(text){                    
-          const cell = document.createElement("td");         
-          const cellText = document.createTextNode(text);
-          cell.appendChild(cellText);          
-          return cell;
-        }
-
-        function createIcon(){ 
-          const cell = document.createElement("td"); 
-          cell.innerHTML =
-            "<i class='fa-regular fa-comment-dots'></i>"+"<i class='ms-3 far fa-keyboard'></i>"+"<i class='ms-3 fa-regular fa-trash-can'><i/>";
-          
-          return cell;
-        }
-
-        result.appendChild(tableBody);
-      
-      } catch (error) {
-        result.innerHTML = `<div class="alert alert-danger">ERROR! Can't Fetch Data</div>`;
-      }
-    };
-
-    fetchSensors();
-
-  </script>
+  <script src="./js/fetchSensors.js"></script> 
+  <script src="./js/displaySettings.js"></script>
 </html>
