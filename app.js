@@ -23,6 +23,6 @@ app.use(express.json());
 //Intec Sensors Routes
 const sensorRoutes = require('./api/routes/sensors');
 
-app.use('/sensors', sensorRoutes);
+app.use('/api/sensors', sensorRoutes);
 
 module.exports = app;
