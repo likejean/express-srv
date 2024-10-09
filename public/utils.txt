@@ -1,0 +1,6 @@
+1. TO ADD SECRETS (ENV. VARIABLES, ext.) TO CODEPSACE:
+Githab>Settings(right side pane)>Codenames(left side pane)>Click "New secret" under Secrets section
+
+
+2. TO VIEW DYNAMIC CODEPSACE API list:
+navigate https://api.github.com/meta to view object with key: "codespaces"
