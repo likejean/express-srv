@@ -11,12 +11,12 @@ function showSensorDetailsAndSettings(
     var card = document.getElementById('sensor-details');
     var tableRow;
 
-    for (const [key, value] of Object.entries(rowObj)) {
-        
-        if (value==='active'){
+    for (const [key, value] of Object.entries(rowObj)) { 
+        if (value === 'active' && key !== `row${index}`){            
             rowObj[`${key}`]='inactive';
             tableRow = document.getElementById(key);
             tableRow.classList.remove("table-active");
+            card.style.visibility = 'hidden';
         }         
       }    
 
@@ -24,16 +24,15 @@ function showSensorDetailsAndSettings(
         rowObj[`row${index}`] = 'active';
         tableRow = document.getElementById(`row${index}`);    
         tableRow.classList.add("table-active"); 
+        card.style.visibility = 'visible';
     }else{
         rowObj[`row${index}`] = 'inactive';
+        tableRow = document.getElementById(`row${index}`);
         tableRow.classList.remove("table-active"); 
+        card.style.visibility = 'hidden';
     }
     
    
-    if (card.style.visibility=='visible') {
-        card.style.visibility = 'hidden';
-    }
-
-    else card.style.visibility = 'visible';
+   
        
 }
