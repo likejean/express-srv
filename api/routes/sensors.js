@@ -6,6 +6,7 @@ const router = express.Router();
 
 
 //Routers
+// GET endpoint
 router.get('/', (req, res, next) => {
     Sensor
         .find()
@@ -45,30 +46,35 @@ router.get('/', (req, res, next) => {
         });
 });
 
+
+//POST endpoint
+
 router.post('/', (req, res, next) => {
     const sensor = new Sensor({
-        _id: new mongoose.Types.ObjectId(),
+        _id: new mongoose.Types.ObjectId(),   
+        createdAt:req.body.createdAt,     
         EID: req.body.EID,
         type: req.body.type,    
-        priority: req.body.priority,
-        calibrationDate: req.body.calDate,
-        expirationDate: req.body.expDate,
-        calibrationExtended: req.body.calExtended,
+        calibrationPriority: req.body.calibrationPriority,
+        calibrationFrequency: req.body.calibrationFrequency,
+        lastCalibrationDate: req.body.lastCalibrationDate,
+        dueCalibrationDate: req.body.dueCalibrationDate,
+        calibrationExtended: req.body.calibrationExtended,
         calibratedBy: req.body.calibratedBy,
-        maxCalibrationExtension: req.body.maxCalExtension,
+        maxCalibrationExtension: req.body.maxCalibrationExtension,
         location: req.body.location,
         description: req.body.description,
-        calibrationRange: req.body.calRange,
+        calibrationRange: req.body.calibrationRange,
         comment: req.body.comment,
         units: req.body.units,
-        manufacturer: req.body.manufacturer,
-        createdAt:req.body.createdAt
+        manufacturer: req.body.manufacturer
+        
     });
    
     sensor.save()
         .then(result => {
             res.status(201).json({
-                message: `${result.description} sensor with EID${result.EID} was added...`,
+                message: `${result.description} sensor with ${result.EID} was added...`,
                 
                 addedSensor: {
                     id: result._id,

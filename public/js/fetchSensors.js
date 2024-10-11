@@ -14,6 +14,8 @@ const fetchSensors = async () => {
     for (let i = 0; i < data.sensors.length; i++) {       
         // adds the row of cells to the end of the table body        
         
+        console.log(typeof(data.sensors[i].expirationDate))
+        console.log(data.sensors[i].expirationDate)
         const row = document.createElement("tr");
         row.setAttribute('id', `row${i+1}`);
         rowObj[`row${i+1}`] = `inactive`;
