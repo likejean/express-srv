@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 const calibrationPrinciples = [
     'Dimensional',
     'Temperature',
@@ -12,16 +11,17 @@ const calibrationPrinciples = [
     'Flow'
 ];
 
-const Schema = mongoose.Schema(
+const calibrationSchema = mongoose.Schema(
     {
         _id: mongoose.Schema.Types.ObjectId,
 
         procedureName: {type: String, unique: true, required: true},
-        calibratorName: {type: String, required: true},
+        calibratorModel: {type: String, required: true},
         measurementQuantity: {type: String, required: true},
         units: {type: String, required: true},
         startRangeLevel: {type: Number, required: true},
         endRangeLevel: {type: Number, required: true},
+        description: {type: String, required: true},
         calibrationPrinciple: {
             type: String,
             required: true,
@@ -29,15 +29,15 @@ const Schema = mongoose.Schema(
         },
 
         comment: {type: String, default: 'None'},
-        devices: [
+        sensors: [
             {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'Sensor',
-                required: false,
+                required: true,
             },
         ],
-    },
-    {timestamps: {createdAt: true, updatedAt: false}},
+        manufacturer: { type: String, required: false }
+    }
 );
 
-export default mongoose.model('Calibration', Schema);
+module.exports = mongoose.model('Calibration', calibrationSchema);

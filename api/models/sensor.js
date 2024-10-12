@@ -22,7 +22,7 @@ const sensorSchema = mongoose.Schema(
     {
         _id: mongoose.Schema.Types.ObjectId,
         createdAt: { type: Date, default: Date.now, required: false},
-        
+        procedure: {type: String, required: true},
         EID: {
             type: String,
             required: true,
@@ -43,10 +43,8 @@ const sensorSchema = mongoose.Schema(
             required: true,
             enum: calibrationFrequencies
         },        
-        lastCalibrationDate:{ type: Date, default: Date.now, required: true },        
-    
-        dueCalibrationDate: { type: Date, default: Date.now, required: true },
-        
+        lastCalibrationDate:{ type: Date, default: Date.now, required: true },
+        dueCalibrationDate: { type: Date, default: Date.now, required: true },        
         calibrationExtended: { type: Boolean, required: true },
         calibratedBy: { type: String, required: false, default: 'Intec' }, 
         maxCalibrationExtension: { type: String, required: false },
@@ -55,7 +53,7 @@ const sensorSchema = mongoose.Schema(
         comment: {type: String, default: 'None'},
         calibrationRange: { type: String, required: true },
         units: { type: String, required: true },
-        manufacturer: { type: String, required: false },
+        manufacturer: { type: String, required: false }
     }
 );
 

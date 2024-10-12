@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const Sensor = require('../models/sensor');
+const Calibration = require('../models/calibration');
 const router = express.Router();
 
 
@@ -16,6 +17,7 @@ router.get('/', (req, res, next) => {
                 count: docs.length,
                 sensors: docs.map(doc => {                    
                     return {
+                        procedureName: doc.procedureName,
                         EID: doc.EID,
                         type: doc.type,    
                         priority: doc.priority,
@@ -32,15 +34,16 @@ router.get('/', (req, res, next) => {
                         manufacturer: doc.manufacturer,
                         createdAt: doc.createdAt,
                         request: {
-                            type: 'GET'
-                        }
+                            type: 'GET',
+                            url: req.originalUrl                    
+                        }  
                     };                    
                 })
             });
         })
         .catch(err => {
             res.status(500).json({
-                comment: 'something is wrong...',
+                message: "Failure",
                 error: err
             });
         });
@@ -50,48 +53,90 @@ router.get('/', (req, res, next) => {
 //POST endpoint
 
 router.post('/', (req, res, next) => {
+
+    const _id = new mongoose.Types.ObjectId();
+
+    const {
+        procedure,
+        createdAt,
+        EID,
+        type,
+        calibrationPriority,
+        calibrationFrequency,
+        lastCalibrationDate,
+        dueCalibrationDate,
+        calibrationExtended,
+        calibratedBy,
+        maxCalibrationExtension,
+        location,
+        description,
+        calibrationRange,
+        comment,
+        units,
+        manufacturer        
+    } = req.body;
+
     const sensor = new Sensor({
-        _id: new mongoose.Types.ObjectId(),   
-        createdAt:req.body.createdAt,     
-        EID: req.body.EID,
-        type: req.body.type,    
-        calibrationPriority: req.body.calibrationPriority,
-        calibrationFrequency: req.body.calibrationFrequency,
-        lastCalibrationDate: req.body.lastCalibrationDate,
-        dueCalibrationDate: req.body.dueCalibrationDate,
-        calibrationExtended: req.body.calibrationExtended,
-        calibratedBy: req.body.calibratedBy,
-        maxCalibrationExtension: req.body.maxCalibrationExtension,
-        location: req.body.location,
-        description: req.body.description,
-        calibrationRange: req.body.calibrationRange,
-        comment: req.body.comment,
-        units: req.body.units,
-        manufacturer: req.body.manufacturer
-        
+        _id,   
+        procedure,
+        createdAt,     
+        EID,
+        type,    
+        calibrationPriority,
+        calibrationFrequency,
+        lastCalibrationDate,
+        dueCalibrationDate,
+        calibrationExtended,
+        calibratedBy,
+        maxCalibrationExtension,
+        location,
+        description,
+        calibrationRange,
+        comment,
+        units,
+        manufacturer        
     });
    
     sensor.save()
-        .then(result => {
+        .then(result => {  
+            //// How to add a document to database collection by reference         
+            Calibration.findOne({procedureName: req.body.procedure})
+                .then((doc)=>{
+                    doc.sensors.push(sensor._id);
+                    doc.save()
+                    .then(() => console.log(`Sensor ${sensor.EID} added to ${doc.name} procedure`))
+                    .catch(() => {
+                        res.status(500).json({
+                            error: "Sensor was not saved to procedure"
+                        });
+                    });
+                })
+                .catch((err)=>{
+                    console.log(err);
+                });
+           
+            ///
             res.status(201).json({
-                message: `${result.description} sensor with ${result.EID} was added...`,
-                
+                message: `SUCCESS: ${result.description} sensor with ${result.EID} was added...`,                
                 addedSensor: {
                     id: result._id,
                     EID: result.EID,
+                    calibrationPrinciples: result.calibrationPrinciples,
                     description: result.description,
                     calibrationDate: result.calDate,
                     expirationDate: result.expDate,
+                    procedureName: result.procedureName
                 },
                 request: {
-                    type: 'GET'
-                }
+                    type: 'POST',
+                    url: req.originalUrl                    
+                }    
             })
         })
         .catch(err => {
             res.status(500).json({
-                message: "Failed to add Sensor to Database",
-                error: err
+                message: "Failed to add Sensor to Calibration Database",
+                err
             });
         });
 });
