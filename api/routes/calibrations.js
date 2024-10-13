@@ -103,5 +103,49 @@ router.post('/', (req, res, next) => {
     });
 });
 
+/// API endpoint: delete a single procedure by MongoDB id
+router.delete('/:procedureId', (req, res, next) => {
+    const id = req.params.procedureId;
+    const name = `{${req.body.startRangeLevel}-${req.body.endRangeLevel}${req.body.units}}`;
+    Calibration.deleteOne({_id: id})
+        .exec()
+        .then(doc => {
+            if(doc.deletedCount === 1){                                       
+                res.status(200).json({
+                    message: `SUCCESS! Calibration procedure ${name} was deleted from database`,
+                    deletedCalibrationProcedure: {
+                        id: req.params.procedureId,
+                        name: req.body.procedureName,
+                        description: req.body.description
+                    },                    
+                    request: {
+                        type: 'DELETE',
+                        url: req.originalUrl                    
+                    }    
+                });                           
+
+            }else{
+                res.status(400).json({
+                    error: `Error: (Hint: the procedure ${name} id {${id}} is valid, but seems like not found in the database (possibly, deteted already in the past).`,
+                    request: {
+                        type: 'DELETE',
+                        url: req.originalUrl                    
+                    }    
+                })
+            }
+
+        }).catch(()=>{                
+            res.status(400).json({
+                error: `Failed to delete the procedure ${name} associated with id {${id}}. (Hint: the sensor id {${id}} format is INVALID; thus, not found in the database...)`,  
+                request: {
+                    type: 'DELETE',
+                    url: req.originalUrl                    
+                }                      
+            });
+        });
+    })
+
+
+
 
 module.exports = router;
