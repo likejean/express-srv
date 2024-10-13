@@ -46,34 +46,69 @@
               </tr>
             </thead>            
           </table>
-        </div>     
+        </div>      
+        
 
         <div scope="col" id="sensor-details" style="visibility: hidden;">
           <div class="card text-center m-4">
             
             <div class="card-header">
-              Extensometer
+              <div class="sensor-description"></div>
               <img src="/img/epsilon_extensometer.jpg" class="card-img-top" alt="/img/epsilon_extensometer.jpg">
             </div>
             <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <h5 class="sensor-description card-title">Axial Extensometer-Model 3542</h5>
+              <p class="card-text">General purpose strain gage extensometers for axial tensile, compression, and cyclic testing. Gauge lengths from 20 to 80 mm (and 0.8 to 2 inches) and full scale measuring ranges from 5% to 100% strain.</p>              
             </div>
-            <div class="card-footer text-body-secondary">
-              2 days ago
+            <div id="sensor-last-calibration-date" class="card-footer text-body-secondary">
+              Last Calibration Date
+            </div>
+            <div id="sensor-due-calibration-date" class="card-footer text-body-secondary">
+              Due Calibration Date
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
+              <li id="sensor-calibration-procedure" class="list-group-item">Calibration Procedure</li>
+              <li id="sensor-measurement-quantity" class="list-group-item">Measurement Quantity</li>
+              <li id="sensor-calibration-procedure" class="list-group-item">Units</li>
+              <li id="sensor-calibration-range" class="list-group-item">Calibration Range</li>
+              <li id="sensor-manufacturer" class="list-group-item">Namufacturer</li>
             </ul>
+            
+          </div>
+          <div class="col-sm-12 text-center">
+            <a href="./sensorpage.html" class="btn btn-primary btn-sm">Update</a>
+            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              Delete
+            </button>
           </div>
         </div>
       </div>   
 
+     
+
+      <!-- Modal -->
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Extensometer EID555</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Are you sure you want to delete this sensor permanently?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       
     </main>
+
+
     
   </body>
   <script
