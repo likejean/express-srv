@@ -99,60 +99,66 @@ router.post('/', (req, res, next) => {
         units,
         manufacturer        
     });
-   
-    sensor.save()
-        .then(result => {  
-            //// How to add a document to database collection by reference         
-            Calibration.findOne({procedureName: req.body.procedure})
-                .then((doc)=>{
-                    doc.sensors.push(sensor._id);
-                    doc.save()
-                    .then(() => console.log(`Sensor ${sensor.description} ${sensor.EID} added to ${req.body.procedure} procedure`))
-                    .catch(() => {
-                        res.status(500).json({
-                            error: "Sensor was not saved to procedure"
-                        });
-                    });
-                })
-                .catch((err)=>{
-                    res.status(500).json({
-                        error: `Failed to find the following procedure: ${procedureName}...`,
-                        err,
+
+    Calibration.findOne({procedureName: req.body.procedure}).then(cal => {
+        if (cal) {   
+            cal.sensors.push(sensor._id);
+            cal.save()
+            .then(() => {
+                console.log(`Sensor ${sensor.description} ${sensor.EID} added to ${req.body.procedure} procedure`);
+                sensor.save().then(result => {
+                    res.status(201).json({
+                        message: `SUCCESS: Calibration procedure was found. ${result.description} sensor with ${result.EID} was added...`,                
+                        addedSensor: {
+                            id: result._id,
+                            EID: result.EID,
+                            type: result.type,
+                            calibrationRange: result.calibrationRange,
+                            description: result.description,
+                            lastCalibrationDate: result.lastCalibrationDate,
+                            dueCalibrationDate: result.dueCalibrationDate,
+                            procedureName: result.procedure
+                        },
                         request: {
                             type: 'POST',
                             url: req.originalUrl                    
-                        }  
+                        }    
                     });
-                });
-           
-            ///
-            res.status(201).json({
-                message: `SUCCESS: ${result.description} sensor with ${result.EID} was added...`,                
-                addedSensor: {
-                    id: result._id,
-                    EID: result.EID,
-                    calibrationPrinciples: result.calibrationPrinciples,
-                    description: result.description,
-                    calibrationDate: result.calDate,
-                    expirationDate: result.expDate,
-                    procedureName: result.procedureName
-                },
-                request: {
-                    type: 'POST',
-                    url: req.originalUrl                    
-                }    
+                })
+                .catch(() => {
+                    res.status(500).json({
+                        error: "Internal Server Error: Sensor was not saved to database"
+                    });
+                })
             })
-        })
-        .catch(err => {
-            res.status(500).json({
-                message: "Failed to add Sensor to Calibration Database",
-                err,
+            .catch(() => {
+                res.status(500).json({
+                    error: "Calibration document associated with this sensor was not updated"                    
+                });
+            });           
+        }else {
+            
+            console.log('Cal not found');
+            res.status(400).json({
+                error: `Failed to find the specified cal procedure for this sensor...`,               
                 request: {
                     type: 'POST',
                     url: req.originalUrl                    
                 }  
             });
-        });
+        }
+    }).catch(err => {
+        console.error('Error finding document:', err);
+        res.status(500).json({
+            message: "Internal Server Error...",
+            err,
+            request: {
+                 type: 'POST',
+                 url: req.originalUrl                    
+             }  
+         });
+    });;
+
 });
 
 /// API endpoint: delete a single sensor by MongoDB id
@@ -179,7 +185,8 @@ router.delete('/:sensorId', (req, res, next) => {
                                 id: req.params.sensorId,
                                 EID: req.body.EID,
                                 description: req.body.description
-                            },                    
+                            }, 
+                            deletedCount: doc.deletedCount,                   
                             request: {
                                 type: 'DELETE',
                                 url: req.originalUrl                    

@@ -21,7 +21,8 @@ const fetchSensors = async () => {
         row.appendChild(createTableCell(`${data.sensors[i].EID}`));
         row.appendChild(createTableCell(`${data.sensors[i].description}`));
         row.appendChild(createTableCell(`${data.sensors[i].calibrationRange}`));
-        row.appendChild(createIcon(i+1, data.sensors[i]));            
+        row.appendChild(createExpiryIcon(`${data.sensors[i].dueCalibrationDate}`));
+        row.appendChild(createGearIcon(i+1, data.sensors[i]));         
         tableBody.appendChild(row);
     }
     //creates a table cell
@@ -31,9 +32,26 @@ const fetchSensors = async () => {
         cell.appendChild(cellText);          
         return cell;
     }
-    //creates a gear icon to access sensor details and settings (update, delete)
-   
-    function createIcon(idx, sensor){ 
+
+
+    //creates a calender and bell icon depending if a sensor calibration due date is expired
+    function createExpiryIcon(dueCalibrationDate){
+        //let expired;
+        const cell = document.createElement("td"); 
+        let dueCalDate = moment.utc(dueCalibrationDate).unix();
+        unixTimestamp = moment().unix();
+        let expired = unixTimestamp > dueCalDate 
+        ? 'style="color:red" class="ms-2 fa-duotone fa-solid fa-bell"'
+        : 'style="color:lightgreen" class="ms-2 fa-regular fa-circle-check"';
+        cell.innerHTML = 
+        `<i class="fa-duotone fa-solid fa-calendar-check"></i>        
+        <i ` + expired + ` </i>`;        
+        return cell;
+
+    }
+
+    //creates a gear icon to access sensor details and settings (update, delete)   
+    function createGearIcon(idx, sensor){ 
         const cell = document.createElement("td"); 
         cell.innerHTML =
         `<i id="icon${idx}" onClick="showSensorDetailsAndSettings(
@@ -47,6 +65,8 @@ const fetchSensors = async () => {
         )" class='fa-sharp-duotone fa-solid fa-gear'></i>`;        
         return cell;
     }
+
+    
     sensorTable.appendChild(tableBody);      
     } catch (error) {
         notification.innerHTML = `<div class="alert alert-danger" role="alert">NOTE! No sensor data exists or unable to fetch due to system failure.</div>`;
