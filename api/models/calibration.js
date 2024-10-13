@@ -4,6 +4,7 @@ const calibrationPrinciples = [
     'Dimensional',
     'Temperature',
     'Pressure',
+    'Force',
     'Humidity',
     'Alignment',
     'Electrical',
