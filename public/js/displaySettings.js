@@ -3,13 +3,21 @@ function showSensorDetailsAndSettings(
     description, 
     manufacturer, 
     units, 
-    expirationDate,
+    lastCalibrationDateDate,
+    dueCalibrationDate,
     EID) 
     {
      
     //Initialize html element variables
     var card = document.getElementById('sensor-details');
     var tableRow;
+
+    let lastCalDate = moment(lastCalibrationDateDate);
+    let dueCalDate = moment(dueCalibrationDate);
+    console.log(lastCalDate.format('dddd MM/DD/YYYY'),lastCalDate.unix())
+    console.log(dueCalDate.format('dddd MM/DD/YYYY'),dueCalDate.unix());
+    const unixTimestamp = moment().unix();
+    console.log(unixTimestamp); 
 
     //CHECK//
     //Check if any 'active' table rows left over from previous click/touch events 

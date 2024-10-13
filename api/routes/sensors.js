@@ -20,9 +20,9 @@ router.get('/', (req, res, next) => {
                         procedureName: doc.procedureName,
                         EID: doc.EID,
                         type: doc.type,    
-                        priority: doc.priority,
-                        calibrationDate: doc.calibrationDate,
-                        expirationDate: doc.expirationDate,
+                        priority: doc.calibrationPriority,
+                        lastCalibrationDate: doc.lastCalibrationDate,
+                        dueCalibrationDate: doc.dueCalibrationDate,
                         calibrationExtended: doc.calibrationExtended,
                         maxCalibrationExtension: doc.maxCalExtension,
                         calibratedBy: doc.calibratedBy,
@@ -44,7 +44,11 @@ router.get('/', (req, res, next) => {
         .catch(err => {
             res.status(500).json({
                 message: "Failure: Unable to fetch sensor data...",
-                error: err
+                error: err,
+                request: {
+                    type: 'POST',
+                    url: req.originalUrl                    
+                }  
             });
         });
 });
@@ -113,7 +117,11 @@ router.post('/', (req, res, next) => {
                 .catch((err)=>{
                     res.status(500).json({
                         error: `Failed to find the following procedure: ${procedureName}...`,
-                        err
+                        err,
+                        request: {
+                            type: 'POST',
+                            url: req.originalUrl                    
+                        }  
                     });
                 });
            
@@ -138,7 +146,11 @@ router.post('/', (req, res, next) => {
         .catch(err => {
             res.status(500).json({
                 message: "Failed to add Sensor to Calibration Database",
-                err
+                err,
+                request: {
+                    type: 'POST',
+                    url: req.originalUrl                    
+                }  
             });
         });
 });

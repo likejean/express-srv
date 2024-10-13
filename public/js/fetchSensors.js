@@ -12,10 +12,8 @@ const fetchSensors = async () => {
     
     // creating all table cells
     for (let i = 0; i < data.sensors.length; i++) {       
-        // adds the row of cells to the end of the table body        
+        // adds the row of cells to the end of the table body 
         
-        console.log(typeof(data.sensors[i].expirationDate))
-        console.log(data.sensors[i].expirationDate)
         const row = document.createElement("tr");
         row.setAttribute('id', `row${i+1}`);
         rowObj[`row${i+1}`] = `inactive`;
@@ -43,7 +41,8 @@ const fetchSensors = async () => {
         '${sensor.description}',
         '${sensor.manufacturer}',
         '${sensor.units}',
-        '${sensor.expirationDate}',
+        '${sensor.lastCalibrationDate}',
+        '${sensor.dueCalibrationDate}',
         '${sensor.EID}'
         )" class='fa-sharp-duotone fa-solid fa-gear'></i>`;        
         return cell;

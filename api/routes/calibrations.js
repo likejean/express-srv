@@ -38,7 +38,11 @@ router.get('/', (req, res, next) => {
         .catch(err => {
             res.status(500).json({
                 message: "Failure",
-                error: err
+                error: err,
+                request: {
+                    type: 'GET',
+                    url: req.originalUrl                    
+                }  
             });
         });
 });
@@ -99,9 +103,15 @@ router.post('/', (req, res, next) => {
         res.status(500).json({
             err,
             message: "Failed to add Calibration Procedure to Database",
+            request: {
+                type: 'POST',
+                url: req.originalUrl                    
+            }  
         });
     });
 });
+
+
 
 /// API endpoint: delete a single procedure by MongoDB id
 router.delete('/:procedureId', (req, res, next) => {
