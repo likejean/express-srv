@@ -16,10 +16,10 @@ function showSensorDetailsAndSettings(
 
     let lastCalDate = moment.utc(lastCalibrationDateDate);
     let dueCalDate = moment.utc(dueCalibrationDate);
-    console.log(lastCalDate.format('dddd MM/DD/YYYY'),lastCalDate.unix())
-    console.log(dueCalDate.format('dddd MM/DD/YYYY'),dueCalDate.unix());
+    //console.log(lastCalDate.format('dddd MM/DD/YYYY'),lastCalDate.unix())
+    //console.log(dueCalDate.format('dddd MM/DD/YYYY'),dueCalDate.unix());
     const unixTimestamp = moment().unix();
-    console.log(unixTimestamp); 
+    
 
     //CHECK//
     //Check if any 'active' table rows left over from previous click/touch events 

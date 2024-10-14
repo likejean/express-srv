@@ -20,7 +20,7 @@ const fetchSensors = async () => {
         row.appendChild(createTableCell(`${i+1}`));
         row.appendChild(createTableCell(`${data.sensors[i].EID}`));
         row.appendChild(createTableCell(`${data.sensors[i].description}`));
-        row.appendChild(createTableCell(`${data.sensors[i].calibrationRange}`));
+        row.appendChild(createTableCell(`${data.sensors[i].capacityRange}`));
         row.appendChild(createExpiryIcon(`${data.sensors[i].dueCalibrationDate}`));
         row.appendChild(createGearIcon(i+1, data.sensors[i]));         
         tableBody.appendChild(row);
