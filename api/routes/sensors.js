@@ -54,6 +54,107 @@ router.get('/', (req, res, next) => {
 });
 
 
+// GET endpoint: get sensor by id
+router.get('/:sensorId', (req, res, next) => {
+    const id = req.params.sensorId;
+    Sensor.findById(id)
+        .exec()
+        .then(doc => {
+            //To handle non-existing id error, but correct format...
+            if (doc) {
+                return res.status(200).json({
+                    doc,
+                    request: {
+                        type: 'GET',
+                        url: req.originalUrl                    
+                    }  
+                });
+            } else {
+                return res.status(400).json({
+                    message: 'No VALID ENTRY',
+                    request: {
+                        type: 'GET',
+                        url: req.originalUrl                    
+                    }  
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: "Failure: Unable to fetch sensor data...",
+                error: err,
+                request: {
+                    type: 'GET',
+                    url: req.originalUrl                    
+                }  
+            });
+        });
+});
+
+//PATCH endpoint: updating PARTIALLY existing SENSOR document
+router.patch('/:sensorId', (req, res, next) => {
+    const id = req.params.sensorId;
+    const {        
+        EID,
+        type,
+        calibrationPriority,
+        calibrationFrequency,
+        lastCalibrationDate,
+        dueCalibrationDate,
+        calibrationExtended,
+        calibratedBy,
+        maxCalibrationExtension,
+        location,
+        description,
+        capacityRange,
+        comment,
+        units,
+        manufacturer        
+    } = req.body;
+
+    Sensor.updateOne({_id: id}, {
+        $set: {
+            EID,
+            type,
+            calibrationPriority,
+            calibrationFrequency,
+            lastCalibrationDate,
+            dueCalibrationDate,
+            calibrationExtended,
+            calibratedBy,
+            maxCalibrationExtension,
+            location,
+            description,
+            capacityRange,
+            comment,
+            units,
+            manufacturer
+        }
+    })
+    .exec()
+    .then(result => {
+        console.log('patch_result', result);
+        res.status(200).json({
+            message: `Sensor w/ id: '${id}' was Updated.`,
+            request: {
+                type: 'PATCH'
+            },
+            result
+        });
+    })
+    .catch(err => {
+        res.status(500).json({
+            message: "Failure: Unable to update sensor data...",
+            error: err,
+            request: {
+                type: 'PATCH',
+                url: req.originalUrl                    
+            }  
+        });
+    });
+});
+
+
 //POST endpoint: create a new SENSOR
 
 router.post('/', (req, res, next) => {

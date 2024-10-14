@@ -47,9 +47,97 @@ router.get('/', (req, res, next) => {
         });
 });
 
+// GET endpoint: get calibration procedure  by id
+router.get('/:procedureId', (req, res, next) => {
+    const id = req.params.procedureId;
+    Calibration.findById(id)
+        .exec()
+        .then(doc => {
+            //To handle non-existing id error, but correct format...
+            if (doc) {
+                return res.status(200).json({
+                    doc,
+                    request: {
+                        type: 'GET',
+                        url: req.originalUrl                    
+                    }  
+                });
+            } else {
+                return res.status(400).json({
+                    message: 'No VALID ENTRY',
+                    request: {
+                        type: 'GET',
+                        url: req.originalUrl                    
+                    }  
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: "Failure: Unable to fetch calibration procedure data...",
+                error: err,
+                request: {
+                    type: 'GET',
+                    url: req.originalUrl                    
+                }  
+            });
+        });
+});
+
+
+//PATCH endpoint: updating PARTIALLY existing SENSOR document
+router.patch('/:procedureId', (req, res, next) => {
+    const id = req.params.procedureId;
+    const {        
+        calibratorModel,
+        measurementQuantity,
+        units,
+        comment,
+        startRangeLevel,
+        endRangeLevel,
+        description,
+        calibrationPrinciple,
+        manufacturer
+    } = req.body;
+
+    Calibration.updateOne({_id: id}, {
+        $set: {
+            calibratorModel,
+            measurementQuantity,
+            units,
+            comment,
+            startRangeLevel,
+            endRangeLevel,
+            description,
+            calibrationPrinciple,
+            manufacturer
+        }
+    })
+    .exec()
+    .then(result => {
+        console.log('patch_result', result);
+        res.status(200).json({
+            message: `Calibration procedure w/ id: '${id}' was Updated.`,
+            request: {
+                type: 'PATCH'
+            },
+            result
+        });
+    })
+    .catch(err => {
+        res.status(500).json({
+            message: "Failure: Unable to update calibration procedure...",
+            error: err,
+            request: {
+                type: 'PATCH',
+                url: req.originalUrl                    
+            }  
+        });
+    });
+});
+
 
 //POST endpoint
-
 router.post('/', (req, res, next) => {
 
     const _id = new mongoose.Types.ObjectId();
@@ -153,7 +241,7 @@ router.delete('/:procedureId', (req, res, next) => {
                 }                      
             });
         });
-    })
+    });
 
 
 
