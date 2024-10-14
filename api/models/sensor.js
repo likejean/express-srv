@@ -21,14 +21,39 @@ const calibrationFrequencies = [
 const sensorSchema = mongoose.Schema(
     {
         _id: mongoose.Schema.Types.ObjectId,
-        createdAt: { type: Date, default: Date.now, required: false},
-        calibrations: [
-            {
+        createdAt: { type: Date, default: Date.now, required: false},       
+        calibrations: [{
+            calibrationProcedureId: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'Calibration',
                 required: true,
             },
-        ],
+            lastCalibrationDate: { 
+                type: Date, 
+                default: Date.now, 
+                required: true 
+            },
+            dueCalibrationDate: { 
+                type: Date, 
+                default: Date.now, 
+                required: true 
+            },        
+            calibrationExtended: { 
+                type: Boolean, 
+                required: true 
+            },
+            maxCalibrationExtension: { 
+                type: String, 
+                required: false 
+            },
+            calibrationRangePercent: { 
+                type: Number, 
+                default: 0,
+                min: 10,
+                max: 100,
+                required: true
+            }
+        }],
         EID: {
             type: String,
             required: true,
@@ -48,30 +73,12 @@ const sensorSchema = mongoose.Schema(
             type: String,
             required: true,
             enum: calibrationFrequencies
-        },        
-        lastCalibrationDate:{ 
-            type: Date, 
-            default: Date.now, 
-            required: true 
-        },
-        dueCalibrationDate: { 
-            type: Date, 
-            default: Date.now, 
-            required: true 
-        },        
-        calibrationExtended: { 
-            type: Boolean, 
-            required: true 
         },
         calibratedBy: { 
             type: String, 
             required: false, 
             default: 'Intec' 
-        }, 
-        maxCalibrationExtension: { 
-            type: String, 
-            required: false 
-        },
+        },         
         description: {
             type: String, 
             required: true
