@@ -15,7 +15,7 @@ const calibrationPrinciples = [
 const calibrationSchema = mongoose.Schema(
     {
         _id: mongoose.Schema.Types.ObjectId,
-
+        createdAt: { type: Date, default: Date.now, required: false},
         procedureName: {type: String, unique: true, required: true},
         calibratorModel: {type: String, required: true},
         measurementQuantity: {type: String, required: true},
