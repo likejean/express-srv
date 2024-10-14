@@ -17,18 +17,18 @@ router.get('/', (req, res, next) => {
                 count: docs.length,
                 sensors: docs.map(doc => {                    
                     return {
-                        procedureName: doc.procedureName,
+                        calibrations: doc.calibrations,
                         EID: doc.EID,
                         type: doc.type,    
                         priority: doc.calibrationPriority,
                         lastCalibrationDate: doc.lastCalibrationDate,
                         dueCalibrationDate: doc.dueCalibrationDate,
                         calibrationExtended: doc.calibrationExtended,
-                        maxCalibrationExtension: doc.maxCalExtension,
+                        maxCalibrationExtension: doc.maxCalibrationExtension,
                         calibratedBy: doc.calibratedBy,
                         location: doc.location,
                         description: doc.description,
-                        calibrationRange: doc.calibrationRange,
+                        capacityRange: doc.capacityRange,
                         comment: doc.comment,
                         units: doc.units,
                         manufacturer: doc.manufacturer,
@@ -46,7 +46,7 @@ router.get('/', (req, res, next) => {
                 message: "Failure: Unable to fetch sensor data...",
                 error: err,
                 request: {
-                    type: 'POST',
+                    type: 'GET',
                     url: req.originalUrl                    
                 }  
             });
@@ -60,7 +60,7 @@ router.post('/', (req, res, next) => {
     const _id = new mongoose.Types.ObjectId();
 
     const {
-        procedure,
+        calibrations,   // NOTE! this array stores values in the following format {0.0-10000.0kips} from client's request body
         createdAt,
         EID,
         type,
@@ -73,7 +73,7 @@ router.post('/', (req, res, next) => {
         maxCalibrationExtension,
         location,
         description,
-        calibrationRange,
+        capacityRange,
         comment,
         units,
         manufacturer        
@@ -81,7 +81,7 @@ router.post('/', (req, res, next) => {
 
     const sensor = new Sensor({
         _id,   
-        procedure,
+        calibrations: [],   // initializes this array to store MongoDB ids, not procedure names...
         createdAt,     
         EID,
         type,    
@@ -94,72 +94,68 @@ router.post('/', (req, res, next) => {
         maxCalibrationExtension,
         location,
         description,
-        calibrationRange,
+        capacityRange,
         comment,
         units,
         manufacturer        
     });
 
-    Calibration.findOne({procedureName: req.body.procedure}).then(cal => {
-        if (cal) {   
-            cal.sensors.push(sensor._id);
-            cal.save()
+    Calibration.find().where('procedureName').in(calibrations).exec()
+    .then(cals => {        
+        if(cals.length > 0){
+            for (let i = 0; i < cals.length; i++) {
+                cals[i].sensors.push(sensor._id);
+                sensor.calibrations.push(cals[i]._id);                                
+            }
+            const saveCals = cals.map(cal => cal.save());
+            Promise.all(saveCals)
             .then(() => {
-                console.log(`Sensor ${sensor.description} ${sensor.EID} added to ${req.body.procedure} procedure`);
                 sensor.save().then(result => {
                     res.status(201).json({
-                        message: `SUCCESS: Calibration procedure was found. ${result.description} sensor with ${result.EID} was added...`,                
-                        addedSensor: {
-                            id: result._id,
-                            EID: result.EID,
-                            type: result.type,
-                            calibrationRange: result.calibrationRange,
-                            description: result.description,
-                            lastCalibrationDate: result.lastCalibrationDate,
-                            dueCalibrationDate: result.dueCalibrationDate,
-                            procedureName: result.procedure
-                        },
+                        message: `SUCCESS: Sensor was save and calibrations procedures were updated per sensor references...`,   
+                        sensor: result,
                         request: {
                             type: 'POST',
                             url: req.originalUrl                    
-                        }    
+                        }   
                     });
-                })
-                .catch(() => {
-                    res.status(500).json({
-                        error: "Internal Server Error: Sensor was not saved to database"
-                    });
-                })
+                });  
             })
             .catch(() => {
                 res.status(500).json({
-                    error: "Calibration document associated with this sensor was not updated"                    
+                    calibrations,
+                    error: "Internal Server Error: Sensor references were not saved to calibration documents",
+                    request: {
+                        type: 'POST',
+                        url: req.originalUrl                    
+                    }
                 });
-            });           
-        }else {
-            
-            console.log('Cal not found');
+            })     
+        } else {
+            console.log('Calibraion procedures were not found');
             res.status(400).json({
-                error: `Failed to find the specified cal procedure for this sensor...`,               
+                cals,
+                error: `Failed to find specified calibration procedures for this sensor...`,               
                 request: {
                     type: 'POST',
                     url: req.originalUrl                    
                 }  
             });
         }
-    }).catch(err => {
-        console.error('Error finding document:', err);
+    })
+    .catch(() => {
         res.status(500).json({
-            message: "Internal Server Error...",
-            err,
+            error: "Internal Server Error: Sensor was not saved to database",
             request: {
-                 type: 'POST',
-                 url: req.originalUrl                    
-             }  
-         });
-    });;
-
+                type: 'POST',
+                url: req.originalUrl                    
+            }
+        });
+    })
 });
+
+
+
 
 /// API endpoint: delete a single sensor by MongoDB id
 router.delete('/:sensorId', (req, res, next) => {
@@ -168,19 +164,23 @@ router.delete('/:sensorId', (req, res, next) => {
         .exec()
         .then(doc => {
             if(doc.deletedCount === 1){
+
                 //If a sensor document was found, then find associated calibration procedure and remove it from its associated sensor array
-                Calibration.findOne({procedureName: req.body.procedure})
-                .then(cal => {                    
-                    for (let i = 0; i < cal.sensors.length; i++) {
-                        if (cal.sensors[i].toString() === id) {
-                            cal.sensors.splice(i, 1);
-                            break;
-                        }
+                Calibration.find().where('_id').in(req.body.calibrations).exec()
+                .then(cals => { 
+                    for (let i = 0; i < cals.length; i++) {
+                        for (let j = 0; j < cals[i].sensors.length; j++) {
+                            if (cals[i].sensors[j].toString() === id) {
+                                cals[i].sensors.splice(j, 1);
+                                break;
+                            }
+                        }                                
                     }
-                    cal.save()  //save updated calibration procedure document
+                    const saveCals = cals.map(cal => cal.save());
+                    Promise.all(saveCals)
                     .then(() => {                        
                         res.status(200).json({
-                            message: `SUCCESS! Sensor ${req.body.description} ${req.body.EID} was deleted from calibration procedure ${req.body.procedure}`,
+                            message: `SUCCESS! Sensor ${req.body.description} ${req.body.EID} was deleted from calibration procedure`,
                             deletedSensor: {
                                 id: req.params.sensorId,
                                 EID: req.body.EID,
