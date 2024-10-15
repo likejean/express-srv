@@ -61,12 +61,7 @@
               <h5 class="sensor-description card-title">Axial Extensometer-Model 3542</h5>
               <p class="card-text">General purpose strain gage extensometers for axial tensile, compression, and cyclic testing. Gauge lengths from 20 to 80 mm (and 0.8 to 2 inches) and full scale measuring ranges from 5% to 100% strain.</p>              
             </div>
-            <div id="sensor-last-calibration-date" class="card-footer text-body-secondary">
-              Last Calibration Date
-            </div>
-            <div id="sensor-due-calibration-date" class="card-footer text-body-secondary">
-              Due Calibration Date
-            </div>
+            
             <ul class="list-group list-group-flush">
               <li id="sensor-calibration-procedure" class="list-group-item">Calibration Procedure</li>
               <li id="sensor-measurement-quantity" class="list-group-item">Measurement Quantity</li>
@@ -74,6 +69,30 @@
               <li id="sensor-calibration-range" class="list-group-item">Calibration Range</li>
               <li id="sensor-manufacturer" class="list-group-item">Namufacturer</li>
             </ul>
+
+            <div class="card-footer text-body-secondary pb-3">
+              <h2 class="mb-3">Calibration Procedures</h2>
+              <div class="row">
+                <div class="col-6">
+                  <ul class="list-group" id="calibration-procedures-list">
+                    <li class="list-group-item">Cras justo odio</li>
+                    <li class="list-group-item active">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Morbi leo risus</li>
+                    <li class="list-group-item">Porta ac consectetur ac</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                  </ul>
+                </div>
+                <div class="col-6">
+                  <div class="tab-content">
+                    <div class="tab-pane fade">show tab pane</div>
+                    <div class="tab-pane fade">...</div>
+                    <div class="tab-pane fade show active">Third one</div>
+                    <div class="tab-pane fade">...</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             
           </div>
           <div class="col-sm-12 text-center">
@@ -116,9 +135,14 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
     integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
     crossorigin="anonymous"
-  ></script>
+    
+  >$('#myList a').on('click', function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+  })</script>
   <script src="./libs/moment.min.js"></script>
   <script src="./libs/moment-with-locales.min.js"></script>
+  <script src="./js/mapCalDueDates.js"></script>
   <script src="./js/fetchSensors.js"></script> 
   <script src="./js/displaySettings.js"></script>
 </html>

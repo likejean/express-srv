@@ -1,21 +1,26 @@
 function showSensorDetailsAndSettings(
-    index,
-    description, 
-    manufacturer, 
-    units, 
-    lastCalibrationDateDate,
-    dueCalibrationDate,
-    EID) 
+        index,
+        description, 
+        manufacturer, 
+        units, 
+        calibrations,
+        EID) 
     {
-     
+
+    
+    console.log(JSON.parse(calibrations.replace(/\&/g, '"')));
+       
     //Initialize html element variables
     var card = document.getElementById('sensor-details');
     var descriptionHeader = document.querySelector('.sensor-description');
+    var calProceduresList = document.getElementById('calibration-procedures-list');
     const descriptionText = document.createTextNode(description);   
     var tableRow;
 
-    let lastCalDate = moment.utc(lastCalibrationDateDate);
-    let dueCalDate = moment.utc(dueCalibrationDate);
+    //console.log('FINAL;;;;;;;;;;;;',JSON.parse(calibrations));
+
+    //let lastCalDate = moment.utc(lastCalibrationDateDate);
+    //let dueCalDate = moment.utc(dueCalibrationDate);
     //console.log(lastCalDate.format('dddd MM/DD/YYYY'),lastCalDate.unix())
     //console.log(dueCalDate.format('dddd MM/DD/YYYY'),dueCalDate.unix());
     const unixTimestamp = moment().unix();
