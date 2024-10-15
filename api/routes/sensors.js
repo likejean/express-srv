@@ -228,7 +228,8 @@ router.post('/', (req, res, next) => {
                     calibrationExtended,
                     maxCalibrationExtension,
                     calibrationRangePercent
-                );                
+                );
+                console.log(calProcedure)                
                 cals[i].sensors.push(sensor._id);
                 sensor.calibrations.push(calProcedure);                                
             }
