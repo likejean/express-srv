@@ -26,7 +26,11 @@ const sensorSchema = mongoose.Schema(
             calibrationProcedureId: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'Calibration',
-                required: true,
+                required: true
+            },
+            calibrationProcedureName: { 
+                type: String, 
+                required: true 
             },
             lastCalibrationDate: { 
                 type: Date, 
@@ -58,7 +62,7 @@ const sensorSchema = mongoose.Schema(
             type: String,
             required: true,
             unique: true,
-            match: /^EID[0-9]+$/,
+            match: /^EID[0-9]+$/
         },
         type: { 
             type: String, 
