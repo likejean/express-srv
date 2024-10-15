@@ -4,7 +4,23 @@ const Sensor = require('../models/sensor');
 const Calibration = require('../models/calibration');
 const router = express.Router();
 
-
+class calibrationProcedure {
+    constructor(
+        calibrationProcedureId, 
+        lastCalibrationDate, 
+        dueCalibrationDate,
+        calibrationExtended,
+        maxCalibrationExtension,
+        calibrationRangePercent
+    ){      
+        this.calibrationProcedureId = calibrationProcedureId;
+        this.lastCalibrationDate = lastCalibrationDate;
+        this.dueCalibrationDate = dueCalibrationDate;
+        this.calibrationExtended = calibrationExtended;
+        this.maxCalibrationExtension = maxCalibrationExtension;
+        this.calibrationRangePercent = calibrationRangePercent;      
+  }
+}
 
 //Routers
 // GET endpoint: get ALL sensors
@@ -169,12 +185,14 @@ router.post('/', (req, res, next) => {
         calibrationFrequency,
         lastCalibrationDate,
         dueCalibrationDate,
-        calibrationExtended,
-        calibratedBy,
+        calibrationExtended,        
         maxCalibrationExtension,
+        calibrationRangePercent,
+        calibratedBy,
         location,
         description,
         capacityRange,
+        model,
         comment,
         units,
         manufacturer        
@@ -182,21 +200,18 @@ router.post('/', (req, res, next) => {
 
     const sensor = new Sensor({
         _id,   
-        calibrations: [],   // initializes this array to store MongoDB ids, not procedure names...
+        calibrations:[],   // initializes this array to store MongoDB ids, not procedure names...
         createdAt,     
         EID,
         type,    
         calibrationPriority,
-        calibrationFrequency,
-        lastCalibrationDate,
-        dueCalibrationDate,
-        calibrationExtended,
-        calibratedBy,
-        maxCalibrationExtension,
+        calibrationFrequency,        
+        calibratedBy,        
         location,
         description,
         capacityRange,
         comment,
+        model,
         units,
         manufacturer        
     });
@@ -205,8 +220,16 @@ router.post('/', (req, res, next) => {
     .then(cals => {        
         if(cals.length > 0){
             for (let i = 0; i < cals.length; i++) {
+                const calProcedure = new calibrationProcedure(
+                    cals[i]._id, 
+                    lastCalibrationDate, 
+                    dueCalibrationDate,
+                    calibrationExtended,
+                    maxCalibrationExtension,
+                    calibrationRangePercent
+                )
                 cals[i].sensors.push(sensor._id);
-                sensor.calibrations.push(cals[i]._id);                                
+                sensor.calibrations.push(calProcedure);                                
             }
             const saveCals = cals.map(cal => cal.save());
             Promise.all(saveCals)

@@ -95,6 +95,10 @@ const sensorSchema = mongoose.Schema(
             type: String, 
             required: true 
         },
+        model: { 
+            type: String, 
+            required: true 
+        },
         units: { 
             type: String, 
             required: true 
