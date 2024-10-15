@@ -7,6 +7,7 @@ const router = express.Router();
 class calibrationProcedure {
     constructor(
         calibrationProcedureId, 
+        calibrationProcedureName,
         lastCalibrationDate, 
         dueCalibrationDate,
         calibrationExtended,
@@ -14,6 +15,7 @@ class calibrationProcedure {
         calibrationRangePercent
     ){      
         this.calibrationProcedureId = calibrationProcedureId;
+        this.calibrationProcedureName = calibrationProcedureName;
         this.lastCalibrationDate = lastCalibrationDate;
         this.dueCalibrationDate = dueCalibrationDate;
         this.calibrationExtended = calibrationExtended;
@@ -212,9 +214,7 @@ router.post('/', (req, res, next) => {
         model,
         units,
         manufacturer        
-    });
-
-    console.log('[]:',calibrationNames);
+    });    
 
     Calibration.find().where('procedureName').in(calibrationNames).exec()
     .then(cals => {        
@@ -222,13 +222,13 @@ router.post('/', (req, res, next) => {
             for (let i = 0; i < cals.length; i++) {
                 const calProcedure = new calibrationProcedure(
                     cals[i]._id, 
+                    calibrationNames[i],
                     lastCalibrationDate, 
                     dueCalibrationDate,
                     calibrationExtended,
                     maxCalibrationExtension,
                     calibrationRangePercent
-                );
-                console.log(calProcedure);
+                );                
                 cals[i].sensors.push(sensor._id);
                 sensor.calibrations.push(calProcedure);                                
             }
