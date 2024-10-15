@@ -177,8 +177,7 @@ router.post('/', (req, res, next) => {
     const _id = new mongoose.Types.ObjectId();
 
     const {
-        calibrations,   // NOTE! this array stores values in the following format {0.0-10000.0kips} from client's request body
-        createdAt,
+        calibrationsNames,   // NOTE! this array stores values in the following format {0.0-10000.0kips} from client's request body        
         EID,
         type,
         calibrationPriority,
@@ -216,7 +215,7 @@ router.post('/', (req, res, next) => {
         manufacturer        
     });
 
-    Calibration.find().where('procedureName').in(calibrations).exec()
+    Calibration.find().where('procedureName').in(calibrationsNames).exec()
     .then(cals => {        
         if(cals.length > 0){
             for (let i = 0; i < cals.length; i++) {
@@ -256,8 +255,9 @@ router.post('/', (req, res, next) => {
                 });
             })     
         } else {
-            console.log('Calibraion procedures were not found');
+            console.log(`Calibration procedures ${calibrationNames} were not found`);
             res.status(400).json({
+                calibrationNames,
                 cals,
                 error: `Failed to find specified calibration procedures for this sensor...`,               
                 request: {
