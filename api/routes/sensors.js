@@ -199,8 +199,7 @@ router.post('/', (req, res, next) => {
 
     const sensor = new Sensor({
         _id,   
-        calibrations:[],   // initializes this array to store MongoDB ids, not procedure names...
-        createdAt,     
+        calibrations:[],   // initializes this array to store MongoDB ids, not procedure names...         
         EID,
         type,    
         calibrationPriority,
@@ -228,7 +227,8 @@ router.post('/', (req, res, next) => {
                     calibrationExtended,
                     maxCalibrationExtension,
                     calibrationRangePercent
-                )
+                );
+                console.log(calProcedure);
                 cals[i].sensors.push(sensor._id);
                 sensor.calibrations.push(calProcedure);                                
             }
