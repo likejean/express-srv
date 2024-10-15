@@ -30,11 +30,12 @@
           </button>
         </div>
       </nav>
-      <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="bg-light">
+      <div class="collapse pb-3" id="navbarToggleExternalContent" data-bs-theme="bg-light">
         <div class="bg-light p-4">
           <h5 class="mb-4 text-body-emphasis h4">Intec Sensors</h5>
           <div class="mb-3 text-body-secondary">The table below lists calibration status of Intec devices used for measurements</div>
           <div class="notification"></div>
+          <!-- Sensor Table List -->
           <table class="table data-result">
             <thead>
               <tr>
@@ -42,14 +43,15 @@
                 <th scope="col">EID</th>
                 <th scope="col">Description</th>
                 <th scope="col">Sensor Capacity</th>
-                <th scope="col">Cal Expiry</th>  
+                <th scope="col">Calibration Status</th>  
                 <th scope="col">Settings</th>              
               </tr>
+              <!-- here is where dynamically generated table html cells are appended -->
             </thead>            
           </table>
         </div>      
         
-
+        <!-- sensor details card -->
         <div scope="col" id="sensor-details" style="visibility: hidden;">
           <div class="card text-center m-4">
             
@@ -69,23 +71,20 @@
               <li id="sensor-calibration-range" class="list-group-item">Calibration Range</li>
               <li id="sensor-manufacturer" class="list-group-item">Namufacturer</li>
             </ul>
-
+            <!-- calibration procedure details -->
             <div class="card-footer text-body-secondary pb-3">
               <h2 class="mb-3">Calibration Procedures</h2>
               <div class="row">
                 <div class="col-6">
                   <ul class="list-group" id="calibration-procedures-list">
+                    <!-- here is where dynamically generated list HTML elements are appended (list of calibrations associated with selected sensor)-->
                     <li class="list-group-item">Cras justo odio</li>
                     <li class="list-group-item active">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
                   </ul>
                 </div>
                 <div class="col-6">
                   <div class="tab-content">
-                    <div class="tab-pane fade">show tab pane</div>
-                    <div class="tab-pane fade">...</div>
+                    <!-- here is where dynamically generated tab pane HTML elements are appended (calibration info ssociated with selected sensor)-->                
                     <div class="tab-pane fade show active">Third one</div>
                     <div class="tab-pane fade">...</div>
                   </div>
@@ -106,7 +105,7 @@
 
      
 
-      <!-- Modal -->
+      <!-- Modal for sensor delete -->
       <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
