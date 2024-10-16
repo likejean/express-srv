@@ -30,11 +30,18 @@
           </button>
         </div>
       </nav>
+      
       <div class="collapse pb-3" id="navbarToggleExternalContent" data-bs-theme="bg-light">
+        <div class="col-sm-12 text-center">
+          <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" id="navbarToggleExternalContent">
+            Create
+          </button>
+        </div>
         <div class="bg-light p-4">
           <h5 class="mb-4 text-body-emphasis h4">Intec Sensors</h5>
           <div class="mb-3 text-body-secondary">The table below lists calibration status of Intec devices used for measurements</div>
           <div class="notification"></div>
+
           <!-- Sensor Table List -->
           <table class="table data-result">
             <thead>
@@ -75,15 +82,13 @@
             <div class="card-footer text-body-secondary pb-3">
               <h2 class="mb-3">Calibration Procedures</h2>
               <div class="row">
-                <div class="col-6">
+                <div class="col-3">
                   <ul class="list-group" id="calibration-procedures-list">
-                    <!-- here is where dynamically generated list HTML elements are appended (list of calibrations associated with selected sensor)-->
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item active">Dapibus ac facilisis in</li>
+                    <!-- here is where dynamically generated list HTML elements are appended (list of calibrations associated with selected sensor)-->                    
                   </ul>
                 </div>
-                <div class="col-6">
-                  <div class="tab-content">
+                <div class="col-5">
+                  <div class="tab-content" id="calibration-procedures-side=pane">
                     <!-- here is where dynamically generated tab pane HTML elements are appended (calibration info ssociated with selected sensor)-->                
                     <div class="tab-pane fade show active">Third one</div>
                     <div class="tab-pane fade">...</div>
@@ -94,6 +99,7 @@
 
             
           </div>
+          <!-- Sensor UPDATE and DELETE operations -->
           <div class="col-sm-12 text-center">
             <a href="./sensorpage.html" class="btn btn-primary btn-sm">Update</a>
             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -102,10 +108,11 @@
           </div>
         </div>
       </div>   
+      
 
      
 
-      <!-- Modal for sensor delete -->
+      <!-- Modal for sensor delete: TODO -->
       <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -133,15 +140,12 @@
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
     integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
-    crossorigin="anonymous"
-    
-  >$('#myList a').on('click', function (e) {
-    e.preventDefault()
-    $(this).tab('show')
-  })</script>
+    crossorigin="anonymous"></script>    
+  </script>
   <script src="./libs/moment.min.js"></script>
   <script src="./libs/moment-with-locales.min.js"></script>
+  <script src="./js/createCalListItem.js"></script>
   <script src="./js/mapCalDueDates.js"></script>
   <script src="./js/fetchSensors.js"></script> 
-  <script src="./js/displaySettings.js"></script>
+  <script src="./js/displaySensorSettings.js"></script>
 </html>

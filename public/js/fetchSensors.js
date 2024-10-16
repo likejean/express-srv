@@ -1,7 +1,8 @@
 const sensorTable = document.querySelector('.data-result');
 const notification = document.querySelector('.notification');
 const tableBody = document.createElement("tbody");
-var rowObj = {};
+var tableRowObj = {};
+var listItemObj = {};
 
 
 
@@ -14,11 +15,10 @@ const fetchSensors = async () => {
     // creating all table cells
     for (let i = 0; i < data.sensors.length; i++) {       
         // adds the row of cells to the end of the table body 
-        strJSON = JSON.stringify(data.sensors[i].calibrations).replace(/\"/g, "&");
-        
-        const row = document.createElement("tr");
+        strJSON = JSON.stringify(data.sensors[i].calibrations).replace(/\"/g, "&");        
+        let row = document.createElement("tr");
         row.setAttribute('id', `row${i+1}`);
-        rowObj[`row${i+1}`] = `inactive`;
+        tableRowObj[`row${i+1}`] = `inactive`;
         row.appendChild(createTableCell(`${i+1}`));
         row.appendChild(createTableCell(`${data.sensors[i].EID}`));
         row.appendChild(createTableCell(`${data.sensors[i].description}`));
@@ -41,7 +41,7 @@ const fetchSensors = async () => {
     function createGearIcon(idx, sensor, str){ 
         const cell = document.createElement("td"); 
         cell.innerHTML =
-        `<i id="icon${idx}" onClick="showSensorDetailsAndSettings(
+        `<i id="icon${idx}" onClick="showSensorInfoCard(
         ${idx},
         '${sensor.description}',
         '${sensor.manufacturer}',

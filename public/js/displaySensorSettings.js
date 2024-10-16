@@ -1,4 +1,4 @@
-function showSensorDetailsAndSettings(
+function showSensorInfoCard(
         index,
         description, 
         manufacturer, 
@@ -7,7 +7,8 @@ function showSensorDetailsAndSettings(
         EID) 
     {
 
-    
+    var parsedJSON = JSON.parse(calibrations.replace(/\&/g, '"'));
+
     console.log(JSON.parse(calibrations.replace(/\&/g, '"')));
        
     //Initialize html element variables
@@ -25,13 +26,18 @@ function showSensorDetailsAndSettings(
     //console.log(dueCalDate.format('dddd MM/DD/YYYY'),dueCalDate.unix());
     const unixTimestamp = moment().unix();
     
+    
+    console.log(createCalibrationListItem(parsedJSON, calProceduresList))
+
+    console.log(listItemObj)
+    console.log(tableRowObj)
 
     //CHECK//
     //Check if any 'active' table rows left over from previous click/touch events 
-    for (const [key, value] of Object.entries(rowObj)) { 
+    for (const [key, value] of Object.entries(tableRowObj)) { 
         //deactivate any different tables rows and hide info card (if it's still displayed)
         if (value === 'active' && key !== `row${index}`){            
-            rowObj[`${key}`]='inactive';
+            tableRowObj[`${key}`]='inactive';
             tableRow = document.getElementById(key);
             tableRow.classList.remove("table-active");
             card.style.visibility = 'hidden';    
@@ -41,8 +47,8 @@ function showSensorDetailsAndSettings(
       
     //TOGGLE FUNCTION//
     //activate a current table row [index] and display its info card...
-    if(rowObj[`row${index}`] === 'inactive') {
-        rowObj[`row${index}`] = 'active';
+    if(tableRowObj[`row${index}`] === 'inactive') {
+        tableRowObj[`row${index}`] = 'active';
         tableRow = document.getElementById(`row${index}`);    
         tableRow.classList.add("table-active"); 
         card.style.visibility = 'visible';          
@@ -51,7 +57,7 @@ function showSensorDetailsAndSettings(
     //deactive a current table row [index] and hide its info card 
     //(only if it was activated during previous click event)
     }else{
-        rowObj[`row${index}`] = 'inactive';
+        tableRowObj[`row${index}`] = 'inactive';
         tableRow = document.getElementById(`row${index}`);
         tableRow.classList.remove("table-active"); 
         card.style.visibility = 'hidden';
