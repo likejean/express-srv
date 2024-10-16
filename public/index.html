@@ -32,15 +32,17 @@
       </nav>
       
       <div class="collapse pb-3" id="navbarToggleExternalContent" data-bs-theme="bg-light">
-        <div class="col-sm-12 text-center">
-          <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" id="navbarToggleExternalContent">
-            Create
-          </button>
-        </div>
+       
         <div class="bg-light p-4">
           <h5 class="mb-4 text-body-emphasis h4">Intec Sensors</h5>
           <div class="mb-3 text-body-secondary">The table below lists calibration status of Intec devices used for measurements</div>
-          <div class="notification"></div>
+          <div class="notification">
+            <div class="col-sm-12 my-2 text-center">
+              <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" id="navbarToggleExternalContent">
+                Create New Sensor
+              </button>
+            </div>
+          </div>
 
           <!-- Sensor Table List -->
           <table class="table data-result">
