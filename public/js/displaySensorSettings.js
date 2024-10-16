@@ -14,7 +14,8 @@ function showSensorInfoCard(
     //Initialize html element variables
     var card = document.getElementById('sensor-details');
     var descriptionHeader = document.querySelector('.sensor-description');
-    var calProceduresList = document.getElementById('calibration-procedures-list');
+    var calProcedureInfo = document.getElementById('calibration-procedures-list');
+    var calProcedureName = document.getElementById('calibration-procedures-badges');
     const descriptionText = document.createTextNode(description);   
     var tableRow;
 
@@ -27,10 +28,10 @@ function showSensorInfoCard(
     const unixTimestamp = moment().unix();
     
     
-    console.log(createCalibrationListItem(parsedJSON, calProceduresList))
+    //console.log(createCalibrationListItem(parsedJSON, calProceduresList))
 
-    console.log(listItemObj)
-    console.log(tableRowObj)
+    //console.log(listItemObj)
+    //console.log(tableRowObj)
 
     //CHECK//
     //Check if any 'active' table rows left over from previous click/touch events 
@@ -42,6 +43,8 @@ function showSensorInfoCard(
             tableRow.classList.remove("table-active");
             card.style.visibility = 'hidden';    
             removeAllChildNodes(descriptionHeader); 
+            removeAllChildNodes(calProcedureInfo);
+            removeAllChildNodes(calProcedureName);
         }         
       } 
       
@@ -52,7 +55,8 @@ function showSensorInfoCard(
         tableRow = document.getElementById(`row${index}`);    
         tableRow.classList.add("table-active"); 
         card.style.visibility = 'visible';          
-        descriptionHeader.appendChild(descriptionText);        
+        descriptionHeader.appendChild(descriptionText); 
+        createCalibrationListItem(parsedJSON, calProcedureInfo, calProcedureName);       
         
     //deactive a current table row [index] and hide its info card 
     //(only if it was activated during previous click event)
@@ -62,6 +66,8 @@ function showSensorInfoCard(
         tableRow.classList.remove("table-active"); 
         card.style.visibility = 'hidden';
         removeAllChildNodes(descriptionHeader);
+        removeAllChildNodes(calProcedureInfo);
+        removeAllChildNodes(calProcedureName);
     }  
 
     //Function helper for removing all children from parent html node

@@ -15,8 +15,8 @@ const fetchSensors = async () => {
     // creating all table cells
     for (let i = 0; i < data.sensors.length; i++) {       
         // adds the row of cells to the end of the table body 
-        strJSON = JSON.stringify(data.sensors[i].calibrations).replace(/\"/g, "&");        
         let row = document.createElement("tr");
+        strJSON = JSON.stringify(data.sensors[i].calibrations).replace(/\"/g, "&");
         row.setAttribute('id', `row${i+1}`);
         tableRowObj[`row${i+1}`] = `inactive`;
         row.appendChild(createTableCell(`${i+1}`));
