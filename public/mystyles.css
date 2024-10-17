@@ -6,19 +6,19 @@
 
 @media screen and (max-width: 750px) {
   .list-group-item {
-     font-size: 30%;
+     font-size: 45%;
   }
 }
 
 
 @media screen and (max-width: 1024px) {
   .list-group-item {
-     font-size: 40%;
+     font-size: 60%;
   }
 }
 
 @media screen and (max-width: 1440px) {
   .list-group-item {
-     font-size: 75%;
+     font-size: 100%;
   }
 }

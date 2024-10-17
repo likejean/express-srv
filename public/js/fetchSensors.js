@@ -14,8 +14,7 @@ const fetchSensors = async () => {
     
     
     // creating all table cells
-    for (let i = 0; i < data.sensors.length; i++) {    
-        console.log(data.sensors[i])   
+    for (let i = 0; i < data.sensors.length; i++) { 
         // adds the row of cells to the end of the table body 
         let row = document.createElement("tr");
         strJSON = JSON.stringify(data.sensors[i].calibrations).replace(/\"/g, "&");
@@ -57,7 +56,8 @@ const fetchSensors = async () => {
         '${sensor.EID}',
         '${sensor.model}',
         '${sensor.type}',
-        '${sensor.capacityRange}'
+        '${sensor.capacityRange}',
+        '${sensor.location}'
         )" class='fa-sharp-duotone fa-solid fa-gear'></i>`;        
         return cell;
     }

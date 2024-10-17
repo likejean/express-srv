@@ -7,7 +7,8 @@ function showSensorInfoCard(
         EID,
         model,
         type,
-        capacity) 
+        capacity,
+        location) 
     {
 
     var parsedJSON = JSON.parse(calibrations.replace(/\&/g, '"')); 
@@ -22,8 +23,8 @@ function showSensorInfoCard(
     var sensorModelHtml = document.getElementById('sensor-model');
     var sensorMeasurementQuantityHtml = document.getElementById('sensor-quantity');
     var sensorCapacityRangeHtml = document.getElementById('sensor-capacity');
-    var calProcedureNameHtml = document.getElementById('calibration-procedures-badges');    
     var manufacturerNameHtml = document.getElementById('sensor-manufacturer');
+    var calProcedureNameHtml = document.getElementById('calibration-procedures-badges');
     var calProcedureInfoHtml = document.getElementById('calibration-procedures-list');
     
   
@@ -63,7 +64,7 @@ function showSensorInfoCard(
         addTextNodeToHtmlElement("Sensor Type:" + "\u00a0" + type, sensorTypeHtml);
         addTextNodeToHtmlElement("Measurement Quantity:" + "\u00a0" + quantity, sensorMeasurementQuantityHtml);
         addTextNodeToHtmlElement("Sensor Capacity Range:" + "\u00a0" + capacity, sensorCapacityRangeHtml);
-        createCalibrationListItem(parsedJSON, calProcedureInfoHtml, calProcedureNameHtml);       
+        createCalibrationListItem(parsedJSON, calProcedureInfoHtml, calProcedureNameHtml, location);       
         
     //deactive a current table row [index] and hide its info card 
     //(only if it was activated during previous click event)
