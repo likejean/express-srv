@@ -1,9 +1,9 @@
 function updateSensorImage (EID){
     var sensorImgObj = {
-        EID47: "mts_load_cell.jpg",
-        EID498: "interface_load_cell.jpg",
-        EID1798: "interface_load_cell.jpg",
-        EID1722: "interface_load_cell.jpg"
+        EID47: "load_transducer_EID47.jpg",
+        EID498: "load_transducer__EID498.jpg",
+        EID1798: "load_transducer_EID1798.jpg",
+        EID1722: "load_transducer_EID1722.jpg"
     };
     
     var img = document.getElementById('sensor-image');
