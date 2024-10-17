@@ -7,17 +7,18 @@ function showSensorInfoCard(
         EID) 
     {
 
-    var parsedJSON = JSON.parse(calibrations.replace(/\&/g, '"'));    
-    console.log('EID:::::',EID);
+    var parsedJSON = JSON.parse(calibrations.replace(/\&/g, '"')); 
+    var tableRow;
+
     updateSensorImage (EID);
        
     //Initialize html element variables
     var card = document.getElementById('sensor-details');
-    var descriptionHeader = document.querySelector('.sensor-description');
-    var calProcedureInfo = document.getElementById('calibration-procedures-list');
-    var calProcedureName = document.getElementById('calibration-procedures-badges');
-    const descriptionText = document.createTextNode(description);   
-    var tableRow;
+    var descriptionHeaderHtml = document.querySelector('.sensor-description');
+    var calProcedureInfoHtml = document.getElementById('calibration-procedures-list');
+    var calProcedureNameHtml = document.getElementById('calibration-procedures-badges');    
+    var manufacturerNameHtml = document.getElementById('sensor-manufacturer');
+  
 
     
 
@@ -30,9 +31,10 @@ function showSensorInfoCard(
             tableRow = document.getElementById(key);
             tableRow.classList.remove("table-active");
             card.style.visibility = 'hidden';    
-            removeAllChildNodes(descriptionHeader); 
-            removeAllChildNodes(calProcedureInfo);
-            removeAllChildNodes(calProcedureName);
+            removeAllChildNodes(descriptionHeaderHtml); 
+            removeAllChildNodes(manufacturerNameHtml);
+            removeAllChildNodes(calProcedureInfoHtml);
+            removeAllChildNodes(calProcedureNameHtml);
         }         
       } 
       
@@ -42,9 +44,10 @@ function showSensorInfoCard(
         tableRowObj[`row${index}`] = 'active';
         tableRow = document.getElementById(`row${index}`);    
         tableRow.classList.add("table-active"); 
-        card.style.visibility = 'visible';          
-        descriptionHeader.appendChild(descriptionText); 
-        createCalibrationListItem(parsedJSON, calProcedureInfo, calProcedureName);       
+        card.style.visibility = 'visible'; 
+        addTextNodeToHtmlElement(description + "\u00a0" + EID, descriptionHeaderHtml);
+        addTextNodeToHtmlElement("Manufacturer:\u00a0" + manufacturer, manufacturerNameHtml)
+        createCalibrationListItem(parsedJSON, calProcedureInfoHtml, calProcedureNameHtml);       
         
     //deactive a current table row [index] and hide its info card 
     //(only if it was activated during previous click event)
@@ -53,9 +56,10 @@ function showSensorInfoCard(
         tableRow = document.getElementById(`row${index}`);
         tableRow.classList.remove("table-active"); 
         card.style.visibility = 'hidden';
-        removeAllChildNodes(descriptionHeader);
-        removeAllChildNodes(calProcedureInfo);
-        removeAllChildNodes(calProcedureName);
+        removeAllChildNodes(descriptionHeaderHtml);
+        removeAllChildNodes(manufacturerNameHtml);
+        removeAllChildNodes(calProcedureInfoHtml);
+        removeAllChildNodes(calProcedureNameHtml);
     }  
 
     //Function helper for removing all children from parent html node

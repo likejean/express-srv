@@ -27,10 +27,10 @@ function createCalibrationListItem (data, list, calName) {
         );
                 
         const calInfoText = document.createTextNode(`
-            Due Date: ${dueCalDate.format('dddd, MM/DD/YYYY')}||`+`   `+
-            `Last Date: ${lastCalDate.format('dddd, MM/DD/YYYY')}||
-            Extended? ${extenstionStatus?"YES||":"NO||"}
-            Expired? ${dueCalDate.unix()>unixTimestamp?"NO||":"YES||"}`
+            Last Date: ${lastCalDate.format('dddd, MM/DD/YYYY')}
+            \u00a0\u00a0\u00a0\u00a0Due Date: ${dueCalDate.format('dddd, MM/DD/YYYY')}
+            \u00a0\u00a0\u00a0\u00a0Extended? ${extenstionStatus?"YES":"NO"}
+            \u00a0\u00a0\u00a0\u00a0Expired? ${dueCalDate.unix()>unixTimestamp?"NO":"YES"}`
         );
        
         listItem.appendChild(calInfoText);   

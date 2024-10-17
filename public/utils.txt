@@ -3,3 +3,8 @@ Githab>Settings(right side pane)>Codenames(left side pane)>Click "New secret" un
 
 2. TO VIEW DYNAMIC CODEPSACE API list:
 navigate https://api.github.com/meta to view object with key: "codespaces"
+
+3. HOW TO ADD NON-BREAKING SPACE IN JAVASCRIPT createTextNode() method
+You can use the escape sequence '\u' in a string with the Unicode value for a non-breaking space:
+var textNode = document.createTextNode("\u00a0");
+&amp;nbsp; and &amp;#160; are strictly HTML (or XML) notations. In JavaScript, you need to use an escape sequence starting with '\\' for special characters in strings.
