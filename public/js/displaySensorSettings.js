@@ -2,9 +2,12 @@ function showSensorInfoCard(
         index,
         description, 
         manufacturer, 
-        units, 
+        quantity, 
         calibrations,
-        EID) 
+        EID,
+        model,
+        type,
+        capacity) 
     {
 
     var parsedJSON = JSON.parse(calibrations.replace(/\&/g, '"')); 
@@ -14,10 +17,15 @@ function showSensorInfoCard(
        
     //Initialize html element variables
     var card = document.getElementById('sensor-details');
-    var descriptionHeaderHtml = document.querySelector('.sensor-description');
-    var calProcedureInfoHtml = document.getElementById('calibration-procedures-list');
+    var descriptionHeaderHtml = document.getElementById('sensor-description');
+    var sensorTypeHtml = document.getElementById('sensor-type');
+    var sensorModelHtml = document.getElementById('sensor-model');
+    var sensorMeasurementQuantityHtml = document.getElementById('sensor-quantity');
+    var sensorCapacityRangeHtml = document.getElementById('sensor-capacity');
     var calProcedureNameHtml = document.getElementById('calibration-procedures-badges');    
     var manufacturerNameHtml = document.getElementById('sensor-manufacturer');
+    var calProcedureInfoHtml = document.getElementById('calibration-procedures-list');
+    
   
 
     
@@ -35,6 +43,10 @@ function showSensorInfoCard(
             removeAllChildNodes(manufacturerNameHtml);
             removeAllChildNodes(calProcedureInfoHtml);
             removeAllChildNodes(calProcedureNameHtml);
+            removeAllChildNodes(sensorModelHtml);
+            removeAllChildNodes(sensorTypeHtml);
+            removeAllChildNodes(sensorMeasurementQuantityHtml);
+            removeAllChildNodes(sensorCapacityRangeHtml);
         }         
       } 
       
@@ -47,6 +59,10 @@ function showSensorInfoCard(
         card.style.visibility = 'visible'; 
         addTextNodeToHtmlElement(description + "\u00a0" + EID, descriptionHeaderHtml);
         addTextNodeToHtmlElement("Manufacturer:\u00a0" + manufacturer, manufacturerNameHtml)
+        addTextNodeToHtmlElement("Sensor Model:" + "\u00a0" + model, sensorModelHtml);
+        addTextNodeToHtmlElement("Sensor Type:" + "\u00a0" + type, sensorTypeHtml);
+        addTextNodeToHtmlElement("Measurement Quantity:" + "\u00a0" + quantity, sensorMeasurementQuantityHtml);
+        addTextNodeToHtmlElement("Sensor Capacity Range:" + "\u00a0" + capacity, sensorCapacityRangeHtml);
         createCalibrationListItem(parsedJSON, calProcedureInfoHtml, calProcedureNameHtml);       
         
     //deactive a current table row [index] and hide its info card 
@@ -60,6 +76,10 @@ function showSensorInfoCard(
         removeAllChildNodes(manufacturerNameHtml);
         removeAllChildNodes(calProcedureInfoHtml);
         removeAllChildNodes(calProcedureNameHtml);
+        removeAllChildNodes(sensorModelHtml);
+        removeAllChildNodes(sensorTypeHtml);
+        removeAllChildNodes(sensorMeasurementQuantityHtml);
+        removeAllChildNodes(sensorCapacityRangeHtml);
     }  
 
     //Function helper for removing all children from parent html node

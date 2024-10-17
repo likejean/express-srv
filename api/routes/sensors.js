@@ -43,12 +43,15 @@ router.get('/', (req, res, next) => {
                         dueCalibrationDate: doc.dueCalibrationDate,
                         calibrationExtended: doc.calibrationExtended,
                         maxCalibrationExtension: doc.maxCalibrationExtension,
+                        calibrationPriority: doc.calibrationPriority,
+                        calibrationFrequency: doc.calibrationFrequency,
                         calibratedBy: doc.calibratedBy,
                         location: doc.location,
                         description: doc.description,
                         capacityRange: doc.capacityRange,
                         comment: doc.comment,
-                        units: doc.units,
+                        quantity: doc.quantity,
+                        model: doc.model,
                         manufacturer: doc.manufacturer,
                         createdAt: doc.createdAt,
                         request: {
@@ -145,7 +148,7 @@ router.patch('/:sensorId', (req, res, next) => {
             description,
             capacityRange,
             comment,
-            units,
+            quantity,
             manufacturer
         }
     })
@@ -195,7 +198,7 @@ router.post('/', (req, res, next) => {
         capacityRange,
         model,
         comment,
-        units,
+        quantity,
         manufacturer        
     } = req.body;
 
@@ -212,7 +215,7 @@ router.post('/', (req, res, next) => {
         capacityRange,
         comment,
         model,
-        units,
+        quantity,
         manufacturer        
     });    
 

@@ -103,7 +103,7 @@ const sensorSchema = mongoose.Schema(
             type: String, 
             required: true 
         },
-        units: { 
+        quantity: { 
             type: String, 
             required: true 
         },

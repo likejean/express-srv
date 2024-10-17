@@ -14,7 +14,8 @@ const fetchSensors = async () => {
     
     
     // creating all table cells
-    for (let i = 0; i < data.sensors.length; i++) {       
+    for (let i = 0; i < data.sensors.length; i++) {    
+        console.log(data.sensors[i])   
         // adds the row of cells to the end of the table body 
         let row = document.createElement("tr");
         strJSON = JSON.stringify(data.sensors[i].calibrations).replace(/\"/g, "&");
@@ -44,16 +45,19 @@ const fetchSensors = async () => {
     
 
     //creates a gear icon to access sensor details and settings (update, delete)   
-    function createGearIcon(idx, sensor, str){ 
+    function createGearIcon(idx, sensor, objstr){ 
         const cell = document.createElement("td"); 
         cell.innerHTML =
         `<i id="icon${idx}" onClick="showSensorInfoCard(
         ${idx},
         '${sensor.description}',
         '${sensor.manufacturer}',
-        '${sensor.units}',
-        '${str}',
-        '${sensor.EID}'
+        '${sensor.quantity}',
+        '${objstr}',
+        '${sensor.EID}',
+        '${sensor.model}',
+        '${sensor.type}',
+        '${sensor.capacityRange}'
         )" class='fa-sharp-duotone fa-solid fa-gear'></i>`;        
         return cell;
     }
