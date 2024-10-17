@@ -7,7 +7,5 @@ function updateSensorImage (EID){
     };
     
     var img = document.getElementById('sensor-image');
-    console.log(img);
-    console.log(EID);
     img.src=`./img/${sensorImgObj[EID]}`;
 }
