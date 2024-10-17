@@ -20,17 +20,22 @@ const fetchSensors = async () => {
         strJSON = JSON.stringify(data.sensors[i].calibrations).replace(/\"/g, "&");
         row.setAttribute('id', `row${i+1}`);
         tableRowObj[`row${i+1}`] = `inactive`;
-        row.appendChild(createTableCell(`${i+1}`));
-        row.appendChild(createTableCell(`${data.sensors[i].EID}`));
-        row.appendChild(createTableCell(`${data.sensors[i].description}`));
-        row.appendChild(createTableCell(`${data.sensors[i].capacityRange}`));
+        row.appendChild(createTableCell(`${i+1}`,[]));
+        row.appendChild(createTableCell(`${data.sensors[i].EID}`,[]),[]);
+        row.appendChild(createTableCell(`${data.sensors[i].description}`,[]));
+        row.appendChild(createTableCell(`${data.sensors[i].capacityRange}`,["d-none", "d-sm-table-cell"]));
         row.appendChild(mapCalDueDatesAndBuildTableCell(data.sensors[i]));
         row.appendChild(createGearIcon(i+1, data.sensors[i], strJSON));         
         tableBody.appendChild(row);
     }
     //creates a table cell
-    function createTableCell(text){                    
-        const cell = document.createElement("td");         
+    function createTableCell(text, classArr){                    
+        const cell = document.createElement("td");
+        if (classArr.length > 0) {
+            classArr.forEach((item) => {
+                cell.classList.add(item); 
+            });
+        }                
         const cellText = document.createTextNode(text);
         cell.appendChild(cellText);          
         return cell;
