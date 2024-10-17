@@ -2,15 +2,16 @@ const sensorTable = document.querySelector('.data-result');
 const notification = document.querySelector('.notification');
 const tableBody = document.createElement("tbody");
 var tableRowObj = {};
-var listItemObj = {};
 
 
 
 const fetchSensors = async () => {
     try {
-    // fetch data using POST API endpoint: /api/sensors        
-    const { data } = await axios.get('/api/sensors');  
+
     let strJSON;
+    // fetch data using POST API endpoint: /api/sensors        
+    const { data } = await axios.get('/api/sensors');   
+    
     
     // creating all table cells
     for (let i = 0; i < data.sensors.length; i++) {       
