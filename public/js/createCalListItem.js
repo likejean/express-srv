@@ -14,11 +14,9 @@ function createCalibrationListItem (data, list, calName, calLocation) {
         listItem.classList.add('list-group-item');
         badgeItem.classList.add('list-group-item');
         
-        listItem.style.color = dueCalDate.unix() > unixTimestamp ? "black" : "red";
-        listItem.style.fontWeight = dueCalDate.unix() > unixTimestamp ? "normal" : "bold";
+        listItem.style.color = dueCalDate.unix() > unixTimestamp ? "black" : "red";       
         badgeItem.style.backgroundColor = "grey";
-        badgeItem.style.color = dueCalDate.unix() > unixTimestamp ? "white" : "rgb(255, 153, 153)";
-        badgeItem.style.fontWeight = dueCalDate.unix() > unixTimestamp ? "normal" : "bold";       
+        badgeItem.style.color = dueCalDate.unix() > unixTimestamp ? "white" : "rgb(255, 153, 153)";        
         
 
 

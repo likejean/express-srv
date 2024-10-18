@@ -8,7 +8,8 @@ function showSensorInfoCard(
         model,
         type,
         capacity,
-        location) 
+        location,
+        comment) 
     {
 
     var parsedJSON = JSON.parse(calibrations.replace(/\&/g, '"')); 
@@ -18,6 +19,7 @@ function showSensorInfoCard(
        
     //Initialize html element variables
     var card = document.getElementById('sensor-details');
+    var sensorCommentHtml = document.getElementById('sensor-comment');
     var descriptionHeaderHtml = document.getElementById('sensor-description');
     var sensorTypeHtml = document.getElementById('sensor-type');
     var sensorModelHtml = document.getElementById('sensor-model');
@@ -41,6 +43,7 @@ function showSensorInfoCard(
             tableRow.classList.remove("table-active");
             card.style.visibility = 'hidden';    
             removeAllChildNodes(descriptionHeaderHtml); 
+            removeAllChildNodes(sensorCommentHtml);
             removeAllChildNodes(manufacturerNameHtml);
             removeAllChildNodes(calProcedureInfoHtml);
             removeAllChildNodes(calProcedureNameHtml);
@@ -59,6 +62,7 @@ function showSensorInfoCard(
         tableRow.classList.add("table-active"); 
         card.style.visibility = 'visible'; 
         addTextNodeToHtmlElement(description + "\u00a0" + EID, descriptionHeaderHtml);
+        addTextNodeToHtmlElement("NOTE:\u00a0" + comment, sensorCommentHtml);
         addTextNodeToHtmlElement("Manufacturer:\u00a0" + manufacturer, manufacturerNameHtml)
         addTextNodeToHtmlElement("Sensor Model:" + "\u00a0" + model, sensorModelHtml);
         addTextNodeToHtmlElement("Sensor Type:" + "\u00a0" + type, sensorTypeHtml);
@@ -74,6 +78,7 @@ function showSensorInfoCard(
         tableRow.classList.remove("table-active"); 
         card.style.visibility = 'hidden';
         removeAllChildNodes(descriptionHeaderHtml);
+        removeAllChildNodes(sensorCommentHtml);
         removeAllChildNodes(manufacturerNameHtml);
         removeAllChildNodes(calProcedureInfoHtml);
         removeAllChildNodes(calProcedureNameHtml);

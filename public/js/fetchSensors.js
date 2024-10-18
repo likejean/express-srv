@@ -57,7 +57,8 @@ const fetchSensors = async () => {
         '${sensor.model}',
         '${sensor.type}',
         '${sensor.capacityRange}',
-        '${sensor.location}'
+        '${sensor.location}',
+        '${sensor.comment}',
         )" class='fa-sharp-duotone fa-solid fa-gear'></i>`;        
         return cell;
     }
