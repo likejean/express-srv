@@ -45,9 +45,7 @@
           <div class="mb-3 text-body-secondary">The table below lists calibration status of Intec devices used for measurements</div>
           <div class="notification">
             <div class="col-sm-12 my-2 text-center">
-              <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" id="navbarToggleExternalContent">
-                Create New Sensor
-              </button>
+              <a href="./html/createNewSensor.html" class="btn btn-primary btn-sm">Create New Sensor</a>              
             </div>
           </div>
 
@@ -67,20 +65,23 @@
           </table>
         </div>      
         
-        <!-- sENSOR BOOTSTRAP CARD -->
+
+        <!-- SENSOR BOOTSTRAP CARD -->
         <div scope="col" id="sensor-details" style="visibility: hidden;">
           <div class="card text-center m-4">
           <div class="col d-flex justify-content-center">
             <div class="card-header sensor-image">   
-              <div style="font-size: large;" class="mb-lg-2 sensor-description"></div>              
+              <!-- sensor description -->
+              <div style="font-size: large;" class="mb-lg-2 sensor-description"></div>
+              <!-- sensor image -->              
               <img id="sensor-image" src="" class="card-img-top mx-auto d-block" alt="/img/epsilon_extensometer.jpg">
             </div>
           </div>
+           <!-- sensor technical information -->
             <div class="card-body">
               <h5 id="sensor-description" style="color:black; font-size:x-large" class="card-title"></h5>
               <p id="sensor-comment" style="color:blue; font-size:large;" class="card-text"></p>              
-            </div>
-            
+            </div>           
             <ul class="list-group list-group-flush">
               <li id="sensor-type" class="list-group-item"></li>
               <li id="sensor-model" class="list-group-item"></li>
@@ -104,12 +105,11 @@
                 </div>                        
               </div>
             </div>
-
-            
           </div>
-          <!-- Sensor UPDATE and DELETE operations -->
+
+          <!-- Sensor UPDATE and DELETE buttons -->
           <div class="col-sm-12 text-center">
-            <a href="./sensorpage.html" class="btn btn-primary btn-sm">Update</a>
+            <a href="./html/workingFile.html" class="btn btn-primary btn-sm">Update</a>
             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
               Delete
             </button>
