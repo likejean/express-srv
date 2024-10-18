@@ -16,7 +16,10 @@ function createCalibrationListItem (data, list, calName, calLocation) {
         
         listItem.style.color = dueCalDate.unix() > unixTimestamp ? "black" : "red";       
         badgeItem.style.backgroundColor = "grey";
-        badgeItem.style.color = dueCalDate.unix() > unixTimestamp ? "white" : "rgb(255, 153, 153)";        
+        badgeItem.style.color = dueCalDate.unix() > unixTimestamp ? "white" : "rgb(255, 153, 153)";    
+        
+        
+        console.log(data[i].calibrationProcedureName);
         
 
 
