@@ -12,6 +12,7 @@ const htmlClassCollection = {
     calProcedureInfoHtml: 'calibration-procedures-list'
 }
 
+//object stores all html elements being dynamically updated by Javascript
 const htmlElementCollection = {};
 
 function getHtmlElementsById () {

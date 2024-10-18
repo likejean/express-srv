@@ -15,7 +15,11 @@ function showSensorInfoCard(
     var parsedJSON = JSON.parse(calibrations.replace(/\&/g, '"')); 
     var tableRow;
 
+    //Updates html .src attribute to display sensor image 
     updateSensorImage(EID);
+
+    //this function call runs document.getElementById() method and mutates globally available object in collection folder; this object stores all 
+    //dynamically updated card information html elements in index.html
     getHtmlElementsById();  
     
 
