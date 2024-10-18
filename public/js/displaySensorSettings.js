@@ -1,4 +1,3 @@
-
 function showSensorInfoCard(
         index,
         description, 

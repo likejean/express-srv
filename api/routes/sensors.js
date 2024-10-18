@@ -288,6 +288,21 @@ router.post('/', (req, res, next) => {
 
 
 /// API endpoint: delete a single sensor by MongoDB id
+/// MUST HAVE body in request! 
+//{
+//    "calibrations":[
+//        "{0-10000lbf}"
+//    ],
+//    "description": "Load Cell Transducer",
+//    "EID": "EIDXXX"      
+
+//const ids =  [
+//    '4ed3ede8844f0f351100000c',
+//    '4ed3f117a844e0471100000d', 
+//   '4ed3f18132f50c491100000e',
+//];
+//}   EAXMPLE: Model.find().where('_id').in(ids).exec((err, records) => {});
+
 router.delete('/:sensorId', (req, res, next) => {
     const id = req.params.sensorId;
     Sensor.deleteOne({_id: id})
@@ -296,7 +311,7 @@ router.delete('/:sensorId', (req, res, next) => {
             if(doc.deletedCount === 1){
 
                 //If a sensor document was found, then find associated calibration procedure and remove it from its associated sensor array
-                Calibration.find().where('_id').in(req.body.calibrations).exec()
+                Calibration.find().where('sensors').in(req.body.calibrations).exec()
                 .then(cals => { 
                     for (let i = 0; i < cals.length; i++) {
                         for (let j = 0; j < cals[i].sensors.length; j++) {
