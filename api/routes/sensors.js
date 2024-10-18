@@ -290,7 +290,7 @@ router.post('/', (req, res, next) => {
 /// MUST HAVE body in request! 
 //{
 //    "calibrations":[
-//        "{0-10000lbf}"
+//      '4ed3ede8844f0f351100000c',
 //    ],
 //    "description": "Load Cell Transducer",
 //    "EID": "EIDXXX"      
@@ -310,7 +310,7 @@ router.delete('/:sensorId', (req, res, next) => {
             if(doc.deletedCount === 1){
 
                 //If a sensor document was found, then find associated calibration procedure and remove it from its associated sensor array
-                Calibration.find().where('sensors').in(req.body.calibrations).exec()
+                Calibration.find().where('_id').in(req.body.calibrations).exec()
                 .then(cals => { 
                     for (let i = 0; i < cals.length; i++) {
                         for (let j = 0; j < cals[i].sensors.length; j++) {
