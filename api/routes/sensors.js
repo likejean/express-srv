@@ -287,20 +287,24 @@ router.post('/', (req, res, next) => {
 
 
 /// API endpoint: delete a single sensor by MongoDB id
-/// MUST HAVE body in request! 
+/// this client reques MUST HAVE the following body! 
 //{
 //    "calibrations":[
 //      '4ed3ede8844f0f351100000c',
+//      '4ed3ede8844f0f351100000a',
+//      '4ed3ede8844f0f351100000d,
+//       ......
+//       ......
 //    ],
 //    "description": "Load Cell Transducer",
 //    "EID": "EIDXXX"      
-
+///////////////EAXMPLE: /////////////////////////////////////////
 //const ids =  [
 //    '4ed3ede8844f0f351100000c',
 //    '4ed3f117a844e0471100000d', 
 //   '4ed3f18132f50c491100000e',
 //];
-//}   EAXMPLE: Model.find().where('_id').in(ids).exec((err, records) => {});
+//}   Model.find().where('_id').in(ids).exec((err, records) => {});
 
 router.delete('/:sensorId', (req, res, next) => {
     const id = req.params.sensorId;
@@ -309,18 +313,21 @@ router.delete('/:sensorId', (req, res, next) => {
         .then(doc => {
             if(doc.deletedCount === 1){
 
-                //If a sensor document was found, then find associated calibration procedure and remove it from its associated sensor array
+                //If a sensor document was found, then find associated calibration procedure(s) by specified id's
+                //in req.body.calibrations array and remove sensor ID from all FOUND cals.sensor[i] arrays
+                //NOTE: could be multiple calibrations found!
                 Calibration.find().where('_id').in(req.body.calibrations).exec()
                 .then(cals => { 
                     for (let i = 0; i < cals.length; i++) {
                         for (let j = 0; j < cals[i].sensors.length; j++) {
                             if (cals[i].sensors[j].toString() === id) {
-                                cals[i].sensors.splice(j, 1);
+                                cals[i].sensors.splice(j, 1);   //use splice() method to mutate existing arrays in cal documents
                                 break;
                             }
                         }                                
                     }
                     const saveCals = cals.map(cal => cal.save());
+                    //resolves all async promises
                     Promise.all(saveCals)
                     .then(() => {                        
                         res.status(200).json({
