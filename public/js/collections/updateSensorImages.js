@@ -6,9 +6,4 @@ const sensorImageCollection = {
     EID555: "extensometer_EID555.jpg"
 };
 
-function updateSensorImage (EID){   
-    
-    var img = document.getElementById('sensor-image');
-    img.src=`./img/${sensorImageCollection[EID]}`;
-}
 

@@ -28,18 +28,7 @@ const fetchSensors = async () => {
         row.appendChild(createGearIcon(i+1, data.sensors[i], strJSON));         
         tableBody.appendChild(row);
     }
-    //creates a table cell
-    function createTableCell(text, classArr){                    
-        const cell = document.createElement("td");
-        if (classArr.length > 0) {
-            classArr.forEach((item) => {
-                cell.classList.add(item); 
-            });
-        }                
-        const cellText = document.createTextNode(text);
-        cell.appendChild(cellText);          
-        return cell;
-    }
+    
 
     
 
@@ -65,6 +54,8 @@ const fetchSensors = async () => {
 
     
     sensorTable.appendChild(tableBody);      
+
+    
     } catch (error) {
         notification.innerHTML = `<div class="alert alert-danger" role="alert">NOTE! No sensor data exists or unable to fetch due to system failure.</div>`;
     }

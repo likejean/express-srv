@@ -89,11 +89,13 @@ const sensorSchema = mongoose.Schema(
         },
         location: {
             type: String, 
-            default: 'Testing Lab'
+            default: 'Testing Lab',
+            required: false
         },
         comment: {
             type: String, 
-            default: 'None'
+            default: 'None',
+            required: false
         },
         capacityRange: { 
             type: String, 
