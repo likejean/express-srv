@@ -163,6 +163,8 @@
        
        const tableBody = document.createElement("tbody");
        const optionsAvailable = document.querySelector('.options-available');
+       const optionsTable = document.querySelector('.selected-calibration-list');
+       const calsObj = {};
         
   
         const fetchCalibrationProcedures = async () => {
@@ -170,13 +172,14 @@
             const { data } = await axios.get('/api/calibrations');
 
             data.payload.forEach((item, idx) => {
-                let option = document.createElement("option");       
+                let option = document.createElement("option"); 
+                calsObj[`${idx+1}`]={procedureName: item.procedureName, calibrationPrinciple: item.calibrationPrinciple}      
                 option.setAttribute('value', idx + 1);
                 let text = document.createTextNode(item.procedureName);
                 option.appendChild(text);      
                 optionsAvailable.appendChild(option);
             });
-                            
+
             } catch (error) {
                 console.log('no data fetched')
             }
@@ -187,14 +190,15 @@
 
         document.querySelector('#calibrationListSelection').addEventListener("change", function(e) {
             const name = e.target.options[e.target.selectedIndex].text;
-            
-            
-            if (this.value == "1") {
-                console.log("selected");
-                
-            }else{
-                console.log('No selected');
-            }
+           
+            let row = document.createElement("tr");       
+            row.setAttribute('id', `row${e.target.value}`);
+            row.appendChild(createTableCell(`${e.target.value}`,[]));
+            row.appendChild(createTableCell(`${calsObj[e.target.value].procedureName}`,[]));
+            row.appendChild(createTableCell(`${calsObj[e.target.value].calibrationPrinciple}`,[]));
+            tableBody.appendChild(row);
+            optionsTable.appendChild(tableBody);
+
         });
         
       </script>
