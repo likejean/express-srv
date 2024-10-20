@@ -55,8 +55,9 @@ const fetchSensors = async () => {
     
     sensorTable.appendChild(tableBody);      
 
-    
-    } catch (error) {
+
+    } catch (error) {                 
+        formAlert.textContent = error.response.data.msg; 
         notification.innerHTML = `<div class="alert alert-danger" role="alert">NOTE! No sensor data exists or unable to fetch due to system failure.</div>`;
     }
 };
