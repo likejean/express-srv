@@ -176,22 +176,16 @@ router.patch('/:sensorId', (req, res, next) => {
 });
 
 
-//POST endpoint: create a new SENSOR
+//POST endpoint: creates a new SENSOR MongoDB document
 
 router.post('/', (req, res, next) => {
     const _id = new mongoose.Types.ObjectId();
 
-    const {
-        calibrationNames,   // NOTE! this array stores values in the following format {0.0-10000.0kips} from client's request body        
+    const {        
         EID,
         type,
         calibrationPriority,
         calibrationFrequency,
-        lastCalibrationDate,
-        dueCalibrationDate,
-        calibrationExtended,        
-        maxCalibrationExtension,
-        calibrationRangePercent,
         calibratedBy,
         location,
         description,
@@ -201,10 +195,11 @@ router.post('/', (req, res, next) => {
         quantity,
         manufacturer        
     } = req.body;
+   
 
     const sensor = new Sensor({
         _id,   
-        calibrations:[],   // initializes this array to store MongoDB ids, not procedure names...         
+        calibrations:[],   // initializes array to store multiple MongoDB IDs for calibrations docs...         
         EID,
         type,    
         calibrationPriority,
@@ -217,70 +212,94 @@ router.post('/', (req, res, next) => {
         model,
         quantity,
         manufacturer        
-    });    
-
-    Calibration.find().where('procedureName').in(calibrationNames).exec()
-    .then(cals => {        
-        if(cals.length > 0){
-            for (let i = 0; i < cals.length; i++) {
-                const calProcedure = new calibrationProcedure(
-                    cals[i]._id, 
-                    calibrationNames[i],
-                    lastCalibrationDate, 
-                    dueCalibrationDate,
-                    calibrationExtended,
-                    maxCalibrationExtension,
-                    calibrationRangePercent
-                );           
-                cals[i].sensors.push(sensor._id);
-                sensor.calibrations.push(calProcedure);                                
-            }
-            const saveCals = cals.map(cal => cal.save());
-            Promise.all(saveCals)
-            .then(() => {
-                sensor.save().then(result => {
-                    res.status(201).json({
-                        message: `SUCCESS: Sensor was save and calibrations procedures were updated per sensor references...`,   
-                        sensor: result,
-                        request: {
-                            type: 'POST',
-                            url: req.originalUrl                    
-                        }   
-                    });
-                });  
-            })
-            .catch(() => {
-                res.status(500).json({
-                    calibrations,
-                    error: "Internal Server Error: Sensor references were not saved to calibration documents",
-                    request: {
-                        type: 'POST',
-                        url: req.originalUrl                    
-                    }
-                });
-            })     
-        } else {
-            console.log(`Calibration procedures ${calibrationNames} were not found`);
-            res.status(400).json({
-                calibrationNames,
-                cals,
-                error: `Failed to find specified calibration procedures for this sensor...`,               
-                request: {
-                    type: 'POST',
-                    url: req.originalUrl                    
-                }  
-            });
-        }
+    });  
+    
+    sensor
+        .save()
+        .then(result => {
+        console.log({url: req.originalUrl, type: 'POST', status: "SUCCESS"});
+        res.status(200).json({
+            message: `SUCCESS: Created new sensor: ${result.EID}`,
+            result,
+            request: {
+                type: 'POST',
+                url: req.originalUrl
+            }          
+           
+        });
     })
     .catch(() => {
         res.status(500).json({
-            error: "Internal Server Error: Sensor was not saved to database",
+            message: "Failed to create a new sensor to Database",
             request: {
                 type: 'POST',
                 url: req.originalUrl                    
-            }
+            }  
         });
-    })
+    });
+
+    // Calibration.find().where('procedureName').in(calibrationNames).exec()
+    // .then(cals => {        
+    //     if(cals.length > 0){
+    //         for (let i = 0; i < cals.length; i++) {
+    //             const calProcedure = new calibrationProcedure(
+    //                 cals[i]._id, 
+    //                 calibrationNames[i],
+    //                 lastCalibrationDate, 
+    //                 dueCalibrationDate,
+    //                 calibrationExtended,
+    //                 maxCalibrationExtension,
+    //                 calibrationRangePercent
+    //             );           
+    //             cals[i].sensors.push(sensor._id);
+    //             sensor.calibrations.push(calProcedure);                                
+    //         }
+    //         const saveCals = cals.map(cal => cal.save());
+    //         Promise.all(saveCals)
+    //         .then(() => {
+    //             sensor.save().then(result => {
+    //                 res.status(201).json({
+    //                     message: `SUCCESS: Sensor was save and calibrations procedures were updated per sensor references...`,   
+    //                     sensor: result,
+    //                     request: {
+    //                         type: 'POST',
+    //                         url: req.originalUrl                    
+    //                     }   
+    //                 });
+    //             });  
+    //         })
+    //         .catch(() => {
+    //             res.status(500).json({
+    //                 calibrations,
+    //                 error: "Internal Server Error: Sensor references were not saved to calibration documents",
+    //                 request: {
+    //                     type: 'POST',
+    //                     url: req.originalUrl                    
+    //                 }
+    //             });
+    //         })     
+    //     } else {
+    //         console.log(`Calibration procedures ${calibrationNames} were not found`);
+    //         res.status(400).json({
+    //             calibrationNames,
+    //             cals,
+    //             error: `Failed to find specified calibration procedures for this sensor...`,               
+    //             request: {
+    //                 type: 'POST',
+    //                 url: req.originalUrl                    
+    //             }  
+    //         });
+    //     }
+    // })
+    // .catch(() => {
+    //     res.status(500).json({
+    //         error: "Internal Server Error: Sensor was not saved to database",
+    //         request: {
+    //             type: 'POST',
+    //             url: req.originalUrl                    
+    //         }
+    //     });
+    // })
 });
 
 

@@ -142,44 +142,37 @@ router.post('/', (req, res, next) => {
 
     const _id = new mongoose.Types.ObjectId();
     const {
-        calibratorModel,
-        measurementQuantity,
-        units,
-        comment,
-        startRangeLevel,
-        endRangeLevel,
-        description,
-        calibrationPrinciple,
-        manufacturer,
-        sensors
+        procedureId,
+        sensorsId,
+        calibrationName,
+        lastCalibrationDate,
+        dueCalibrationDate,        
+        calibrationExtended,
+        maxCalibrationExtension,
+        calibrationRangePercent,
+        comment
     } = req.body;
 
-    const newCalibrationProcedure = new Calibration({
+    const calibration = new Calibration({
         _id,
-        calibratorModel,
-        procedureName: `{${startRangeLevel}-${endRangeLevel}${units}}`,
-        description,
-        measurementQuantity,
-        units,
-        comment,
-        startRangeLevel,
-        endRangeLevel,
-        calibrationPrinciple,
-        manufacturer,
-        sensors
+        procedureId,
+        sensorsId,
+        calibrationName,
+        lastCalibrationDate,
+        dueCalibrationDate,        
+        calibrationExtended,
+        maxCalibrationExtension,
+        calibrationRangePercent,
+        comment
     });
 
-    newCalibrationProcedure
+    calibration
         .save()
         .then(result => {
+        console.log({url: req.originalUrl, type: 'POST', status: "SUCCESS"});
         res.status(200).json({
-            message: `SUCCESS: Created new calibration process: {${result.startRangeLevel} to ${result.endRangeLevel} ${result.units}}`,
-            addedCalibrationProcedure: {
-                id: result._id,                
-                measurementQuantity: result.measurementQuantity,
-                units: result.units,
-                manufacturer: result.manufacturer
-            },
+            message: `SUCCESS: Created a new calibration event: {${result.startRangeLevel} to ${result.endRangeLevel} ${result.units}}`,
+            result,
             request: {
                 type: 'POST',
                 url: req.originalUrl
@@ -189,8 +182,7 @@ router.post('/', (req, res, next) => {
     })
     .catch(err => {
         res.status(500).json({
-            err,
-            message: "Failed to add Calibration Procedure to Database",
+            message: "Failed to add a new calibration event",
             request: {
                 type: 'POST',
                 url: req.originalUrl                    

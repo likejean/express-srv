@@ -22,42 +22,13 @@ const sensorSchema = mongoose.Schema(
     {
         _id: mongoose.Schema.Types.ObjectId,
         createdAt: { type: Date, default: Date.now, required: false},       
-        calibrations: [{
-            calibrationProcedureId: {
+        calibrations: [
+            {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'Calibration',
-                required: true
+                required: true,
             },
-            calibrationProcedureName: { 
-                type: String, 
-                required: true 
-            },
-            lastCalibrationDate: { 
-                type: Date, 
-                default: Date.now, 
-                required: true 
-            },
-            dueCalibrationDate: { 
-                type: Date, 
-                default: Date.now, 
-                required: true 
-            },        
-            calibrationExtended: { 
-                type: Boolean, 
-                required: true 
-            },
-            maxCalibrationExtension: { 
-                type: String, 
-                required: false 
-            },
-            calibrationRangePercent: { 
-                type: Number, 
-                default: 0,
-                min: 10,
-                max: 100,
-                required: true
-            }
-        }],
+        ],
         EID: {
             type: String,
             required: true,
