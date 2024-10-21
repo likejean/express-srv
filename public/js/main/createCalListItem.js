@@ -1,7 +1,8 @@
+//this function creates list of all calibrations associated with specified sensor
 function createCalibrationListItem (data, list, calName, calLocation) {
     const unixTimestamp = moment().unix();
 
-    for (let i=0; i<data.length; i++){
+    for (let i=0; i < data.length; i++){
         let listItem = document.createElement("li");
         let badgeItem = document.createElement("a");        
 
@@ -22,13 +23,13 @@ function createCalibrationListItem (data, list, calName, calLocation) {
         const calNameText = document.createTextNode(`
             ${data[i].calibrationName.replace(/{/g, "").replace(/}/g, "")}`
         );
-        
+
         const calInfoText = document.createTextNode(`
             Where? ${calLocation}
-            \u00a0\u00a0\u00a0\u00a0Last Date: ${lastCalDate.format('dddd, MM/DD/YYYY')}
-            \u00a0\u00a0\u00a0\u00a0Due Date: ${dueCalDate.format('dddd, MM/DD/YYYY')}
-            \u00a0\u00a0\u00a0\u00a0Extended? ${extenstionStatus?"YES":"NO"}
-            \u00a0\u00a0\u00a0\u00a0Expired? ${dueCalDate.unix()>unixTimestamp?"NO":"YES"}`
+            \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0Last Date: ${lastCalDate.format('dddd, MM/DD/YYYY')}
+            \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0Due Date: ${dueCalDate.format('dddd, MM/DD/YYYY')}
+            \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0Extended? ${extenstionStatus?"YES":"NO"}
+            \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0Expired? ${dueCalDate.unix()>unixTimestamp?"NO":"YES"}`
         );
        
         listItem.appendChild(calInfoText);   
