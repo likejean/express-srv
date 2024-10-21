@@ -12,9 +12,9 @@ function createCalibrationListItem (data, list, calName, calLocation) {
         let extenstionStatus = data[i].calibrationExtended;
 
 
-        badgeItem.href=`./api/calibrations/${data[i]._id}`;
-        listItem.setAttribute('id', `item${i+1}`);
-        
+        //badgeItem.href=`./api/calibrations/${data[i]._id}/test.html`;
+        badgeItem.href=`./html/test.html`;
+       
         //add class attributes to calName badge and calInfo list item
         badgeItem.classList.add('list-group-item');
         listItem.classList.add('list-group-item');
