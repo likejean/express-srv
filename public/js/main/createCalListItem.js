@@ -1,6 +1,7 @@
 //this function creates list of all calibrations associated with specified sensor
 function createCalibrationListItem (data, list, calName, calLocation) {
-    const unixTimestamp = moment().unix();
+    //Get a current time in unix format
+    const unixTimestamp = moment().unix(); 
 
     for (let i=0; i < data.length; i++){
         let listItem = document.createElement("li");
@@ -11,11 +12,17 @@ function createCalibrationListItem (data, list, calName, calLocation) {
         let extenstionStatus = data[i].calibrationExtended;
 
 
-        listItem.setAttribute('id', `item${i+1}`);
         badgeItem.href="#";
-        listItem.classList.add('list-group-item');
-        badgeItem.classList.add('list-group-item');
+        listItem.setAttribute('id', `item${i+1}`);
         
+        //add class attributes to calName badge and calInfo list item
+        badgeItem.classList.add('list-group-item');
+        listItem.classList.add('list-group-item');
+        badgeItem.classList.add('d-flex');
+        listItem.classList.add('d-flex');
+        
+        
+        //add css styles to calName badge and calInfo list item
         listItem.style.color = dueCalDate.unix() > unixTimestamp ? "black" : "red";       
         badgeItem.style.backgroundColor = "grey";
         badgeItem.style.color = dueCalDate.unix() > unixTimestamp ? "white" : "rgb(255, 153, 153)";  
@@ -32,8 +39,8 @@ function createCalibrationListItem (data, list, calName, calLocation) {
             \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0Expired? ${dueCalDate.unix()>unixTimestamp?"NO":"YES"}`
         );
        
-        listItem.appendChild(calInfoText);   
-        badgeItem.appendChild(calNameText);             
+        badgeItem.appendChild(calNameText); 
+        listItem.appendChild(calInfoText); 
         list.appendChild(listItem); 
         calName.appendChild(badgeItem);      
         

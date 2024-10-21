@@ -42,10 +42,12 @@
        
         <div class="bg-light p-4">
           <h5 class="mb-4 text-body-emphasis h4">Intec Sensors</h5>
-          <div class="mb-3 text-body-secondary">The table below lists calibration status of Intec devices used for measurements</div>
+          <div class="mb-4 text-body-secondary">The table below lists calibration status of Intec devices used for measurements</div>
           <div class="notification">
-            <div class="col-sm-12 my-2 text-center">
-              <a href="./html/createNewSensor.html" class="btn btn-primary btn-sm">Create New Sensor</a>              
+            <div class="col-sm-12 my-4 text-center">
+              <a href="./html/createNewSensor.html" class="btn btn-primary btn-sm">Add Sensor</a> 
+              <a href="./html/logCalibrationEvent.html" class="btn btn-secondary btn-sm">Log Calibration Event</a>   
+              <a href="./html/createNewProcedure.html" class="btn btn-primary btn-sm">Add Procedure</a> 
             </div>
           </div>
 
@@ -91,7 +93,7 @@
             </ul>
             <!-- calibration procedure details -->
             <div class="card-footer text-body-secondary pb-3">
-              <h2 class="mb-3">Calibration Procedures</h2>
+              <h2 class="mb-3">Calibrations</h2>
               <div class="row d-flex align-items-center">
                 <div class="col-12 col-sm-3">
                   <ul class="mx-1 list-group row" id="calibration-procedures-badges">
@@ -146,7 +148,7 @@
     crossorigin="anonymous"></script>    
   </script>
 
-  <!-- LIBRARIES SCRIPTS -->
+  <!-- LIBS SCRIPTS -->
   <script src="./libs/moment.min.js"></script>
   <script src="./libs/moment-with-locales.min.js"></script>
 
@@ -157,13 +159,15 @@
   <!-- UTILS SCRIPTS -->
   <script src="./js/utils/createTableCell.js"></script>
   <script src="./js/utils/getHtmlElementById.js"></script>
+  <script src="./js/utils/addTextNodeToHtmlElement.js"></script>
   <script src="./js/utils/updateSensorImage.js"></script>
   <script src="./js/utils/removeAllChildNodes.js"></script>
 
   <!--MAIN SCRIPTS-->
-  <script src="./js/main/fetchAllData/fetchData.js"></script> 
+  <script src="./js/main/fetchAllData.js"></script>
+  <script src="./js/main/createMainSensorTable.js"></script> 
   <script src="./js/main/createGearIcon.js"></script>
-  <script src="./js/main/addTextNodeToHtmlElement.js"></script>  
+    
   <script src="./js/main/createCalListItem.js"></script>
   <script src="./js/main/mapCalDueDates.js"></script>  
   <script src="./js/main/showSensorInfoCard.js"></script>
