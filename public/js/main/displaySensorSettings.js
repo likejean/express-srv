@@ -3,7 +3,7 @@ function showSensorInfoCard(
         description, 
         manufacturer, 
         quantity, 
-        calibrations,
+        calibrations,   //should get array from createGearIcon
         EID,
         model,
         type,

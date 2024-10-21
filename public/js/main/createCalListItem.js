@@ -1,6 +1,6 @@
 function createCalibrationListItem (data, list, calName, calLocation) {
     const unixTimestamp = moment().unix();
-    
+
     for (let i=0; i<data.length; i++){
         let listItem = document.createElement("li");
         let badgeItem = document.createElement("a");        
@@ -9,6 +9,7 @@ function createCalibrationListItem (data, list, calName, calLocation) {
         let dueCalDate = moment.utc(data[i].dueCalibrationDate);
         let extenstionStatus = data[i].calibrationExtended;
 
+
         listItem.setAttribute('id', `item${i+1}`);
         badgeItem.href="#";
         listItem.classList.add('list-group-item');
@@ -16,17 +17,12 @@ function createCalibrationListItem (data, list, calName, calLocation) {
         
         listItem.style.color = dueCalDate.unix() > unixTimestamp ? "black" : "red";       
         badgeItem.style.backgroundColor = "grey";
-        badgeItem.style.color = dueCalDate.unix() > unixTimestamp ? "white" : "rgb(255, 153, 153)";    
-        
-        
-        console.log(data[i].calibrationProcedureName);
-        
-
+        badgeItem.style.color = dueCalDate.unix() > unixTimestamp ? "white" : "rgb(255, 153, 153)";  
 
         const calNameText = document.createTextNode(`
-            ${data[i].calibrationProcedureName.replace(/{/g, "").replace(/}/g, "")}`
+            ${data[i].calibrationName.replace(/{/g, "").replace(/}/g, "")}`
         );
-                
+        
         const calInfoText = document.createTextNode(`
             Where? ${calLocation}
             \u00a0\u00a0\u00a0\u00a0Last Date: ${lastCalDate.format('dddd, MM/DD/YYYY')}

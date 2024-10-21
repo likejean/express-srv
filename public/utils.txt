@@ -8,3 +8,68 @@ navigate https://api.github.com/meta to view object with key: "codespaces"
 You can use the escape sequence '\u' in a string with the Unicode value for a non-breaking space:
 var textNode = document.createTextNode("\u00a0");
 &amp;nbsp; and &amp;#160; are strictly HTML (or XML) notations. In JavaScript, you need to use an escape sequence starting with '\\' for special characters in strings.
+
+
+4. HOW TO FIND MULTIPLE DOCS IN MONGOOSE MONGODB COLLECTIONS
+    // Calibration.find().where('procedureName').in(calibrationNames).exec()
+    // .then(cals => {        
+    //     if(cals.length > 0){
+    //         for (let i = 0; i < cals.length; i++) {
+    //             const calProcedure = new calibrationProcedure(
+    //                 cals[i]._id, 
+    //                 calibrationNames[i],
+    //                 lastCalibrationDate, 
+    //                 dueCalibrationDate,
+    //                 calibrationExtended,
+    //                 maxCalibrationExtension,
+    //                 calibrationRangePercent
+    //             );           
+    //             cals[i].sensors.push(sensor._id);
+    //             sensor.calibrations.push(calProcedure);                                
+    //         }
+    //         const saveCals = cals.map(cal => cal.save());
+    //         Promise.all(saveCals)
+    //         .then(() => {
+    //             sensor.save().then(result => {
+    //                 res.status(201).json({
+    //                     message: `SUCCESS: Sensor was save and calibrations procedures were updated per sensor references...`,   
+    //                     sensor: result,
+    //                     request: {
+    //                         type: 'POST',
+    //                         url: req.originalUrl                    
+    //                     }   
+    //                 });
+    //             });  
+    //         })
+    //         .catch(() => {
+    //             res.status(500).json({
+    //                 calibrations,
+    //                 error: "Internal Server Error: Sensor references were not saved to calibration documents",
+    //                 request: {
+    //                     type: 'POST',
+    //                     url: req.originalUrl                    
+    //                 }
+    //             });
+    //         })     
+    //     } else {
+    //         console.log(`Calibration procedures ${calibrationNames} were not found`);
+    //         res.status(400).json({
+    //             calibrationNames,
+    //             cals,
+    //             error: `Failed to find specified calibration procedures for this sensor...`,               
+    //             request: {
+    //                 type: 'POST',
+    //                 url: req.originalUrl                    
+    //             }  
+    //         });
+    //     }
+    // })
+    // .catch(() => {
+    //     res.status(500).json({
+    //         error: "Internal Server Error: Sensor was not saved to database",
+    //         request: {
+    //             type: 'POST',
+    //             url: req.originalUrl                    
+    //         }
+    //     });
+    // })

@@ -6,6 +6,50 @@ const router = express.Router();
 
 
 
+//Routers
+// GET endpoint: all calibration documents
+router.get('/', (req, res, next) => {
+    Procedure
+        .find()
+        .exec()
+        .then(docs => {
+        res.status(200).json({
+            message:   `Successfully fetched ${docs.length} calibration procedure document(s)`,
+            payload: docs.map(doc => {
+                return {
+                    _id: doc._id,
+                    procedureName: doc.procedureName,
+                    calibratorModel: doc.calibratorModel,
+                    measurementQuantity: doc.measurementQuantity,
+                    units: doc.units,                    
+                    startRangeLevel: doc.startRangeLevel,
+                    endRangeLevel: doc.endRangeLevel,
+                    description: doc.description,                    
+                    comment: doc.comment,
+                    manufacturer: doc.manufacturer,
+                    calibrations: doc.calibrations,
+                    createdAt: doc.createdAt,
+                };
+            }),
+            total: docs.length,
+            request: {
+                type: 'GET',
+                url: req.originalUrl
+            }
+        });
+    })
+    .catch(() => {
+        res.status(500).json({
+            message: "Failure: Calibration events were not fetched... Something went wrong",
+            request: {
+                type: 'GET',
+                url: req.originalUrl                    
+            }  
+        });
+    });
+});
+
+
 
 
 //POST endpoint: creates a new calibration PROCEDURE MongoDB document

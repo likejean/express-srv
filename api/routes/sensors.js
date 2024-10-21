@@ -4,25 +4,6 @@ const Sensor = require('../models/sensor');
 const Calibration = require('../models/calibration');
 const router = express.Router();
 
-class calibrationProcedure {
-    constructor(
-        calibrationProcedureId, 
-        calibrationProcedureName,
-        lastCalibrationDate, 
-        dueCalibrationDate,
-        calibrationExtended,
-        maxCalibrationExtension,
-        calibrationRangePercent
-    ){      
-        this.calibrationProcedureId = calibrationProcedureId;
-        this.calibrationProcedureName = calibrationProcedureName;
-        this.lastCalibrationDate = lastCalibrationDate;
-        this.dueCalibrationDate = dueCalibrationDate;
-        this.calibrationExtended = calibrationExtended;
-        this.maxCalibrationExtension = maxCalibrationExtension;
-        this.calibrationRangePercent = calibrationRangePercent;      
-  }
-}
 
 //Routers
 // GET endpoint: get ALL sensors
@@ -32,17 +13,14 @@ router.get('/', (req, res, next) => {
         .exec()
         .then(docs => {
             res.status(200).json({
-                count: docs.length,
-                sensors: docs.map(doc => {                    
+                message:   `Successfully fetched ${docs.length} sensors`,
+                payload: docs.map(doc => {                    
                     return {
+                        _id: doc._id,
                         calibrations: doc.calibrations,
                         EID: doc.EID,
                         type: doc.type,    
-                        priority: doc.calibrationPriority,
-                        lastCalibrationDate: doc.lastCalibrationDate,
-                        dueCalibrationDate: doc.dueCalibrationDate,
-                        calibrationExtended: doc.calibrationExtended,
-                        maxCalibrationExtension: doc.maxCalibrationExtension,
+                        priority: doc.calibrationPriority,                        
                         calibrationPriority: doc.calibrationPriority,
                         calibrationFrequency: doc.calibrationFrequency,
                         calibratedBy: doc.calibratedBy,
@@ -59,7 +37,12 @@ router.get('/', (req, res, next) => {
                             url: req.originalUrl                    
                         }  
                     };                    
-                })
+                }),
+                total: docs.length,
+                request: {
+                type: 'GET',
+                url: req.originalUrl
+            }
             });
         })
         .catch(err => {
@@ -238,68 +221,7 @@ router.post('/', (req, res, next) => {
         });
     });
 
-    // Calibration.find().where('procedureName').in(calibrationNames).exec()
-    // .then(cals => {        
-    //     if(cals.length > 0){
-    //         for (let i = 0; i < cals.length; i++) {
-    //             const calProcedure = new calibrationProcedure(
-    //                 cals[i]._id, 
-    //                 calibrationNames[i],
-    //                 lastCalibrationDate, 
-    //                 dueCalibrationDate,
-    //                 calibrationExtended,
-    //                 maxCalibrationExtension,
-    //                 calibrationRangePercent
-    //             );           
-    //             cals[i].sensors.push(sensor._id);
-    //             sensor.calibrations.push(calProcedure);                                
-    //         }
-    //         const saveCals = cals.map(cal => cal.save());
-    //         Promise.all(saveCals)
-    //         .then(() => {
-    //             sensor.save().then(result => {
-    //                 res.status(201).json({
-    //                     message: `SUCCESS: Sensor was save and calibrations procedures were updated per sensor references...`,   
-    //                     sensor: result,
-    //                     request: {
-    //                         type: 'POST',
-    //                         url: req.originalUrl                    
-    //                     }   
-    //                 });
-    //             });  
-    //         })
-    //         .catch(() => {
-    //             res.status(500).json({
-    //                 calibrations,
-    //                 error: "Internal Server Error: Sensor references were not saved to calibration documents",
-    //                 request: {
-    //                     type: 'POST',
-    //                     url: req.originalUrl                    
-    //                 }
-    //             });
-    //         })     
-    //     } else {
-    //         console.log(`Calibration procedures ${calibrationNames} were not found`);
-    //         res.status(400).json({
-    //             calibrationNames,
-    //             cals,
-    //             error: `Failed to find specified calibration procedures for this sensor...`,               
-    //             request: {
-    //                 type: 'POST',
-    //                 url: req.originalUrl                    
-    //             }  
-    //         });
-    //     }
-    // })
-    // .catch(() => {
-    //     res.status(500).json({
-    //         error: "Internal Server Error: Sensor was not saved to database",
-    //         request: {
-    //             type: 'POST',
-    //             url: req.originalUrl                    
-    //         }
-    //     });
-    // })
+
 });
 
 

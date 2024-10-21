@@ -1,51 +1,54 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const Calibration = require('../models/calibration');
+const Procedure = require('../models/procedure');
+const Sensor = require('../models/sensor');
 const router = express.Router();
 
 
 //Routers
-// GET endpoint
+// GET endpoint: all calibration documents
 router.get('/', (req, res, next) => {
     Calibration
         .find()
         .exec()
         .then(docs => {
-            res.status(200).json({
-                message:   `Successfully fetched ${docs.length} calibration document(s)`,
-                payload: docs.map(doc => {
-                    return {
-                        _id: doc._id,
-                        procedureName: doc.procedureName,
-                        calibratorModel: doc.calibratorModel,
-                        measurementQuantity: doc.measurementQuantity,
-                        units: doc.units,
-                        comment: doc.comment,
-                        startRangeLevel: doc.startRangeLevel,
-                        endRangeLevel: doc.endRangeLevel,
-                        manufacturer: doc.manufacturer,
-                        calibrationPrinciple: doc.calibrationPrinciple,
-                        sensors: doc.sensors ? doc.sensors : [],
-                    };
-                }),
-                total: docs.length,
-                request: {
-                    type: 'GET',
-                    url: req.originalUrl
-                }
-            });
-        })
-        .catch(err => {
-            res.status(500).json({
-                message: "Failure",
-                error: err,
-                request: {
-                    type: 'GET',
-                    url: req.originalUrl                    
-                }  
-            });
+        res.status(200).json({
+            message:   `Successfully fetched ${docs.length} calibration event(s)`,
+            payload: docs.map(doc => {
+                return {
+                    _id: doc._id,
+                    calibrationName: doc.calibrationName,
+                    procedureId: doc.procedureId,
+                    sensorId: doc.sensorId,
+                    lastCalibrationDate: doc.lastCalibrationDate,                    
+                    dueCalibrationDate: doc.dueCalibrationDate,
+                    calibrationExtended: doc.calibrationExtended,
+                    maxCalibrationExtension: doc.maxCalibrationExtension,
+                    calibrationRangePercent: doc.calibrationRangePercent,
+                    comment: doc.comment,
+                    createdAt: doc.createdAt,
+                };
+            }),
+            total: docs.length,
+            request: {
+                type: 'GET',
+                url: req.originalUrl
+            }
         });
+    })
+    .catch(() => {
+        res.status(500).json({
+            message: "Failure: Calibration events were not fetched... Something went wrong",
+            request: {
+                type: 'GET',
+                url: req.originalUrl                    
+            }  
+        });
+    });
 });
+
+
 
 // GET endpoint: get calibration procedure  by id
 router.get('/:procedureId', (req, res, next) => {
@@ -137,13 +140,14 @@ router.patch('/:procedureId', (req, res, next) => {
 });
 
 
-//POST endpoint
+//POST endpoint: creates a new calibration EVENT MongoDB document
+
 router.post('/', (req, res, next) => {
 
     const _id = new mongoose.Types.ObjectId();
     const {
         procedureId,
-        sensorsId,
+        sensorId,
         calibrationName,
         lastCalibrationDate,
         dueCalibrationDate,        
@@ -156,7 +160,7 @@ router.post('/', (req, res, next) => {
     const calibration = new Calibration({
         _id,
         procedureId,
-        sensorsId,
+        sensorId,
         calibrationName,
         lastCalibrationDate,
         dueCalibrationDate,        
@@ -166,29 +170,52 @@ router.post('/', (req, res, next) => {
         comment
     });
 
-    calibration
-        .save()
-        .then(result => {
-        console.log({url: req.originalUrl, type: 'POST', status: "SUCCESS"});
-        res.status(200).json({
-            message: `SUCCESS: Created a new calibration event: {${result.startRangeLevel} to ${result.endRangeLevel} ${result.units}}`,
-            result,
-            request: {
-                type: 'POST',
-                url: req.originalUrl
-            }          
-           
+    Promise.all([
+        Sensor.findById(sensorId).exec(),
+        Procedure.findById(procedureId).exec()
+    ])
+    .then(([sensor, procedure]) => {
+
+        sensor.calibrations.push(_id);   //push calibration event _id into sensor's array field
+        procedure.calibrations.push(_id);  //push calibration event _id into sensor's array field
+        
+        Promise.all([sensor.save(), procedure.save(), calibration.save()])
+        .then(result => {           
+            res.status(201).json({
+                message: `SUCCESS: Calibration event ${calibration.calibrationName} successufully SAVED. 
+                Calibration event id {${_id}} pushed into array fields of sensor ${sensor.EID} and procedure ${procedure.procedureName}.`,   
+                sensor: result[0],
+                procedure: result[1],
+                calibration: result[2],
+                request: {
+                    type: 'POST',
+                    url: req.originalUrl                    
+                }   
+            });            
+        })
+        .catch (() =>{
+            res.status(500).json({
+                message: "Internal Server Error",
+                request: {
+                    type: 'POST',
+                    url: req.originalUrl                    
+                }  
+            });
         });
+
     })
-    .catch(err => {
+    .catch (() =>{
         res.status(500).json({
-            message: "Failed to add a new calibration event",
+            sensorID,
+            procedureId,
+            message: "Something went wrong... Sensor and/or Procedure were not found.",
             request: {
                 type: 'POST',
                 url: req.originalUrl                    
             }  
         });
     });
+   
 });
 
 

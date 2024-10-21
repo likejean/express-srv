@@ -14,7 +14,7 @@ const calibrationSchema = mongoose.Schema(
             ref: 'Procedure',
             required: true
         },
-        sensorsId: {
+        sensorId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Calibration',
             required: true
