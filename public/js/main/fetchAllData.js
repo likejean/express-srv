@@ -1,8 +1,3 @@
-const sensorTable = document.querySelector('.data-result');
-const notification = document.querySelector('.notification');
-const tableBody = document.createElement("tbody");
-var tableRowObj = {};
-
 const fetchAllData = async () => {
     
     let strJSON;

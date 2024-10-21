@@ -13,6 +13,13 @@ router.get('/', (req, res, next) => {
         .find()
         .exec()
         .then(docs => {
+        console.log({
+            total: docs.length,
+            request: {
+                type: 'GET',
+                url: req.originalUrl,
+                status: "SUCCESS"
+            }});
         res.status(200).json({
             message:   `Successfully fetched ${docs.length} calibration procedure document(s)`,
             payload: docs.map(doc => {

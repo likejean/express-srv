@@ -13,6 +13,13 @@ router.get('/', (req, res, next) => {
         .find()
         .exec()
         .then(docs => {
+        console.log({
+            total: docs.length,
+            request: {
+                type: 'GET',
+                url: req.originalUrl,
+                status: "SUCCESS"
+            }});
         res.status(200).json({
             message:   `Successfully fetched ${docs.length} calibration event(s)`,
             payload: docs.map(doc => {
@@ -55,9 +62,15 @@ router.get('/:procedureId', (req, res, next) => {
     const id = req.params.procedureId;
     Calibration.findById(id)
         .exec()
-        .then(doc => {
+        .then(doc => {           
             //To handle non-existing id error, but correct format...
             if (doc) {
+                console.log({
+                    request: {
+                        type: 'GET',
+                        url: req.originalUrl,
+                        status: "SUCCESS"
+                    }});
                 return res.status(200).json({
                     doc,
                     request: {
@@ -66,8 +79,15 @@ router.get('/:procedureId', (req, res, next) => {
                     }  
                 });
             } else {
+                console.log({
+                    request: {
+                        message: 'Invalid Entry',
+                        type: 'GET',
+                        url: req.originalUrl,
+                        status: "FAILURE"
+                    }});
                 return res.status(400).json({
-                    message: 'No VALID ENTRY',
+                    message: 'Invalid Entry',
                     request: {
                         type: 'GET',
                         url: req.originalUrl                    

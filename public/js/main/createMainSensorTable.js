@@ -1,5 +1,11 @@
+const sensorTable = document.querySelector('.data-result');
+const notification = document.querySelector('.notification');
+const tableBody = document.createElement("tbody");
+var tableRowObj = {};
+
+
 function createMainSensorTable(sensors, calibrations) {
-    
+
     // creating all table cells            
     for (let i = 0; i < sensors.length; i++) { 
         // adds the row of cells to the end of the table body 
