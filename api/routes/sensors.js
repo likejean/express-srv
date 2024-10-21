@@ -21,6 +21,7 @@ router.get('/', (req, res, next) => {
                 }});
             res.status(200).json({
                 message:   `Successfully fetched ${docs.length} sensors`,
+                collectionName: "sensors",
                 payload: docs.map(doc => {                    
                     return {
                         _id: doc._id,
