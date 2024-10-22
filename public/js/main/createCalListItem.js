@@ -13,7 +13,10 @@ function createCalibrationListItem (data, list, calName, calLocation) {
 
 
         //badgeItem.href=`./api/calibrations/${data[i]._id}/test.html`;
-        badgeItem.href=`./html/test.html`;
+        badgeItem.setAttribute('id', `${data[i]._id}`)
+        badgeItem.classList.add('calibration-record-link');
+        badgeItem.href=`./html/calibration.html?id=${data[i]._id}`;       
+
        
         //add class attributes to calName badge and calInfo list item
         badgeItem.classList.add('list-group-item');
@@ -24,8 +27,8 @@ function createCalibrationListItem (data, list, calName, calLocation) {
         
         //add css styles to calName badge and calInfo list item
         listItem.style.color = dueCalDate.unix() > unixTimestamp ? "black" : "red";       
-        badgeItem.style.backgroundColor = "grey";
-        badgeItem.style.color = dueCalDate.unix() > unixTimestamp ? "white" : "rgb(255, 153, 153)";  
+        badgeItem.style.backgroundColor = dueCalDate.unix() > unixTimestamp ? "green" : "red";        
+        badgeItem.style.color = "white";  
 
         const calNameText = document.createTextNode(`
             ${data[i].calibrationName.replace(/{/g, "").replace(/}/g, "")}`

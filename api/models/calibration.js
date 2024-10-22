@@ -32,7 +32,11 @@ const calibrationSchema = mongoose.Schema(
             type: Date, 
             default: Date.now, 
             required: true 
-        },        
+        },  
+        adjustmentsMade: { 
+            type: Boolean, 
+            required: true 
+        },       
         calibrationExtended: { 
             type: Boolean, 
             required: true 

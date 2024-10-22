@@ -31,6 +31,7 @@ router.get('/', (req, res, next) => {
                     sensorId: doc.sensorId,
                     lastCalibrationDate: doc.lastCalibrationDate,                    
                     dueCalibrationDate: doc.dueCalibrationDate,
+                    adjustmentsMade: doc.adjustmentsMade,
                     calibrationExtended: doc.calibrationExtended,
                     maxCalibrationExtension: doc.maxCalibrationExtension,
                     calibrationRangePercent: doc.calibrationRangePercent,
@@ -73,7 +74,7 @@ router.get('/:procedureId', (req, res, next) => {
                         status: "SUCCESS"
                     }});
                 return res.status(200).json({
-                    doc,
+                    calibration: doc,
                     request: {
                         type: 'GET',
                         url: req.originalUrl                    
@@ -171,7 +172,8 @@ router.post('/', (req, res, next) => {
         sensorId,
         calibrationName,
         lastCalibrationDate,
-        dueCalibrationDate,        
+        dueCalibrationDate,     
+        adjustmentsMade,   
         calibrationExtended,
         maxCalibrationExtension,
         calibrationRangePercent,
@@ -184,7 +186,8 @@ router.post('/', (req, res, next) => {
         sensorId,
         calibrationName,
         lastCalibrationDate,
-        dueCalibrationDate,        
+        dueCalibrationDate,   
+        adjustmentsMade,     
         calibrationExtended,
         maxCalibrationExtension,
         calibrationRangePercent,

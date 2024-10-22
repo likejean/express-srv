@@ -46,3 +46,7 @@ label {
   justify-content: center;
   align-items: center;
 }
+
+.calibration-card-item {
+  display: inline-block;
+}

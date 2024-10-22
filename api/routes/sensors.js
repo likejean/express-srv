@@ -87,7 +87,7 @@ router.get('/:sensorId', (req, res, next) => {
                         status: "SUCCESS"
                     }});
                 return res.status(200).json({
-                    doc,
+                    sensor: doc,
                     request: {
                         type: 'GET',
                         url: req.originalUrl                    

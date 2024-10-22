@@ -27,10 +27,10 @@ const fetchAllData = async () => {
     .catch((error) => {
       //display error message if data fetch failure occurs or any other internal error detected
       notification.innerHTML = `
-            <div class="text-center">
-                <div class="alert alert-danger" role="alert"> NOTE! No sensor data exists or unable to fetch due to system failure.</div>
-                <div class="alert alert-danger" role="alert">${error}</div>
-            </div>`;
+        <div class="text-center">
+            <div class="alert alert-danger" role="alert"> NOTE! No sensor data exists or unable to fetch due to system failure.</div>
+            <div class="alert alert-danger" role="alert">${error}</div>
+        </div>`;
     });
 };
 
