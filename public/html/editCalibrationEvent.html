@@ -26,44 +26,51 @@
       <div class="container-fluid">
         <div class="row d-flex justify-content-center">
           <div class="card border-success my-5" style="max-width: 35rem;">
-            <div id="cardHeader" class="card-header bg-transparent border-success text-center">Calibration Notice</div>
+            <div id="cardHeader" class="card-header bg-transparent border-success text-center">Calibration Summary</div>
     
     
             <div class="card-body text-success">
               <h5 id="calName" class="card-title text-center"></h5>
 
               <div class="d-flex align-items-center">
-                <div class="col-11">Calibration Last Date:<span class="cal-notice-span" id="lastCalDate"></span></div>
+                <div class="col-5">Calibration Last Date:</div>               
+                <div id="lastCalDateWrapper" class="col-6"><span class="cal-notice-span" id="lastCalDate"></span></div>                
                 <div class="p-2 col-1"><i id="lastCalDateIcon" class="fa-duotone fa-solid fa-2x fa-pen-to-square"></i></div>
               </div>
 
               <div class="d-flex align-items-center">
-                <div class="col-11">Calibration Due Date:<span class="cal-notice-span" id="dueCalDate"></span></div>
+                <div class="col-5">Calibration Due Date:</div>
+                <div id="dueCalDateWrapper" class="col-6"><span class="cal-notice-span" id="dueCalDate"></span></div>
                 <div class="p-2 col-1"><i id="dueCalDateIcon" class="fa-duotone fa-solid fa-2x fa-pen-to-square"></i></div>
               </div>
 
               <div class="d-flex align-items-center">
-                <div class="col-11">Calibration Extended:<span class="cal-notice-span" id="calExtended"></span></div>
+                <div class="col-5">Calibration Extended:</div>
+                <div id="calExtendedWrapper" class="col-6"><span class="cal-notice-span" id="calExtended"></span></div>
                 <div class="p-2 col-1"><i id="calExtendedIcon" class="fa-duotone fa-solid fa-2x fa-pen-to-square"></i></div>
               </div>
 
               <div class="d-flex align-items-center">
-                <div class="col-11">Maximum Calibration Extension:<span class="cal-notice-span" id="maxCalExtention"></span></div>
+                <div class="col-5">Maximum Calibration Extension:</div>
+                <div id="maxCalExtentionWrapper" class="col-6"><span class="cal-notice-span" id="maxCalExtention"></span></div>
                 <div class="p-2 col-1"><i id="maxCalExtentionIcon" class="fa-duotone fa-solid fa-2x fa-pen-to-square"></i></div>
               </div>
 
               <div class="d-flex align-items-center">
-                <div class="col-11">Calibration Range Percent:<span class="cal-notice-span" id="calRangePercent"></span></div>
+                <div class="col-5">Calibration Range Percent:</div>
+                <div id="calRangePercentWrapper" class="col-6"><span class="cal-notice-span" id="calRangePercent"></span></div>
                 <div class="p-2 col-1"><i id="calRangePercentIcon" class="fa-duotone fa-solid fa-2x fa-pen-to-square"></i></div>
               </div>
 
               <div class="d-flex align-items-center">
-                <div class="col-11">Adjustment Made:<span class="cal-notice-span" id="calAdjustmentMade"></span></div>
+                <div class="col-5">Adjustment Made:</div>
+                <div id="calAdjustmentMadeWrapper" class="col-6"><span class="cal-notice-span" id="calAdjustmentMade"></span></div>
                 <div class="p-2 col-1"><i id="calAdjustmentMadeIcon" class="fa-duotone fa-solid fa-2x fa-pen-to-square"></i></div>
               </div>
 
               <div class="d-flex align-items-center">
-                <div class="col-11">Comment:<span class="cal-notice-span" id="calComment"></span></div>
+                <div class="col-5">Comment:</div>
+                <div id="calCommentWrapper" class="col-6"><span class="cal-notice-span" id="calComment"></span></div>
                 <div class="p-2 col-1"><i id="calCommentIcon" class="fa-duotone fa-solid fa-2x fa-pen-to-square"></i></div>
               </div>
             
@@ -95,61 +102,45 @@
 
     <script src="../libs/moment.min.js"></script>
     <script src="../libs/moment-with-locales.min.js"></script>
+    <script src="../js/calibration/fetchCalRecordById.js"></script>
+    <script src="../js/utils/trimStringBySubstring.js"></script>
+    <script src="../js/utils/removeAllChildNodes.js"></script>
+    <script src="../js/collections/editCalContentItemAtive.js"></script>
 
 
     <script>
-        // Get all links on the page
-
-      const calibrationName = document.getElementById('calName');
-      const lastCalibrationDate = document.getElementById('lastCalDate');
-      const dueCalibrationDate = document.getElementById('dueCalDate');
-      const calibrationExtended = document.getElementById('calExtended');
-      const maxCalibrationExtention = document.getElementById('maxCalExtention');
-      const calibrationRangePercent = document.getElementById('calRangePercent');
-      const calibrationAdjustmentMade = document.getElementById('calAdjustmentMade');
-      const calComment = document.getElementById('calComment');
-      
-      
-      
-        
-      const fetchCalRecordById = async () => {
-        
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        let id = urlParams.get('id');
-        //Get a current time in unix format
-        const unixTimestamp = moment().unix();
-
-
-        // fetch all data using POST API endpoints: sensors, calibrations, procedures
-        await axios.get(`../api/calibrations/${id}`)
-          .then((result) => {
-            
-            calibrationName.innerText = result.data.calibration.calibrationName;
-            lastCalibrationDate.innerText = "\u00a0\u00a0\u00a0" + moment.utc(result.data.calibration.lastCalibrationDate).format('dddd, MM/DD/YYYY');
-            dueCalibrationDate.innerText = "\u00a0\u00a0\u00a0" + moment.utc(result.data.calibration.dueCalibrationDate).format('dddd, MM/DD/YYYY');
-            calibrationExtended.innerText = result.data.calibration.calibrationExtended ? "\u00a0\u00a0\u00a0Yes" : "\u00a0\u00a0\u00a0No";
-            maxCalibrationExtention.innerText = "\u00a0\u00a0\u00a0" + result.data.calibration.maxCalibrationExtension;
-            calibrationRangePercent.innerText = "\u00a0\u00a0\u00a0" + result.data.calibration.calibrationRangePercent;
-            calibrationAdjustmentMade.innerText = result.data.calibration.adjustmentsMade ? "\u00a0\u00a0\u00a0Yes" : "\u00a0\u00a0\u00a0No";
-            calComment.innerText = "\u00a0\u00a0\u00a0" + result.data.calibration.comment;
-            
-          })
-          .catch((error) => {
-            //display error message if data fetch failure occurs or any other internal error detected
-            console.log(error)
-          });
-      };
-
-      fetchCalRecordById();
-
+     
 
       // Get the element you want to add the event listener to
       let icons = document.querySelectorAll('.fa-pen-to-square');
       icons.forEach(icon => {
         icon.addEventListener('click', (e) => {
-             console.log(e.target.id);
-             console.log("Icon clicked!")
+
+           const wrapperName = trimBySubstring(e.target.id, "Icon").concat("Wrapper")
+             
+           const wrapper = document.getElementById(wrapperName);
+           const placeholderText = wrapper.textContent;
+           let icon = document.getElementById(editCalContentItemAtive[wrapperName].name.concat("Icon"));
+
+            if(!editCalContentItemAtive[wrapperName].status) { 
+              let input = document.createElement('input');
+              icon.classList.replace("fa-pen-to-square", "fa-file-pen"); 
+              editCalContentItemAtive[wrapperName].childNodes = Array.from(wrapper.childNodes);        
+              removeAllChildNodes(wrapper);                           
+              editCalContentItemAtive[wrapperName].status = true;              
+              input.classList.add(editCalContentItemAtive[wrapperName].class);
+              input.setAttribute("name",  editCalContentItemAtive[wrapperName].name);
+              input.setAttribute("type", editCalContentItemAtive[wrapperName].type);
+              wrapper.appendChild(input);
+            } else {                   
+              removeAllChildNodes(wrapper);
+              icon.classList.replace("fa-file-pen", "fa-pen-to-square");
+              editCalContentItemAtive[wrapperName].status = false;
+              wrapper.append(...editCalContentItemAtive[wrapperName].childNodes);
+              editCalContentItemAtive[wrapperName].childNodes = [];
+            }
+
+
           });
       })
                   

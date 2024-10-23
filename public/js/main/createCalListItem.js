@@ -12,10 +12,10 @@ function createCalibrationListItem (data, list, calName, calLocation) {
         let extenstionStatus = data[i].calibrationExtended;
 
 
-        //badgeItem.href=`./api/calibrations/${data[i]._id}/test.html`;
+        //add url with query params to navigate Calibration Event Card for edits
         badgeItem.setAttribute('id', `${data[i]._id}`)
         badgeItem.classList.add('calibration-record-link');
-        badgeItem.href=`./html/calibration.html?id=${data[i]._id}`;       
+        badgeItem.href=`./html/editCalibrationEvent.html?id=${data[i]._id}`;       
 
        
         //add class attributes to calName badge and calInfo list item

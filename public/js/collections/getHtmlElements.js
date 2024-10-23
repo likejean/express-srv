@@ -1,4 +1,3 @@
-
 const htmlClassCollection = {
     card: 'sensor-details',
     sensorCommentHtml: 'sensor-comment',
