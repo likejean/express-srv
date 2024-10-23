@@ -1,28 +1,25 @@
-
 @media screen and (min-width: 200px) {
   .list-group-item {
-     font-size: 70%;
+    font-size: 70%;
   }
 }
 
 @media screen and (min-width: 750px) {
   .list-group-item {
-     font-size: 85%;
+    font-size: 85%;
   }
 }
 
 @media screen and (min-width: 1440px) {
   .list-group-item {
-     font-size: 100%;
+    font-size: 100%;
   }
 }
-
 
 label {
   font-weight: bold;
   color: darkblue;
 }
-
 
 #new-sensor-extention {
   font-size: 12px;
@@ -41,7 +38,7 @@ label {
 }
 
 .list-group-item {
-  min-height: 60px; 
+  min-height: 60px;
   align-self: center;
   justify-content: center;
   align-items: center;
@@ -49,4 +46,12 @@ label {
 
 .calibration-card-item {
   display: inline-block;
+}
+
+.cal-notice-span {
+  font-weight: bold;
+}
+
+.fa-pen-to-square {
+  color: blue;
 }
