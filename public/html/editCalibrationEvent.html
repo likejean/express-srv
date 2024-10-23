@@ -87,7 +87,7 @@
               <div class="container">
                 <div class="row m-2">
                     <div class="form-group col text-center">                           
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" onclick=patchCalibrationSummaryRecord()>Submit</button>
                         <a href="../index.html" class="btn btn-dark">Back</a>
                     </div>
                     
@@ -111,7 +111,7 @@
     <script src="../js/calibration/fetchCalRecordById.js"></script>
     <script src="../js/utils/trimStringBySubstring.js"></script>
     <script src="../js/utils/removeAllChildNodes.js"></script>
-    <script src="../js/collections/editCalContentItemAtive.js"></script>
+    <script src="../js/collections/editCalContentItemActive.js"></script>
 
 
     <script>
@@ -126,27 +126,27 @@
              
            const wrapper = document.getElementById(wrapperName);
            const placeholderText = wrapper.textContent;
-           let icon = document.getElementById(editCalContentItemAtive[wrapperName].name.concat("Icon"));
+           let icon = document.getElementById(editCalContentItemActive[wrapperName].name.concat("Icon"));
 
-            if(!editCalContentItemAtive[wrapperName].status) { 
+            if(!editCalContentItemActive[wrapperName].status) { 
               let input = document.createElement('input');
               icon.classList.replace("fa-circle-dot", "fa-file-pen"); 
-              editCalContentItemAtive[wrapperName].childNodes = Array.from(wrapper.childNodes);        
+              editCalContentItemActive[wrapperName].childNodes = Array.from(wrapper.childNodes);        
               removeAllChildNodes(wrapper);                           
-              editCalContentItemAtive[wrapperName].status = true;              
-              input.classList.add(editCalContentItemAtive[wrapperName].class);
-              input.setAttribute("name",  editCalContentItemAtive[wrapperName].name);
-              input.setAttribute("type", editCalContentItemAtive[wrapperName].type);
-              input.setAttribute("style", "border-color:green");
+              editCalContentItemActive[wrapperName].status = true;              
+              input.classList.add(editCalContentItemActive[wrapperName].class);
+              input.setAttribute("name",  editCalContentItemActive[wrapperName].name);
+              input.setAttribute("type", editCalContentItemActive[wrapperName].type);
+              input.setAttribute("style", "border-color:blue;");
               
               wrapper.appendChild(input);
               input.addEventListener("input", inputValues);
             } else {                   
               removeAllChildNodes(wrapper);
               icon.classList.replace("fa-file-pen", "fa-circle-dot");
-              editCalContentItemAtive[wrapperName].status = false;
-              wrapper.append(...editCalContentItemAtive[wrapperName].childNodes);
-              editCalContentItemAtive[wrapperName].childNodes = [];              
+              editCalContentItemActive[wrapperName].status = false;
+              wrapper.append(...editCalContentItemActive[wrapperName].childNodes);
+              editCalContentItemActive[wrapperName].childNodes = [];              
             }
             
           });
@@ -154,16 +154,32 @@
 
 
       function inputValues (event) {
-             // Get the new value from the input field
-             const newValue = event.target.value;
-             const concatInputName = event.target.name.concat("Wrapper");
-             const inputType = event.target.type;
-             if (inputType === "checkbox") editCalContentItemAtive[concatInputName].checked = this.checked;
-             else editCalContentItemAtive[concatInputName].value = newValue;
-             //console.log(event.target.name)
-            // Do something with the new value, e.g., update another element
-             console.log(editCalContentItemAtive);
+          // Get the new value from the input field
+          const newValue = event.target.value;
+          const inputType = event.target.type;
+          const concatInputName = event.target.name.concat("Wrapper");             
+          if (inputType === "checkbox") editCalContentItemActive[concatInputName].checked = this.checked;
+          else editCalContentItemActive[concatInputName].value = newValue;
+        
       }
+
+      function patchCalibrationSummaryRecord() {
+        
+        const filterAndTransform = (obj, filterFn) => {
+            const result = {};
+
+            for (const key in obj) {
+              if (filterFn(obj[key])) {
+                  obj[key].type == "checkbox" ? result[obj[key].databaseName]= obj[key].checked : result[obj[key].databaseName]= obj[key].value;                
+                };
+              }
+              return result;
+            }
+
+          const filteredPatchRequestData = filterAndTransform(editCalContentItemActive, item => item.status === true);
+      
+        }
+
                   
       
     </script>
