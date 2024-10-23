@@ -30,7 +30,13 @@
     
     
             <div class="card-body text-success">
-              <h5 id="calName" class="card-title text-center"></h5>
+              <h5 class="card-title text-center"></h5>
+
+              <div class="d-flex align-items-center">
+                <div class="col-5">Calibratin Name:</div>               
+                <div id="calNameWrapper" class="col-6"><span class="cal-notice-span" id="calName"></span></div>                
+                <div class="p-2 col-1"><i id="calNameIcon" class="fa-duotone fa-solid fa-2x fa-pen-to-square"></i></div>
+              </div>
 
               <div class="d-flex align-items-center">
                 <div class="col-5">Calibration Last Date:</div>               
@@ -139,8 +145,7 @@
               wrapper.append(...editCalContentItemAtive[wrapperName].childNodes);
               editCalContentItemAtive[wrapperName].childNodes = [];
             }
-
-
+            
           });
       })
                   

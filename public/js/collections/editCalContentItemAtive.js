@@ -1,4 +1,12 @@
 const editCalContentItemAtive = {
+    calNameWrapper: {
+        status: false,
+        type: "text",
+        name: "calName",
+        value: "",
+        class: "form-control",
+        childNodes: []
+    },
     lastCalDateWrapper: {
         status: false,
         type: "date",
