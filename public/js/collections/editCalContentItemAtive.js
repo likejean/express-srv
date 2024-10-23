@@ -28,6 +28,7 @@ const editCalContentItemAtive = {
         type: "checkbox",
         name: "calExtended",
         value: "",
+        checked: false,
         class: "form-check-input",
         childNodes: []
     },
@@ -49,9 +50,10 @@ const editCalContentItemAtive = {
     },
     calAdjustmentMadeWrapper: {
         status: false,        
-        type: "radio",
+        type: "checkbox",
         name: "calAdjustmentMade",
         value: "",
+        checked: false,
         class: "form-check-input",
         childNodes: []
     },

@@ -137,6 +137,8 @@
               input.classList.add(editCalContentItemAtive[wrapperName].class);
               input.setAttribute("name",  editCalContentItemAtive[wrapperName].name);
               input.setAttribute("type", editCalContentItemAtive[wrapperName].type);
+              input.setAttribute("style", "border-color:green");
+              
               wrapper.appendChild(input);
               input.addEventListener("input", inputValues);
             } else {                   
@@ -154,10 +156,13 @@
       function inputValues (event) {
              // Get the new value from the input field
              const newValue = event.target.value;
-             editCalContentItemAtive[wrapperName].value = newValue;
-
+             const concatInputName = event.target.name.concat("Wrapper");
+             const inputType = event.target.type;
+             if (inputType === "checkbox") editCalContentItemAtive[concatInputName].checked = this.checked;
+             else editCalContentItemAtive[concatInputName].value = newValue;
+             //console.log(event.target.name)
             // Do something with the new value, e.g., update another element
-             //console.log(editCalContentItemAtive);
+             console.log(editCalContentItemAtive);
       }
                   
       
