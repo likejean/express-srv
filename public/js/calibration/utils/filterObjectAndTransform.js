@@ -1,6 +1,4 @@
 //this helper function filters editCalContentItemActive Collection and prepares body object for PATCH API endpoint
-
-//initilize object for PATCH api endpoint request body
 calPatchRequestData = {};
 
 const filterObjectAndTransform = (obj, filterFn) => {
@@ -16,6 +14,6 @@ const filterObjectAndTransform = (obj, filterFn) => {
 };
 
 calPatchRequestData = filterObjectAndTransform(
-  editCalContentItemActive,
+  calibrationInputContainer,
   (input) => input.status === true
 );

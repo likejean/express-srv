@@ -32,6 +32,12 @@
             <div class="card-body text-success">
               <h5 class="card-title text-center"></h5>
 
+              <div class="d-flex align-items-center">                           
+                <div id="calNameWrapper" class="col-6">Sensor:<span></span></div>                
+                <div id="calNameWrapper" class="col-6">Procedure:<span></span></div> 
+              </div>
+              <hr/>
+
               <div class="d-flex align-items-center">
                 <div class="col-5">Calibratin Name:</div>               
                 <div id="calNameWrapper" class="col-6"><span class="cal-notice-span" id="calName"></span></div>                
@@ -87,7 +93,8 @@
               <div class="container">
                 <div class="row m-2">
                     <div class="form-group col text-center">                           
-                        <button type="submit" class="btn btn-primary" onclick=patchCalibrationSummaryRecord()>Submit</button>
+                        <button type="submit" class="btn btn-primary" onclick=patchCalibrationRecord()>Submit</button>
+                        <button type="submit" class="btn btn-danger" onclick=deleteCalibrationRecord()>Delete</button>
                         <a href="../index.html" class="btn btn-dark">Back</a>
                     </div>
                     
@@ -108,11 +115,16 @@
 
     <script src="../libs/moment.min.js"></script>
     <script src="../libs/moment-with-locales.min.js"></script>
-    <script src="../js/calibration/fetchCalRecordById.js"></script>
+    
+    <script src="../js/collections/calibrationInputContainer.js"></script>
     <script src="../js/utils/trimStringBySubstring.js"></script>
     <script src="../js/utils/removeAllChildNodes.js"></script>
-    <script src="../js/collections/calibrationInputContainer.js"></script>
 
+    <script src="../js/calibration/fetchCalRecordById.js"></script>
+    <script src="../js/calibration/utils/filterObjectAndTransform.js"></script>
+    <script src="../js/calibration/utils/iconClickEventCallback.js"></script>
+    <script src="../js/calibration/utils/inputChangeValueCallback.js"></script>
+    <script src="../js/calibration/patchCalibrationRecord.js"></script>
 
     <script>
      
@@ -120,84 +132,9 @@
       // Get the element you want to add the event listener to
       let icons = document.querySelectorAll('.fa-circle-dot');
       icons.forEach(icon => {
-         icon.addEventListener('click', (e) => {
-
-           const wrapperName = trimBySubstring(e.target.id, "Icon").concat("Wrapper")
-             
-           const wrapper = document.getElementById(wrapperName);
-           const placeholderText = wrapper.textContent;
-           let icon = document.getElementById(calibrationInputContainer[wrapperName].name.concat("Icon"));
-
-            if(!calibrationInputContainer[wrapperName].status) { 
-                let input = document.createElement('input');
-                icon.classList.replace("fa-circle-dot", "fa-file-pen"); 
-                calibrationInputContainer[wrapperName].childNodes = Array.from(wrapper.childNodes);        
-                removeAllChildNodes(wrapper);                           
-                calibrationInputContainer[wrapperName].status = true;              
-                input.classList.add(calibrationInputContainer[wrapperName].class);
-                input.setAttribute("name", calibrationInputContainer[wrapperName].name);
-                input.setAttribute("type", calibrationInputContainer[wrapperName].type);
-                input.setAttribute("style", "border-color:blue;");
-                
-                wrapper.appendChild(input);
-                input.addEventListener("input", inputValues);
-            } else {                   
-                removeAllChildNodes(wrapper);
-                icon.classList.replace("fa-file-pen", "fa-circle-dot");
-                calibrationInputContainer[wrapperName].status = false;
-                wrapper.append(...calibrationInputContainer[wrapperName].childNodes);
-                calibrationInputContainer[wrapperName].childNodes = [];              
-            }
-            
-          });
+         icon.addEventListener('click', iconClickEventCallback);
       })
-
-
-      function inputValues (event) {
-          // Get the new value from the input field
-          const newValue = event.target.value;
-          const inputType = event.target.type;
-          const concatInputName = event.target.name.concat("Wrapper");             
-          if (inputType === "checkbox") calibrationInputContainer[concatInputName].checked = this.checked;
-          else calibrationInputContainer[concatInputName].value = newValue;
-        
-      }
-
-
-
-      function patchCalibrationSummaryRecord() {
-        calPatchRequestData = {};
-        const filterAndTransform = (obj, filterFn) => {
-            const result = {};
-
-            for (const key in obj) {
-              if (filterFn(obj[key])) {
-                  obj[key].type == "checkbox" ? result[obj[key].databaseName]= obj[key].checked : result[obj[key].databaseName]= obj[key].value;                
-                };
-              }
-              return result;
-            }
-
-          calPatchRequestData = filterAndTransform(calibrationInputContainer, item => item.status === true);
-        
-          //obtain query string by id
-          const queryString = window.location.search;
-          const urlParams = new URLSearchParams(queryString);
-          let id = urlParams.get("id");
-          
-          axios.patch(`../api/calibrations/${id}`, calPatchRequestData
-            )
-            .then((response) => {
-                console.log(response);
-                window.location.reload();
-              })
-            .catch((error) => {
-             console.log("ERROR", error);
-          });
-        
-      }
       
     </script>
-
 
 </html>
