@@ -163,7 +163,12 @@
         
       }
 
+
+
       function patchCalibrationSummaryRecord() {
+
+        calPatchRequestData = {};
+        
         
         const filterAndTransform = (obj, filterFn) => {
             const result = {};
@@ -176,11 +181,24 @@
               return result;
             }
 
-          const filteredPatchRequestData = filterAndTransform(editCalContentItemActive, item => item.status === true);
-      
-        }
-
-                  
+          calPatchRequestData = filterAndTransform(editCalContentItemActive, item => item.status === true);
+        
+          //obtain query string by id
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          let id = urlParams.get("id");
+          
+          axios.patch(`../api/calibrations/${id}`, calPatchRequestData
+            )
+            .then((response) => {
+                console.log(response);
+                window.location.reload();
+              })
+            .catch((error) => {
+             console.log("ERROR", error);
+          });
+        
+      }
       
     </script>
 

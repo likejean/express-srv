@@ -1,4 +1,6 @@
 const editCalContentItemActive = {
+  sensorId: "",
+  procedureId: "",
   calNameWrapper: {
     status: false,
     type: "text",
