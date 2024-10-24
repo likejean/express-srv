@@ -112,6 +112,7 @@ router.get("/:calibrationId", (req, res, next) => {
 //PATCH endpoint: updating PARTIALLY existing SENSOR document
 router.patch("/:calibrationId", (req, res, next) => {
   const id = req.params.calibrationId;
+  console.log(req.body);
   Calibration.updateOne({ _id: id }, { $set: { ...req.body } })
     .exec()
     .then((result) => {

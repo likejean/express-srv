@@ -45,7 +45,7 @@ const editCalContentItemActive = {
     value: "",
     class: "form-control",
     childNodes: [],
-    databaseName: "maxCalibrationExtended",
+    databaseName: "maxCalibrationExtension",
   },
   calRangePercentWrapper: {
     status: false,
