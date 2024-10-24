@@ -1,4 +1,4 @@
-const editCalContentItemActive = {
+const calibrationInputContainer = {
   sensorId: "",
   procedureId: "",
   calNameWrapper: {

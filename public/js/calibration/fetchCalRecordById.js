@@ -27,11 +27,11 @@ const fetchCalRecordById = async () => {
       if (unixCalibrationDueDate < unixTimestamp)
         dueCalibrationDate.style.color = "red";
 
-      editCalContentItemActive.sensorId = result.data.calibration.sensorId;
-      editCalContentItemActive.procedureId =
+      calibrationInputContainer.sensorId = result.data.calibration.sensorId;
+      calibrationInputContainer.procedureId =
         result.data.calibration.procedureId;
 
-      //populate fetched calibration data in Calibration Summary Card
+      //populate fetched calibration data in Calibration Summary Card html elements
       calibrationName.innerText = result.data.calibration.calibrationName;
       lastCalibrationDate.innerText =
         "\u00a0\u00a0\u00a0" +

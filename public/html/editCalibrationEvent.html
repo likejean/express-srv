@@ -111,7 +111,7 @@
     <script src="../js/calibration/fetchCalRecordById.js"></script>
     <script src="../js/utils/trimStringBySubstring.js"></script>
     <script src="../js/utils/removeAllChildNodes.js"></script>
-    <script src="../js/collections/editCalContentItemActive.js"></script>
+    <script src="../js/collections/calibrationInputContainer.js"></script>
 
 
     <script>
@@ -120,33 +120,33 @@
       // Get the element you want to add the event listener to
       let icons = document.querySelectorAll('.fa-circle-dot');
       icons.forEach(icon => {
-        icon.addEventListener('click', (e) => {
+         icon.addEventListener('click', (e) => {
 
            const wrapperName = trimBySubstring(e.target.id, "Icon").concat("Wrapper")
              
            const wrapper = document.getElementById(wrapperName);
            const placeholderText = wrapper.textContent;
-           let icon = document.getElementById(editCalContentItemActive[wrapperName].name.concat("Icon"));
+           let icon = document.getElementById(calibrationInputContainer[wrapperName].name.concat("Icon"));
 
-            if(!editCalContentItemActive[wrapperName].status) { 
-              let input = document.createElement('input');
-              icon.classList.replace("fa-circle-dot", "fa-file-pen"); 
-              editCalContentItemActive[wrapperName].childNodes = Array.from(wrapper.childNodes);        
-              removeAllChildNodes(wrapper);                           
-              editCalContentItemActive[wrapperName].status = true;              
-              input.classList.add(editCalContentItemActive[wrapperName].class);
-              input.setAttribute("name",  editCalContentItemActive[wrapperName].name);
-              input.setAttribute("type", editCalContentItemActive[wrapperName].type);
-              input.setAttribute("style", "border-color:blue;");
-              
-              wrapper.appendChild(input);
-              input.addEventListener("input", inputValues);
+            if(!calibrationInputContainer[wrapperName].status) { 
+                let input = document.createElement('input');
+                icon.classList.replace("fa-circle-dot", "fa-file-pen"); 
+                calibrationInputContainer[wrapperName].childNodes = Array.from(wrapper.childNodes);        
+                removeAllChildNodes(wrapper);                           
+                calibrationInputContainer[wrapperName].status = true;              
+                input.classList.add(calibrationInputContainer[wrapperName].class);
+                input.setAttribute("name", calibrationInputContainer[wrapperName].name);
+                input.setAttribute("type", calibrationInputContainer[wrapperName].type);
+                input.setAttribute("style", "border-color:blue;");
+                
+                wrapper.appendChild(input);
+                input.addEventListener("input", inputValues);
             } else {                   
-              removeAllChildNodes(wrapper);
-              icon.classList.replace("fa-file-pen", "fa-circle-dot");
-              editCalContentItemActive[wrapperName].status = false;
-              wrapper.append(...editCalContentItemActive[wrapperName].childNodes);
-              editCalContentItemActive[wrapperName].childNodes = [];              
+                removeAllChildNodes(wrapper);
+                icon.classList.replace("fa-file-pen", "fa-circle-dot");
+                calibrationInputContainer[wrapperName].status = false;
+                wrapper.append(...calibrationInputContainer[wrapperName].childNodes);
+                calibrationInputContainer[wrapperName].childNodes = [];              
             }
             
           });
@@ -158,18 +158,15 @@
           const newValue = event.target.value;
           const inputType = event.target.type;
           const concatInputName = event.target.name.concat("Wrapper");             
-          if (inputType === "checkbox") editCalContentItemActive[concatInputName].checked = this.checked;
-          else editCalContentItemActive[concatInputName].value = newValue;
+          if (inputType === "checkbox") calibrationInputContainer[concatInputName].checked = this.checked;
+          else calibrationInputContainer[concatInputName].value = newValue;
         
       }
 
 
 
       function patchCalibrationSummaryRecord() {
-
         calPatchRequestData = {};
-        
-        
         const filterAndTransform = (obj, filterFn) => {
             const result = {};
 
@@ -181,7 +178,7 @@
               return result;
             }
 
-          calPatchRequestData = filterAndTransform(editCalContentItemActive, item => item.status === true);
+          calPatchRequestData = filterAndTransform(calibrationInputContainer, item => item.status === true);
         
           //obtain query string by id
           const queryString = window.location.search;
