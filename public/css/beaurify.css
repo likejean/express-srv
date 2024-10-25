@@ -26,6 +26,11 @@ label {
   color: darkred;
 }
 
+#inputErrorMessage {
+  color: red;
+}
+
+
 .control-form-field-box {
   border-radius: 4px;
   border: 1px solid #f3f1f1;

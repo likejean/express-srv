@@ -1,3 +1,5 @@
+const allowedChars = /^[-, a-zA-Z0-9]*$/;
+
 const calibrationInputContainer = {
   sensorId: "",
   procedureId: "",
@@ -9,6 +11,8 @@ const calibrationInputContainer = {
     class: "form-control",
     childNodes: [],
     databaseName: "calibrationName",
+    validator: (text) => (allowedChars.test(text) ? true : false),
+    inputRule: `Error! No special characters allowed here (exception: dashes "-")`,
   },
   lastCalDateWrapper: {
     status: false,
@@ -55,6 +59,8 @@ const calibrationInputContainer = {
     class: "form-control",
     childNodes: [],
     databaseName: "calibrationRangePercent",
+    validator: (number) => (number <= 100 && number >= 10 ? true : false),
+    inputRule: `Error! Only positive integers allowed within range: 10%-100%`,
   },
   calAdjustmentMadeWrapper: {
     status: false,

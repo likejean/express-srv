@@ -25,6 +25,7 @@ function iconClickEventCallback(event) {
     input.addEventListener("input", inputChangeValueCallback);
   } else {
     input.removeEventListener("input", inputChangeValueCallback);
+    document.getElementById("inputErrorMessage").textContent = "";
     removeAllChildNodes(wrapper);
     icon.classList.replace("fa-file-pen", "fa-circle-dot");
     calibrationInputContainer[wrapperName].status = false;
