@@ -6,7 +6,7 @@ const Sensor = require("../models/sensor");
 const router = express.Router();
 
 //Routers
-// GET endpoint: all calibration documents
+// GET endpoint: get ALL calibration documents/records
 router.get("/", (req, res, next) => {
   Calibration.find()
     .exec()
@@ -57,7 +57,7 @@ router.get("/", (req, res, next) => {
     });
 });
 
-// GET endpoint: get calibration procedure  by id
+// GET endpoint: get a calibration record by ID
 router.get("/:calibrationId", (req, res, next) => {
   const id = req.params.calibrationId;
   Calibration.findById(id)
@@ -111,7 +111,7 @@ router.get("/:calibrationId", (req, res, next) => {
     });
 });
 
-//PATCH endpoint: updating PARTIALLY existing SENSOR document
+//PATCH endpoint: update PARTIALLY existing calibration record/document by ID
 router.patch("/:calibrationId", (req, res, next) => {
   const id = req.params.calibrationId;
   console.log("Request body:", req.body);
@@ -146,6 +146,7 @@ router.patch("/:calibrationId", (req, res, next) => {
 });
 
 //POST endpoint: creates a new calibration EVENT MongoDB document
+/////////////TBD
 
 router.post("/", (req, res, next) => {
   const _id = new mongoose.Types.ObjectId();
@@ -222,10 +223,12 @@ router.post("/", (req, res, next) => {
     });
 });
 
-/// API endpoint: delete a single procedure by MongoDB id
+
+
+
+///DELETE API endpoint: delete a calibration record/document by ID
 router.delete("/:procedureId", (req, res, next) => {
   const id = req.params.procedureId;
-  const name = `{${req.body.startRangeLevel}-${req.body.endRangeLevel}${req.body.units}}`;
   Calibration.deleteOne({ _id: id })
     .exec()
     .then((doc) => {

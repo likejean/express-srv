@@ -129,8 +129,14 @@
     <script src="../js/calibration/utils/iconClickEventCallback.js"></script>
     <script src="../js/calibration/utils/inputChangeValueCallback.js"></script>
     <script src="../js/calibration/patchCalibrationRecord.js"></script>
+    <script src="../js/calibration/deleteCalRecordById.js"></script>
 
     <script>
+
+      //obtain query string by id
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      var id = urlParams.get("id");
      
 
       // Get the element you want to add the event listener to

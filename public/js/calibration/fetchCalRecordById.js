@@ -34,7 +34,8 @@ const fetchCalRecordById = async () => {
 
 
       //populate fetched calibration data in Calibration Summary Card html elements
-      calibrationName.innerText = result.data.calibration.calibrationName;
+      calibrationName.innerText =  "\u00a0\u00a0\u00a0" + 
+      result.data.calibration.calibrationName;
       lastCalibrationDate.innerText =
         "\u00a0\u00a0\u00a0" +
         moment

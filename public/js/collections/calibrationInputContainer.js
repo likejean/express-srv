@@ -2,8 +2,8 @@ const allowedChars = /^[-., a-zA-Z0-9]*$/;
 
 const calibrationInputContainer = {
   //Sensor and calibration procedure associated with current calibration event
-  sensor: "",
-  procedure: "",
+  sensor: {},
+  procedure: {},
   //Calibration Record Card Input Wrappers
   calNameWrapper: {
     status: false,
