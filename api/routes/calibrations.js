@@ -61,6 +61,8 @@ router.get("/", (req, res, next) => {
 router.get("/:calibrationId", (req, res, next) => {
   const id = req.params.calibrationId;
   Calibration.findById(id)
+    .populate("sensorId")
+    .populate("procedureId")
     .exec()
     .then((doc) => {
       //To handle non-existing id error, but correct format...
