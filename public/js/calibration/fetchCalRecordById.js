@@ -1,3 +1,5 @@
+const sensorName = document.getElementById("sensor-name");
+const procedureName = document.getElementById("procedure-name");
 const calibrationName = document.getElementById("calName");
 const lastCalibrationDate = document.getElementById("lastCalDate");
 const dueCalibrationDate = document.getElementById("dueCalDate");
@@ -27,9 +29,9 @@ const fetchCalRecordById = async () => {
       if (unixCalibrationDueDate < unixTimestamp)
         dueCalibrationDate.style.color = "red";
 
-      calibrationInputContainer.sensorId = result.data.calibration.sensorId;
-      calibrationInputContainer.procedureId =
-        result.data.calibration.procedureId;
+      calibrationInputContainer.sensor = result.data.calibration.sensorId;
+      calibrationInputContainer.procedure = result.data.calibration.procedureId;
+
 
       //populate fetched calibration data in Calibration Summary Card html elements
       calibrationName.innerText = result.data.calibration.calibrationName;
@@ -57,6 +59,9 @@ const fetchCalRecordById = async () => {
         : "\u00a0\u00a0\u00a0No";
       calComment.innerText =
         "\u00a0\u00a0\u00a0" + result.data.calibration.comment;
+
+        sensorName.innerText = "\u00a0" + result.data.calibration.sensorId.EID;
+        procedureName.innerText = "\u00a0" + result.data.calibration.procedureId.procedureName;
     })
     .catch((error) => {
       //display error message if data fetch failure occurs or any other internal error detected

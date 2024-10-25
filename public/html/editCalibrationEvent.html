@@ -26,62 +26,63 @@
       <div class="container-fluid">
         <div class="row d-flex justify-content-center">
           <div class="card border-success my-5" style="max-width: 35rem;">
-            <div id="cardHeader" class="card-header bg-transparent border-success text-center">Calibration Summary</div>
+            <div id="cardHeader" class="card-header bg-transparent border-success text-center"><h3>Calibration Record</h3></div>
     
     
             <div class="card-body text-success">
               <h5 class="card-title text-center"></h5>
 
-              <div class="d-flex align-items-center">                           
-                <div class="col-6">Sensor:<span></span></div>                
-                <div class="col-6">Procedure:<span></span></div> 
+              <div class="d-none d-sm-flex align-items-center">                           
+                <div class="col-5 badge bg-success">Sensor:<span id="sensor-name"></span></div>     
+                <div class="col-2 text-center"><i class="fa-solid fa-certificate"></i></div>           
+                <div class="col-5 badge bg-success">Procedure:<span id="procedure-name"></span></div> 
               </div>
               <hr/>
 
               <div class="d-flex align-items-center">
-                <div class="col-5">Calibration Name:</div>               
+                <div class="col-5 d-none d-sm-flex">Calibration Name:</div>               
                 <div id="calNameWrapper" class="col-6"><span class="cal-notice-span" id="calName"></span></div>                
                 <div class="p-2 col-1"><i id="calNameIcon" class="fa-duotone fa-solid fa-2x fa-circle-dot"></i></div>
               </div>
 
               <div class="d-flex align-items-center">
-                <div class="col-5">Calibration Last Date:</div>               
+                <div class="col-5 d-none d-sm-flex">Calibration Last Date:</div>               
                 <div id="lastCalDateWrapper" class="col-6"><span class="cal-notice-span" id="lastCalDate"></span></div>                
                 <div class="p-2 col-1"><i id="lastCalDateIcon" class="fa-duotone fa-solid fa-2x fa-circle-dot"></i></div>
               </div>
 
               <div class="d-flex align-items-center">
-                <div class="col-5">Calibration Due Date:</div>
+                <div class="col-5 d-none d-sm-flex">Calibration Due Date:</div>
                 <div id="dueCalDateWrapper" class="col-6"><span class="cal-notice-span" id="dueCalDate"></span></div>
                 <div class="p-2 col-1"><i id="dueCalDateIcon" class="fa-duotone fa-solid fa-2x fa-circle-dot"></i></div>
               </div>
 
               <div class="d-flex align-items-center">
-                <div class="col-5">Calibration Extended:</div>
+                <div class="col-5 d-none d-sm-flex">Calibration Extended:</div>
                 <div id="calExtendedWrapper" class="col-6"><span class="cal-notice-span" id="calExtended"></span></div>
                 <div class="p-2 col-1"><i id="calExtendedIcon" class="fa-duotone fa-solid fa-2x fa-circle-dot"></i></div>
               </div>
 
               <div class="d-flex align-items-center">
-                <div class="col-5">Maximum Calibration Extension:</div>
+                <div class="col-5 d-none d-sm-flex">Maximum Calibration Extension:</div>
                 <div id="maxCalExtentionWrapper" class="col-6"><span class="cal-notice-span" id="maxCalExtention"></span></div>
                 <div class="p-2 col-1"><i id="maxCalExtentionIcon" class="fa-duotone fa-solid fa-2x fa-circle-dot"></i></div>
               </div>
 
               <div class="d-flex align-items-center">
-                <div class="col-5">Calibration Range Percent:</div>
+                <div class="col-5 d-none d-sm-flex">Calibration Range Percent:</div>
                 <div id="calRangePercentWrapper" class="col-6"><span class="cal-notice-span" id="calRangePercent"></span></div>
                 <div class="p-2 col-1"><i id="calRangePercentIcon" class="fa-duotone fa-solid fa-2x fa-circle-dot"></i></div>
               </div>
 
               <div class="d-flex align-items-center">
-                <div class="col-5">Adjustment Made:</div>
+                <div class="col-5 d-none d-sm-flex">Adjustment Made:</div>
                 <div id="calAdjustmentMadeWrapper" class="col-6"><span class="cal-notice-span" id="calAdjustmentMade"></span></div>
                 <div class="p-2 col-1"><i id="calAdjustmentMadeIcon" class="fa-duotone fa-solid fa-2x fa-circle-dot"></i></div>
               </div>
 
               <div class="d-flex align-items-center">
-                <div class="col-5">Comment:</div>
+                <div class="col-5 d-none d-sm-flex">Comment:</div>
                 <div id="calCommentWrapper" class="col-6"><span class="cal-notice-span" id="calComment"></span></div>
                 <div class="p-2 col-1"><i id="calCommentIcon" class="fa-duotone fa-solid fa-2x fa-circle-dot"></i></div>
               </div>
