@@ -149,80 +149,99 @@ router.patch("/:calibrationId", (req, res, next) => {
 /////////////TBD
 
 router.post("/", (req, res, next) => {
-  const _id = new mongoose.Types.ObjectId();
-  const {
-    procedureId,
-    sensorId,
-    calibrationName,
-    lastCalibrationDate,
-    dueCalibrationDate,
-    adjustmentsMade,
-    calibrationExtended,
-    maxCalibrationExtension,
-    calibrationRangePercent,
-    comment,
-  } = req.body;
-
-  const calibration = new Calibration({
-    _id,
-    procedureId,
-    sensorId,
-    calibrationName,
-    lastCalibrationDate,
-    dueCalibrationDate,
-    adjustmentsMade,
-    calibrationExtended,
-    maxCalibrationExtension,
-    calibrationRangePercent,
-    comment,
-  });
-
-  Promise.all([
-    Sensor.findById(sensorId).exec(),
-    Procedure.findById(procedureId).exec(),
-  ])
-    .then(([sensor, procedure]) => {
-      sensor.calibrations.push(_id); //push calibration event _id into sensor's array field
-      procedure.calibrations.push(_id); //push calibration event _id into sensor's array field
-
-      Promise.all([sensor.save(), procedure.save(), calibration.save()])
-        .then((result) => {
-          res.status(201).json({
-            message: `SUCCESS: Calibration event ${calibration.calibrationName} successufully SAVED. 
-                Calibration event id {${_id}} pushed into array fields of sensor ${sensor.EID} and procedure ${procedure.procedureName}.`,
-            sensor: result[0],
-            procedure: result[1],
-            calibration: result[2],
-            request: {
-              type: "POST",
-              url: req.originalUrl,
-            },
-          });
-        })
-        .catch(() => {
-          res.status(500).json({
-            message: "Internal Server Error",
-            request: {
-              type: "POST",
-              url: req.originalUrl,
-            },
-          });
-        });
-    })
-    .catch(() => {
-      res.status(500).json({
-        sensorID,
+    const _id = new mongoose.Types.ObjectId();
+    const {
         procedureId,
-        message:
-          "Something went wrong... Sensor and/or Procedure were not found.",
-        request: {
-          type: "POST",
-          url: req.originalUrl,
-        },
-      });
-    });
-});
+        sensorId,
+        calibrationName,
+        lastCalibrationDate,
+        dueCalibrationDate,
+        adjustmentsMade,
+        calibrationExtended,
+        maxCalibrationExtension,
+        calibrationRangePercent,
+        comment,
+    } = req.body;
 
+    const calibration = new Calibration({
+        _id,
+        procedureId,
+        sensorId,
+        calibrationName,
+        lastCalibrationDate,
+        dueCalibrationDate,
+        adjustmentsMade,
+        calibrationExtended,
+        maxCalibrationExtension,
+        calibrationRangePercent,
+        comment,
+    });
+
+    calibration
+        .save()  //save calibration record document
+        .then((result) => {
+            Promise.all([
+                Sensor.findById(sensorId).exec(), //find sensor document by specified reference id
+                Procedure.findById(procedureId).exec(),  //find procedure by specified reference id
+            ])
+            .then(([sensor, procedure]) => {
+                sensor.calibrations.push(_id); //push calibration event _id into sensor's array field
+                procedure.calibrations.push(_id); //push calibration event _id into sensor's array field
+                Promise.all([sensor.save(), procedure.save()])
+                .then(() => {
+                    //SUCCESS:
+                    console.log({
+                        request: {
+                            type: "POST",
+                            url: req.originalUrl,
+                            status: "SUCCESS",
+                        },
+                    });
+                    res.status(200).json({
+                        message: `SUCCESS: Calibration event ${calibration.calibrationName} successufully SAVED. 
+                            Calibration event id was pushed into reference arrays of sensor ${sensor.EID} and procedure ${procedure.procedureName}.`,
+                        result,
+                        request: {
+                        type: "POST",
+                        url: req.originalUrl,
+                        },
+                    });
+                })
+                //FAILURE: if specified references were not saved
+                .catch(()=>{
+                    res.status(500).json({
+                        message: "Failed to save reference id in sensor and procedure...",
+                        request: {
+                            type: 'POST',
+                            url: req.originalUrl                    
+                        }  
+                    });
+                })
+            })
+            //FAILURE: if either sensor or procedure (or both) were not found
+            .catch(()=>{
+                res.status(500).json({
+                    message: "Failed to find either sensor and/or procedure documents by ids...",
+                    request: {
+                        type: 'POST',
+                        url: req.originalUrl                    
+                    }  
+                });
+            })
+        })
+        //FAILURE: if calibration record was not saved
+        .catch(()=>{
+            res.status(500).json({
+                message: "Failed to save a calibration procedure (possibly, failed to meet Schema model requirements)",
+                request: {
+                    type: 'POST',
+                    url: req.originalUrl                    
+                }  
+            });
+        });
+
+    });
+ 
 
 
 

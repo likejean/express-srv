@@ -15,7 +15,7 @@ function createMainSensorTable(sensors, calibrations) {     //comes from fetchAl
 
     // stringify calibration list
     strJSON = JSON.stringify(associatedCalibrations).replace(/\"/g, "&");
-
+    
     // create table row for each sensor
     row.setAttribute("id", `row${i + 1}`);
     tableRowObj[`row${i + 1}`] = `inactive`;

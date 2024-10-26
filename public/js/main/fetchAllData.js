@@ -25,6 +25,7 @@ const fetchAllData = async () => {
      
       //function call to create all cells for main sensor table
       createMainSensorTable(sensors, calibrations);
+      
     })
     .catch((error) => {
       //display error message if data fetch failure occurs or any other internal error detected

@@ -95,7 +95,13 @@ router.post('/', (req, res, next) => {
     procedure
         .save()
         .then(result => {
-        console.log({url: req.originalUrl, type: 'POST', status: "SUCCESS"});
+        console.log({
+            request: {
+                type: "POST",
+                url: req.originalUrl,
+                status: "SUCCESS",
+            },
+        });
         res.status(200).json({
             message: `SUCCESS: Created new calibration procedure: ${result.procedureName}`,
             result,
