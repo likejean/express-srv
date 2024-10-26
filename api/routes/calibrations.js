@@ -146,127 +146,178 @@ router.patch("/:calibrationId", (req, res, next) => {
 });
 
 //POST endpoint: creates a new calibration EVENT MongoDB document
-/////////////TBD
+/////////////COMPLETED and TESTED////////////////////////////////
 
 router.post("/", (req, res, next) => {
-    const _id = new mongoose.Types.ObjectId();
-    const {
-        procedureId,
-        sensorId,
-        calibrationName,
-        lastCalibrationDate,
-        dueCalibrationDate,
-        adjustmentsMade,
-        calibrationExtended,
-        maxCalibrationExtension,
-        calibrationRangePercent,
-        comment,
-    } = req.body;
+  const _id = new mongoose.Types.ObjectId();
+  const {
+    procedureId,
+    sensorId,
+    calibrationName,
+    lastCalibrationDate,
+    dueCalibrationDate,
+    adjustmentsMade,
+    calibrationExtended,
+    maxCalibrationExtension,
+    calibrationRangePercent,
+    comment,
+  } = req.body;
 
-    const calibration = new Calibration({
-        _id,
-        procedureId,
-        sensorId,
-        calibrationName,
-        lastCalibrationDate,
-        dueCalibrationDate,
-        adjustmentsMade,
-        calibrationExtended,
-        maxCalibrationExtension,
-        calibrationRangePercent,
-        comment,
-    });
+  const calibration = new Calibration({
+    _id,
+    procedureId,
+    sensorId,
+    calibrationName,
+    lastCalibrationDate,
+    dueCalibrationDate,
+    adjustmentsMade,
+    calibrationExtended,
+    maxCalibrationExtension,
+    calibrationRangePercent,
+    comment,
+  });
 
-    calibration
-        .save()  //save calibration record document
-        .then((result) => {
-            Promise.all([
-                Sensor.findById(sensorId).exec(), //find sensor document by specified reference id
-                Procedure.findById(procedureId).exec(),  //find procedure by specified reference id
-            ])
-            .then(([sensor, procedure]) => {
-                sensor.calibrations.push(_id); //push calibration event _id into sensor's array field
-                procedure.calibrations.push(_id); //push calibration event _id into sensor's array field
-                Promise.all([sensor.save(), procedure.save()])
-                .then(() => {
-                    //SUCCESS:
-                    console.log({
-                        request: {
-                            type: "POST",
-                            url: req.originalUrl,
-                            status: "SUCCESS",
-                        },
-                    });
-                    res.status(200).json({
-                        message: `SUCCESS: Calibration event ${calibration.calibrationName} successufully SAVED. 
-                            Calibration event id was pushed into reference arrays of sensor ${sensor.EID} and procedure ${procedure.procedureName}.`,
-                        result,
-                        request: {
-                        type: "POST",
-                        url: req.originalUrl,
-                        },
-                    });
-                })
-                //FAILURE: if specified references were not saved
-                .catch(()=>{
-                    res.status(500).json({
-                        message: "Failed to save reference id in sensor and procedure...",
-                        request: {
-                            type: 'POST',
-                            url: req.originalUrl                    
-                        }  
-                    });
-                })
-            })
-            //FAILURE: if either sensor or procedure (or both) were not found
-            .catch(()=>{
-                res.status(500).json({
-                    message: "Failed to find either sensor and/or procedure documents by ids...",
-                    request: {
-                        type: 'POST',
-                        url: req.originalUrl                    
-                    }  
-                });
-            })
-        })
-        //FAILURE: if calibration record was not saved
-        .catch(()=>{
-            res.status(500).json({
-                message: "Failed to save a calibration procedure (possibly, failed to meet Schema model requirements)",
+  calibration
+    .save() //save calibration record document
+    .then((result) => {
+      Promise.all([
+        Sensor.findById(sensorId).exec(), //find sensor document by specified reference id
+        Procedure.findById(procedureId).exec(), //find procedure by specified reference id
+      ])
+        .then(([sensor, procedure]) => {
+          sensor.calibrations.push(_id); //push calibration event _id into sensor's array field
+          procedure.calibrations.push(_id); //push calibration event _id into sensor's array field
+          Promise.all([sensor.save(), procedure.save()])
+            .then(() => {
+              //SUCCESS:
+              console.log({
                 request: {
-                    type: 'POST',
-                    url: req.originalUrl                    
-                }  
+                  type: "POST",
+                  url: req.originalUrl,
+                  status: "SUCCESS",
+                },
+              });
+              res.status(200).json({
+                message: `SUCCESS: Calibration event ${calibration.calibrationName} successufully SAVED. 
+                            Calibration event id was pushed into reference arrays of sensor ${sensor.EID} and procedure ${procedure.procedureName}.`,
+                result,
+                request: {
+                  type: "POST",
+                  url: req.originalUrl,
+                },
+              });
+            })
+            //FAILURE: if specified references were not saved in
+            .catch(() => {
+              res.status(500).json({
+                message:
+                  "Failed to save reference id in sensor and procedure...",
+                request: {
+                  type: "POST",
+                  url: req.originalUrl,
+                },
+              });
             });
+        })
+        //FAILURE: if either sensor or procedure (or both) associated with current calibraton record were not found
+        .catch(() => {
+          res.status(500).json({
+            message:
+              "Failed to find either sensor and/or procedure documents by ids...",
+            request: {
+              type: "POST",
+              url: req.originalUrl,
+            },
+          });
         });
-
+    })
+    //FAILURE: if calibration record was not saved
+    .catch(() => {
+      res.status(500).json({
+        message:
+          "Failed to save a calibration procedure (possibly, failed to meet Schema model requirements)",
+        request: {
+          type: "POST",
+          url: req.originalUrl,
+        },
+      });
     });
- 
-
-
+});
 
 ///DELETE API endpoint: delete a calibration record/document by ID
 router.delete("/:procedureId", (req, res, next) => {
   const id = req.params.procedureId;
-  Calibration.deleteOne({ _id: id })
+  const { procedureId, sensorId } = req.body;
+
+  Calibration.deleteOne({ _id: id }) //delete calibratin record by ID
     .exec()
     .then((doc) => {
+      ////<<<<<<<deleteOne()>>>>>>>/////
       if (doc.deletedCount === 1) {
-        res.status(200).json({
-          message: `SUCCESS! Calibration procedure ${name} was deleted from database`,
-          deletedCalibrationProcedure: {
-            id: req.params.procedureId,
-            name: req.body.procedureName,
-            description: req.body.description,
-          },
-          request: {
-            type: "DELETE",
-            url: req.originalUrl,
-          },
-        });
+        //if document has been Successfully deleted
+        Promise.all([
+          Sensor.findById(sensorId).exec(), //find sensor document by specified reference id
+          Procedure.findById(procedureId).exec(), //find procedure by specified reference id
+        ])
+          .then(([sensor, procedure]) => {
+            for (let i = 0; i < sensor[i].calibrations.length; i++) {
+              if (sensor[i].calibrations.toString() === id) {
+                sensor[i].calibrations.splice(i, 1); //use splice() method to mutate array [remove reference of deleted calibratin record]
+                break;
+              }
+            }
+            for (let i = 0; i < procedure[i].calibrations.length; i++) {
+              if (procedure[i].calibrations.toString() === id) {
+                procedure[i].calibrations.splice(i, 1); //use splice() method to mutate array [remove reference of deleted calibratin record]
+                break;
+              }
+            }
+            Promise.all([sensor.save(), procedure.save()])
+              .then(() => {
+                console.log({
+                  request: {
+                    type: "DELETE",
+                    url: req.originalUrl,
+                    status: "SUCCESS",
+                  },
+                });
+                res.status(200).json({
+                  message: `SUCCESS! Calibration procedure ${id} was deleted from database and its reference was cleaned up`,
+                  deletedDocument: doc,
+                  request: {
+                    type: "DELETE",
+                    url: req.originalUrl,
+                  },
+                });
+              })
+              //FAILURE: if mutated sensor and/or procedure documents were not saved
+              .catch((err) => {
+                res.status(500).json({
+                  err,
+                  message:
+                    "Failed to save updated sensor and/or procedure documents due to cleanup...",
+                  request: {
+                    type: "DELETE",
+                    url: req.originalUrl,
+                  },
+                });
+              });
+          })
+          //FAILURE: if mutated sensor and/or procedure documents were not saved
+          .catch((err) => {
+            res.status(500).json({
+              err,
+              message:
+                "Failed to save find sensor and/or procedure documents associated with deleted calibration event...",
+              request: {
+                type: "DELETE",
+                url: req.originalUrl,
+              },
+            });
+          });
       } else {
         res.status(400).json({
-          error: `Error: (Hint: the procedure ${name} id {${id}} is valid, but seems like not found in the database (possibly, deteted already in the past).`,
+          error: `Error: (Hint: the calibration record {${id}} is valid, but most likely not found in the database.`,
           request: {
             type: "DELETE",
             url: req.originalUrl,
@@ -274,9 +325,10 @@ router.delete("/:procedureId", (req, res, next) => {
         });
       }
     })
-    .catch(() => {
+    .catch((err) => {
       res.status(400).json({
-        error: `Failed to delete the procedure ${name} associated with id {${id}}. (Hint: the sensor id {${id}} format is INVALID; thus, not found in the database...)`,
+        err,
+        error: `Failed to delete the associated with id {${id}}. (Hint: the sensor id {${id}} might be INVALID (not found in the database))`,
         request: {
           type: "DELETE",
           url: req.originalUrl,

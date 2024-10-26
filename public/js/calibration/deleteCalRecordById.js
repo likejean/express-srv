@@ -1,15 +1,15 @@
 function deleteCalibrationRecord() {
-    console.log(id)
-
-    const data = {
-        sensorId: calibrationInputContainer.sensor._id,
-        procedureId: calibrationInputContainer.procedure._id 
-      };
-    axios.delete(`../api/calibrations/${id}`)
-    .then(response => {
-        console.log('Document deleted successfully:', response.data);
+  const data = {
+    sensorId: calibrationInputContainer.sensor._id,
+    procedureId: calibrationInputContainer.procedure._id,
+  };
+  axios
+    .delete(`../api/calibrations/${id}`, { data })
+    .then((response) => {
+      console.log("Document deleted successfully:", response.data);
+      window.location.href = "../index.html";
     })
-    .catch(error => {
-        console.error('Error deleting document:', error);
+    .catch((error) => {
+      console.error("Error deleting document:", error);
     });
 }
