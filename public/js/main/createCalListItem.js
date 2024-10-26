@@ -2,12 +2,11 @@
 function createCalibrationListItem (data, list, calName, calLocation) {     //called in showSensorInfoCard.js
     //Get a current time in unix format
     const unixTimestamp = moment().unix(); 
-    const calibrationRecords = document.getElementById('calRecords');
+    //const calibrationRecords = document.getElementById('cal-record');
 
     if (data.length === 0) {
-        console.log(calibrationRecords)
-        removeAllChildNodes(calibrationRecords);
-        calibrationRecords.innerHTML = `<span class="badge bg-danger-subtle">No Records Found</span>`;
+        //removeAllChildNodes(calibrationRecords);
+        //calibrationRecords.innerHTML = `<span class="badge bg-danger-subtle">No Records Found</span>`;
         
     }else{
         for (let i=0; i < data.length; i++){

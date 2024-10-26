@@ -12,8 +12,7 @@ function showSensorInfoCard(
     comment
 ) {
 
-    var parsedJSON =
-    JSON.parse(calibrations.replace(/\&/g, '"'));
+    var parsedJSON = JSON.parse(calibrations.replace(/\&/g, '"'));
 
     var tableRow;
 
@@ -29,19 +28,21 @@ function showSensorInfoCard(
     for (const [key, value] of Object.entries(tableRowObj)) {
         //deactivate any different tables rows and hide info card (if it's still displayed)
         if (value === "active" && key !== `row${index}`) {
-        tableRowObj[`${key}`] = "inactive";
-        tableRow = document.getElementById(key);
-        tableRow.classList.remove("table-active");
-        htmlElementCollection.card.style.visibility = "hidden";
-        removeAllChildNodes(htmlElementCollection.descriptionHeaderHtml);
-        removeAllChildNodes(htmlElementCollection.sensorCommentHtml);
-        removeAllChildNodes(htmlElementCollection.manufacturerNameHtml);
-        removeAllChildNodes(htmlElementCollection.calProcedureInfoHtml);
-        removeAllChildNodes(htmlElementCollection.calProcedureNameHtml);
-        removeAllChildNodes(htmlElementCollection.sensorModelHtml);
-        removeAllChildNodes(htmlElementCollection.sensorTypeHtml);
-        removeAllChildNodes(htmlElementCollection.sensorMeasurementQuantityHtml);
-        removeAllChildNodes(htmlElementCollection.sensorCapacityRangeHtml);
+            tableRowObj[`${key}`] = "inactive";
+            tableRow = document.getElementById(key);
+            tableRow.classList.remove("table-active");
+            htmlElementCollection.card.style.visibility = "hidden";
+            removeAllChildNodes(htmlElementCollection.descriptionHeaderHtml);
+            removeAllChildNodes(htmlElementCollection.sensorCommentHtml);
+            removeAllChildNodes(htmlElementCollection.manufacturerNameHtml);
+            removeAllChildNodes(htmlElementCollection.calProcedureInfoHtml);
+            removeAllChildNodes(htmlElementCollection.calProcedureNameHtml);
+            removeAllChildNodes(htmlElementCollection.sensorModelHtml);
+            removeAllChildNodes(htmlElementCollection.sensorTypeHtml);
+            removeAllChildNodes(htmlElementCollection.sensorMeasurementQuantityHtml);
+            removeAllChildNodes(htmlElementCollection.sensorCapacityRangeHtml);
+            removeAllChildNodes(htmlElementCollection.calRecordsNoticeHtml);
+            
         }
     }
 
@@ -80,6 +81,13 @@ function showSensorInfoCard(
             "Sensor Capacity Range:" + "\u00a0" + capacity,
             htmlElementCollection.sensorCapacityRangeHtml
         );
+        
+        parsedJSON.length === 0 ? addHtmlChildElementToParent(htmlElementCollection.calRecordsNoticeHtml,
+            `<span class='badge bg-danger-subtle'>No Records Found</span>`
+        ) : addHtmlChildElementToParent(htmlElementCollection.calRecordsNoticeHtml,
+            `<span class='badge bg-info-subtle'>${parsedJSON.length} Record(s) Found</span>`
+        )
+       
         createCalibrationListItem(                            //createCalListItem.js
             parsedJSON,
             htmlElementCollection.calProcedureInfoHtml,
@@ -103,5 +111,6 @@ function showSensorInfoCard(
         removeAllChildNodes(htmlElementCollection.sensorTypeHtml);
         removeAllChildNodes(htmlElementCollection.sensorMeasurementQuantityHtml);
         removeAllChildNodes(htmlElementCollection.sensorCapacityRangeHtml);
+        removeAllChildNodes(htmlElementCollection.calRecordsNoticeHtml);
     }
 }

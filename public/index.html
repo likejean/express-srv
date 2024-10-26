@@ -91,10 +91,11 @@
               <li id="sensor-capacity" class="list-group-item"></li>
               <li id="sensor-manufacturer" class="list-group-item"></li>
             </ul>
+
             <!-- calibration procedure details -->
             <div class="card-footer text-body-secondary pb-3">
               <h2 class="mb-3">Calibration Records</h2>
-              <div id="calRecords" class="row d-flex align-items-center">
+              <div class="row d-flex align-items-center">
                 <div class="col-12 col-sm-3">
                   <ul class="mx-1 list-group row" id="calibration-procedures-badges">
                     <!-- here is where dynamically generated list HTML elements are appended (list of calibrations associated with selected sensor)-->                    
@@ -106,6 +107,7 @@
                   </ul>
                 </div>                        
               </div>
+              <div id="cal-records" class="row mt-3 mx-1 d-flex text-center"></div>
             </div>
           </div>
 
@@ -162,6 +164,7 @@
   <script src="./js/utils/addTextNodeToHtmlElement.js"></script>
   <script src="./js/utils/updateSensorImage.js"></script>
   <script src="./js/utils/removeAllChildNodes.js"></script>
+  <script src="./js/utils/addHtmlChildElementToParent.js"></script>
 
   <!--MAIN SCRIPTS-->
   <script src="./js/main/fetchAllData.js"></script>

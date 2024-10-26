@@ -6,7 +6,7 @@ const mapCalDueDatesAndBuildTableCell = function (data){
     let dueCalDate, iconHtmlText;   
 
     if (data.length === 0){
-        cell.innerHTML = '<span class="badge bg-info-subtle">NONE</span>'
+        cell.innerHTML = '<span class="badge bg-danger-subtle">NONE</span>'
     }else{
         for(let i=0; i < data.length; i++){        
             dueCalDate =  moment.utc(data[i].dueCalibrationDate).unix(); 

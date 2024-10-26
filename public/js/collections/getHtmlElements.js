@@ -8,7 +8,8 @@ const htmlClassCollection = {
     sensorCapacityRangeHtml: 'sensor-capacity',
     manufacturerNameHtml: 'sensor-manufacturer',
     calProcedureNameHtml: 'calibration-procedures-badges',
-    calProcedureInfoHtml: 'calibration-procedures-list'
+    calProcedureInfoHtml: 'calibration-procedures-list',
+    calRecordsNoticeHtml: 'cal-records'
 }
 
 
