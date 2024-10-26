@@ -295,7 +295,7 @@ router.delete("/:procedureId", (req, res, next) => {
                 res.status(500).json({
                   err,
                   message:
-                    "Failed to save updated sensor and/or procedure documents due to cleanup...",
+                    "Failed to cleanup sensor and/or procedure documents associated with deleted calibration record...",
                   request: {
                     type: "DELETE",
                     url: req.originalUrl,
@@ -308,7 +308,7 @@ router.delete("/:procedureId", (req, res, next) => {
             res.status(500).json({
               err,
               message:
-                "Failed to save find sensor and/or procedure documents associated with deleted calibration event...",
+                "Failed to find sensor and/or procedure documents associated with deleted calibration event...",
               request: {
                 type: "DELETE",
                 url: req.originalUrl,
