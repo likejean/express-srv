@@ -17,10 +17,12 @@ const fetchAllData = async () => {
       });
 
       //If successful fetch being executed, retrieve all data
+
       const sensors = result[0].data.payload;
       const calibrations = result[1].data.payload;
       const procedures = result[2].data.payload;
 
+     
       //function call to create all cells for main sensor table
       createMainSensorTable(sensors, calibrations);
     })
