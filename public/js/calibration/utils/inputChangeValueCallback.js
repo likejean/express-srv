@@ -3,12 +3,12 @@ function inputChangeValueCallback(event) {
     const newValue = event.target.value;
     const inputType = event.target.type;
     const concatInputName = event.target.name.concat("Wrapper");
-    calibrationInputContainer[concatInputName].validator &&
-    calibrationInputContainer[concatInputName].validator(newValue)
+    _calfactory.inputWrappers[concatInputName].validator &&
+    _calfactory.inputWrappers[concatInputName].validator(newValue)
       ? (document.getElementById("inputErrorMessage").textContent = "")
       : (document.getElementById("inputErrorMessage").textContent =
-          calibrationInputContainer[concatInputName].inputRule);
+       _calfactory.inputWrappers[concatInputName].inputRule);
     if (inputType === "checkbox")
-       calibrationInputContainer[concatInputName].checked = this.checked;
-    else calibrationInputContainer[concatInputName].value = newValue;
+      _calfactory.inputWrappers[concatInputName].checked = this.checked;
+    else _calfactory.inputWrappers[concatInputName].value = newValue;
 }

@@ -1,11 +1,30 @@
 const allowedChars = /^[-., a-zA-Z0-9]*$/;
 
+
+class calibrationFactory {
+    constructor(
+            calibrationName, 
+            sensor,
+            procedure,
+            inputWrappers,
+        ){
+        this.sensor = sensor;
+        this.procedure = procedure;
+        this.calibrationName = calibrationName;
+        this.calNameWrapper = calNameWrapper;
+        this.inputWrappers = inputWrappers;
+    }
+
+    isPatchButtonActive() {      
+      for (const [key, value] of Object.entries(this.inputWrappers)) {
+          if (value.status) return true;
+      }
+      return false;            
+    }
+}
+
 const calibrationInputContainer = {
-    calibrationName: "",
-    //Sensor and calibration procedure associated with current calibration event
-    sensor: {},
-    procedure: {},    
-    
+        
     //Calibration Record Card Input Wrappers
     calNameWrapper: {
         status: false,
@@ -86,3 +105,6 @@ const calibrationInputContainer = {
         databaseName: "comment",
     },
 };
+
+const _calfactory = new calibrationFactory("",{},{}, calibrationInputContainer)
+

@@ -14,6 +14,6 @@ const filterObjectAndTransform = (obj, filterFn) => {
 };
 
 calPatchRequestData = filterObjectAndTransform(
-    calibrationInputContainer,
+    _calfactory.inputWrappers,
     (input) => input.status === true
 );

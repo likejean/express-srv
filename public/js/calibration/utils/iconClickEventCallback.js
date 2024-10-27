@@ -5,31 +5,34 @@ function iconClickEventCallback(event) {
     const wrapper = document.getElementById(wrapperName);
     let input = document.createElement("input");
     let icon = document.getElementById(
-      calibrationInputContainer[wrapperName].name.concat("Icon")
+      _calfactory.inputWrappers[wrapperName].name.concat("Icon")
     );
+    const patchButton = document.getElementById("patch-cal-record");
 
   //creates toggle functionality for icons in Calibration Summary Card
-  if (!calibrationInputContainer[wrapperName].status) {
+  if (!_calfactory.inputWrappers[wrapperName].status) {      
       icon.classList.replace("fa-circle-dot", "fa-file-pen");
-      calibrationInputContainer[wrapperName].childNodes = Array.from(
+      _calfactory.inputWrappers[wrapperName].childNodes = Array.from(
         wrapper.childNodes
       );
       removeAllChildNodes(wrapper);
-      calibrationInputContainer[wrapperName].status = true;
-      input.classList.add(calibrationInputContainer[wrapperName].class);
-      input.setAttribute("name", calibrationInputContainer[wrapperName].name);
-      input.setAttribute("type", calibrationInputContainer[wrapperName].type);
+      _calfactory.inputWrappers[wrapperName].status = true;
+      input.classList.add(_calfactory.inputWrappers[wrapperName].class);
+      input.setAttribute("name", _calfactory.inputWrappers[wrapperName].name);
+      input.setAttribute("type", _calfactory.inputWrappers[wrapperName].type);
       input.setAttribute("style", "border-color:blue;");
-
+      
       wrapper.appendChild(input);
-      input.addEventListener("input", inputChangeValueCallback);
+      input.addEventListener("input", inputChangeValueCallback);      
+      patchButton.disabled = !_calfactory.isPatchButtonActive();
   } else {
       input.removeEventListener("input", inputChangeValueCallback);
       document.getElementById("inputErrorMessage").textContent = "";
       removeAllChildNodes(wrapper);
       icon.classList.replace("fa-file-pen", "fa-circle-dot");
-      calibrationInputContainer[wrapperName].status = false;
-      wrapper.append(...calibrationInputContainer[wrapperName].childNodes);
-      calibrationInputContainer[wrapperName].childNodes = [];
+      _calfactory.inputWrappers[wrapperName].status = false;
+      wrapper.append(..._calfactory.inputWrappers[wrapperName].childNodes);
+      _calfactory.inputWrappers[wrapperName].childNodes = [];      
+      patchButton.disabled = !_calfactory.isPatchButtonActive();
   }
 }

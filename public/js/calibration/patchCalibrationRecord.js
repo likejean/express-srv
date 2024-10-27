@@ -3,7 +3,7 @@ function patchCalibrationRecord() {
 
   //get this helper function from utils...
     calPatchRequestData = filterObjectAndTransform(
-        calibrationInputContainer,
+        _calfactory.inputWrappers,
         (item) => item.status === true
     );
 
