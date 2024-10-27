@@ -6,7 +6,13 @@ const Sensor = require("../models/sensor");
 const router = express.Router();
 
 //Routers
+
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
 // GET endpoint: get ALL calibration documents/records
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+
 router.get("/", (req, res, next) => {
   Calibration.find()
     .exec()
@@ -57,7 +63,12 @@ router.get("/", (req, res, next) => {
     });
 });
 
+
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
 // GET endpoint: get a calibration record by ID
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
 router.get("/:calibrationId", (req, res, next) => {
   const id = req.params.calibrationId;
   Calibration.findById(id)
@@ -84,7 +95,8 @@ router.get("/:calibrationId", (req, res, next) => {
       } else {
         console.log({
           request: {
-            message: "Invalid Entry",
+            message: "Failed to fetch calibration record by ID. Most likely the document ID is not valid.",
+            isIdValid: mongoose.Types.ObjectId.isValid(id),
             type: "GET",
             url: req.originalUrl,
             status: "FAILURE",
@@ -111,24 +123,30 @@ router.get("/:calibrationId", (req, res, next) => {
     });
 });
 
+
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
 //PATCH endpoint: update PARTIALLY existing calibration record/document by ID
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+
 router.patch("/:calibrationId", (req, res, next) => {
   const id = req.params.calibrationId;
-  console.log("Request body:", req.body);
+  console.log("Request Body:", req.body);
   Calibration.updateOne({ _id: id }, { $set: { ...req.body } })
     .exec()
     .then((result) => {
       console.log({
-        request: {
-          type: "PATCH",
-          url: req.originalUrl,
-          status: "SUCCESS",
-        },
+            request: {
+                type: "PATCH",
+                url: req.originalUrl,
+                status: "SUCCESS",
+            },
       });
       res.status(200).json({
         message: `Calibration record w/ id: '${id}' was Updated.`,
         request: {
-          type: "PATCH",
+            type: "PATCH",
         },
         result,
       });
@@ -136,16 +154,20 @@ router.patch("/:calibrationId", (req, res, next) => {
     .catch((err) => {
       res.status(500).json({
         message: "Failure: Unable to update calibration...",
+        isIdValid: mongoose.Types.ObjectId.isValid(id),
         error: err,
         request: {
-          type: "PATCH",
-          url: req.originalUrl,
+            type: "PATCH",
+            url: req.originalUrl,
         },
       });
     });
 });
 
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
 //POST endpoint: creates a new calibration EVENT MongoDB document
+/////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
 
 router.post("/", (req, res, next) => {
@@ -244,7 +266,15 @@ router.post("/", (req, res, next) => {
     });
 });
 
-///DELETE API endpoint: delete a calibration record/document by ID
+
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+///DELETE API endpoint: deletes a calibration record/document by ID
+///and removes its reference ObjectIds with associated sensor and procedure documents
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+
+
 router.delete("/:calibrationId", (req, res, next) => {
   const id = req.params.calibrationId;
   const { procedureId, sensorId } = req.body;
