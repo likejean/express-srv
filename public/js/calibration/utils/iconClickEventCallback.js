@@ -12,9 +12,7 @@ function iconClickEventCallback(event) {
   //creates toggle functionality for icons in Calibration Summary Card
   if (!_calfactory.inputWrappers[wrapperName].status) {      
       icon.classList.replace("fa-circle-dot", "fa-file-pen");
-      _calfactory.inputWrappers[wrapperName].childNodes = Array.from(
-        wrapper.childNodes
-      );
+      _calfactory.inputWrappers[wrapperName].childNodes = Array.from(wrapper.childNodes);
       removeAllChildNodes(wrapper);
       _calfactory.inputWrappers[wrapperName].status = true;
       input.classList.add(_calfactory.inputWrappers[wrapperName].class);

@@ -1,6 +1,6 @@
 const allowedChars = /^[-., a-zA-Z0-9]*$/;
 
-
+// GLOBAL FACTORY for calibration record view/edit/delete page
 class calibrationFactory {
     constructor(
             calibrationName, 
@@ -16,7 +16,7 @@ class calibrationFactory {
     }
 
     isPatchButtonActive() {      
-      for (const [key, value] of Object.entries(this.inputWrappers)) {
+      for (const [item, value] of Object.entries(this.inputWrappers)) {
           if (value.status) return true;
       }
       return false;            
@@ -106,5 +106,6 @@ const calibrationInputContainer = {
     },
 };
 
+//Instantiation of calibationFactory Class
 const _calfactory = new calibrationFactory("",{},{}, calibrationInputContainer)
 
