@@ -90,16 +90,15 @@
               <div class="d-flex align-items-center">
                 <div class="col-12"><span id="inputErrorMessage"></span></div>                
               </div>
-              
-            
             </div>
 
+
             <!-- Modal to delete calibration record: -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal fade" id="deleteCalRecordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteCalRecordModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">Calibration Record:
-                    <h1 class="modal-title fs-5 delete-calibration-record-name text-center" id="staticBackdropLabel"></h1>
+                    <h1 class="modal-title fs-5 delete-calibration-record-name text-center" id="deleteCalRecordModalLabel"></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
@@ -119,8 +118,8 @@
                 <div class="row m-2">
                   <div class="form-group col text-center">                           
                       <button id="patch-cal-record" type="submit" class="btn btn-primary" onclick=patchCalibrationRecord() disabled>Submit</button>
-                      <button type="button" class="btn btn-danger" onclick=openCalibrationWarningModal()
-                          data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                      <button type="button" class="btn btn-danger" onclick=openCalWarningModal()
+                            data-bs-toggle="modal" data-bs-target="#deleteCalRecordModal">
                           Delete
                       </button>
                       <a href="../index.html" class="btn btn-dark">Back</a>
@@ -139,13 +138,19 @@
       crossorigin="anonymous"></script>    
     </script>
 
+    <!-- javascript libraries -->
     <script src="../libs/moment.min.js"></script>
     <script src="../libs/moment-with-locales.min.js"></script>
+
+    <!-- global javascript classes -->
+    <script src="../js/classes/calibrationGlobalFactory.js"></script>
     
+    <!-- collections and utils -->
     <script src="../js/collections/calibrationInputContainer.js"></script>
     <script src="../js/utils/trimStringBySubstring.js"></script>
     <script src="../js/utils/removeAllChildNodes.js"></script>
 
+    <!-- javascript calibration folder -->
     <script src="../js/calibration/fetchCalRecordById.js"></script>
     <script src="../js/calibration/utils/filterObjectAndTransform.js"></script>
     <script src="../js/calibration/utils/iconClickEventCallback.js"></script>
@@ -161,7 +166,7 @@
       var id = urlParams.get("id");
      
 
-      // Get the element you want to add the event listener to
+      // attach event listener to all icons to edit calibration record information
       let icons = document.querySelectorAll('.fa-circle-dot');
       icons.forEach(icon => {
          icon.addEventListener('click', iconClickEventCallback);

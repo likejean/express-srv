@@ -1,6 +1,4 @@
-
-
-function openCalibrationWarningModal () {
+function openCalWarningModal () {
     const modalTitle = document.querySelector('.delete-calibration-record-name');
     modalTitle.innerText = "\u00a0\u00a0\u00a0" + _calfactory.calibrationName;
 }

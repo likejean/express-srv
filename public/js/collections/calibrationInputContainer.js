@@ -1,27 +1,7 @@
 const allowedChars = /^[-., a-zA-Z0-9]*$/;
+const limitCommentText = /^.{10,40}$/;
+const validateDateFormat = /^\d{4}-\d{2}-\d{2}$/; 
 
-// GLOBAL FACTORY for calibration record view/edit/delete page
-class calibrationFactory {
-    constructor(
-            calibrationName, 
-            sensor,
-            procedure,
-            inputWrappers,
-        ){
-        this.sensor = sensor;
-        this.procedure = procedure;
-        this.calibrationName = calibrationName;
-        this.calNameWrapper = calNameWrapper;
-        this.inputWrappers = inputWrappers;
-    }
-
-    isPatchButtonActive() {      
-      for (const [item, value] of Object.entries(this.inputWrappers)) {
-          if (value.status) return true;
-      }
-      return false;            
-    }
-}
 
 const calibrationInputContainer = {
         
@@ -44,7 +24,15 @@ const calibrationInputContainer = {
         value: "",
         class: "form-control",
         childNodes: [],
-        databaseName: "lastCalibrationDate",
+        databaseName: "lastCalibrationDate",        
+        validator: (dateString) => {
+          if (validateDateFormat.test(dateString)) {
+            const date = new Date(dateString);
+            return (date instanceof Date && !isNaN(date));
+          } 
+          return false;
+        },
+        inputRule: `Date must be valid format: 2020-01-01`,
     },
     dueCalDateWrapper: {
         status: false,
@@ -53,7 +41,15 @@ const calibrationInputContainer = {
         value: "",
         class: "form-control",
         childNodes: [],
-        databaseName: "dueCalibrationDate",
+        databaseName: "dueCalibrationDate",        
+        validator: (dateString) => {
+          if (validateDateFormat.test(dateString)) {
+            const date = new Date(dateString);
+            return (date instanceof Date && !isNaN(date));
+          } 
+          return false;
+        },
+        inputRule: `Date must be valid format: 2020-01-01`,
     },
     calExtendedWrapper: {
         status: false,
@@ -102,7 +98,9 @@ const calibrationInputContainer = {
         value: "",
         class: "form-control",
         childNodes: [],
-        databaseName: "comment",
+        databaseName: "comment",        
+        validator: (text) => (limitCommentText.test(text) ? true : false),
+        inputRule: `Minimum 10 and maximum 40 characters are allowed here...`,
     },
 };
 

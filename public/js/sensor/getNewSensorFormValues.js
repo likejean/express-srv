@@ -1,19 +1,19 @@
 const form = document.getElementById("newSensorForm");
+var newSensorPostData = {};
+var _sensfactory = new sensorFactory();
 
-console.log(form)
+form.addEventListener("submit", submitNewSensorData);
 
-form.addEventListener("submit", (event) => {
+function submitNewSensorData (event) {
     event.preventDefault(); // Prevent default form submission
-    console.log(event.target.value)
     const formData = new FormData(form);
 
-    console.log(formData)
-
-    // Get the value of a specific field
-    const name = formData.get("EID");
-
-    // Loop through all form data
+    // Loop through all form data and prepare data object for POST request
     for (const [key, value] of formData.entries()) {
-        console.log(key, value);
+        newSensorPostData[key] = value;
+        _sensfactory[key] = value;
     }
-});
+
+    console.log(newSensorPostData);
+    console.log(_sensfactory);
+}
