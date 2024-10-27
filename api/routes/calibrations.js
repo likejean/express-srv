@@ -245,10 +245,9 @@ router.post("/", (req, res, next) => {
 });
 
 ///DELETE API endpoint: delete a calibration record/document by ID
-router.delete("/:procedureId", (req, res, next) => {
-  const id = req.params.procedureId;
+router.delete("/:calibrationId", (req, res, next) => {
+  const id = req.params.calibrationId;
   const { procedureId, sensorId } = req.body;
-
   Calibration.deleteOne({ _id: id }) //delete calibratin record by ID
     .exec()
     .then((doc) => {
@@ -260,15 +259,15 @@ router.delete("/:procedureId", (req, res, next) => {
           Procedure.findById(procedureId).exec(), //find procedure by specified reference id
         ])
           .then(([sensor, procedure]) => {
-            for (let i = 0; i < sensor[i].calibrations.length; i++) {
-              if (sensor[i].calibrations.toString() === id) {
-                sensor[i].calibrations.splice(i, 1); //use splice() method to mutate array [remove reference of deleted calibratin record]
+            for (let i = 0; i < sensor.calibrations.length; i++) {
+              if (sensor.calibrations[i].toString() === id) {
+                sensor.calibrations.splice(i, 1); //use splice() method to mutate array [remove reference of deleted calibratin record]
                 break;
               }
             }
-            for (let i = 0; i < procedure[i].calibrations.length; i++) {
-              if (procedure[i].calibrations.toString() === id) {
-                procedure[i].calibrations.splice(i, 1); //use splice() method to mutate array [remove reference of deleted calibratin record]
+            for (let i = 0; i < procedure.calibrations.length; i++) {
+              if (procedure.calibrations[i].toString() === id) {
+                procedure.calibrations.splice(i, 1); //use splice() method to mutate array [remove reference of deleted calibratin record]
                 break;
               }
             }
@@ -282,7 +281,7 @@ router.delete("/:procedureId", (req, res, next) => {
                   },
                 });
                 res.status(200).json({
-                  message: `SUCCESS! Calibration procedure ${id} was deleted from database and its reference was cleaned up`,
+                  message: `SUCCESS! Calibration procedure ${id} was deleted from database and its reference IDs were cleaned up`,
                   deletedDocument: doc,
                   request: {
                     type: "DELETE",
@@ -306,18 +305,20 @@ router.delete("/:procedureId", (req, res, next) => {
           //FAILURE: if mutated sensor and/or procedure documents were not saved
           .catch((err) => {
             res.status(500).json({
-              err,
-              message:
-                "Failed to find sensor and/or procedure documents associated with deleted calibration event...",
-              request: {
-                type: "DELETE",
-                url: req.originalUrl,
-              },
+                err,
+                message: `Calibration record ${id} DELETED, but sensor and procedure with the following reference IDs were NOT FOUND`,
+                sensorId,
+                procedureId,                
+                request: {
+                    type: "DELETE",
+                    url: req.originalUrl,
+                },
             });
           });
       } else {
         res.status(400).json({
-          error: `Error: (Hint: the calibration record {${id}} is valid, but most likely not found in the database.`,
+          message: `Document was NOT deleted. The calibration record associated with ID {${id}} is VALID, but most likley NOT found in the database.`,
+          isIdValid: mongoose.Types.ObjectId.isValid(id),
           request: {
             type: "DELETE",
             url: req.originalUrl,
@@ -328,7 +329,8 @@ router.delete("/:procedureId", (req, res, next) => {
     .catch((err) => {
       res.status(400).json({
         err,
-        error: `Failed to delete the associated with id {${id}}. (Hint: the sensor id {${id}} might be INVALID (not found in the database))`,
+        message: `Failed to delete calibration record associated with ID ${id}. The ID format is most likely INVALID. {CHECK: mongoose.Types.ObjectId.isValid(${id})}`,
+        isIdValid: mongoose.Types.ObjectId.isValid(id),
         request: {
           type: "DELETE",
           url: req.originalUrl,
