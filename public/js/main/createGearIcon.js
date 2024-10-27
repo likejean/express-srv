@@ -1,8 +1,7 @@
 //creates a gear icon to access sensor details and settings (update, delete)
 function createGearIcon(idx, sensor, objstr) {
-  const cell = document.createElement("td");
-  
-  cell.innerHTML = `<i id="icon${idx}" onClick="showSensorInfoCard(
+    const cell = document.createElement("td");  
+    cell.innerHTML = `<i id="icon${idx}" onClick="showSensorInfoCard(
         ${idx},
         '${sensor.description}',
         '${sensor.manufacturer}',
@@ -15,5 +14,5 @@ function createGearIcon(idx, sensor, objstr) {
         '${sensor.location}',
         '${sensor.comment}',
         )" class='fa-sharp-duotone fa-solid fa-gear'></i>`;
-  return cell;
+    return cell;
 }

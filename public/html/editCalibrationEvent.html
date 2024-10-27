@@ -93,16 +93,38 @@
               
             
             </div>
+
+            <!-- Modal to delete calibration record: -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">Calibration Record:
+                    <h1 class="modal-title fs-5 delete-calibration-record-name text-center" id="staticBackdropLabel"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Are you sure you want to delete this calibration record permanently?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick=deleteCalibrationRecord()>Delete</button>
+                  </div>
+                </div>
+              </div>
+            </div>
     
     
             <div class="card-footer bg-transparent border-success text-center">
               <div class="container">
                 <div class="row m-2">
-                    <div class="form-group col text-center">                           
-                        <button type="submit" class="btn btn-primary" onclick=patchCalibrationRecord()>Submit</button>
-                        <button type="submit" class="btn btn-danger" onclick=deleteCalibrationRecord()>Delete</button>
-                        <a href="../index.html" class="btn btn-dark">Back</a>
-                    </div>                    
+                  <div class="form-group col text-center">                           
+                      <button type="submit" class="btn btn-primary" onclick=patchCalibrationRecord() disabled>Submit</button>
+                      <button type="button" class="btn btn-danger" onclick=openCalibrationWarningModal()
+                          data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                          Delete
+                      </button>
+                      <a href="../index.html" class="btn btn-dark">Back</a>
+                  </div>                    
                 </div>                    
               </div>
             </div>

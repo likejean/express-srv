@@ -2,18 +2,18 @@
 calPatchRequestData = {};
 
 const filterObjectAndTransform = (obj, filterFn) => {
-  const result = {};
-  for (const key in obj) {
-    if (filterFn(obj[key])) {
-      obj[key].type == "checkbox"
-        ? (result[obj[key].databaseName] = obj[key].checked)
-        : (result[obj[key].databaseName] = obj[key].value);
+    const result = {};
+    for (const key in obj) {
+        if (filterFn(obj[key])) {
+            obj[key].type == "checkbox"
+              ? (result[obj[key].databaseName] = obj[key].checked)
+            : (result[obj[key].databaseName] = obj[key].value);
+        }
     }
-  }
-  return result;
+    return result;
 };
 
 calPatchRequestData = filterObjectAndTransform(
-  calibrationInputContainer,
-  (input) => input.status === true
+    calibrationInputContainer,
+    (input) => input.status === true
 );

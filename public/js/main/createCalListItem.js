@@ -23,7 +23,6 @@ function createCalibrationListItem (data, list, calName, calLocation) {     //ca
             badgeItem.classList.add('calibration-record-link');
             badgeItem.href=`./html/editCalibrationEvent.html?id=${data[i]._id}`;       
     
-           
             //add class attributes to calName badge and calInfo list item
             badgeItem.classList.add('list-group-item');
             listItem.classList.add('list-group-item');
@@ -55,6 +54,4 @@ function createCalibrationListItem (data, list, calName, calLocation) {     //ca
             
         }    
     }
-
-   
 }
