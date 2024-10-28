@@ -37,4 +37,6 @@ function submitNewSensorData (event) {
     for (const [key, value] of formData.entries()) {
         newSensorPostData[key] = value;
     }
+
+    inputs.forEach((item) => item.removeEventListener("input", inputHandler));
 }
