@@ -14,9 +14,9 @@ class calibrationFactory {
     }
 
     isPatchButtonActive() {      
-      for (const [item, value] of Object.entries(this.inputWrappers)) {
-          if (value.status) return true;
-      }
-      return false;            
+        for (const [item, value] of Object.entries(this.inputWrappers)) {
+            if (value.status) return true;
+        }
+        return false;            
     }
 }

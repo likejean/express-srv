@@ -1,4 +1,7 @@
+///Callback function for ONCLICK eventListener in editCalibrationEvent.html file...
+////.......  icon.addEventListener('click', iconClickEventCallback);
 function iconClickEventCallback(event) {
+  
     const wrapperName = trimBySubstring(event.target.id, "Icon").concat(
       "Wrapper"
     );
@@ -10,7 +13,8 @@ function iconClickEventCallback(event) {
     const patchButton = document.getElementById("patch-cal-record");
 
   //creates toggle functionality for icons in Calibration Summary Card
-  if (!_calfactory.inputWrappers[wrapperName].status) {      
+  if (!_calfactory.inputWrappers[wrapperName].status) {   
+
       icon.classList.replace("fa-circle-dot", "fa-file-pen");
       _calfactory.inputWrappers[wrapperName].childNodes = Array.from(wrapper.childNodes);
       removeAllChildNodes(wrapper);
@@ -18,12 +22,13 @@ function iconClickEventCallback(event) {
       input.classList.add(_calfactory.inputWrappers[wrapperName].class);
       input.setAttribute("name", _calfactory.inputWrappers[wrapperName].name);
       input.setAttribute("type", _calfactory.inputWrappers[wrapperName].type);
-      input.setAttribute("style", "border-color:blue;");
-      
+      input.setAttribute("style", "border-color:blue;");      
       wrapper.appendChild(input);
       input.addEventListener("input", inputChangeValueCallback);      
       patchButton.disabled = !_calfactory.isPatchButtonActive();
+
   } else {
+
       input.removeEventListener("input", inputChangeValueCallback);
       document.getElementById("inputErrorMessage").textContent = "";
       removeAllChildNodes(wrapper);

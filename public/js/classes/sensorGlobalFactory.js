@@ -1,30 +1,22 @@
 // GLOBAL FACTORY for new sensor form 
 class sensorFactory {
     constructor(
-            EID, 
-            type,
-            calibrationPriority,
-            calibrationFrequency,
-            calibratedBy,
-            location,
-            description,
-            capacityRange,
-            comment,
-            model,
-            quantity,
-            manufacturer
+            newSensorFormInputs
         ){
-            this.EID = EID, 
-            this.type = type,
-            this.calibrationPriority = calibrationPriority,
-            this.calibrationFrequency = calibrationFrequency,
-            this.calibratedBy = calibratedBy,
-            this.location = location,
-            this.description = description,
-            this.capacityRange = capacityRange,
-            this.comment = comment,
-            this.model = model,
-            this.quantity = quantity,
-            this.manufacturer = manufacturer
+        this.newSensorFormInputs = newSensorFormInputs
+    }
+
+    isSubmitButtonActive() {      
+        for (const [item, obj] of Object.entries(this.newSensorFormInputs)) {            
+            if (obj.value==="") {
+                return false;
+            }
+        }
+        return true;            
+    }
+
+    isFormInputFieldEmpty(inputName) {
+        return this.newSensorFormInputs[inputName].value.length === 0
     }
 }
+

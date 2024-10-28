@@ -3,7 +3,7 @@ const limitCommentText = /^.{10,40}$/;
 const validateDateFormat = /^\d{4}-\d{2}-\d{2}$/; 
 
 
-const calibrationInputContainer = {
+const editCalibrationInputContainer = {
         
     //Calibration Record Card Input Wrappers
     calNameWrapper: {
@@ -105,5 +105,5 @@ const calibrationInputContainer = {
 };
 
 //Instantiation of calibationFactory Class
-const _calfactory = new calibrationFactory("",{},{}, calibrationInputContainer)
+const _calfactory = new calibrationFactory("",{},{}, editCalibrationInputContainer)
 
