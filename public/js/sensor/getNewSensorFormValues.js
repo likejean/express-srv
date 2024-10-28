@@ -1,19 +1,21 @@
 const form = document.getElementById("new-sensor-form");
 const submitButton = document.getElementById("post-new-sensor");
-var newSensorPostData = {};
+
+var newSensorPostData = {};  //this object for storing POST request body
 
 //Preset NewSensorForm fields with initial values using GLOBAL SENSOR FACTORY
 Object.entries(_sensfactory.newSensorFormInputs).forEach(([key, obj]) => {
     form.elements[key].value = obj.value;
 });
 
-
+//Attach eventListeners to all New Sensor Form Inputs to detect input entry events
 var inputs = document.querySelectorAll('input, select, textarea'); 
 for (i=0; i<inputs.length; i++){
-    inputs[i].oninput = changeHandler;
+    inputs[i].oninput = inputHandler;
 }
 
-function changeHandler (e) {
+//callback input handler function for ONINPUT EventListener
+function inputHandler (e) {
     let value = e.target.value;
     let name = e.target.name;
     _sensfactory.newSensorFormInputs[name].value = value;
@@ -23,9 +25,10 @@ function changeHandler (e) {
 }
 
 
-
+//Attach eventListener to New Sensor Form data Submission event
 form.addEventListener("submit", submitNewSensorData);
 
+//callback funciton for ONSUBMIT EventListener
 function submitNewSensorData (event) {
     event.preventDefault(); // Prevent default form submission
     const formData = new FormData(form);
@@ -33,6 +36,5 @@ function submitNewSensorData (event) {
     // Loop through all form data and prepare data object for POST request
     for (const [key, value] of formData.entries()) {
         newSensorPostData[key] = value;
-        //_sensfactory.newSensorFormInputs[key].value = value;
     }
 }
