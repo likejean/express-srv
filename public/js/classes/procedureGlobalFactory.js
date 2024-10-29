@@ -16,7 +16,7 @@ class procedureFactory {
     }
 
     isEndRangeLevelGreater() {
-        return this.newCalProcedureFormInputs["endRangeLevel"].value > this.newCalProcedureFormInputs["startRangeLevel"].value;
+        return Number(this.newCalProcedureFormInputs["endRangeLevel"].value) > Number(this.newCalProcedureFormInputs["startRangeLevel"].value);
     }
 
     isFormInputFieldEmpty(inputName) {

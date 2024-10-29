@@ -1,4 +1,5 @@
 const form = document.getElementById("new-procedure-form");
+const validationMassage = document.getElementById('range-levels-validation');
 const submitButton = document.getElementById("get-procedure-form-values");
 
 var newProcedurePostData = {};  //this object for storing POST request body
@@ -24,8 +25,12 @@ function inputHandler (e) {
     submitButton.disabled = !_procfactory.isSubmitButtonActive();
     if(_procfactory.isFormInputFieldEmpty(name)) e.target.style.border = "2px solid red" ;
     else e.target.style.border = "2px solid blue";
-    if(name=="startRangeLevel" || name=="endRangeLevel") 
-        (_procfactory.isEndRangeLevelGreater());
+    if(name=="startRangeLevel" || name=="endRangeLevel") {
+        (_procfactory.isEndRangeLevelGreater()) ?
+        validationMassage.innerText = ""
+        : validationMassage.innerText = "Attention!!! Upper range limit cannot be less or equal lower range limit";
+    }
+        
 }
 
 
@@ -42,7 +47,6 @@ function submitNewProcedureData (event) {
     for (const [key, value] of formData.entries()) {
         (key=="startRangeLevel" || key=="endRangeLevel") ? newProcedurePostData[key] = Number(value) : newProcedurePostData[key] = value;
     }
-    
 
     inputs.forEach((item) => item.removeEventListener("input", inputHandler));
 }

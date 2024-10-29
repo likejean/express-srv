@@ -55,3 +55,8 @@ label {
 .cal-notice-span {
   font-weight: bold;
 }
+
+#range-levels-validation {
+  color: red;
+  font-weight: bold;
+}
