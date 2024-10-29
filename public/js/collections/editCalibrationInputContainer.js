@@ -7,6 +7,7 @@ const editCalibrationInputContainer = {
         
     //Calibration Record Card Input Wrappers
     calNameWrapper: {
+        tag: "input",
         status: false,
         type: "text",
         name: "calName",
@@ -18,6 +19,7 @@ const editCalibrationInputContainer = {
         inputRule: `Error! No special characters allowed here (exception: dashes "-")`,
       },
     lastCalDateWrapper: {
+        tag: "input",
         status: false,
         type: "date",
         name: "lastCalDate",
@@ -35,6 +37,7 @@ const editCalibrationInputContainer = {
         inputRule: `Date must be valid format: 2020-01-01`,
     },
     dueCalDateWrapper: {
+        tag: "input",
         status: false,
         type: "date",
         name: "dueCalDate",
@@ -52,6 +55,7 @@ const editCalibrationInputContainer = {
         inputRule: `Date must be valid format: 2020-01-01`,
     },
     calExtendedWrapper: {
+        tag: "input",
         status: false,
         type: "checkbox",
         name: "calExtended",
@@ -62,6 +66,7 @@ const editCalibrationInputContainer = {
         databaseName: "calibrationExtended",
     },
     maxCalExtentionWrapper: {
+        tag: "input",
         status: false,
         type: "text",
         name: "maxCalExtention",
@@ -71,6 +76,7 @@ const editCalibrationInputContainer = {
         databaseName: "maxCalibrationExtension",
     },
     calRangePercentWrapper: {
+        tag: "input",
         status: false,
         type: "number",
         name: "calRangePercent",
@@ -82,6 +88,7 @@ const editCalibrationInputContainer = {
         inputRule: `Error! Only positive integers allowed within range: 10%-100%`,
     },
     calAdjustmentMadeWrapper: {
+        tag: "input",
         status: false,
         type: "checkbox",
         name: "calAdjustmentMade",
@@ -92,6 +99,7 @@ const editCalibrationInputContainer = {
         databaseName: "adjustmentsMade",
     },
     calCommentWrapper: {
+        tag: "textarea",
         status: false,
         type: "text",
         name: "calComment",
