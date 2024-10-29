@@ -1,4 +1,4 @@
-// GLOBAL FACTORY for new sensor form 
+// GLOBAL FACTORY for sensors
 class sensorFactory {
     constructor(
             newSensorFormInputs

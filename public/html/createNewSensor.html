@@ -1,413 +1,390 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/beaurify.css" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.1/dist/css/datepicker-bs5.min.css"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-    <title>New Sensor Form</title>
-  </head>
-  <body>
-    <nav>
-      <div class="nav-center"></div>
-    </nav>
-    <main>
-      <div class="container">
-        <div class="jumbotron pt-4">
-          <h1 class="new-sensor-form-title">New Sensor</h1>
-          <p>Please, use this form to create a new sensor</p>
-        </div>
-
-        <form id="new-sensor-form">
-          <!-- EID -->
-          <div class="control-form-field-box form-group my-4 p-2">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../css/beaurify.css" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.1/dist/css/datepicker-bs5.min.css"
+        />
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"
+        ></script>
+        <title>New Sensor Form</title>
+    </head>
+    <body>
+        <nav>
+            <div class="nav-center"></div>
+        </nav>
+        <main>
             <div class="container">
-              <label for="sensorEID">Sensor EID</label>
-              <input
-                name="EID"
-                type="text"
-                class="form-control"
-                id="sensorEID"
-                aria-describedby="sensorEID#Help"
-                placeholder="Enter EID#"
-                required
-              />
-              <small id="sensorEID#Help" class="form-text text-muted">
-                Please, do not include any characters, empty spaces or zeros
-                preceding numbers. Correct format example: EID1, EID123.
-                Incorrect format example: EID001, "EID001" or EID 001
-              </small>
+                <div class="jumbotron pt-4">
+                    <h1 class="new-sensor-form-title">New Sensor</h1>
+                    <p>Please, use this form to create a new sensor</p>
+                </div>
+
+                <form id="new-sensor-form">
+                    <!-- EID -->
+                    <div class="control-form-field-box form-group my-4 p-2">
+                        <div class="container">
+                            <label for="sensorEID">Sensor EID</label>
+                            <input
+                                name="EID"
+                                type="text"
+                                class="form-control"
+                                id="sensorEID"
+                                aria-describedby="sensorEID#Help"
+                                placeholder=""
+                                required
+                            />
+                            <small id="sensorEID#Help" class="form-text text-muted">
+                                Please, do not include any characters, empty spaces or zeros
+                                preceding numbers. Correct format example: EID1, EID123.
+                                Incorrect format example: EID001, "EID001" or EID 001
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- type and manufacturer -->
+                    <div class="control-form-field-box form-group my-4 p-2">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12 mb-sm-4">
+                                    <label class="font-weight-bold" for="sensorType"
+                                    >Sensor Type</label>
+                                    <input
+                                        name="type"
+                                        type="text"
+                                        class="form-control"
+                                        id="sensorType"
+                                        aria-describedby="sensorType#Help"
+                                        placeholder=""
+                                        required
+                                    />
+                                    <small id="sensorType#Help" class="form-text text-muted">
+                                        Examples: Displacement Sensors, Temperature Sensors,
+                                        Pressure Sensors, Laser Sensors, ext.
+                                    </small>
+                                </div>
+                                <div class="col-lg-6 col-sm-12 mb-sm-4">
+                                    <label class="font-weight-bold" for="sensorManufacturer">Sensor Manufacturer</label>
+                                    <input
+                                        name="manufacturer"
+                                        type="text"
+                                        class="form-control"
+                                        id="sensorManufacturer"
+                                        aria-describedby="sensorManufacturer#Help"
+                                        placeholder=""
+                                        required
+                                    />
+                                    <small
+                                        id="sensorManufacturer#Help"
+                                        class="form-text text-muted"
+                                    >
+                                        Please, enter manufacturer name. (Example: Epsilon,
+                                        Interface, MTS, ext.)
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- description and model -->
+                    <div class="control-form-field-box form-group my-4 p-2">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12 mb-sm-4">
+                                    <label class="font-weight-bold" for="sensorDescription">Sensor Description</label>
+                                    <input
+                                        name="description"
+                                        type="text"
+                                        class="form-control"
+                                        id="sensorDescription"
+                                        aria-describedby="sensorDescription#Help"
+                                        placeholder="Please, enter sensor's description here"
+                                        required
+                                    />
+                                    <small id="sensorDescription#Help" class="form-text text-muted">
+                                        Description must be very as short as possible (examples:
+                                        "deflectometer", "load transducer", ext.) Further details
+                                        regarding this device must be entered in comment section
+                                        below.
+                                    </small>
+                                </div>
+                                <div class="col-lg-6 col-sm-12 mb-sm-4">
+                                    <label class="font-weight-bold" for="sensorModel">Sensor Model</label>
+                                    <input
+                                        name="model"
+                                        type="text"
+                                        class="form-control"
+                                        id="sensorModel"
+                                        aria-describedby="sensorModel#Help"
+                                        placeholder="Please, enter model abbrivation here"
+                                        required
+                                    />
+                                    <small id="sensorModel#Help" class="form-text text-muted">
+                                        Model description must be as short as possible
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- calibration frequency and calibration priority -->
+                    <div class="control-form-field-box form-group my-4 p-2">
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-12 mb-sm-4">
+                                <label for="calibrationFrequency">Calibration Frequency</label>
+                                <select
+                                    name="calibrationFrequency"
+                                    class="form-select"
+                                    aria-label="Please, select calibration/verfication frequency below"
+                                    id="calibrationFrequency"
+                                    aria-describedby="calibrationFrequency#Help"
+                                >
+                                    <option selected></option>
+                                    <!-- The list of <option /> tags will be generated by Javascript code later -->
+                                    <option value="Weekly">Weekly</option>
+                                    <option value="Biweekly">Biweekly</option>
+                                    <option value="Monthly">Monthly</option>
+                                    <option value="Weekly">Weekly</option>
+                                    <option value="Quarterly">Quarterly</option>
+                                    <option value="Semiannually">Semiannually</option>
+                                    <option value="Annually">Annually</option>
+                                </select>
+                                <small
+                                id="calibrationFrequency#Help"
+                                class="form-text text-muted">
+                                    Please, select how frequently this sensor must be performed
+                                </small>
+                            </div>
+                            <div class="col-lg-6 col-sm-12 mb-sm-4">
+                                <label for="calibrationPriority">Calibration Priority</label>
+                                <select
+                                    name="calibrationPriority"
+                                    class="form-select"
+                                    aria-label="Please, select calibration/verfication frequency below"
+                                    id="calibrationPriority"
+                                    aria-describedby="calibrationPriority#Help">
+                                    <option selected></option>
+                                    <!-- The list of <option /> tags will be generated by Javascript code later -->
+                                    <option value="Mandatory">Mandatory</option>
+                                    <option value="Optional">Optional</option>
+                                    <option value="Unserviceable">Unserviceable</option>
+                                    <option value="Broken">Broken</option>
+                                </select>
+                                <small
+                                    id="calibrationPriority#Help"
+                                    class="form-text text-muted">
+                                    Please, select priority calibration level on this sensor
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- calibatedBy and calibration location -->
+                    <div class="control-form-field-box form-group my-4 p-2">
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-12 mb-sm-4">
+                                <label class="font-weight-bold" for="calibratedBy">Calibrated By</label>
+                                <input
+                                    name="calibratedBy"
+                                    type="text"
+                                    class="form-control"
+                                    id="calibratedBy"
+                                    aria-describedby="calibratedBy#Help"
+                                    placeholder="Intec"
+                                />
+                                <small id="calibratedByn#Help" class="form-text text-muted">
+                                    Enter either Intec (if device was calibrated on site) or name
+                                    of contractor permorming this calibration
+                                </small>
+                            </div>
+                            <div class="col-lg-6 col-sm-12 mb-sm-4">
+                                <label class="font-weight-bold" for="calibrationLocation">Calibration Location</label>
+                                <input
+                                    name="location"
+                                    type="text"
+                                    class="form-control"
+                                    id="calibrationLocation"
+                                    aria-describedby="calibrationLocation#Help"
+                                    placeholder=""
+                                    required
+                                />
+                                <small
+                                    id="calibrationLocation#Help"
+                                    class="form-text text-muted"
+                                    >
+                                    Enter on which test frame was calibration performed (if
+                                    applicable)
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- capacity and quantity -->
+                    <div class="control-form-field-box form-group my-4 p-2">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12 mb-sm-4">
+                                    <label class="font-weight-bold" for="capacityRange">Sensor Capacity Range</label>
+                                    <input
+                                        name="capacityRange"
+                                        type="text"
+                                        class="form-control"
+                                        id="capacityRange"
+                                        aria-describedby="capacityRange#Help"
+                                        placeholder="Please, enter sensor's capacity here"
+                                        required
+                                    />
+                                    <small id="capacityRange#Help" class="form-text text-muted">
+                                        Sensor capacity must include measurement units. Please, do
+                                        not include blank spaces between capacity value and unit
+                                        description. Further details regarding this device must be
+                                        entered in comment section below.
+                                    </small>
+                                </div>
+                                <div class="col-lg-6 col-sm-12 mb-sm-4 mb-3">
+                                    <label class="font-weight-bold" for="sensorQuantity">Measurement Quantity</label>
+                                    <input
+                                        name="quantity"
+                                        type="text"
+                                        class="form-control"
+                                        id="sensorQuantity"
+                                        aria-describedby="sensorQuantity#Help"
+                                        placeholder="Please, enter measurement quantity for sensor here"
+                                        required
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="control-form-field-box form-check p-2 d-flex align-items-start flex-column my-4">
+                        <div class="container">
+                            <div class="row">
+                                <div class="form-group">
+                                <label for="commentTextArea">Comments</label>
+                                <textarea
+                                    name="comment"
+                                    class="form-control my-3"
+                                    id="commentTextArea"
+                                    rows="5"
+                                ></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--//////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+                    <!-- Modal to delete calibration record: -->
+                    <div
+                        class="modal fade"
+                        id="createNewSensorModal"
+                        data-bs-backdrop="static"
+                        data-bs-keyboard="false"
+                        tabindex="-1"
+                        aria-labelledby="createNewSensorModalLabel"
+                        aria-hidden="true"
+                    >
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Calibration Record:
+                                <h1
+                                    class="modal-title fs-5 create-new-sensor-name text-center"
+                                    id="createNewSensorModal"
+                                ></h1>
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                ></button>
+                                </div>
+                                <div class="modal-body">
+                                    You are sure you want to create this sensor?
+                                </div>
+                                <div class="modal-footer">
+                                <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-bs-dismiss="modal"
+                                >
+                                    Close
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-primary"
+                                    onclick="createNewSensorRecord()"
+                                >
+                                    Create
+                                </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row m-5">
+                            <div class="form-group col text-center">
+                                <button
+                                    id="get-sensor-form-values"
+                                    type="submit"
+                                    class="btn btn-primary"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#createNewSensorModal"
+                                >
+                                Submit
+                                </button>
+                                <a href="../index.html" class="btn btn-dark">Back</a>
+                                <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    onclick="resetNewSensorForm()"
+                                >
+                                Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-          </div>
+        </main>
 
-          <!-- type and manufacturer -->
-          <div class="control-form-field-box form-group my-4 p-2">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-6 col-sm-12 mb-sm-4">
-                  <label class="font-weight-bold" for="sensorType"
-                    >Sensor Type</label
-                  >
-                  <input
-                    name="type"
-                    type="text"
-                    class="form-control"
-                    id="sensorType"
-                    aria-describedby="sensorType#Help"
-                    placeholder=""
-                    required
-                  />
-                  <small id="sensorType#Help" class="form-text text-muted">
-                    Examples: Displacement Sensors, Temperature Sensors,
-                    Pressure Sensors, Laser Sensors, ext.
-                  </small>
-                </div>
-                <div class="col-lg-6 col-sm-12 mb-sm-4">
-                  <label class="font-weight-bold" for="sensorManufacturer"
-                    >Sensor Manufacturer</label
-                  >
-                  <input
-                    name="manufacturer"
-                    type="text"
-                    class="form-control"
-                    id="sensorManufacturer"
-                    aria-describedby="sensorManufacturer#Help"
-                    placeholder=""
-                    required
-                  />
-                  <small
-                    id="sensorManufacturer#Help"
-                    class="form-text text-muted"
-                  >
-                    Please, enter manufacturer name. (Example: Epsilon,
-                    Interface, MTS, ext.)
-                  </small>
-                </div>
-              </div>
-            </div>
-          </div>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+            integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+            crossorigin="anonymous"
+        ></script>
 
-          <!-- description and model -->
-          <div class="control-form-field-box form-group my-4 p-2">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-6 col-sm-12 mb-sm-4">
-                  <label class="font-weight-bold" for="sensorDescription"
-                    >Sensor Description</label
-                  >
-                  <input
-                    name="description"
-                    type="text"
-                    class="form-control"
-                    id="sensorDescription"
-                    aria-describedby="sensorDescription#Help"
-                    placeholder="Please, enter sensor's description here"
-                    required
-                  />
-                  <small
-                    id="sensorDescription#Help"
-                    class="form-text text-muted"
-                  >
-                    Description must be very as short as possible (examples:
-                    "deflectometer", "load transducer", ext.) Further details
-                    regarding this device must be entered in comment section
-                    below.
-                  </small>
-                </div>
-                <div class="col-lg-6 col-sm-12 mb-sm-4">
-                  <label class="font-weight-bold" for="sensorModel"
-                    >Sensor Model</label
-                  >
-                  <input
-                    name="model"
-                    type="text"
-                    class="form-control"
-                    id="sensorModel"
-                    aria-describedby="sensorModel#Help"
-                    placeholder="Please, enter model abbrivation here"
-                    required
-                  />
-                  <small id="sensorModel#Help" class="form-text text-muted">
-                    Model description must be as short as possible
-                  </small>
-                </div>
-              </div>
-            </div>
-          </div>
+        <script src="../js/utils/createTableCell.js"></script>
+        <script src="../js/utils/removeAllChildNodes.js"></script>
+        <script src="../js/classes/sensorGlobalFactory.js"></script>
+        <script src="../js/collections/newSensorFormContainer.js"></script>
+        <script src="../js/sensor/getNewSensorFormValues.js"></script>
+        <script src="../js/sensor/createNewSensorRecord.js"></script>
 
-          <!-- calibration frequency and calibration priority -->
-          <div class="control-form-field-box form-group my-4 p-2">
-            <div class="row">
-              <div class="col-lg-6 col-sm-12 mb-sm-4">
-                <label for="calibrationFrequency">Calibration Frequency</label>
-                <select
-                  name="calibrationFrequency"
-                  class="form-select"
-                  aria-label="Please, select calibration/verfication frequency below"
-                  id="calibrationFrequency"
-                  aria-describedby="calibrationFrequency#Help"
-                >
-                  <option selected></option>
-                  <!-- The list of <option /> tags will be generated by Javascript code later -->
-                  <option value="Weekly">Weekly</option>
-                  <option value="Biweekly">Biweekly</option>
-                  <option value="Monthly">Monthly</option>
-                  <option value="Weekly">Weekly</option>
-                  <option value="Quarterly">Quarterly</option>
-                  <option value="Semiannually">Semiannually</option>
-                  <option value="Annually">Annually</option>
-                </select>
-                <small
-                  id="calibrationFrequency#Help"
-                  class="form-text text-muted"
-                >
-                  Please, select how frequently this sensor must be performed
-                </small>
-              </div>
-              <div class="col-lg-6 col-sm-12 mb-sm-4">
-                <label for="calibrationPriority">Calibration Priority</label>
-                <select
-                  name="calibrationPriority"
-                  class="form-select"
-                  aria-label="Please, select calibration/verfication frequency below"
-                  id="calibrationPriority"
-                  aria-describedby="calibrationPriority#Help"
-                >
-                  <option selected></option>
-                  <!-- The list of <option /> tags will be generated by Javascript code later -->
-                  <option value="Mandatory">Mandatory</option>
-                  <option value="Optional">Optional</option>
-                  <option value="Unserviceable">Unserviceable</option>
-                  <option value="Broken">Broken</option>
-                </select>
-                <small
-                  id="calibrationPriority#Help"
-                  class="form-text text-muted"
-                >
-                  Please, select priority calibration level on this sensor
-                </small>
-              </div>
-            </div>
-          </div>
-
-          <!-- calibatedBy and calibration location -->
-          <div class="control-form-field-box form-group my-4 p-2">
-            <div class="row">
-              <div class="col-lg-6 col-sm-12 mb-sm-4">
-                <label class="font-weight-bold" for="calibratedBy"
-                  >Calibrated By</label
-                >
-                <input
-                  name="calibratedBy"
-                  type="text"
-                  class="form-control"
-                  id="calibratedBy"
-                  aria-describedby="calibratedBy#Help"
-                  placeholder="Intec"
-                />
-                <small id="calibratedByn#Help" class="form-text text-muted">
-                  Enter either Intec (if device was calibrated on site) or name
-                  of contractor permorming this calibration
-                </small>
-              </div>
-              <div class="col-lg-6 col-sm-12 mb-sm-4">
-                <label class="font-weight-bold" for="calibrationLocation"
-                  >Calibration Location</label
-                >
-                <input
-                  name="location"
-                  type="text"
-                  class="form-control"
-                  id="calibrationLocation"
-                  aria-describedby="calibrationLocation#Help"
-                  placeholder=""
-                  required
-                />
-                <small
-                  id="calibrationLocation#Help"
-                  class="form-text text-muted"
-                >
-                  Enter on which test frame was calibration performed (if
-                  applicable)
-                </small>
-              </div>
-            </div>
-          </div>
-
-          <!-- capacity and quantity -->
-          <div class="control-form-field-box form-group my-4 p-2">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-6 col-sm-12 mb-sm-4">
-                  <label class="font-weight-bold" for="capacityRange"
-                    >Sensor Capacity Range</label
-                  >
-                  <input
-                    name="capacityRange"
-                    type="text"
-                    class="form-control"
-                    id="capacityRange"
-                    aria-describedby="capacityRange#Help"
-                    placeholder="Please, enter sensor's capacity here"
-                    required
-                  />
-                  <small id="capacityRange#Help" class="form-text text-muted">
-                    Sensor capacity must include measurement units. Please, do
-                    not include blank spaces between capacity value and unit
-                    description. Further details regarding this device must be
-                    entered in comment section below.
-                  </small>
-                </div>
-                <div class="col-lg-6 col-sm-12 mb-sm-4 mb-3">
-                  <label class="font-weight-bold" for="sensorQuantity"
-                    >Measurement Quantity</label
-                  >
-                  <input
-                    name="quantity"
-                    type="text"
-                    class="form-control"
-                    id="sensorQuantity"
-                    aria-describedby="sensorQuantity#Help"
-                    placeholder="Please, enter measurement quantity for sensor here"
-                    required
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Comments -->
-          <div
-            class="control-form-field-box form-check p-2 d-flex align-items-start flex-column my-4"
-          >
-            <div class="container">
-              <div class="row">
-                <div class="form-group">
-                  <label for="commentTextArea">Comments</label>
-                  <textarea
-                    name="comment"
-                    class="form-control my-3"
-                    id="commentTextArea"
-                    rows="5"
-                  ></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!--//////////////////////////////////////////////////////////////////////////////////////////////////////-->
-
-          <!-- Modal to delete calibration record: -->
-          <div
-            class="modal fade"
-            id="createNewSensorModal"
-            data-bs-backdrop="static"
-            data-bs-keyboard="false"
-            tabindex="-1"
-            aria-labelledby="createNewSensorModalLabel"
-            aria-hidden="true"
-          >
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  Calibration Record:
-                  <h1
-                    class="modal-title fs-5 delete-calibration-record-name text-center"
-                    id="createNewSensorModal"
-                  ></h1>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div class="modal-body">
-                  You are sure you want to create this new sensor?
-                </div>
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    onclick="createNewSensorRecord()"
-                  >
-                    Create
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="container">
-            <div class="row m-5">
-              <div class="form-group col text-center">
-                <button
-                  id="post-new-sensor"
-                  type="submit"
-                  class="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#createNewSensorModal"
-                >
-                  Submit
-                </button>
-                <a href="../index.html" class="btn btn-dark">Back</a>
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  onclick="resetNewSensorForm()"
-                >
-                  Reset
-                </button>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </main>
-
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
-      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
-      crossorigin="anonymous"
-    ></script>
-
-    <script src="../js/utils/createTableCell.js"></script>
-    <script src="../js/utils/removeAllChildNodes.js"></script>
-    <script src="../js/classes/sensorGlobalFactory.js"></script>
-    <script src="../js/collections/newSensorFormContainer.js"></script>
-    <script src="../js/sensor/getNewSensorFormValues.js"></script>
-    <script src="../js/sensor/createNewSensorRecord.js"></script>
-
-    <script>
-      function resetNewSensorForm() {
-        window.location.reload();
-      }
-    </script>
-  </body>
+        <script>
+            function resetNewSensorForm() {
+                window.location.reload();
+            }
+        </script>
+    </body>
 </html>

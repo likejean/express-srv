@@ -1,5 +1,5 @@
 const form = document.getElementById("new-sensor-form");
-const submitButton = document.getElementById("post-new-sensor");
+const submitButton = document.getElementById("get-sensor-form-values");
 
 var newSensorPostData = {};  //this object for storing POST request body
 

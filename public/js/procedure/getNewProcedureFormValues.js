@@ -1,19 +1,48 @@
-const form = document.getElementById("newProcedureForm");
+const form = document.getElementById("new-procedure-form");
+const submitButton = document.getElementById("get-procedure-form-values");
 
-console.log(form)
+var newProcedurePostData = {};  //this object for storing POST request body
 
-form.addEventListener("submit", (event) => {
+//Preset NewSensorForm fields with initial values using GLOBAL PROCEDURE FACTORY
+Object.entries(_procfactory.newCalProcedureFormInputs).forEach(([key, obj]) => {
+    form.elements[key].value = obj.value;
+});
+
+//Attach eventListeners to all New Procedure Form Inputs to detect input entry events
+var inputs = document.querySelectorAll('input, select, textarea'); 
+for (i=0; i<inputs.length; i++){
+    inputs[i].oninput = inputHandler;
+}
+
+
+
+//callback input handler function for ONINPUT EventListener
+function inputHandler (e) {
+    let value = e.target.value;
+    let name = e.target.name;
+    _procfactory.newCalProcedureFormInputs[name].value = value;
+    submitButton.disabled = !_procfactory.isSubmitButtonActive();
+    if(_procfactory.isFormInputFieldEmpty(name)) e.target.style.border = "2px solid red" ;
+    else e.target.style.border = "2px solid blue";
+    if(name=="startRangeLevel" || name=="endRangeLevel") 
+        (_procfactory.isEndRangeLevelGreater());
+}
+
+
+//Attach eventListener to New Calibration Procedure Form data Submission event
+form.addEventListener("submit", submitNewProcedureData);
+
+
+//callback funciton for ONSUBMIT EventListener
+function submitNewProcedureData (event) {
     event.preventDefault(); // Prevent default form submission
-    console.log(event.target.value)
     const formData = new FormData(form);
 
-    console.log(formData)
-
-    // Get the value of a specific field
-    const name = formData.get("EID");
-
-    // Loop through all form data
+    // Loop through all form data and prepare data object for POST request
     for (const [key, value] of formData.entries()) {
-        console.log(key, value);
+        (key=="startRangeLevel" || key=="endRangeLevel") ? newProcedurePostData[key] = Number(value) : newProcedurePostData[key] = value;
     }
-});
+    
+
+    inputs.forEach((item) => item.removeEventListener("input", inputHandler));
+}

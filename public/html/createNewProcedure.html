@@ -32,38 +32,308 @@
             </div>
 
 
-            <form id="newProcedureForm">
-                                <!-- procedures -->
-                <!-- /////////////////////////////
-                ///////////////////////////// -->
+            <form id="new-procedure-form">
+
                 <div class="control-form-field-box form-group my-4 p-2">
                     <div class="container">
-                        <label for="procedureName">Procedure Name</label>
-                        <input name="EID" type="text" class="form-control" id="procedureName" aria-describedby="procedureName#Help" placeholder="Enter Procedure Name" required>
-                        <small id="sprocedureName#Help" class="form-text text-muted">
-                            Please, do not include any characters, empty spaces or zeros preceding numbers. 
-                        </small>
-                    </div>              
+                        <div class="row">
+
+                            <!-- Calibrator Model -->
+                            <!-- ////////////////////////////////////////////////////////// -->
+                            <div class="col-lg-6 col-sm-12 mb-sm-4">
+                                <label for="calibratorModel">Calibrator Model</label>
+                                <input 
+                                    name="model" 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="calibratorModel" 
+                                    aria-describedby="calibratorModel#Help" 
+                                    placeholder="" 
+                                    required
+                                />
+                                <small id="calibratorModel#Help" class="form-text text-muted">
+                                    Please, do not include empty spaces within characters. 
+                                </small>
+                            </div>  
+                            
+                            <!-- Calibration Principle -->
+                            <!-- ////////////////////////////////////////////////////////// -->
+                            <div class="col-lg-6 col-sm-12 mb-sm-4">
+                                <label for="calibrationPrinciple">Calibration Principle</label>
+                                <select
+                                    name="calibrationPrinciple"
+                                    class="form-select"
+                                    aria-label="Please, select one calibration Principle"
+                                    id="calibrationPrinciple"
+                                    aria-describedby="calibrationPrinciple#Help">
+                                    <option selected></option>
+                                    <option value="Dimensional">Dimensional</option>
+                                    <option value="Force">Force</option>
+                                    <option value="Alignment">Alignment</option>
+                                    <option value="Pressure">Pressure</option>
+                                    <option value="Temperature">Temperature</option>
+                                    <option value="Humidity">Humidity</option>
+                                    <option value="Electrical">Electrical</option>
+                                    <option value="Radio">Radio</option>
+                                    <option value="Flow">Flow</option>
+    
+                                </select>
+                                <small
+                                    id="calibrationPrinciple#Help"
+                                    class="form-text text-muted">
+                                    Please, select calibration principle for this procedure
+                                </small>            
+                            </div>                        
+                        </div>   
+                    </div>                                        
                 </div>
 
 
+                <div class="control-form-field-box form-group my-4 p-2">
+                    <div class="container">
+                        <div class="row">
+                            <!-- Measurement Quantity -->
+                            <!-- ////////////////////////////////////////////////////////// -->
+                            <div class="col-lg-6 col-sm-12 mb-sm-4">                            
+                                <label for="measurementQuantity">Measurement Quantity</label>
+                                <input 
+                                    name="quantity" 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="measurementQuantity" 
+                                    aria-describedby="measurementQuantity#Help" 
+                                    placeholder="" 
+                                    required
+                                />
+                                <small id="measurementQuantity#Help" class="form-text text-muted">
+                                    Please, enter valid measurement quantity (examples: load, displacement, temperature, strain). 
+                                </small>                                          
+                            </div>        
+    
+                            <!-- Units -->
+                            <!-- ////////////////////////////////////////////////////////// -->
+                            <div class="col-lg-6 col-sm-12 mb-sm-4">
+                                <label for="quantityUnits">Quantity Units</label>
+                                <input 
+                                    name="units" 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="quantityUnits" 
+                                    aria-describedby="quantityUnits#Help" 
+                                    placeholder="" 
+                                    required
+                                />
+                                <small id="quantityUnits#Help" class="form-text text-muted">
+                                    Please, enter valid units for calibrator measurements (examples: lbf, in, microstrain, °F). 
+                                </small>            
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="control-form-field-box form-group my-4 p-2">
+                    <div class="container">
+                        <div class="row">
+                            <!-- StartRangeLevel -->
+                            <!-- ////////////////////////////////////////////////////////// -->
+                            <div class="col-lg-6 col-sm-12 mb-sm-4">
+                                <label class="font-weight-bold" for="startRangeLevel">Lower Calibration Range Level</label>
+                                <input
+                                    name="startRangeLevel"
+                                    type="number"
+                                    class="form-control"
+                                    id="startRangeLevel"
+                                    aria-describedby="startRangeLevel#Help"
+                                    required
+                                />
+                                <small id="startRangeLevel#Help" class="form-text text-muted">
+                                    Enter the lower calibration level (usually, equals zero)
+                                </small>
+                            </div>
+
+                            <!-- EndRangeLevel -->
+                            <!-- ////////////////////////////////////////////////////////// -->
+                            <div class="col-lg-6 col-sm-12 mb-sm-4">
+                                <label class="font-weight-bold" for="endRangeLevel">Upper Calibration Range Level</label>
+                                <input
+                                    name="endRangeLevel"
+                                    type="number"
+                                    class="form-control"
+                                    id="endRangeLevel"
+                                    aria-describedby="endRangeLevel#Help"
+                                    required
+                                />
+                                <small id="endRangeLevel#Help" class="form-text text-muted">
+                                    Enter the upper calibration level (usually, equals sensor fullscale capacity)
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="control-form-field-box form-group my-4 p-2">
+                    <div class="container">
+                        <div class="row">
+                            <!-- Description -->
+                            <!-- ////////////////////////////////////////////////////////// -->
+
+                            <div class="col-lg-6 col-sm-12 mb-sm-4">
+                                <label class="font-weight-bold" for="calibratorDescription">Calibrator Description</label>
+                                <input
+                                    name="description"
+                                    type="text"
+                                    class="form-control"
+                                    id="calibratorDescription"
+                                    aria-describedby="calibratorDescription#Help"
+                                    required
+                                />
+                                <small id="calibratorDescription#Help" class="form-text text-muted">
+                                    Description must be very as short as possible (examples:
+                                    "Gold Standard Calibrator Load Transducer", ext.) Further details
+                                    regarding this device must be entered in comment section
+                                    below.
+                                </small>
+                            </div>
+
+                            <!-- Manufacturer -->
+                            <!-- ////////////////////////////////////////////////////////// -->
+                            <div class="col-lg-6 col-sm-12 mb-sm-4">
+                                <label class="font-weight-bold" for="calibratorManufacturer">Calibrator Manufacturer</label>
+                                <input
+                                    name="manufacturer"
+                                    type="text"
+                                    class="form-control"
+                                    id="calibratorManufacturer"
+                                    aria-describedby="calibratorManufacturer#Help"
+                                    required
+                                />
+                                <small
+                                    id="calibratorManufacturerr#Help"
+                                    class="form-text text-muted"
+                                >
+                                    Please, enter manufacturer name. (Example: Epsilon,
+                                    Interface, MTS, ext.)
+                                </small>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="control-form-field-box form-group my-4 p-2">
+                    <div class="container">
+                        <div class="row">
+                            <!-- Comments -->
+                            <!-- ////////////////////////////////////////////////////////// -->
+                            <!-- Comments -->                            
+                            <div class="container">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="commentTextArea">Comments</label>
+                                        <textarea
+                                            name="comment"
+                                            class="form-control my-3"
+                                            id="commentTextArea"
+                                            rows="5"
+                                        ></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
                 <!-- /////////////////////////////
                 ///////////////////////////// -->
+
+
+                
+                <!--//////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+                <!-- Modal to delete calibration record: -->
+                <div
+                    class="modal fade"
+                    id="createNewCalProcedureModal"
+                    data-bs-backdrop="static"
+                    data-bs-keyboard="false"
+                    tabindex="-1"
+                    aria-labelledby="createNewCalProcedureModalLabel"
+                    aria-hidden="true"
+                >
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                Calibration Procedure:
+                            <h1
+                                class="modal-title fs-5 create-new-procedure-name text-center"
+                                id="createNewCalProcedureModal"
+                            ></h1>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
+                            </div>
+                            <div class="modal-body">
+                                You are sure you want to create this calibration procedure?
+                            </div>
+                            <div class="modal-footer">
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                            >
+                                Close
+                            </button>
+                            <button
+                                type="button"
+                                class="btn btn-primary"
+                                onclick="createNewCalibrationProcedure()"
+                            >
+                                Create
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
                 <div class="container">
                     <div class="row m-5">
 
                         <div class="form-group col text-center">                           
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button 
+                                id="get-procedure-form-values" 
+                                type="submit" 
+                                class="btn btn-primary"
+                                data-bs-toggle="modal"
+                                data-bs-target="#createNewCalProcedureModal"
+                                >Submit</button>
                             <a href="../index.html" class="btn btn-dark">Back</a>
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                onclick="resetNewProcedureForm()"
+                            >
+                            Reset
+                            </button>
                         </div>
                         
                     </div>                    
                 </div>
+
+
+
             </form>
 
-           
         </div>
         
     </main>
@@ -73,8 +343,22 @@
             integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
             crossorigin="anonymous"
         ></script>  
+
+     
+        <script src="../js/classes/procedureGlobalFactory.js"></script>
+
+
+        <script src="../js/collections/newProcedureFormContainer.js"></script>
+        
+
         <script src="../js/procedure/getNewProcedureFormValues.js"></script>
-   
+        <script src="../js/procedure/createNewCalibrationProcedure.js"></script>
+
+        <script>
+            function resetNewProcedureForm() {
+                window.location.reload();
+            }
+        </script>
 
     </body>
 </html>
