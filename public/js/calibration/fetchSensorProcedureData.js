@@ -4,13 +4,14 @@ const fetchSensorProcedureData = async () => {
   // fetch all data using POST API endpoints: sensors, calibrations, procedures
   await Promise.all([axios.get("/api/sensors"), axios.get("/api/procedures")])
     .then((result) => {
-      //console.log('dkafjksjfkldf',globalDataStorage);
 
       //store all data in browser's local storage
       result.forEach((elem) => {
         let name = elem.data.collectionName;
         _store[name] = elem;
       });
+
+      generateSensorProcedureNameLists(_store.getSensorNames(), _store.getCalProcedureNames());
 
     })
     .catch((error) => {

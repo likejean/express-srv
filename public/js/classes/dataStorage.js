@@ -10,13 +10,22 @@ class dataStorage {
     }
 
     getSensorNames(){
-        return this.sensors.data.payload.forEach(item => item.EID);
+         return this.sensors.data.payload.reduce((obj, sensor) => {
+            obj[`${sensor.EID}`] = sensor._id;
+            return obj;
+          }, {});
     }
     getCalProcedureNames(){
-
+        return this.procedures.data.payload.reduce((obj, procedure) => {
+            obj[`${procedure.procedureName}`] = procedure._id;
+            return obj;
+          }, {});
     }
-    getCalRecordsNames(){
-
+    getCalRecordNames(){
+        return this.calibrations.data.payload.reduce((obj, calibration) => {
+            obj[`${calibration.calibrationName}`] = calibration._id;
+            return obj;
+          }, {});
     }
 }
 
