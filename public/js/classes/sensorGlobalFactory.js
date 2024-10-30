@@ -8,7 +8,7 @@ class sensorFactory {
 
     isSubmitButtonActive() {      
         for (const [item, obj] of Object.entries(this.newSensorFormInputs)) {            
-            if (obj.value==="") {
+            if (obj.value === "") {
                 return false;
             }
         }

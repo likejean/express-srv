@@ -63,7 +63,7 @@
                             <div class="col-lg-6 col-sm-12 mb-sm-4">
                                 <label for="procedureId">Select Procedure</label>
                                 <select
-                                    name="pprocedureId"
+                                    name="procedureId"
                                     class="form-select"
                                     aria-label="Please, select procedure below"
                                     id="procedureId"
@@ -180,22 +180,22 @@
                             <div class="col-lg-6 col-sm-12 mb-sm-4">
                                 <div class="form-check mx-2">
                                     <input
-                                        name="adjustmentMade"
+                                        name="adjustmentsMade"
                                         class="form-check-input"
                                         type="checkbox"
                                         value=""
-                                        id="adjustmentMade"
-                                        aria-describedby="adjustmentMade#Help"
+                                        id="adjustmentsMade"
+                                        aria-describedby="adjustmentsMade#Help"
                                     />
                                     <label
                                         class="form-check-label"
-                                        for="adjustmentMade"
+                                        for="adjustmentsMade"
                                     >
                                         Any adjustments were performed during this calibration?
                                     </label>
                                 </div>
                                 <small
-                                id="calibrationExtended#Help"
+                                id="adjustmentsMade#Help"
                                 class="form-text text-muted"
                                 >
                                 Check this box if any adjustments were performed during this calibration.
@@ -319,6 +319,7 @@
                     <div class="row m-5">
                         <div class="form-group col text-center">
                             <button 
+                                id="get-calibration-form-values"
                                 type="submit"
                                 data-bs-toggle="modal"
                                 data-bs-target="#createNewCalibrationModal"
@@ -342,9 +343,26 @@
         crossorigin="anonymous"
     ></script>
 
+    <!--Get access to Global data storage-->
     <script src="../js/classes/dataStorage.js"></script>
-    <script src="../js/calibration/fetchSensorProcedureData.js"></script>
+
+    <!--Get access to calibration Global Factory Class-->
+    <script src="../js/classes/calibrationGlobalFactory.js"></script>
+
+    <!--Fetch all neccessary data for this page-->
+    <script src="../js/calibration/fetchSensorProcedureData.js"></script>   
+
+    <!--Get both containers for _calfactory-->
+    <script src="../js/collections/editCalibrationInputContainer.js"></script>
+    <script src="../js/collections/newCalibrationFormContainer.js"></script>
+    
+
+    
     <script src="../js/calibration/utils/generateSensorProcedureNameLists.js"></script>
+    <script src="../js/calibration/getNewCalibrationFormValues.js"></script> 
+
+
+    
 
     
     <script>

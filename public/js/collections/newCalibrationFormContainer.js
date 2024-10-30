@@ -1,16 +1,51 @@
 const newCalRecordFormContainer = {
+  sensorId: {
+    value: "",
+    validator: () => {},
+    inputRule: ``,
+  },
+  procedureId: {
+    value: "",
+    validator: () => {},
+    inputRule: ``,
+  },
   calibrationName: {
     value: "55520241212-TC",
     validator: () => {},
     inputRule: ``,
   },
-  comment: {
-    value: "None",
+  calibrationLastDate: {
+    value: "",
+    validator: () => {},
+    inputRule: ``,
+  },
+  calibrationDueDate: {
+    value: "",
+    validator: () => {},
+    inputRule: ``,
+  },
+  calibrationExtended: {
+    value: false,
     validator: () => {},
     inputRule: ``,
   },
   adjustmentsMade: {
-    value: true,
+    value: false,
+    validator: () => {},
+    inputRule: ``,
+  },
+  comment: {
+    value: "None.",
+    validator: () => {},
+    inputRule: ``,
+  },
+  maxCalibrationExtension: {
+    value: "",
+    validator: () => {},
+    inputRule: ``,
+  },
+  calibrationRangePercent: {
+    value: 0,
     validator: () => {},
     inputRule: ``,
   },

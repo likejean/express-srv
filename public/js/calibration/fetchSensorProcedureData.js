@@ -1,11 +1,11 @@
 const _store = new dataStorage();
 
 const fetchSensorProcedureData = async () => {
-  // fetch all data using POST API endpoints: sensors, calibrations, procedures
+  // fetch all data using POST API endpoints: sensors, procedures
   await Promise.all([axios.get("/api/sensors"), axios.get("/api/procedures")])
     .then((result) => {
 
-      //store all data in browser's local storage
+      //store all data in local data storage
       result.forEach((elem) => {
         let name = elem.data.collectionName;
         _store[name] = elem;

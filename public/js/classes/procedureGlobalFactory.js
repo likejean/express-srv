@@ -8,7 +8,7 @@ class procedureFactory {
 
     isSubmitButtonActive() {      
         for (const [item, obj] of Object.entries(this.newCalProcedureFormInputs)) {            
-            if (obj.value==="") {
+            if (obj.value === "") {
                 return false;
             }
         }
