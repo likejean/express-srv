@@ -18,8 +18,10 @@ for (i=0; i<inputs.length; i++){
 function inputHandler (e) {
     let value = e.target.value;
     let name = e.target.name;
+
     _sensfactory.newSensorFormInputs[name].value = value;
     submitButton.disabled = !_sensfactory.isSubmitButtonActive();
+    
     if(_sensfactory.isFormInputFieldEmpty(name)) e.target.style.border = "2px solid red" ;
     else e.target.style.border = "2px solid blue";
 }

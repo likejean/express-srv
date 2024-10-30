@@ -21,10 +21,13 @@ for (i=0; i<inputs.length; i++){
 function inputHandler (e) {
     let value = e.target.value;
     let name = e.target.name;
+    
     _procfactory.newCalProcedureFormInputs[name].value = value;
     submitButton.disabled = !_procfactory.isSubmitButtonActive();
+    
     if(_procfactory.isFormInputFieldEmpty(name)) e.target.style.border = "2px solid red" ;
     else e.target.style.border = "2px solid blue";
+    
     if(name=="startRangeLevel" || name=="endRangeLevel") {
         (_procfactory.isEndRangeLevelGreater()) ?
         validationMassage.innerText = ""

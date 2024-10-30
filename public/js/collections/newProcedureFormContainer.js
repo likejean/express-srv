@@ -1,10 +1,10 @@
 const newCalProcedureFormContainer = {
-    model:{
+    calibratorModel:{
         value:"1610AJH-50K", 
         validator: () => {},
         inputRule: ``,
     },
-    quantity:{
+    measurementQuantity:{
         value:"Load", 
         validator: () => {},
         inputRule: ``,
