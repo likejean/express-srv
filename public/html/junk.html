@@ -81,5 +81,69 @@
         input.value = ''
       })
     </script>
+    <script>
+      const tableBody = document.querySelector(".selected-calibration-list");
+      const optionsAvailable = document.querySelector(".options-available");
+      const clearSelectionButton = document.getElementById(
+        "clearCalibrationSelectionList"
+      ); // select the button element
+      let selectedCals = {};
+
+      let data = JSON.parse(window.localStorage.getItem("calibrations"));
+
+      data.forEach((item, idx) => {
+        let option = document.createElement("option");
+        let text = document.createTextNode(item.calibrationName);
+        selectedCals[`${idx + 1}`] = new calibrationlProcedure(
+          item._id,
+          item.calibrationName,
+          item.calibrationRangePercent
+        );
+        option.setAttribute("value", idx + 1);
+        option.appendChild(text);
+        optionsAvailable.appendChild(option);
+      });
+      clearSelectionButton.style.visibility = "hidden";
+      // submit form
+
+      document
+        .querySelector("#calibrationListSelection")
+        .addEventListener("change", function (e) {
+          let name = e.target.options[e.target.selectedIndex].text;
+          let val = e.target.value;
+          let row = document.createElement("tr");
+          row.setAttribute("id", `row${val}`);
+          row.appendChild(createTableCell(`${val}`, []));
+          row.appendChild(
+            createTableCell(`${selectedCals[val].procedureName}`, [])
+          );
+          row.appendChild(
+            createTableCell(`${selectedCals[val].calibrationPrinciple}`, [])
+          );
+          clearSelectionButton.style.visibility = "visible";
+          tableBody.appendChild(row);
+        });
+
+      clearSelectionButton.addEventListener("click", (e) => {
+        // add a click event listener
+        e.preventDefault();
+        removeAllChildNodes(tableBody);
+        clearSelectionButton.style.visibility = "hidden";
+      });
+
+      function getFormValues() {
+        // Get the form element
+        const form = document.getElementById("newCalibrationEvent");
+
+        // Get the input values
+        const EID = form.elements["EID"].value;
+        console.log(form.elements);
+        //const email = form.elements["email"].value;
+
+        // Do something with the values (e.g., display them)
+        console.log("Name:", EID);
+        //console.log("Email:", email);
+      }
+    </script>
   </body>
 </html>
