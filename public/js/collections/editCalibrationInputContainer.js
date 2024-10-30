@@ -112,6 +112,5 @@ const editCalibrationInputContainer = {
     },
 };
 
-//Instantiation of calibationFactory Class
-const _calfactory = new calibrationFactory("",{},{}, editCalibrationInputContainer)
+
 

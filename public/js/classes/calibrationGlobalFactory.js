@@ -1,16 +1,17 @@
 // GLOBAL FACTORY for calibration record view/edit/delete page
 class calibrationFactory {
     constructor(
-            calibrationName, 
             sensor,
             procedure,
+            calibrationName,
             inputWrappers,
+            newCalRecordFormInputs
         ){
         this.sensor = sensor;
         this.procedure = procedure;
         this.calibrationName = calibrationName;
-        this.calNameWrapper = calNameWrapper;
         this.inputWrappers = inputWrappers;
+        this.newCalRecordFormInputs = newCalRecordFormInputs;
     }
 
     isPatchButtonActive() {      
