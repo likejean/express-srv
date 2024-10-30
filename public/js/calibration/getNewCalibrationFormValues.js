@@ -1,12 +1,14 @@
 const form = document.getElementById("new-calibration-form");
-const submitButton = document.getElementById("et-calibration-form-values");
+const submitButton = document.getElementById("get-calibration-form-values");
 
 var newCalibrationPostData = {}; //this object for storing POST request body
 
-
 //Preset New Calibration Form fields with initial values using GLOBAL CALIBRATION FACTORY
 Object.entries(_calfactory.newCalRecordFormInputs).forEach(([key, obj]) => {
-  form.elements[key].value = obj.value;
+ 
+  if (key === "adjustmentsMade" || key === "calibrationExtended")
+    form.elements[key].checked = obj.checked;
+  else form.elements[key].value = obj.value;
 });
 
 //Attach eventListeners to all New Calibration Form Inputs to detect input entry events
@@ -19,6 +21,8 @@ for (i = 0; i < inputs.length; i++) {
 function inputHandler(e) {
   let value = e.target.value;
   let name = e.target.name;
+
+  console.log(value, name);
 
   _calfactory.newCalRecordFormInputs[name].value = value;
   submitButton.disabled = !_calfactory.isSubmitButtonActive();

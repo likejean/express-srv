@@ -15,27 +15,27 @@ const newCalRecordFormContainer = {
     inputRule: ``,
   },
   calibrationLastDate: {
-    value: "",
+    value: moment().format("YYYY-MM-DD"),
     validator: () => {},
     inputRule: ``,
   },
   calibrationDueDate: {
-    value: "",
+    value: moment().format("YYYY-MM-DD"),
     validator: () => {},
     inputRule: ``,
   },
   calibrationExtended: {
-    value: false,
+    checked: false,
     validator: () => {},
     inputRule: ``,
   },
   adjustmentsMade: {
-    value: false,
+    checked: true,
     validator: () => {},
     inputRule: ``,
   },
   comment: {
-    value: "None.",
+    value: "TBD",
     validator: () => {},
     inputRule: ``,
   },
