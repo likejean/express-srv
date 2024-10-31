@@ -36,9 +36,8 @@ form.addEventListener("submit", submitNewCalibrationData);
 //callback funciton for ONSUBMIT EventListener
 function submitNewCalibrationData(event) {
   event.preventDefault(); // Prevent default form submission
-  const formData = new FormData(form);
 
-  console.log(formData.entries());
+  const formData = new FormData(form);
 
   // Loop through all form data and prepare data object for POST request
   for (const [key, value] of formData.entries()) {
