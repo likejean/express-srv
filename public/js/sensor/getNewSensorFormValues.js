@@ -6,6 +6,7 @@ var newSensorPostData = {};  //this object for storing POST request body
 //Preset NewSensorForm fields with initial values using GLOBAL SENSOR FACTORY
 Object.entries(_sensfactory.newSensorFormInputs).forEach(([key, obj]) => {
     form.elements[key].value = obj.value;
+    submitButton.disabled = !_sensfactory.isSubmitButtonActive();
 });
 
 //Attach eventListeners to all New Sensor Form Inputs to detect input entry events

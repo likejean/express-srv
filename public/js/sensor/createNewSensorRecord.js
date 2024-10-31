@@ -1,5 +1,5 @@
 function createNewSensorRecord() {
-  //use PATCH API endpoint to update existing calibration record
+  //use PATCH API endpoint to create new sensor
   axios
     .post(`../api/sensors`, newSensorPostData)
     .then((response) => {

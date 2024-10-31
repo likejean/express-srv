@@ -7,6 +7,7 @@ var newProcedurePostData = {};  //this object for storing POST request body
 //Preset NewSensorForm fields with initial values using GLOBAL PROCEDURE FACTORY
 Object.entries(_procfactory.newCalProcedureFormInputs).forEach(([key, obj]) => {
     form.elements[key].value = obj.value;
+    submitButton.disabled = !_procfactory.isSubmitButtonActive();
 });
 
 //Attach eventListeners to all New Procedure Form Inputs to detect input entry events

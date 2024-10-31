@@ -35,17 +35,17 @@ const newCalRecordFormContainer = {
     inputRule: ``,
   },
   comment: {
-    value: "TBD",
+    value: "TBD...",
     validator: () => {},
     inputRule: ``,
   },
   maxCalibrationExtension: {
-    value: "",
+    value: "6-months",
     validator: () => {},
     inputRule: ``,
   },
   calibrationRangePercent: {
-    value: 0,
+    value: 100,
     validator: () => {},
     inputRule: ``,
   },
