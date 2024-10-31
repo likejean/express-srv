@@ -18,11 +18,37 @@ class calibrationFactory {
     for (const key in this.newCalRecordFormInputs) {
       if (typeof this.newCalRecordFormInputs[key] === "object") {
         for (const subkey in this.newCalRecordFormInputs[key]) {
-          if (subkey === "value" && this.newCalRecordFormInputs[key][subkey] === "") return false;
+          if (
+            subkey === "value" &&
+            this.newCalRecordFormInputs[key][subkey] === ""
+          )
+            return false;
         }
       }
     }
     return true;
+  }
+
+  isValidationRuleApplied(inputName, inputValue) {
+    // Convert the function to a string and remove whitespace
+    const funcString = this.newCalRecordFormInputs[inputName].validator
+      .toString()
+      .trim();
+
+    // Check if the function body for validator is empty
+    if (funcString === "function () {}" || funcString === "() => {}") {
+      return {
+        rule: "",
+        isValid: true,
+      };
+    } else {
+      return {
+        rule: this.newCalRecordFormInputs[inputName].validator(inputValue)
+          ? ""
+          : this.newCalRecordFormInputs[inputName].inputRule,
+        isValid: this.newCalRecordFormInputs[inputName].validator(inputValue),
+      };
+    }
   }
 
   isFormInputFieldEmpty(inputName) {

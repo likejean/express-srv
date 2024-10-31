@@ -1,4 +1,5 @@
 const form = document.getElementById("new-calibration-form");
+const inputValidationText = document.querySelector(".new-calibration-valid-input");
 const submitButton = document.getElementById("get-calibration-form-values");
 
 var newCalibrationPostData = {}; //this object for storing POST request body
@@ -19,8 +20,12 @@ for (i = 0; i < inputs.length; i++) {
 
 //callback input handler function for ONINPUT EventListener
 function inputHandler(e) {
-  let value = e.target.value;
+  
   let name = e.target.name;
+  let value = name === "calibrationRangePercent" ? Number(e.target.value) : e.target.value;
+
+  console.log(_calfactory.isValidationRuleApplied(name, value));
+  inputValidationText.innerText = _calfactory.isValidationRuleApplied(name, value).rule;
 
   if (name === "calibrationExtended" || name === "adjustmentsMade") {
     _calfactory.newCalRecordFormInputs[name].checked = e.target.checked;

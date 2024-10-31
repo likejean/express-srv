@@ -56,7 +56,8 @@ label {
   font-weight: bold;
 }
 
-#range-levels-validation {
+#range-levels-validation,
+.new-calibration-valid-input {
   color: red;
   font-weight: bold;
 }
