@@ -16,15 +16,19 @@ class calibrationFactory {
 
   isSubmitButtonActive() {
     for (const [item, obj] of Object.entries(this.newCalRecordFormInputs)) {
-      if (obj.value === "") {
-        return false;
+      if (item !== "adjustmentsMade" && item !== "calibrationExtended") {
+        if (obj.value === "") {
+          return false;
+        }
+        return true;
       }
     }
-    return true;
   }
 
   isFormInputFieldEmpty(inputName) {
-    return this.newCalRecordFormInputs[inputName].value.length === 0;
+    if (inputName !== "adjustmentsMade" && inputName !== "calibrationExtended")
+      return this.newCalRecordFormInputs[inputName].value.length === 0;
+    else return false;
   }
 
   isPatchButtonActive() {
