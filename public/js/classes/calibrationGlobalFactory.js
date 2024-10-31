@@ -24,7 +24,6 @@ class calibrationFactory {
             }else{
                 return this.isFormInputFieldEmpty(item) ? false: true;   
             }
-                 
         } 
     }
 

@@ -26,9 +26,14 @@ function inputHandler(e) {
     _calfactory.newCalRecordFormInputs[name].value = value;
     submitButton.disabled = !_calfactory.isSubmitButtonActive();
 
-    _calfactory.isFormInputFieldEmpty(name)
-        ? (e.target.style.border = "2px solid red")
-        : (e.target.style.border = "2px solid blue");
+    if(_calfactory.isFormInputFieldEmpty(name)){
+      e.target.style.border = "2px solid red";
+      if(!submitButton.disabled) submitButton.disabled = true;
+    }else{
+      e.target.style.border = "2px solid blue"
+    }
+       
+    
   }
 
 //Attach eventListener to New Calibration Procedure Form data Submission event
