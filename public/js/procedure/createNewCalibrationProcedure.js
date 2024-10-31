@@ -1,5 +1,5 @@
 function createNewCalibrationProcedure() {
-  //use PATCH API endpoint to create new calibration procedure
+  //use POST API endpoint to create new calibration procedure
   axios
     .post(`../api/procedures`, newProcedurePostData)
     .then((response) => {

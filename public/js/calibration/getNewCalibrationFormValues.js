@@ -40,19 +40,21 @@ function submitNewCalibrationData(event) {
 
     const formData = new FormData(form);
 
-    //Unable to obtain data from checkboxes inside form. TBD
-    newCalibrationPostData["calibrationExtended"] = false;
-    newCalibrationPostData["adjustmentsMade"] = true;
+    //Unable to obtain data from checkboxes inside form, so get checked status directly from the calibration factory
+    newCalibrationPostData["calibrationExtended"] = _calfactory.newCalRecordFormInputs["calibrationExtended"].checked;
+    newCalibrationPostData["adjustmentsMade"] = _calfactory.newCalRecordFormInputs["adjustmentsMade"].checked;
 
     // Loop through all form data and prepare data object for POST request
     for (const [key, value] of formData.entries()) {
 
-        if(key === "sensorId") newCalibrationPostData[key] = _store.getSensorNames()[value];
-        else if(key === "procedureId") newCalibrationPostData[key] = _store.getCalProcedureNames()[value];        
-        else if(key === "calibrationExtended" || key === "adjustmentsMade") newCalibrationPostData[key] = false;
-        else key == "calibrationRangePercent"
-          ? (newCalibrationPostData[key] = Number(value))
-          : (newCalibrationPostData[key] = value);
+        if(key === "sensorId") newCalibrationPostData[key] = _store.getSensorNames()[value];   //get ObjectId instead of sensor name
+        else if(key === "procedureId") newCalibrationPostData[key] = _store.getCalProcedureNames()[value]; //get ObjectId instead of procedure name        
+        else if(key === "calibrationExtended" || key === "adjustmentsMade") //edge case: if form submission includes checkbox data, use calibration factory data instead
+          newCalibrationPostData[key] = _calfactory.newCalRecordFormInputs[key].checked;
+        
+          else key == "calibrationRangePercent"
+          ? newCalibrationPostData[key] = Number(value)
+          : newCalibrationPostData[key] = value;
     }
 
     inputs.forEach((item) => item.removeEventListener("input", inputHandler));
