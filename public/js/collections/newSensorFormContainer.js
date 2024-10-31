@@ -1,64 +1,76 @@
 const newSensorFormContainer = {
-    EID:{
-        value:"EIDXXX", 
-        validator: () => {},
-        inputRule: ``,
-    },
-    type:{
-        value:"Type", 
-        validator: () => {},
-        inputRule: ``,
-    },
-    calibrationPriority: {
-        value:"Mandatory", 
-        validator: () => {},
-        inputRule: ``,
-    },
-    calibrationFrequency: {
-        value:"Annually", 
-        validator: () => {},
-        inputRule: ``,
-    },
-    calibratedBy:{
-        value:"Intec", 
-        validator: () => {},
-        inputRule: ``,
-    },
-    location: {
-        value:"Portable", 
-        validator: () => {},
-        inputRule: ``,
-    },
-    description: {
-        value:"Sensor Description", 
-        validator: () => {},
-        inputRule: ``,
-    },
-    capacityRange: {
-        value:"Capacity Range", 
-        validator: () => {},
-        inputRule: ``,
-    },
-    comment: {
-        value:"None", 
-        validator: () => {},
-        inputRule: ``,
-    },
-    model: {
-        value:"Model", 
-        validator: () => {},
-        inputRule: ``,
-    },
-    quantity: {
-        value:"Quantity", 
-        validator: () => {},
-        inputRule: ``,
-    },
-    manufacturer: {
-        value:"MTS", 
-        validator: () => {},
-        inputRule: ``,
-    }
-}
+  EID: {
+    value: "EIDXXX",
+    validator: () => {},
+    inputRule: ``,
+    regex: "",
+  },
+  type: {
+    value: "Type",
+    validator: () => {},
+    inputRule: ``,
+    regex: "",
+  },
+  calibrationPriority: {
+    value: "Mandatory",
+    validator: () => {},
+    inputRule: ``,
+    regex: "",
+  },
+  calibrationFrequency: {
+    value: "Annually",
+    validator: () => {},
+    inputRule: ``,
+    regex: "",
+  },
+  calibratedBy: {
+    value: "Intec",
+    validator: () => {},
+    inputRule: ``,
+    regex: "",
+  },
+  location: {
+    value: "Portable",
+    validator: () => {},
+    inputRule: ``,
+    regex: "",
+  },
+  description: {
+    value: "Sensor Description",
+    validator: () => {},
+    inputRule: ``,
+    regex: "",
+  },
+  capacityRange: {
+    value: "Capacity Range",
+    validator: () => {},
+    inputRule: ``,
+    regex: "",
+  },
+  comment: {
+    value: "None",
+    validator: () => {},
+    inputRule: ``,
+    regex: "",
+  },
+  model: {
+    value: "Model",
+    validator: () => {},
+    inputRule: ``,
+    regex: "",
+  },
+  quantity: {
+    value: "Quantity",
+    validator: () => {},
+    inputRule: ``,
+    regex: "",
+  },
+  manufacturer: {
+    value: "MTS",
+    validator: () => {},
+    inputRule: ``,
+    regex: "",
+  },
+};
 
 var _sensfactory = new sensorFactory(newSensorFormContainer);
