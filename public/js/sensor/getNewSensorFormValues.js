@@ -1,4 +1,5 @@
 const form = document.getElementById("new-sensor-form");
+const sensFormModalHeaderText = document.querySelector(".new-sensor-modal-header");
 const submitButton = document.getElementById("get-sensor-form-values");
 
 var newSensorPostData = {};  //this object for storing POST request body
@@ -36,6 +37,10 @@ function submitNewSensorData (event) {
     event.preventDefault(); // Prevent default form submission
     const formData = new FormData(form);
 
+    //concatenate and populate sensor EID in modal header
+    sensFormModalHeaderText.innerText = "Sensor:\u00a0" 
+    + _sensfactory.newSensorFormInputs["EID"].value;
+   
     // Loop through all form data and prepare data object for POST request
     for (const [key, value] of formData.entries()) {
         newSensorPostData[key] = value;

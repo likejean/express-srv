@@ -1,5 +1,6 @@
 const form = document.getElementById("new-procedure-form");
 const validationMassage = document.getElementById("range-levels-validation");
+const procFormModalHeaderText = document.querySelector(".new-cal-procedure-modal-header");
 const submitButton = document.getElementById("get-procedure-form-values");
 
 var newProcedurePostData = {}; //this object for storing POST request body
@@ -45,6 +46,12 @@ form.addEventListener("submit", submitNewProcedureData);
 function submitNewProcedureData(event) {
     event.preventDefault(); // Prevent default form submission
     const formData = new FormData(form);
+
+    //concatenate and populate procedure name in modal header
+    procFormModalHeaderText.innerText = "Calibration Procedure:\u00a0{" 
+    + _procfactory.newCalProcedureFormInputs["startRangeLevel"].value + "-" 
+    + _procfactory.newCalProcedureFormInputs["endRangeLevel"].value + "\u00a0"
+    + _procfactory.newCalProcedureFormInputs["units"].value + "}";
 
     // Loop through all form data and prepare data object for POST request
     for (const [key, value] of formData.entries()) {

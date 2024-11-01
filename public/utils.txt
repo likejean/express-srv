@@ -85,7 +85,12 @@ var textNode = document.createTextNode("\u00a0");
     //      console.log(result);        
     //    })
     //   .catch((error) => {
-     //     console.log("ERROR", error);
-     //  })
-   //  }
+    //     console.log("ERROR", error);
+    //  })
+    //  }
+
+    6. HOW TO SEARCH IN ENTIRE VISUAL STUDIO CODE
+    
+    //VS Code allows you to quickly search over all files in the currently opened folder. 
+    //Press Ctrl+Shift+F and enter your search term.
   

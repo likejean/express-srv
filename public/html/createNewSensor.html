@@ -306,34 +306,24 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    Sensor Record:
-                                <h1
-                                    class="modal-title fs-5 create-new-sensor-name text-center"
-                                    id="createNewSensorModal"
-                                ></h1>
-                                <button
-                                    type="button"
-                                    class="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"
-                                ></button>
+                                    <h1 class="modal-title fs-5 text-center container-fluid" id="createNewSensorModal">
+                                        <span class="new-sensor-modal-header badge bg-info"></span>  
+                                    </h1> 
+                                    <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"
+                                    ></button>
                                 </div>
                                 <div class="modal-body">
-                                    You are sure you want to create this sensor?
+                                    <h3>Do you want to add this sensor to database?</h3>
                                 </div>
                                 <div class="modal-footer">
-                                <button
-                                    type="button"
-                                    class="btn btn-secondary"
-                                    data-bs-dismiss="modal"
-                                >
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                     Close
                                 </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-primary"
-                                    onclick=createNewSensorRecord()
-                                >
+                                <button type="button" class="btn btn-primary" onclick=createNewSensorRecord()>
                                     Create
                                 </button>
                                 </div>
