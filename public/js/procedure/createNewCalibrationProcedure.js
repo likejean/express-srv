@@ -1,5 +1,6 @@
 function createNewCalibrationProcedure() {
   //use POST API endpoint to create new calibration procedure
+
   axios
     .post(`../api/procedures`, newProcedurePostData)
     .then((response) => {
@@ -8,6 +9,6 @@ function createNewCalibrationProcedure() {
       window.location.href = "../index.html";
     })
     .catch((error) => {
-      console.log("ERROR:", error);
+      console.log("ERROR::", error);
     });
 }
