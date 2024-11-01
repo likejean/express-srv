@@ -23,10 +23,9 @@ for (i = 0; i < inputs.length; i++) {
 //callback input handler function for ONINPUT EventListener
 function inputHandler(e) {
   let name = e.target.name;
-  let value =
-    name === "calibrationRangePercent"
-      ? Number(e.target.value)
-      : e.target.value;
+  let value = name === "calibrationRangePercent" ? Number(e.target.value) : e.target.value;
+
+  if(name === "calibrationRangePercent") e.target.value = Math.trunc(parseFloat(value));
 
   inputValidationText.innerText = _calfactory.isValidationRuleApplied(
     name,
@@ -57,10 +56,8 @@ function submitNewCalibrationData(event) {
   const formData = new FormData(form);
 
   //Unable to obtain data from checkboxes inside form, so get the "checked" status directly from the calibration factory
-  newCalibrationPostData["calibrationExtended"] =
-    _calfactory.newCalRecordFormInputs["calibrationExtended"].checked;
-  newCalibrationPostData["adjustmentsMade"] =
-    _calfactory.newCalRecordFormInputs["adjustmentsMade"].checked;
+  newCalibrationPostData["calibrationExtended"] = _calfactory.newCalRecordFormInputs["calibrationExtended"].checked;
+  newCalibrationPostData["adjustmentsMade"] = _calfactory.newCalRecordFormInputs["adjustmentsMade"].checked;
 
   // Loop through all form data and prepare data object for POST request
   for (const [key, value] of formData.entries()) {

@@ -21,13 +21,13 @@ const newCalProcedureFormContainer = {
         value: 0, 
         validator: () => {},
         inputRule: ``,
-        regex:""
+        regex: ""        
     },
     endRangeLevel:{
-        value:500, 
+        value: 50000, 
         validator: () => {},
         inputRule: ``,
-        regex:""
+        regex: /[^0-9]/g
     },
     description: {
         value:"Gold Standard Force Calibration Transducer", 
