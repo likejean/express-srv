@@ -2,11 +2,7 @@ function patchCalibrationRecord() {
     calPatchRequestData = {};
 
   //get this helper function from utils...
-    calPatchRequestData = filterObjectAndTransform(
-        _calfactory.inputWrappers,
-        (item) => item.status === true
-    );
-
+    calPatchRequestData = filterObjectAndTransform(_calfactory.inputWrappers, (item) => item.status === true);    
   
   //use PATCH API endpoint to update existing calibration record
     axios
@@ -15,8 +11,8 @@ function patchCalibrationRecord() {
         icons.forEach((icon) => {
             icon.removeEventListener("click", iconClickEventCallback);
         });
-        console.log("Calibration record updated successfully:", response);
-        window.location.reload();      
+        window.location.reload();
+        console.log("Calibration record updated successfully:", response);              
     })
     .catch((error) => {
         console.log("ERROR", error);

@@ -56,7 +56,7 @@ function submitNewCalibrationData(event) {
 
   const formData = new FormData(form);
 
-  //Unable to obtain data from checkboxes inside form, so get checked status directly from the calibration factory
+  //Unable to obtain data from checkboxes inside form, so get the "checked" status directly from the calibration factory
   newCalibrationPostData["calibrationExtended"] =
     _calfactory.newCalRecordFormInputs["calibrationExtended"].checked;
   newCalibrationPostData["adjustmentsMade"] =
@@ -72,13 +72,14 @@ function submitNewCalibrationData(event) {
     //get ObjectId instead of procedure name
     else if (key === "calibrationExtended" || key === "adjustmentsMade")
       //edge case: if form submission includes checkbox data, use calibration factory data instead
-      newCalibrationPostData[key] =
-        _calfactory.newCalRecordFormInputs[key].checked;
+      newCalibrationPostData[key] =_calfactory.newCalRecordFormInputs[key].checked;
     else
       key == "calibrationRangePercent"
         ? (newCalibrationPostData[key] = Number(value))
         : (newCalibrationPostData[key] = value);
   }
+
+  console.log(newCalibrationPostData)
 
   inputs.forEach((item) => item.removeEventListener("input", inputHandler));
 }

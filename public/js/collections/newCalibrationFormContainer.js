@@ -17,13 +17,13 @@ const newCalRecordFormContainer = {
     inputRule: ``,
     regex:""
   },
-  calibrationLastDate: {
+  lastCalibrationDate: {
     value: moment().format("YYYY-MM-DD"),
     validator: () => {},
     inputRule: ``,
     regex:""
   },
-  calibrationDueDate: {
+  dueCalibrationDate: {
     value: moment().format("YYYY-MM-DD"),
     validator: () => {},
     inputRule: ``,

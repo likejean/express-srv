@@ -1,11 +1,11 @@
 const allowedChars = /^[-., a-zA-Z0-9]*$/;
-const limitCommentText = /^.{10,40}$/;
+const limitCommentText = /^.{10,300}$/;
 const validateDateFormat = /^\d{4}-\d{2}-\d{2}$/; 
 
 
 const editCalibrationInputContainer = {
         
-    //Calibration Record Card Input Wrappers
+    //Calibration Record Card: Edit Input Wrappers
     calNameWrapper: {
         tag: "input",
         status: false,
@@ -108,7 +108,7 @@ const editCalibrationInputContainer = {
         childNodes: [],
         databaseName: "comment",        
         validator: (text) => (limitCommentText.test(text) ? true : false),
-        inputRule: `Minimum 10 and maximum 40 characters are allowed here...`,
+        inputRule: `Minimum 10 and maximum 300 characters are allowed here...`,
     },
 };
 
