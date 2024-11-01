@@ -55,8 +55,8 @@ const newCalRecordFormContainer = {
   },
   calibrationRangePercent: {
     value: 100,
-    validator: number => number < 100 && number > 10,
-    inputRule: `percentage value should be within 10%-100%`,
+    validator: number => number < 100 && number > 0,
+    inputRule: `percentage value should be within 0%-100%`,
     regex:""
   },
 };

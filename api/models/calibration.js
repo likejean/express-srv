@@ -48,7 +48,7 @@ const calibrationSchema = mongoose.Schema(
         calibrationRangePercent: { 
             type: Number, 
             default: 100,
-            min: 10,
+            min: 0,
             max: 100,
             required: true
         },
