@@ -1,178 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/beaurify.css">
-    <link 
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
-      rel="stylesheet" 
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
-      crossorigin="anonymous">
-    <link rel="stylesheet" 
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" 
-    />
-    <script 
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
-      crossorigin="anonymous">
-    </script>
-    
-    <title>Intec Sensors</title>
-  </head>
-  <body>
-    
-    <main>      
-      <nav class="navbar navbar-dark bg-dark intec-navbar">
-        <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
-      </nav>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="../css/beaurify.css">
+		<link 
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+			rel="stylesheet" 
+			integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+			crossorigin="anonymous">
+		<link rel="stylesheet" 
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" 
+		/>
+		<script 
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+			crossorigin="anonymous">
+		</script>
+		
+		<title>Intec Sensors</title>
+	</head>
+	<body>
+		
+		<main>      
+			<nav class="navbar navbar-dark bg-dark intec-navbar">
+				<div class="container-fluid">
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<img src="./img/calibration.jpg" alt="" class="img-thumbnail avatar">
+				</div>
+			</nav>
 
-      <div class="d-flex justify-content-center d-none intec-spinner">
-        <div class="spinner-border" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
-      </div>
-      
-      <div class="collapse pb-3" id="navbarToggleExternalContent" data-bs-theme="bg-light">
-       
-        <div class="bg-light p-4">
-          <h5 class="mb-4 text-body-emphasis h4">Intec Sensors</h5>
-          <div class="mb-4 text-body-secondary">The table below lists calibration status of Intec devices used for measurements</div>
-          <div class="notification">
-            <div class="col-sm-12 my-4 text-center">
-              <a href="./html/createNewSensor.html" class="btn btn-primary btn-sm">Add Sensor</a> 
-              <a href="./html/createNewCalibrationEvent.html" class="btn btn-secondary btn-sm">Add Calibration Event</a>   
-              <a href="./html/createNewProcedure.html" class="btn btn-primary btn-sm">Add Procedure</a> 
-            </div>
-          </div>
+			<div class="d-flex justify-content-center d-none intec-spinner">
+				<div class="spinner-border" role="status">
+					<span class="visually-hidden">Loading...</span>
+				</div>
+			</div>
+			
+			<div class="collapse pb-3" id="navbarToggleExternalContent" data-bs-theme="bg-light">
+			
+				<div class="bg-light p-4">
+					<h5 class="mb-4 text-body-emphasis h4">Intec Sensors</h5>
+					
+					<div class="mb-4 text-body-secondary">The table below lists calibration status of Intec devices used for measurements</div>
+						<div class="notification">
+							<div class="col-sm-12 my-4 text-center">
+								<a href="./html/createNewSensor.html" class="btn btn-primary btn-sm">Add Sensor</a> 
+								<a href="./html/createNewCalibrationEvent.html" class="btn btn-secondary btn-sm">Add Calibration Event</a>   
+								<a href="./html/createNewProcedure.html" class="btn btn-primary btn-sm">Add Procedure</a> 
+							</div>
+						</div>
 
-          <!-- Sensor Table List -->
-          <table class="table data-result">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">EID</th>
-                <th scope="col">Description</th>
-                <th scope="col" class="d-none d-sm-table-cell">Sensor Capacity</th>
-                <th scope="col">Calibration Status</th>  
-                <th scope="col">Settings</th>              
-              </tr>
-              <!-- here is where dynamically generated table html cells are appended -->
-            </thead>            
-          </table>
-        </div>      
-        
+						<!-- Sensor Table List -->
+						<table class="table data-result">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">EID</th>
+									<th scope="col">Description</th>
+									<th scope="col" class="d-none d-sm-table-cell">Sensor Capacity</th>
+									<th scope="col">Calibration Status</th>  
+									<th scope="col">Settings</th>              
+								</tr>
+								<!-- here is where dynamically generated table html cells are appended -->
+							</thead>            
+						</table>
+					</div>      
+					
 
-        <!-- SENSOR BOOTSTRAP CARD -->
-        <div scope="col" id="sensor-details" style="visibility: hidden;">
-          <div class="card text-center m-4">
-          <div class="col d-flex justify-content-center">
-            <div class="card-header sensor-image">   
-              <!-- sensor description -->
-              <div style="font-size: large;" class="mb-lg-2 sensor-description"></div>
-              <!-- sensor image -->              
-              <img id="sensor-image" src="" class="card-img-top mx-auto d-block" alt="Image Not Found">
-            </div>
-          </div>
-           <!-- sensor technical information -->
-            <div class="card-body">
-              <h5 id="sensor-description" style="color:black; font-size:x-large" class="card-title"></h5>
-              <p id="sensor-comment" style="color:blue; font-size:large;" class="card-text"></p>              
-            </div>           
-            <ul class="list-group list-group-flush">
-              <li id="sensor-type" class="list-group-item"></li>
-              <li id="sensor-model" class="list-group-item"></li>
-              <li id="sensor-quantity" class="list-group-item"></li>
-              <li id="sensor-capacity" class="list-group-item"></li>
-              <li id="sensor-manufacturer" class="list-group-item"></li>
-            </ul>
+					<!-- SENSOR BOOTSTRAP CARD -->
+					<div scope="col" id="sensor-details" style="visibility: hidden;">
+						<div class="card text-center m-4">
+							<div class="col d-flex justify-content-center">
+								<div class="card-header sensor-image">   
+								<!-- sensor description -->
+								<div style="font-size: large;" class="mb-lg-2 sensor-description"></div>
+								<!-- sensor image -->              
+								<img id="sensor-image" src="" class="card-img-top mx-auto d-block" alt="Image Not Found">
+							</div>
+						</div>
+						<!-- sensor technical information -->
+						<div class="card-body">
+							<h5 id="sensor-description" style="color:black; font-size:x-large" class="card-title"></h5>
+							<p id="sensor-comment" style="color:blue; font-size:large;" class="card-text"></p>              
+						</div>           
+							<ul class="list-group list-group-flush">
+							<li id="sensor-type" class="list-group-item"></li>
+							<li id="sensor-model" class="list-group-item"></li>
+							<li id="sensor-quantity" class="list-group-item"></li>
+							<li id="sensor-capacity" class="list-group-item"></li>
+							<li id="sensor-manufacturer" class="list-group-item"></li>
+						</ul>
 
-            <!-- calibration procedure details -->
-            <div class="card-footer text-body-secondary pb-3">
-              <h2 class="mb-3">Calibration Records</h2>
-              <div class="row d-flex align-items-center">
-                <div class="col-12 col-sm-3">
-                  <ul class="mx-1 list-group row" id="calibration-procedures-badges">
-                    <!-- here is where dynamically generated list HTML elements are appended (list of calibrations associated with selected sensor)-->                    
-                  </ul>
-                </div>  
-                <div class="col-9">
-                  <ul class="mx-1 list-group row d-none d-sm-block" id="calibration-procedures-list">
-                    <!-- here is where dynamically generated list HTML elements are appended (list of calibrations associated with selected sensor)-->                    
-                  </ul>
-                </div>                        
-              </div>
-              <div id="cal-records" class="mt-3 mx-1 d-flex text-center justify-content-center"></div>
-            </div>
-          </div>
+						<!-- calibration procedure details -->
+						<div class="card-footer text-body-secondary pb-3">
+							<h2 class="mb-3">Calibration Records</h2>
+								<div class="row d-flex align-items-center">
+									<div class="col-12 col-sm-3">
+										<ul class="mx-1 list-group row" id="calibration-procedures-badges">
+											<!-- here is where dynamically generated list HTML elements are appended (list of calibrations associated with selected sensor)-->                    
+										</ul>
+									</div>  
+									<div class="col-9">
+										<ul class="mx-1 list-group row d-none d-sm-block" id="calibration-procedures-list">
+											<!-- here is where dynamically generated list HTML elements are appended (list of calibrations associated with selected sensor)-->                    
+										</ul>
+									</div>                        
+								</div>
+							<div id="cal-records" class="mt-3 mx-1 d-flex text-center justify-content-center"></div>
+						</div>
+					</div>
 
-          <!-- Sensor UPDATE and DELETE buttons -->
-          <div class="col-sm-12 text-center">
-            <a href="./html/workingFile.html" class="btn btn-primary btn-sm">Update</a>
-            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-              Delete
-            </button>
-          </div>
-        </div>
-      </div> 
+					<!-- Sensor UPDATE and DELETE buttons -->
+					<div class="col-sm-12 text-center">
+						<a href="./html/workingFile.html" class="btn btn-primary btn-sm">Update</a>
+						<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+							Delete
+						</button>
+					</div>
+				</div>
+			</div> 
 
-      <!-- Modal for sensor delete: TODO -->
-      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Extensometer EID555</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Are you sure you want to delete this sensor permanently?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Delete</button>
-            </div>
-          </div>
-        </div>
-      </div>
+			<!-- Modal for sensor delete: TODO -->
+			<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="staticBackdropLabel">Extensometer EID555</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							Are you sure you want to delete this sensor permanently?
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Delete</button>
+						</div>
+					</div>
+				</div>
+			</div>
 
-    </main>
+		</main>
 
-  </body>
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
-    integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
-    crossorigin="anonymous"></script>    
-  </script>
+	</body>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+		integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+		crossorigin="anonymous"></script>    
+	</script>
 
-  <!-- LIBS SCRIPTS -->
-  <script src="./libs/moment.min.js"></script>
-  <script src="./libs/moment-with-locales.min.js"></script>
+	<!-- LIBS SCRIPTS -->
+	<script src="./libs/moment.min.js"></script>
+	<script src="./libs/moment-with-locales.min.js"></script>
 
-  <!-- COLLECTIONS & CLASSES SCRIPTS -->
-  <script src="./js/collections/getHtmlElements.js"></script>
-  <script src="./js/collections/updateSensorImages.js"></script>
-  <script src="./js/classes/dataStorage.js"></script>
+	<!-- COLLECTIONS & CLASSES SCRIPTS -->
+	<script src="./js/collections/getHtmlElements.js"></script>
+	<script src="./js/collections/updateSensorImages.js"></script>
+	<script src="./js/classes/dataStorage.js"></script>
 
-  <!-- UTILS SCRIPTS -->
-  <script src="./js/utils/createTableCell.js"></script>
-  <script src="./js/utils/getHtmlElementById.js"></script>
-  <script src="./js/utils/addTextNodeToHtmlElement.js"></script>
-  <script src="./js/utils/updateSensorImage.js"></script>
-  <script src="./js/utils/removeAllChildNodes.js"></script>
-  <script src="./js/utils/addHtmlChildElementToParent.js"></script>
+	<!-- UTILS SCRIPTS -->
+	<script src="./js/utils/createTableCell.js"></script>
+	<script src="./js/utils/getHtmlElementById.js"></script>
+	<script src="./js/utils/addTextNodeToHtmlElement.js"></script>
+	<script src="./js/utils/updateSensorImage.js"></script>
+	<script src="./js/utils/removeAllChildNodes.js"></script>
+	<script src="./js/utils/addHtmlChildElementToParent.js"></script>
 
-  <!--MAIN SCRIPTS-->
-  <script src="./js/main/fetchSensorCalibrationData.js"></script>
-  <script src="./js/main/createMainSensorTable.js"></script> 
-  <script src="./js/main/createGearIcon.js"></script>    
-  <script src="./js/main/createCalListItem.js"></script>
-  <script src="./js/main/mapCalDueDates.js"></script>  
-  <script src="./js/main/showSensorInfoCard.js"></script>
+	<!--MAIN SCRIPTS-->
+	<script src="./js/main/fetchSensorCalibrationData.js"></script>
+	<script src="./js/main/createMainSensorTable.js"></script> 
+	<script src="./js/main/createGearIcon.js"></script>    
+	<script src="./js/main/createCalListItem.js"></script>
+	<script src="./js/main/mapCalDueDates.js"></script>  
+	<script src="./js/main/showSensorInfoCard.js"></script>
 
-  
+	
 </html>

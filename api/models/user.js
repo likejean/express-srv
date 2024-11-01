@@ -24,6 +24,10 @@ const userSchema = new Schema({
 		type: String,
 		required: true,
 		enum: userLevels
+	},
+	avatar: {
+		type: String,
+		required: true
 	}
 });
 
