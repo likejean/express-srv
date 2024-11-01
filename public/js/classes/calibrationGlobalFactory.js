@@ -29,6 +29,8 @@ class calibrationFactory {
         return true;
     }
 
+    //this method determines if validation rule applied to any field in New Calibration Record Form
+    //if there is a validation rule applied, it outputs warning message for any user's rule valiolation.
     isValidationRuleApplied(inputName, inputValue) {
         // Convert the function to a string and remove whitespace
         const funcString = this.newCalRecordFormInputs[inputName].validator
@@ -51,15 +53,17 @@ class calibrationFactory {
         }
     }
 
+    //this method determines if there is any empty string in n New Calibration Record Form input field
     isFormInputFieldEmpty(inputName) {
         if (inputName === "adjustmentsMade" || inputName === "calibrationExtended")
         return false;
         else return this.newCalRecordFormInputs[inputName].value.length === 0;
     }
 
+
     isPatchButtonActive() {
         for (const [item, value] of Object.entries(this.inputWrappers)) {
-        if (value.status) return true;
+            if (value.status) return true;
         }
         return false;
     }
