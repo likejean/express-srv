@@ -1,8 +1,6 @@
 function createNewCalibrationRecord() {
 //use POST API endpoint to create new calibration record
 
-console.log(newCalibrationPostData);
-
 axios
     .post(`../api/calibrations`, newCalibrationPostData)
     .then((response) => {
