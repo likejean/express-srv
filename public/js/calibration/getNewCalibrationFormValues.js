@@ -26,10 +26,7 @@ function inputHandler(e) {
 
 	if(name === "calibrationRangePercent") e.target.value = Math.trunc(parseFloat(value));
 
-	inputValidationText.innerText = _calfactory.isValidationRuleApplied(
-		name,
-		value
-	).rule;
+	inputValidationText.innerText = _calfactory.isValidationRuleApplied(name, value).rule;
 
 	if (name === "calibrationExtended" || name === "adjustmentsMade") {
 		_calfactory.newCalRecordFormInputs[name].checked = e.target.checked;

@@ -1,8 +1,10 @@
 // GLOBAL FACTORY for sensors
 class sensorFactory {
     constructor(
+			inputWrappers,
             newSensorFormInputs
         ){
+		this.inputWrappers = inputWrappers,
         this.newSensorFormInputs = newSensorFormInputs
     }
 

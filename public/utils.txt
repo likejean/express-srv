@@ -93,4 +93,8 @@ var textNode = document.createTextNode("\u00a0");
     
     //VS Code allows you to quickly search over all files in the currently opened folder. 
     //Press Ctrl+Shift+F and enter your search term.
+
+
+	7. HOW TO CHANGE ALL occurrences in VS CODE file
+	// use Ctrl+shift+L in Visual Studio Code to select all occurrences of word in local page!
   

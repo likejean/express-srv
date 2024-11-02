@@ -1,10 +1,10 @@
 const sensorImageCollection = {
-  EID47: "load_transducer_EID47.jpg",
-  EID498: "load_transducer_EID498.jpg",
-  EID1798: "load_transducer_EID1798.jpg",
-  EID1722: "load_transducer_EID1722.jpg",
-  EID555: "extensometer_EID555.jpg",
-  EID199: "deflectometer_EID199.jpg",
-  EID3005: "load_transducer_EID3005.jpg",
-  EID1663: "load_transducer_EID1663.jpg",
+	EID47: "load_transducer_EID47.jpg",
+	EID498: "load_transducer_EID498.jpg",
+	EID1798: "load_transducer_EID1798.jpg",
+	EID1722: "load_transducer_EID1722.jpg",
+	EID555: "extensometer_EID555.jpg",
+	EID199: "deflectometer_EID199.jpg",
+	EID3005: "load_transducer_EID3005.jpg",
+	EID1663: "load_transducer_EID1663.jpg",
 };

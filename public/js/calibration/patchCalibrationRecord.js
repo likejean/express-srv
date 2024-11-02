@@ -1,6 +1,12 @@
 function patchCalibrationRecord() {
     calPatchRequestData = {};
 
+	//obtain query string by id
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    let id = urlParams.get("id");
+
+
   //get this helper function from utils...
     calPatchRequestData = filterObjectAndTransform(_calfactory.inputWrappers, (item) => item.status === true);    
   

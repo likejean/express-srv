@@ -52,7 +52,7 @@ label {
   display: inline-block;
 }
 
-.cal-notice-span {
+.cal-notice-span, .sensor-notice-span {
   font-weight: bold;
 }
 

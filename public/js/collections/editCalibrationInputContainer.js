@@ -8,80 +8,74 @@ const editCalibrationInputContainer = {
     //Calibration Record Card: Edit Input Wrappers
     calNameWrapper: {
         tag: "input",
+		attributes: {type: "text", name: "calName", style:"border-color:blue;"},
+        classes: ["form-control"],
         status: false,
-        type: "text",
-        name: "calName",
-        value: "",
-        class: "form-control",
+        value: "",		
         childNodes: [],
         databaseName: "calibrationName",
         validator: (text) => (allowedChars.test(text) ? true : false),
         inputRule: `Error! No special characters allowed here (exception: dashes "-")`,
-      },
+    },
     lastCalDateWrapper: {
         tag: "input",
+		attributes: {type: "date", name: "lastCalDate", style:"border-color:blue;"},
+        classes: ["form-control"],
         status: false,
-        type: "date",
-        name: "lastCalDate",
         value: "",
-        class: "form-control",
         childNodes: [],
         databaseName: "lastCalibrationDate",        
         validator: (dateString) => {
-          if (validateDateFormat.test(dateString)) {
-            const date = new Date(dateString);
-            return (date instanceof Date && !isNaN(date));
-          } 
-          return false;
+			if (validateDateFormat.test(dateString)) {
+				const date = new Date(dateString);
+				return (date instanceof Date && !isNaN(date));
+			} 
+			return false;
         },
         inputRule: `Date must be valid format: 2020-01-01`,
     },
     dueCalDateWrapper: {
         tag: "input",
+		attributes: {type: "date", name: "dueCalDate", style:"border-color:blue;"},
+        classes: ["form-control"],
         status: false,
-        type: "date",
-        name: "dueCalDate",
         value: "",
-        class: "form-control",
         childNodes: [],
         databaseName: "dueCalibrationDate",        
         validator: (dateString) => {
-          if (validateDateFormat.test(dateString)) {
-            const date = new Date(dateString);
-            return (date instanceof Date && !isNaN(date));
-          } 
-          return false;
+			if (validateDateFormat.test(dateString)) {
+				const date = new Date(dateString);
+				return (date instanceof Date && !isNaN(date));
+			} 
+			return false;
         },
         inputRule: `Date must be valid format: 2020-01-01`,
     },
     calExtendedWrapper: {
         tag: "input",
+		attributes: {type: "checkbox", name: "calExtended", style:"border-color:blue;"},
+        classes: ["form-check-input"],
         status: false,
-        type: "checkbox",
-        name: "calExtended",
         value: "",
         checked: false,
-        class: "form-check-input",
         childNodes: [],
         databaseName: "calibrationExtended",
     },
     maxCalExtentionWrapper: {
         tag: "input",
+		attributes: {type: "text", name: "maxCalExtention", style:"border-color:blue;"},
+        classes: ["form-control"],
         status: false,
-        type: "text",
-        name: "maxCalExtention",
         value: "",
-        class: "form-control",
         childNodes: [],
         databaseName: "maxCalibrationExtension",
     },
     calRangePercentWrapper: {
         tag: "input",
+		attributes: {type: "number", name: "calRangePercent", style:"border-color:blue;"},
+        classes: ["form-control"],
         status: false,
-        type: "number",
-        name: "calRangePercent",
         value: "",
-        class: "form-control",
         childNodes: [],
         databaseName: "calibrationRangePercent",
         validator: (number) => (number <= 100 && number >= 10 ? true : false),
@@ -89,22 +83,20 @@ const editCalibrationInputContainer = {
     },
     calAdjustmentMadeWrapper: {
         tag: "input",
+		attributes: {type: "checkbox", name: "calAdjustmentMade", style:"border-color:blue;"},
+        classes: ["form-check-input"],
         status: false,
-        type: "checkbox",
-        name: "calAdjustmentMade",
         value: "",
         checked: false,
-        class: "form-check-input",
         childNodes: [],
         databaseName: "adjustmentsMade",
     },
     calCommentWrapper: {
         tag: "textarea",
+		attributes: {type: "text", name: "calComment", rows: "10", style:"border-color:blue;"},
+        classes: ["form-control"],
         status: false,
-        type: "text",
-        name: "calComment",
         value: "",
-        class: "form-control",
         childNodes: [],
         databaseName: "comment",        
         validator: (text) => (limitCommentText.test(text) ? true : false),

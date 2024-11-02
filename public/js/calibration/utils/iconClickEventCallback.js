@@ -5,12 +5,14 @@ function iconClickEventCallback(event) {
 	const wrapperName = trimBySubstring(event.target.id, "Icon").concat("Wrapper");
 	const wrapper = document.getElementById(wrapperName);
 	let input = document.createElement(_calfactory.inputWrappers[wrapperName].tag);
-	let icon = document.getElementById(_calfactory.inputWrappers[wrapperName].name.concat("Icon"));
+	let icon = document.getElementById(_calfactory.inputWrappers[wrapperName].attributes.name.concat("Icon"));
 	const patchButton = document.getElementById("patch-cal-record");
 
 	//creates toggle functionality for icons in Calibration Summary Card
 	if (!_calfactory.inputWrappers[wrapperName].status) {
+		//replace ellipsis-vertical icon with file-open icon to signify edit mode
 		icon.classList.replace("fa-ellipsis-vertical", "fa-file-pen");
+
 		//reserve the previous html child nodes in the calibration factory
 		_calfactory.inputWrappers[wrapperName].childNodes = Array.from(wrapper.childNodes);
 		//initialize value of the edit input
@@ -21,11 +23,14 @@ function iconClickEventCallback(event) {
 		//activate edit mode for targeted text wrapper
 		_calfactory.inputWrappers[wrapperName].status = true;
 
-		//construct & append the edit input to empty wrapper
-		input.classList.add(_calfactory.inputWrappers[wrapperName].class);
-		input.setAttribute("name", _calfactory.inputWrappers[wrapperName].name);
-		input.setAttribute("type", _calfactory.inputWrappers[wrapperName].type);		
-		input.setAttribute("style", "border-color:blue;");		
+		//add classes, attributes and append the edit input to empty wrapper
+		_calfactory.inputWrappers[wrapperName].classes.forEach(item => input.classList.add(item));
+
+		Object.entries(_calfactory.inputWrappers[wrapperName].attributes).forEach(([key, value]) => {
+			input.setAttribute(key, value);
+		});
+		
+		
 		wrapper.appendChild(input);
 
 		//attach event listener to edit input
