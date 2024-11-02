@@ -1,6 +1,7 @@
 const sensorName = document.getElementById("sensor-name");
 const sensorModel = document.getElementById("sensor-model");
 const sensorComment = document.getElementById("sensorComment");
+const sensorCalibrationPriority = document.getElementById("calibrationPriority");
 const sensorDescription = document.getElementById("sensorDescription");
 
 
@@ -19,6 +20,7 @@ const fetchSensordById = async () => {
 			sensorName.innerText = "\u00a0" + result.data.sensor.EID;
 			sensorModel.innerText = "\u00a0" + result.data.sensor.model;
 			sensorDescription.innerText = result.data.sensor.description;
+			sensorCalibrationPriority.innerText = result.data.sensor.calibrationPriority;
 			sensorComment.innerText = result.data.sensor.comment;
 		})
 		.catch((error) => {

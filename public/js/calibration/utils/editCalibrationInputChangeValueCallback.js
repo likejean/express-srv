@@ -1,6 +1,6 @@
-//////////Callback function for ONCHANGE eventListener in "iconClickEventCallback.js"
+//////////Callback function for ONCHANGE eventListener in "editCalibrationIconClickEventCallback.js"
 
-function inputChangeValueCallback(event) {
+function editCalibrationInputChangeValueCallback(event) {
     // Get the new value from the input field
     const newValue = event.target.value;
     const inputType = event.target.type;    

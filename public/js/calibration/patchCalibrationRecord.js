@@ -15,7 +15,7 @@ function patchCalibrationRecord() {
     .patch(`../api/calibrations/${id}`, calPatchRequestData)
     .then((response) => {
         icons.forEach((icon) => {
-            icon.removeEventListener("click", iconClickEventCallback);
+            icon.removeEventListener("click", editCalibrationIconClickEventCallback);
         });
         window.location.reload();
         console.log("Calibration record updated successfully:", response);              

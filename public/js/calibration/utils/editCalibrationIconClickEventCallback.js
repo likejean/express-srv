@@ -1,7 +1,8 @@
 ///Callback function for ONCLICK eventListener in editCalibrationEvent.html file...
-////.......  icon.addEventListener('click', iconClickEventCallback);
-function iconClickEventCallback(event) {
+////.......  icon.addEventListener('click', editCalibrationIconClickEventCallback);
+function editCalibrationIconClickEventCallback(event) {
 	
+	//construct wrapper name to access calibration factory collections
 	const wrapperName = trimBySubstring(event.target.id, "Icon").concat("Wrapper");
 	const wrapper = document.getElementById(wrapperName);
 	let input = document.createElement(_calfactory.inputWrappers[wrapperName].tag);
@@ -34,12 +35,12 @@ function iconClickEventCallback(event) {
 		wrapper.appendChild(input);
 
 		//attach event listener to edit input
-		input.addEventListener("input", inputChangeValueCallback);
+		input.addEventListener("input", editCalibrationInputChangeValueCallback);
 		patchButton.disabled = !_calfactory.isPatchButtonActive();
 	} else {
 
 		//reverse changes to original wrapper state and calibration factory
-		input.removeEventListener("input", inputChangeValueCallback);
+		input.removeEventListener("input", editCalibrationInputChangeValueCallback);
 		document.getElementById("inputErrorMessage").textContent = "";
 		removeAllChildNodes(wrapper);
 		icon.classList.replace("fa-file-pen", "fa-ellipsis-vertical");
