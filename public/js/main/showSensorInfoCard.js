@@ -14,6 +14,7 @@ function showSensorInfoCard(
 	sensorId
 ) {
     var parsedJSON = JSON.parse(calibrations.replace(/\&/g, '"'));
+	var deleteBtn = document.getElementById("delete-sensor-button");
 
     var tableRow;
 
@@ -57,15 +58,10 @@ function showSensorInfoCard(
 		tableRowObj[`row${tableRowIndex}`] = "active";
 		tableRow = document.getElementById(`row${tableRowIndex}`);
 		tableRow.classList.add("table-active");
+		_store.activeSensorCard = {description, tableRowIndex, EID, sensorId}
 		htmlElementCollection.card.style.visibility = "visible";
-		addTextNodeToHtmlElement(
-			description + "\u00a0" + EID,
-			htmlElementCollection.descriptionHeaderHtml
-		);
-		addTextNodeToHtmlElement(
-			"NOTE:\u00a0" + comment,
-			htmlElementCollection.sensorCommentHtml
-		);
+		addTextNodeToHtmlElement(description + "\u00a0" + EID, htmlElementCollection.descriptionHeaderHtml);
+		addTextNodeToHtmlElement("NOTE:\u00a0" + comment, htmlElementCollection.sensorCommentHtml);
 		addTextNodeToHtmlElement(
 			"Manufacturer:\u00a0" + manufacturer,
 			htmlElementCollection.manufacturerNameHtml
@@ -97,13 +93,19 @@ function showSensorInfoCard(
 				`<span class='badge bg-info'>${parsedJSON.length} Record(s) Found</span>`
 				);
 
-		if (parsedJSON.length > 0) createCalibrationListItem(
+		if (parsedJSON.length > 0) {
+			if (!deleteBtn.disabled) deleteBtn.disabled = true;
+			createCalibrationListItem(
 			//createCalListItem.js
 				parsedJSON,
 				htmlElementCollection.calProcedureInfoHtml,
 				htmlElementCollection.calProcedureNameHtml,
 				location
 			);
+		}			
+		else {
+			deleteBtn.disabled = false;
+		}
 
     //deactive a current table row [tableRowIndex] and hide its info card
     //(only if it was activated during previous click event)

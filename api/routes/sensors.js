@@ -233,8 +233,7 @@ router.post('/', (req, res, next) => {
             request: {
                 type: 'POST',
                 url: req.originalUrl
-            }          
-           
+            }
         });
     })
     .catch(() => {
@@ -251,25 +250,11 @@ router.post('/', (req, res, next) => {
 
 
 
-/// API endpoint: delete a single sensor by MongoDB id
-/// this client reques MUST HAVE the following body! 
-//{
-//    "calibrations":[
-//      '4ed3ede8844f0f351100000c',
-//      '4ed3ede8844f0f351100000a',
-//      '4ed3ede8844f0f351100000d,
-//       ......
-//       ......
-//    ],
-//    "description": "Load Cell Transducer",
-//    "EID": "EIDXXX"      
-///////////////EAXMPLE: /////////////////////////////////////////
-//const ids =  [
-//    '4ed3ede8844f0f351100000c',
-//    '4ed3f117a844e0471100000d', 
-//   '4ed3f18132f50c491100000e',
-//];
-//}   Model.find().where('_id').in(ids).exec((err, records) => {});
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+///DELETE API endpoint: deletes a sensor record/document by ID
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
 
 router.delete('/:sensorId', (req, res, next) => {
     const id = req.params.sensorId;
@@ -277,49 +262,19 @@ router.delete('/:sensorId', (req, res, next) => {
         .exec()
         .then(doc => {
             if(doc.deletedCount === 1){
-
-                //If a sensor document was found, then find associated calibration procedure(s) by specified id's
-                //in req.body.calibrations array and remove sensor ID from all FOUND cals.sensor[i] arrays
-                //NOTE: could be multiple calibrations found!
-                Calibration.find().where('_id').in(req.body.calibrations).exec()
-                .then(cals => { 
-                    for (let i = 0; i < cals.length; i++) {
-                        for (let j = 0; j < cals[i].sensors.length; j++) {
-                            if (cals[i].sensors[j].toString() === id) {
-                                cals[i].sensors.splice(j, 1);   //use splice() method to mutate existing arrays in cal documents
-                                break;
-                            }
-                        }                                
-                    }
-                    const saveCals = cals.map(cal => cal.save());
-                    //resolves all async promises
-                    Promise.all(saveCals)
-                    .then(() => {                        
-                        res.status(200).json({
-                            message: `SUCCESS! Sensor ${req.body.description} ${req.body.EID} was deleted from calibration procedure`,
-                            deletedSensor: {
-                                id: req.params.sensorId,
-                                EID: req.body.EID,
-                                description: req.body.description
-                            }, 
-                            deletedCount: doc.deletedCount,                   
-                            request: {
-                                type: 'DELETE',
-                                url: req.originalUrl                    
-                            }    
-                        });                           
-                    }).catch(err => {
-                        throw new Error(err);
-                    })
-                }).catch(() => {
-                    res.status(500).json({
-                        error: "Internal Server Error: Sensor was not deleted...",
-                        request: {
-                            type: 'DELETE',
-                            url: req.originalUrl                    
-                        }    
-                    });
-                });
+                res.status(200).json({
+					message: `SUCCESS! Sensor ${req.body.description} ${req.body.EID} was deleted from calibration procedure`,
+					deletedSensor: {
+						id: req.params.sensorId,
+						EID: req.body.EID,
+						description: req.body.description
+					}, 
+					deletedCount: doc.deletedCount,                   
+					request: {
+						type: 'DELETE',
+						url: req.originalUrl                    
+					}    
+				});        
             }else{
                 res.status(400).json({
                     error: `Error: (Hint: the sensor ${req.body.EID} id {${id}} is valid, but seems like not found in the database.`,

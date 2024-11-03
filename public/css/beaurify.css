@@ -1,65 +1,65 @@
 @media screen and (min-width: 200px) {
-  .list-group-item {
-    font-size: 70%;
-  }
+	.list-group-item {
+		font-size: 70%;
+	}
 }
 
 @media screen and (min-width: 750px) {
-  .list-group-item {
-    font-size: 85%;
-  }
+	.list-group-item {
+		font-size: 85%;
+	}
 }
 
 @media screen and (min-width: 1440px) {
-  .list-group-item {
-    font-size: 100%;
-  }
+	.list-group-item {
+		font-size: 100%;
+	}
 }
 
 label {
-  font-weight: bold;
-  color: darkblue;
+	font-weight: bold;
+	color: darkblue;
 }
 
 #new-sensor-extention {
-  font-size: 12px;
-  color: darkred;
+	font-size: 12px;
+	color: darkred;
 }
 
 #inputErrorMessage {
-  color: red;
+	color: red;
 }
 
 .control-form-field-box {
-  border-radius: 4px;
-  border: 1px solid #f3f1f1;
-  box-shadow: 0px 0px 5px 5px #e7e7e7;
-  padding: 65px 40px;
+	border-radius: 4px;
+	border: 1px solid #f3f1f1;
+	box-shadow: 0px 0px 5px 5px #e7e7e7;
+	padding: 65px 40px;
 }
 
 .new-sensor-form-title {
-  color: blue;
+	color: blue;
 }
 
 .list-group-item {
-  min-height: 60px;
-  align-self: center;
-  justify-content: center;
-  align-items: center;
+	min-height: 60px;
+	align-self: center;
+	justify-content: center;
+	align-items: center;
 }
 
 .calibration-card-item {
-  display: inline-block;
+	display: inline-block;
 }
 
 .cal-notice-span, .sensor-notice-span {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 #range-levels-validation,
 .new-calibration-valid-input {
-  color: red;
-  font-weight: bold;
+	color: red;
+	font-weight: bold;
 }
 
 .avatar {

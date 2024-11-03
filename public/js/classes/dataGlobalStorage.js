@@ -1,12 +1,14 @@
 class dataStorage {
     constructor(
-        id,
-        procedures,
-            calibrations
+			sensors,
+			procedures,
+            calibrations,
+			activeSensorCard
         ){      
-            this.sensors = id,
+            this.sensors = sensors,
             this.procedures = procedures,
-            this.calibrations = calibrations      
+            this.calibrations = calibrations,
+			this.activeSensorCard = activeSensorCard    
     }
 
     getSensorNames(){
