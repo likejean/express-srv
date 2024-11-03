@@ -62,36 +62,19 @@ function showSensorInfoCard(
 		htmlElementCollection.card.style.visibility = "visible";
 		addTextNodeToHtmlElement(description + "\u00a0" + EID, htmlElementCollection.descriptionHeaderHtml);
 		addTextNodeToHtmlElement("NOTE:\u00a0" + comment, htmlElementCollection.sensorCommentHtml);
-		addTextNodeToHtmlElement(
-			"Manufacturer:\u00a0" + manufacturer,
-			htmlElementCollection.manufacturerNameHtml
-		);
-		addTextNodeToHtmlElement(
-			"Sensor Model:" + "\u00a0" + model,
-			htmlElementCollection.sensorModelHtml
-		);
-		addTextNodeToHtmlElement(
-			"Sensor Type:" + "\u00a0" + type,
-			htmlElementCollection.sensorTypeHtml
-		);
-		addTextNodeToHtmlElement(
-			"Measurement Quantity:" + "\u00a0" + quantity,
-			htmlElementCollection.sensorMeasurementQuantityHtml
-		);
-		addTextNodeToHtmlElement(
-			"Sensor Capacity Range:" + "\u00a0" + capacity,
-			htmlElementCollection.sensorCapacityRangeHtml
-		);
+		addTextNodeToHtmlElement("Manufacturer:\u00a0" + manufacturer, htmlElementCollection.manufacturerNameHtml);
+		addTextNodeToHtmlElement("Sensor Model:" + "\u00a0" + model, htmlElementCollection.sensorModelHtml);
+		addTextNodeToHtmlElement("Sensor Type:" + "\u00a0" + type, htmlElementCollection.sensorTypeHtml);
+		addTextNodeToHtmlElement("Measurement Quantity:" + "\u00a0" + quantity, htmlElementCollection.sensorMeasurementQuantityHtml);
+		addTextNodeToHtmlElement("Sensor Capacity Range:" + "\u00a0" + capacity, htmlElementCollection.sensorCapacityRangeHtml);
 
 		parsedJSON.length === 0
-			? addHtmlChildElementToParent(
-				htmlElementCollection.calRecordsNoticeHtml,
-				`<span class='badge bg-danger'>No Records Found</span>`
-				)
-			: addHtmlChildElementToParent(
-				htmlElementCollection.calRecordsNoticeHtml,
-				`<span class='badge bg-info'>${parsedJSON.length} Record(s) Found</span>`
-				);
+			? addHtmlChildElementToParent(htmlElementCollection.calRecordsNoticeHtml,
+				`<span class='badge bg-danger'>No Records Found</span>`)
+			: addHtmlChildElementToParent(htmlElementCollection.calRecordsNoticeHtml,
+				parsedJSON.length === 1 
+				? `<span class='badge bg-info'>1 Record Found</span>`
+				:`<span class='badge bg-info'>${parsedJSON.length} Records Found</span>`);
 
 		if (parsedJSON.length > 0) {
 			if (!deleteBtn.disabled) deleteBtn.disabled = true;

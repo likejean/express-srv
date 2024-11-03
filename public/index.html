@@ -71,48 +71,55 @@
 					
 
 					<!-- SENSOR BOOTSTRAP CARD -->
-					<div scope="col" id="sensor-details" style="visibility: hidden;">
-						<div class="card text-center m-4">
-							<div class="col d-flex justify-content-center">
-								<div class="card-header sensor-image">   
-								<!-- sensor description -->
-								<div style="font-size: large;" class="mb-lg-2 sensor-description"></div>
-								<!-- sensor image -->              
-								<img id="sensor-image" src="" class="card-img-top mx-auto d-block" alt="Image Not Found">
+					 <div class="container">
+						<div scope="col" class="row justify-content-center" id="sensor-details" style="visibility: hidden;">
+							<div class="card col-10 shadow border text-center m-4">
+								<div>
+									<div class="card-header sensor-image">   
+									<!-- sensor description -->
+									<div style="font-size: large;" class="mb-lg-2 sensor-description"></div>
+									<!-- sensor image -->              
+									<img id="sensor-image" src="" class="card-img-top mx-auto d-block" alt="Image Not Found">
+								</div>
+							</div>
+							<!-- sensor technical information -->
+							<div class="card-body">
+								<h5 id="sensor-description" style="color:black; font-size:x-large" class="card-title"></h5>
+								<p id="sensor-comment" style="color:blue; font-size:large;" class="card-text"></p> 
+								<div class="card-body d-flex flex-column align-items-center">											
+									<a href="#" class="btn btn-primary m-2">Technical Information</a>
+									<ul class="list-group list-group-flush">
+										<li id="sensor-type" class="list-group-item"></li>
+										<li id="sensor-model" class="list-group-item"></li>
+										<li id="sensor-quantity" class="list-group-item"></li>
+										<li id="sensor-capacity" class="list-group-item"></li>
+										<li id="sensor-manufacturer" class="list-group-item"></li>
+									</ul>  
+								</div>
+							</div>
+						
+	
+							<!-- calibration procedure details -->
+							<div class="card-footer text-body-secondary pb-3">
+								<h2 class="mb-3">Calibration Records</h2>
+									<div class="row d-flex align-items-center">
+										<div class="col-12 col-sm-3">
+											<ul class="mx-1 list-group row" id="calibration-procedures-badges">
+												<!-- here is where dynamically generated list HTML elements are appended (list of calibrations associated with selected sensor)-->                    
+											</ul>
+										</div>  
+										<div class="col-9">
+											<ul class="mx-1 list-group row d-none d-sm-block" id="calibration-procedures-list">
+												<!-- here is where dynamically generated list HTML elements are appended (list of calibrations associated with selected sensor)-->                    
+											</ul>
+										</div>                        
+									</div>
+								<div id="cal-records" class="mt-3 mx-1 d-flex text-center justify-content-center"></div>
 							</div>
 						</div>
-						<!-- sensor technical information -->
-						<div class="card-body">
-							<h5 id="sensor-description" style="color:black; font-size:x-large" class="card-title"></h5>
-							<p id="sensor-comment" style="color:blue; font-size:large;" class="card-text"></p>              
-						</div>           
-							<ul class="list-group list-group-flush">
-							<li id="sensor-type" class="list-group-item"></li>
-							<li id="sensor-model" class="list-group-item"></li>
-							<li id="sensor-quantity" class="list-group-item"></li>
-							<li id="sensor-capacity" class="list-group-item"></li>
-							<li id="sensor-manufacturer" class="list-group-item"></li>
-						</ul>
-
-						<!-- calibration procedure details -->
-						<div class="card-footer text-body-secondary pb-3">
-							<h2 class="mb-3">Calibration Records</h2>
-								<div class="row d-flex align-items-center">
-									<div class="col-12 col-sm-3">
-										<ul class="mx-1 list-group row" id="calibration-procedures-badges">
-											<!-- here is where dynamically generated list HTML elements are appended (list of calibrations associated with selected sensor)-->                    
-										</ul>
-									</div>  
-									<div class="col-9">
-										<ul class="mx-1 list-group row d-none d-sm-block" id="calibration-procedures-list">
-											<!-- here is where dynamically generated list HTML elements are appended (list of calibrations associated with selected sensor)-->                    
-										</ul>
-									</div>                        
-								</div>
-							<div id="cal-records" class="mt-3 mx-1 d-flex text-center justify-content-center"></div>
-						</div>
-					</div>
-
+	
+					 </div>
+					
 					<!-- Sensor UPDATE and DELETE buttons -->
 					<div class="col-sm-12 text-center">
 						<a id="fetch-patch-sensor-info" href="" class="btn btn-primary btn-sm">Update</a>

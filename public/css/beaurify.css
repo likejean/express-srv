@@ -41,12 +41,6 @@ label {
 	color: blue;
 }
 
-.list-group-item {
-	min-height: 60px;
-	align-self: center;
-	justify-content: center;
-	align-items: center;
-}
 
 .calibration-card-item {
 	display: inline-block;
@@ -64,4 +58,8 @@ label {
 
 .avatar {
 	width: 60px;
+}
+
+.sensor-notice-span {
+	margin-right: 40px;	
 }
