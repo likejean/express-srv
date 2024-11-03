@@ -1,5 +1,4 @@
-//this helper function filters editCalContentItemActive Collection and prepares body object for PATCH API endpoint
-calPatchRequestData = {};
+//this helper function filters Collection and prepares body JSON object for PATCH API endpoint
 
 const filterObjectAndTransform = (obj, filterFn) => {
     const result = {};
@@ -13,7 +12,3 @@ const filterObjectAndTransform = (obj, filterFn) => {
     return result;
 };
 
-calPatchRequestData = filterObjectAndTransform(
-    _calfactory.inputWrappers,
-    (input) => input.status === true
-);

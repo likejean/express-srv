@@ -16,8 +16,7 @@ const fetchSensordById = async () => {
     await axios
 		.get(`../api/sensors/${id}`)
 		.then((result) => {
-			console.log(result);
-			sensorName.innerText = "\u00a0" + result.data.sensor.EID;
+			sensorName.innerText = "\u00a0" + result.data.sensor.EID + "\u00a0-\u00a0{" + result.data.sensor.capacityRange + "}";
 			sensorModel.innerText = "\u00a0" + result.data.sensor.model;
 			sensorDescription.innerText = result.data.sensor.description;
 			sensorCalibrationPriority.innerText = result.data.sensor.calibrationPriority;

@@ -113,7 +113,7 @@ router.get("/:calibrationId", (req, res, next) => {
     })
     .catch((err) => {
         res.status(500).json({
-            message: "Failure: Unable to fetch calibration procedure data...",
+            message: "Failure: Unable to fetch calibration records...",
             error: err,
             request: {
             type: "GET",

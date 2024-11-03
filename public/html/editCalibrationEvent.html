@@ -41,57 +41,56 @@
 
 						<div class="d-flex align-items-center">
 							<div class="col-5 d-none d-sm-flex">Calibration Name:</div>               
-							<div id="calNameWrapper" class="col-6"><span class="cal-notice-span" id="calName"></span></div>                
+							<div id="calNameWrapper" class="col-11 col-sm-6 mb-1 gutter"><span class="cal-notice-span" id="calName"></span></div>                
 							<div class="p-2 col-1"><i id="calNameIcon" class="fa-solid fa-2x fa-ellipsis-vertical"></i></div>							
 						</div>
 						<hr/>
 
 						<div class="d-flex align-items-center">
 							<div class="col-5 d-none d-sm-flex">Calibration Last Date:</div>               
-							<div id="lastCalDateWrapper" class="col-6"><span class="cal-notice-span" id="lastCalDate"></span></div>                
+							<div id="lastCalDateWrapper" class="col-11 col-sm-6 mb-1 gutter"><span class="cal-notice-span" id="lastCalDate"></span></div>                
 							<div class="p-2 col-1"><i id="lastCalDateIcon" class="fa-solid fa-2x fa-ellipsis-vertical"></i></div>
 						</div>
 						<hr/>
 
 						<div class="d-flex align-items-center">
 							<div class="col-5 d-none d-sm-flex">Calibration Due Date:</div>
-							<div id="dueCalDateWrapper" class="col-6"><span class="cal-notice-span" id="dueCalDate"></span></div>
+							<div id="dueCalDateWrapper" class="col-11 col-sm-6 mb-1 gutter"><span class="cal-notice-span" id="dueCalDate"></span></div>
 							<div class="p-2 col-1"><i id="dueCalDateIcon" class="fa-solid fa-2x fa-ellipsis-vertical"></i></div>
 						</div>
 						<hr/>
 
 						<div class="d-flex align-items-center">
 							<div class="col-5 d-none d-sm-flex">Calibration Extended:</div>
-							<div id="calExtendedWrapper" class="col-6"><span class="cal-notice-span" id="calExtended"></span></div>
+							<div id="calExtendedWrapper" class="col-11 col-sm-6 mb-1 gutter"><span class="cal-notice-span" id="calExtended"></span></div>
 							<div class="p-2 col-1"><i id="calExtendedIcon" class="fa-solid fa-2x fa-ellipsis-vertical"></i></div>
 						</div>
 						<hr/>
 
 						<div class="d-flex align-items-center">
 							<div class="col-5 d-none d-sm-flex">Maximum Calibration Extension:</div>
-							<div id="maxCalExtentionWrapper" class="col-6"><span class="cal-notice-span" id="maxCalExtention"></span></div>
+							<div id="maxCalExtentionWrapper" class="col-11 col-sm-6 mb-1 gutter"><span class="cal-notice-span" id="maxCalExtention"></span></div>
 							<div class="p-2 col-1"><i id="maxCalExtentionIcon" class="fa-solid fa-2x fa-ellipsis-vertical"></i></div>
 						</div>
 						<hr/>
 
 						<div class="d-flex align-items-center">
 							<div class="col-5 d-none d-sm-flex">Calibration Range Percent:</div>
-							<div id="calRangePercentWrapper" class="col-6"><span class="cal-notice-span" id="calRangePercent"></span></div>
+							<div id="calRangePercentWrapper" class="col-11 col-sm-6 mb-1 gutter"><span class="cal-notice-span" id="calRangePercent"></span></div>
 							<div class="p-2 col-1"><i id="calRangePercentIcon" class="fa-solid fa-2x fa-ellipsis-vertical"></i></div>
 						</div>
 						<hr/>
 
 						<div class="d-flex align-items-center">
 							<div class="col-5 d-none d-sm-flex">Adjustment Made:</div>
-							<div id="calAdjustmentMadeWrapper" class="col-6"><span class="cal-notice-span" id="calAdjustmentMade"></span></div>
+							<div id="calAdjustmentMadeWrapper" class="col-11 col-sm-6 mb-1 gutter"><span class="cal-notice-span" id="calAdjustmentMade"></span></div>
 							<div class="p-2 col-1"><i id="calAdjustmentMadeIcon" class="fa-solid fa-2x fa-ellipsis-vertical"></i></div>
 						</div>
 						<hr />
 
 						<div class="d-flex align-items-center">
 							<div class="col-5 d-none d-sm-flex">Comment:</div>
-							<div id="calCommentWrapper" class="col-5"><span class="cal-notice-span" id="calComment"></span></div>
-							<div class="col-1"></div>
+							<div id="calCommentWrapper" class="col-11 col-sm-6 mb-1 gutter"><span class="cal-notice-span" id="calComment"></span></div>							
 							<div class="p-2 col-1"><i id="calCommentIcon" class="fa-solid fa-2x fa-ellipsis-vertical"></i></div>
 						</div>
 						<hr />
@@ -161,10 +160,10 @@
     <script src="../js/collections/newCalibrationFormContainer.js"></script>
     <script src="../js/utils/trimStringBySubstring.js"></script>
     <script src="../js/utils/removeAllChildNodes.js"></script>
+	<script src="../js/utils/filterObjectAndTransform.js"></script>
 
     <!-- javascript calibration folder -->
-    <script src="../js/calibration/fetchCalRecordById.js"></script>
-    <script src="../js/calibration/utils/filterObjectAndTransform.js"></script>
+    <script src="../js/calibration/fetchCalRecordById.js"></script>    
     <script src="../js/calibration/utils/editCalibrationIconClickEventCallback.js"></script>
     <script src="../js/calibration/utils/editCalibrationInputChangeValueCallback.js"></script>
     <script src="../js/calibration/patchCalibrationRecord.js"></script>

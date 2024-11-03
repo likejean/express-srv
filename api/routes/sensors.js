@@ -6,7 +6,12 @@ const router = express.Router();
 
 
 //Routers
-// GET endpoint: get ALL sensors
+
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+// GET endpoint: get ALL sensor documents/records
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
 router.get('/', (req, res, next) => {
     Sensor
         .find()
@@ -20,21 +25,20 @@ router.get('/', (req, res, next) => {
                     status: "SUCCESS"
                 }});
             res.status(200).json({
-                message:   `Successfully fetched ${docs.length} sensors`,
-                collectionName: "sensors",
+                message: `Successfully fetched ${docs.length} sensor record(s)`,
+            	collectionName: "sensors",
                 payload: docs.map(doc => {                    
                     return {
                         _id: doc._id,
                         calibrations: doc.calibrations,
                         EID: doc.EID,
-                        type: doc.type,    
-                        priority: doc.calibrationPriority,                        
+                        type: doc.type,                    
                         calibrationPriority: doc.calibrationPriority,
                         calibrationFrequency: doc.calibrationFrequency,
                         calibratedBy: doc.calibratedBy,
+						capacityRange: doc.capacityRange,
                         location: doc.location,
-                        description: doc.description,
-                        capacityRange: doc.capacityRange,
+                        description: doc.description,                        
                         comment: doc.comment,
                         quantity: doc.quantity,
                         model: doc.model,
@@ -55,7 +59,8 @@ router.get('/', (req, res, next) => {
         })
         .catch(err => {
             res.status(500).json({
-                message: "Failure: Unable to fetch sensor data...",
+				message:
+                	"Failure: Sensor events were not fetched... Something went wrong",
                 error: err,
                 request: {
                     type: 'GET',
@@ -66,7 +71,11 @@ router.get('/', (req, res, next) => {
 });
 
 
-// GET endpoint: get sensor by id
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+// GET endpoint: get a sensor record by ID
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
 router.get('/:sensorId', (req, res, next) => {
     const id = req.params.sensorId;
     Sensor.findById(id)
@@ -94,100 +103,84 @@ router.get('/:sensorId', (req, res, next) => {
                     }  
                 });
             } else {
-                console.log({
-                    request: {
-                        message: 'Invalid Entry',
-                        type: 'GET',
-                        url: req.originalUrl,
-                        status: "FAILURE"
-                    }});
-                return res.status(400).json({
-                    message: 'Invalid Entry',
-                    request: {
-                        type: 'GET',
-                        url: req.originalUrl                    
-                    }  
-                });
+				console.log({
+					request: {
+						message: "Failed to fetch sensor record by ID. Most likely the document ID is not valid.",
+						isIdValid: mongoose.Types.ObjectId.isValid(id),
+						type: "GET",
+						url: req.originalUrl,
+						status: "FAILURE",
+					},
+				});
+				return res.status(400).json({
+					message: "Invalid Entry",
+					request: {
+						type: "GET",
+						url: req.originalUrl,
+					},
+				});
             }
         })
         .catch(err => {
             res.status(500).json({
-                message: "Failure: Unable to fetch sensor data...",
-                error: err,
-                request: {
-                    type: 'GET',
-                    url: req.originalUrl                    
-                }  
-            });
+				message: "Failure: Unable to fetch sensor records...",
+				error: err,
+				request: {
+				type: "GET",
+				url: req.originalUrl,
+				},
+			});
         });
 });
 
-//PATCH endpoint: updating PARTIALLY existing SENSOR document
-router.patch('/:sensorId', (req, res, next) => {
-    const id = req.params.sensorId;
-    const {        
-        EID,
-        type,
-        calibrationPriority,
-        calibrationFrequency,
-        lastCalibrationDate,
-        dueCalibrationDate,
-        calibrationExtended,
-        calibratedBy,
-        maxCalibrationExtension,
-        location,
-        description,
-        capacityRange,
-        comment,
-        units,
-        manufacturer        
-    } = req.body;
 
-    Sensor.updateOne({_id: id}, {
-        $set: {
-            EID,
-            type,
-            calibrationPriority,
-            calibrationFrequency,
-            lastCalibrationDate,
-            dueCalibrationDate,
-            calibrationExtended,
-            calibratedBy,
-            maxCalibrationExtension,
-            location,
-            description,
-            capacityRange,
-            comment,
-            quantity,
-            manufacturer
-        }
-    })
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+//PATCH endpoint: update PARTIALLY existing sensor record/document by ID
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+router.patch("/:sensorId", (req, res, next) => {
+    const id = req.params.sensorId;
+    console.log("Request Body:", req.body);
+    Sensor.updateOne({ _id: id }, { $set: { ...req.body } })
     .exec()
-    .then(result => {
-        console.log('patch_result', result);
-        res.status(200).json({
-            message: `Sensor w/ id: '${id}' was Updated.`,
+    .then((result) => {
+        console.log({
             request: {
-                type: 'PATCH'
+                type: "PATCH",
+                url: req.originalUrl,
+                status: "SUCCESS",
             },
-            result
+        });
+        res.status(200).json({
+            message: `Sensor record w/ id: '${id}' was Updated.`,
+            request: {
+                type: "PATCH",
+            },
+            result,
         });
     })
-    .catch(err => {
+    .catch((err) => {
         res.status(500).json({
-            message: "Failure: Unable to update sensor data...",
+            message: "Failure: Unable to update sensor record...",
+            isIdValid: mongoose.Types.ObjectId.isValid(id),
             error: err,
             request: {
-                type: 'PATCH',
-                url: req.originalUrl                    
-            }  
+                type: "PATCH",
+                url: req.originalUrl,
+            },
         });
     });
 });
 
 
-//POST endpoint: creates a new SENSOR MongoDB document
 
+
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+//POST endpoint: creates a new sensor RECORD MongoDB document
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
 router.post('/', (req, res, next) => {
     const _id = new mongoose.Types.ObjectId();
 
