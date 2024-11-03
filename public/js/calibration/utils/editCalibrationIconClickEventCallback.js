@@ -17,7 +17,7 @@ function editCalibrationIconClickEventCallback(event) {
 		//reserve the previous html child nodes in the calibration factory
 		_calfactory.inputWrappers[wrapperName].childNodes = Array.from(wrapper.childNodes);
 		//initialize value of the edit input
-		input.value = wrapper.textContent;
+		input.value = wrapper.textContent;		
 
 		//remove all child nodes of the text wrapper
 		removeAllChildNodes(wrapper);
@@ -31,12 +31,12 @@ function editCalibrationIconClickEventCallback(event) {
 			input.setAttribute(key, value);
 		});
 		
-		
 		wrapper.appendChild(input);
 
 		//attach event listener to edit input
 		input.addEventListener("input", editCalibrationInputChangeValueCallback);
 		patchButton.disabled = !_calfactory.isPatchButtonActive();
+
 	} else {
 
 		//reverse changes to original wrapper state and calibration factory

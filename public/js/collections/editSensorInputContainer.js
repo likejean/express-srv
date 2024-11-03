@@ -1,14 +1,15 @@
+const limitCommentText = /^.{10,300}$/;
+
 const editSensorInputContainer = {
 
-
 	sensorDescriptionWrapper: {
-        tag: "text",
+        tag: "input",
 		attributes: {type: "text", name: "sensorDescription", style:"border-color:blue;"},
         classes: ["form-control"],
         status: false,
         value: "",
         childNodes: [],
-        databaseName: "comment"
+        databaseName: "description"
     },
 
 
@@ -19,7 +20,7 @@ const editSensorInputContainer = {
         status: false,
         value: "",
         childNodes: [],
-        databaseName: "comment"
+        databaseName: "calibrationPriority"
     },
 
 	sensorCommentWrapper: {

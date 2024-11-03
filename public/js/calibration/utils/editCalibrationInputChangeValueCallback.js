@@ -17,4 +17,5 @@ function editCalibrationInputChangeValueCallback(event) {
     if (inputType === "checkbox")
         _calfactory.inputWrappers[concatInputName].checked = this.checked;
     else _calfactory.inputWrappers[concatInputName].value = newValue;
+
 }

@@ -14,11 +14,18 @@ class sensorFactory {
                 return false;
             }
         }
-        return true;            
+        return true;
     }
 
     isFormInputFieldEmpty(inputName) {
         return this.newSensorFormInputs[inputName].value.length === 0
+    }
+
+	isPatchButtonActive() {
+        for (const [item, value] of Object.entries(this.inputWrappers)) {
+            if (value.status) return true;
+        }
+        return false;
     }
 }
 
