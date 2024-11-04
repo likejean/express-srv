@@ -18,19 +18,37 @@
 			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
 			crossorigin="anonymous">
 		</script>
-		
+
 		<title>Procedure Card</title>
     </head>
     <body>		
 		<div class="container-fluid">
 			<div class="row d-flex justify-content-center">
-				<div class="card border-success my-5" style="max-width: 35rem;">
-					<div id="cardHeader" class="card-header bg-transparent border-success text-center"><h3>Procedure Technical Information</h3></div>
-
-
+				<div class="card border-success my-5" style="max-width: 75rem;">
+					<div class="card-footer text-center my-3"><h2>Calibration Procedures</h2></div>
+					<table class="table">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Name</th>
+								<th scope="col">Description</th>
+								<th scope="col">Calibrator Model</th>
+								<th scope="col">Quantity</th>
+								<th scope="col">Units</th>								
+								<th scope="col">Manufacturer</th>
+								<th scope="col">Calibrations</th>
+								<th scope="col">Comments</th>
+								<th scope="col">Settings</th>
+							</tr>
+						</thead>
+						<tbody class="calibration-procedures-data">
+										
+						</tbody>
+					</table>
 
 					<div class="card-footer bg-transparent border-success text-center">
 						<div class="container">
+							
 							<div class="row d-none d-sm-flex">
 								<div class="form-group col m-2 text-center">                           
 									<button id="patch-sensor-record" type="submit" class="btn btn-primary m-2" onclick=patchProcedureRecord() disabled>Submit</button>								
@@ -50,5 +68,10 @@
 		crossorigin="anonymous"></script>    
     </script>
 
-	
+	<script src="../js/classes/dataGlobalStorage.js"></script>
+	<script src="../js/procedure/fetchAllCalProcedures.js"></script>
+	<script src="../js/utils/createTableCell.js"></script>
+	<script src="../js/procedure/createProceduresTable.js"></script>
+	<script src="../js/procedure/createTrashIcon.js"></script>
+
 </html>

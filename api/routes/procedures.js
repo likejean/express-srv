@@ -7,10 +7,16 @@ const router = express.Router();
 
 
 //Routers
-// GET endpoint: all calibration documents
+
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+// GET endpoint: get ALL calibration procedures
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
 router.get('/', (req, res, next) => {
     Procedure
         .find()
+		.populate("calibrations")
         .exec()
         .then(docs => {
         console.log({
@@ -21,7 +27,7 @@ router.get('/', (req, res, next) => {
                 status: "SUCCESS"
             }});
         res.status(200).json({
-            message:   `Successfully fetched ${docs.length} calibration procedure document(s)`,
+            message:   `Successfully fetched ${docs.length} calibration procedures`,
             collectionName: "procedures",
             payload: docs.map(doc => {
                 return {
@@ -108,8 +114,7 @@ router.post('/', (req, res, next) => {
             request: {
                 type: 'POST',
                 url: req.originalUrl
-            }          
-           
+            }
         });
     })
     .catch(() => {

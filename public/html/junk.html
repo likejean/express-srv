@@ -115,10 +115,10 @@
           row.setAttribute("id", `row${val}`);
           row.appendChild(createTableCell(`${val}`, []));
           row.appendChild(
-            createTableCell(`${selectedCals[val].procedureName}`, [])
+            createTableCell("td",`${selectedCals[val].procedureName}`, [])
           );
           row.appendChild(
-            createTableCell(`${selectedCals[val].calibrationPrinciple}`, [])
+            createTableCell("td",`${selectedCals[val].calibrationPrinciple}`, [])
           );
           clearSelectionButton.style.visibility = "visible";
           tableBody.appendChild(row);

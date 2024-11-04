@@ -72,56 +72,56 @@ router.get("/", (req, res, next) => {
 router.get("/:calibrationId", (req, res, next) => {
     const id = req.params.calibrationId;
     Calibration.findById(id)
-    .populate("sensorId")
-    .populate("procedureId")
-    .exec()
-    .then((doc) => {
-        //To handle non-existing id error, but correct format...
-        if (doc) {
-            console.log({
-                request: {
-                    type: "GET",
-                    url: req.originalUrl,
-                    status: "SUCCESS",
-                },
-            });
-            return res.status(200).json({
-                calibration: doc,
-                request: {
-                    type: "GET",
-                    url: req.originalUrl,
-                },
-            });
-        } else {
-            console.log({
-                request: {
-                    message: "Failed to fetch calibration record by ID. Most likely the document ID is not valid.",
-                    isIdValid: mongoose.Types.ObjectId.isValid(id),
-                    type: "GET",
-                    url: req.originalUrl,
-                    status: "FAILURE",
-                },
-            });
-            return res.status(400).json({
-                message: "Invalid Entry",
-                request: {
-                    type: "GET",
-                    url: req.originalUrl,
-                },
-            });
-        }
-    })
-    .catch((err) => {
-        res.status(500).json({
-            message: "Failure: Unable to fetch calibration records...",
-            error: err,
-            request: {
-            type: "GET",
-            url: req.originalUrl,
-            },
-        });
-    });
-});
+		.populate("sensorId")
+		.populate("procedureId")
+		.exec()
+		.then((doc) => {
+			//To handle non-existing id error, but correct format...
+			if (doc) {
+				console.log({
+					request: {
+						type: "GET",
+						url: req.originalUrl,
+						status: "SUCCESS",
+					},
+				});
+				return res.status(200).json({
+					calibration: doc,
+					request: {
+						type: "GET",
+						url: req.originalUrl,
+					},
+				});
+			} else {
+				console.log({
+					request: {
+						message: "Failed to fetch calibration record by ID. Most likely the document ID is not valid.",
+						isIdValid: mongoose.Types.ObjectId.isValid(id),
+						type: "GET",
+						url: req.originalUrl,
+						status: "FAILURE",
+					},
+				});
+				return res.status(400).json({
+					message: "Invalid Entry",
+					request: {
+						type: "GET",
+						url: req.originalUrl,
+					},
+				});
+			}
+		})
+		.catch((err) => {
+			res.status(500).json({
+				message: "Failure: Unable to fetch calibration records...",
+				error: err,
+				request: {
+				type: "GET",
+				url: req.originalUrl,
+				},
+			});
+		});
+	});
 
 
 /////////////COMPLETED and TESTED////////////////////////////////
@@ -134,35 +134,35 @@ router.patch("/:calibrationId", (req, res, next) => {
     const id = req.params.calibrationId;
     console.log("Request Body:", req.body);
     Calibration.updateOne({ _id: id }, { $set: { ...req.body } })
-    .exec()
-    .then((result) => {
-        console.log({
-            request: {
-                type: "PATCH",
-                url: req.originalUrl,
-                status: "SUCCESS",
-            },
-        });
-        res.status(200).json({
-            message: `Calibration record w/ id: '${id}' was Updated.`,
-            request: {
-                type: "PATCH",
-            },
-            result,
-        });
-    })
-    .catch((err) => {
-        res.status(500).json({
-            message: "Failure: Unable to update calibration...",
-            isIdValid: mongoose.Types.ObjectId.isValid(id),
-            error: err,
-            request: {
-                type: "PATCH",
-                url: req.originalUrl,
-            },
-        });
-    });
-});
+		.exec()
+		.then((result) => {
+			console.log({
+				request: {
+					type: "PATCH",
+					url: req.originalUrl,
+					status: "SUCCESS",
+				},
+			});
+			res.status(200).json({
+				message: `Calibration record w/ id: '${id}' was Updated.`,
+				request: {
+					type: "PATCH",
+				},
+				result,
+			});
+		})
+		.catch((err) => {
+			res.status(500).json({
+				message: "Failure: Unable to update calibration...",
+				isIdValid: mongoose.Types.ObjectId.isValid(id),
+				error: err,
+				request: {
+					type: "PATCH",
+					url: req.originalUrl,
+				},
+			});
+		});
+	});
 
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
@@ -276,97 +276,97 @@ router.post("/", (req, res, next) => {
 
 
 router.delete("/:calibrationId", (req, res, next) => {
-  const id = req.params.calibrationId;
-  const { procedureId, sensorId } = req.body;
-  Calibration.deleteOne({ _id: id }) //delete calibratin record by ID
-    .exec()
-    .then((doc) => {
-      ////<<<<<<<deleteOne()>>>>>>>/////
-        if (doc.deletedCount === 1) {
-        //if document has been Successfully deleted
-        Promise.all([
-          Sensor.findById(sensorId).exec(), //find sensor document by specified reference id
-          Procedure.findById(procedureId).exec(), //find procedure by specified reference id
-        ])
-            .then(([sensor, procedure]) => {
-            for (let i = 0; i < sensor.calibrations.length; i++) {
-                if (sensor.calibrations[i].toString() === id) {
-                    sensor.calibrations.splice(i, 1); //use splice() method to mutate array [remove reference of deleted calibratin record]
-                    break;
-                }
-            }
-            for (let i = 0; i < procedure.calibrations.length; i++) {
-                if (procedure.calibrations[i].toString() === id) {
-                    procedure.calibrations.splice(i, 1); //use splice() method to mutate array [remove reference of deleted calibratin record]
-                    break;
-                }
-            }
-            Promise.all([sensor.save(), procedure.save()])
-                .then(() => {
-                    console.log({
-                    request: {
-                        type: "DELETE",
-                        url: req.originalUrl,
-                        status: "SUCCESS",
-                    },
-                });
-                res.status(200).json({
-                    message: `SUCCESS! Calibration procedure ${id} was deleted from database and its reference IDs were cleaned up`,
-                    deletedDocument: doc,
-                    request: {
-                        type: "DELETE",
-                        url: req.originalUrl,
-                    },
-                });
-                })
-              //FAILURE: if mutated sensor and/or procedure documents were not saved
-                .catch((err) => {
-                    res.status(500).json({
-                    err,
-                    message:
-                        "Failed to cleanup sensor and/or procedure documents associated with deleted calibration record...",
-                    request: {
-                        type: "DELETE",
-                        url: req.originalUrl,
-                    },
-                    });
-                });
-            })
-          //FAILURE: if mutated sensor and/or procedure documents were not saved
-            .catch((err) => {
-                res.status(500).json({
-                    err,
-                    message: `Calibration record ${id} DELETED, but sensor and procedure with the following reference IDs were NOT FOUND`,
-                    sensorId,
-                    procedureId,                
-                    request: {
-                        type: "DELETE",
-                        url: req.originalUrl,
-                    },
-                });
-          });
-        } else {
-        res.status(400).json({
-            message: `Document was NOT deleted. The calibration record associated with ID {${id}} is VALID, but most likley NOT found in the database.`,
-            isIdValid: mongoose.Types.ObjectId.isValid(id),
-            request: {
-                type: "DELETE",
-                url: req.originalUrl,
-            },
-        });
-        }
-    })
-    .catch((err) => {
-        res.status(400).json({
-            err,
-            message: `Failed to delete calibration record associated with ID ${id}. The ID format is most likely INVALID. {CHECK: mongoose.Types.ObjectId.isValid(${id})}`,
-            isIdValid: mongoose.Types.ObjectId.isValid(id),
-            request: {
-            type: "DELETE",
-            url: req.originalUrl,
-            },
-        });
-    });
-});
+	const id = req.params.calibrationId;
+	const { procedureId, sensorId } = req.body;
+	Calibration.deleteOne({ _id: id }) //delete calibratin record by ID
+		.exec()
+		.then((doc) => {
+		////<<<<<<<deleteOne()>>>>>>>/////
+			if (doc.deletedCount === 1) {
+			//if document has been Successfully deleted
+			Promise.all([
+			Sensor.findById(sensorId).exec(), //find sensor document by specified reference id
+			Procedure.findById(procedureId).exec(), //find procedure by specified reference id
+			])
+				.then(([sensor, procedure]) => {
+				for (let i = 0; i < sensor.calibrations.length; i++) {
+					if (sensor.calibrations[i].toString() === id) {
+						sensor.calibrations.splice(i, 1); //use splice() method to mutate array [remove reference of deleted calibratin record]
+						break;
+					}
+				}
+				for (let i = 0; i < procedure.calibrations.length; i++) {
+					if (procedure.calibrations[i].toString() === id) {
+						procedure.calibrations.splice(i, 1); //use splice() method to mutate array [remove reference of deleted calibratin record]
+						break;
+					}
+				}
+				Promise.all([sensor.save(), procedure.save()])
+					.then(() => {
+						console.log({
+						request: {
+							type: "DELETE",
+							url: req.originalUrl,
+							status: "SUCCESS",
+						},
+					});
+					res.status(200).json({
+						message: `SUCCESS! Calibration procedure ${id} was deleted from database and its reference IDs were cleaned up`,
+						deletedDocument: doc,
+						request: {
+							type: "DELETE",
+							url: req.originalUrl,
+						},
+					});
+					})
+				//FAILURE: if mutated sensor and/or procedure documents were not saved
+					.catch((err) => {
+						res.status(500).json({
+						err,
+						message:
+							"Failed to cleanup sensor and/or procedure documents associated with deleted calibration record...",
+						request: {
+							type: "DELETE",
+							url: req.originalUrl,
+						},
+						});
+					});
+				})
+			//FAILURE: if mutated sensor and/or procedure documents were not saved
+				.catch((err) => {
+					res.status(500).json({
+						err,
+						message: `Calibration record ${id} DELETED, but sensor and procedure with the following reference IDs were NOT FOUND`,
+						sensorId,
+						procedureId,                
+						request: {
+							type: "DELETE",
+							url: req.originalUrl,
+						},
+					});
+			});
+			} else {
+			res.status(400).json({
+				message: `Document was NOT deleted. The calibration record associated with ID {${id}} is VALID, but most likley NOT found in the database.`,
+				isIdValid: mongoose.Types.ObjectId.isValid(id),
+				request: {
+					type: "DELETE",
+					url: req.originalUrl,
+				},
+			});
+			}
+		})
+		.catch((err) => {
+			res.status(400).json({
+				err,
+				message: `Failed to delete calibration record associated with ID ${id}. The ID format is most likely INVALID. {CHECK: mongoose.Types.ObjectId.isValid(${id})}`,
+				isIdValid: mongoose.Types.ObjectId.isValid(id),
+				request: {
+				type: "DELETE",
+				url: req.originalUrl,
+				},
+			});
+		});
+	});
 
 module.exports = router;

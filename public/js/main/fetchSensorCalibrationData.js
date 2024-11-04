@@ -29,7 +29,7 @@ const fetchSensorCalibrationData = async () => {
 				<div class="alert alert-danger" role="alert"> NOTE! No sensor data exists or unable to fetch due to system failure.</div>
 				<div class="alert alert-danger" role="alert">${error}</div>
 			</div>`;
-    });
-};
+		});
+	};
 
 fetchSensorCalibrationData();
