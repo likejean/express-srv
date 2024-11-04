@@ -26,20 +26,21 @@
 			<div class="row d-flex justify-content-center">
 				<div class="card border-success my-5" style="max-width: 75rem;">
 					<div class="card-footer text-center my-3"><h2>Calibration Procedures</h2></div>
-					<table class="table">
-						<thead class="thead-dark">
+					<table class="table table-hover">
+						<thead class="table-dark">
 							<tr>
 								<th scope="col">#</th>
 								<th scope="col">Name</th>
-								<th scope="col">Description</th>
-								<th scope="col">Calibrator Model</th>
-								<th scope="col">Quantity</th>
-								<th scope="col">Units</th>								
-								<th scope="col">Manufacturer</th>
+								<th scope="col" class="d-none d-sm-table-cell">Description</th>
+								<th scope="col" class="d-none d-sm-table-cell">Calibrator Model</th>
+								<th scope="col" class="d-none d-md-table-cell">Quantity</th>
+								<th scope="col" class="d-none d-md-table-cell">Units</th>								
+								<th scope="col" class="d-none d-lg-table-cell">Manufacturer</th>
 								<th scope="col">Calibrations</th>
-								<th scope="col">Comments</th>
+								<th scope="col" class="d-none d-lg-table-cell">Comments</th>
 								<th scope="col">Settings</th>
 							</tr>
+
 						</thead>
 						<tbody class="calibration-procedures-data">
 										
@@ -73,5 +74,6 @@
 	<script src="../js/utils/createTableCell.js"></script>
 	<script src="../js/procedure/createProceduresTable.js"></script>
 	<script src="../js/procedure/createTrashIcon.js"></script>
+	<script src="../js/procedure/createDropDownList.js"></script>
 
 </html>

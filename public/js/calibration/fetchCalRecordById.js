@@ -15,10 +15,11 @@ const fetchCalRecordById = async () => {
     const urlParams = new URLSearchParams(queryString);
     let id = urlParams.get("id");
 
-  //Get a current time in unix format
+	
+  	//Get a current time in unix format
     const unixTimestamp = moment().unix();
 
-  // fetch all data using POST API endpoints: sensors, calibrations, procedures
+ 	 // fetch all data using POST API endpoints: sensors, calibrations, procedures
     await axios
     .get(`../api/calibrations/${id}`)
     .then((result) => {

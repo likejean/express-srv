@@ -63,3 +63,10 @@ label {
 .sensor-notice-span {
 	margin-right: 40px;	
 }
+
+li {
+	display: flex; /* allows align-items to work below */
+	justify-content: center; /* Horizontally centers single-line elements */
+	text-align:center; /* Horizontally centers text within line-wrapped elements */
+	align-items: center; /* vertical */
+}
