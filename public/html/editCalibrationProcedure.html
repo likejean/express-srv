@@ -26,6 +26,7 @@
 			<div class="row d-flex justify-content-center">
 				<div class="card border-success my-5" style="max-width: 75rem;">
 					<div class="card-footer text-center my-3"><h2>Calibration Procedures</h2></div>
+					<p style="color:red;">Note: You can only delete a procedure if it is not associated with any calibration records.</p>
 					<table class="table table-hover">
 						<thead class="table-dark">
 							<tr>
@@ -33,9 +34,9 @@
 								<th scope="col">Name</th>
 								<th scope="col" class="d-none d-sm-table-cell">Description</th>
 								<th scope="col" class="d-none d-sm-table-cell">Calibrator Model</th>
-								<th scope="col" class="d-none d-md-table-cell">Quantity</th>
-								<th scope="col" class="d-none d-md-table-cell">Units</th>								
 								<th scope="col" class="d-none d-lg-table-cell">Manufacturer</th>
+								<th scope="col" class="d-none d-md-table-cell">Quantity</th>
+								<th scope="col" class="d-none d-md-table-cell">Units</th>
 								<th scope="col">Calibrations</th>
 								<th scope="col" class="d-none d-lg-table-cell">Comments</th>
 								<th scope="col">Settings</th>
@@ -43,7 +44,7 @@
 
 						</thead>
 						<tbody class="calibration-procedures-data">
-										
+							<!-- here is where dynamically generated list HTML elements are appended (list of all calibration procedures)-->
 						</tbody>
 					</table>
 
@@ -52,7 +53,7 @@
 							
 							<div class="row d-none d-sm-flex">
 								<div class="form-group col m-2 text-center">                           
-									<button id="patch-sensor-record" type="submit" class="btn btn-primary m-2" onclick=patchProcedureRecord() disabled>Submit</button>								
+									<!--TBD <button id="patch-sensor-record" type="submit" class="btn btn-primary m-2" onclick=patchProcedureRecord() disabled>Submit</button> -->								
 									<a href="../index.html" class="btn btn-dark">Back</a>
 								</div>
 							</div>
@@ -75,5 +76,6 @@
 	<script src="../js/procedure/createProceduresTable.js"></script>
 	<script src="../js/procedure/createTrashIcon.js"></script>
 	<script src="../js/procedure/createDropDownList.js"></script>
+	<script src="../js/procedure/deleteCalProcedureById.js"></script>
 
 </html>

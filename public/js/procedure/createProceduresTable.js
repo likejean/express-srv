@@ -16,9 +16,9 @@ function createProceduresTable() {
 		row.appendChild(createTableCell("td",`${data[i].procedureName}`, [],  [])); //Procedure Name cell
 		row.appendChild(createTableCell("td",`${data[i].description}`, ["d-none", "d-sm-table-cell"],  [])); //Description cell
 		row.appendChild(createTableCell("td",`${data[i].calibratorModel}`, ["d-none", "d-sm-table-cell"],  [])); //Calibrator Model cell
-		row.appendChild(createTableCell("td",`${data[i].measurementQuantity}`, ["d-none", "d-md-table-cell"],  [])); //Measurement Quantity cell
-		row.appendChild(createTableCell("td",`${data[i].units}`, ["d-none", "d-md-table-cell"],  [])); //Units cell
 		row.appendChild(createTableCell("td",`${data[i].manufacturer}`, ["d-none", "d-lg-table-cell"],  [])); //Calibrator Manufacturer cell
+		row.appendChild(createTableCell("td",`${data[i].measurementQuantity}`, ["d-none", "d-md-table-cell"],  [])); //Measurement Quantity cell
+		row.appendChild(createTableCell("td",`${data[i].units}`, ["d-none", "d-md-table-cell"],  [])); //Units cell		
 		row.appendChild(createDropDownList("td", data[i].calibrations, [])); //Calibrations drop-down list
 		row.appendChild(createTableCell("td", data[i].comment, ["d-none", "d-lg-table-cell"],  [])); //Comments Manufacturer cell
 		row.appendChild(createTrashIcon(`${i + 1}`, `${data[i]._id}`, [], data[i].calibrations.length !== 0))

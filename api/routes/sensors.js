@@ -262,8 +262,16 @@ router.delete('/:sensorId', (req, res, next) => {
         .exec()
         .then(doc => {
             if(doc.deletedCount === 1){
+                //SUCCESS:
+                console.log({
+                    request: {
+                    type: "DELETE",
+                    url: req.originalUrl,
+                    status: "SUCCESS",
+                    },
+                });
                 res.status(200).json({
-					message: `SUCCESS! Sensor ${req.body.description} ${req.body.EID} was deleted from calibration procedure`,
+					message: `SUCCESS! Sensor ${req.body.description} ${req.body.EID} was deleted.`,
 					deletedSensor: {
 						id: req.params.sensorId,
 						EID: req.body.EID,

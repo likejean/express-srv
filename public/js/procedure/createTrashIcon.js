@@ -7,9 +7,7 @@ function createTrashIcon(rowIdx, procedureId, attrArr, disabled) {
             cell.setAttribute(item.attribute, item.value); 
         });
     } 
-    cell.innerHTML = disabledStatus + `<i id="icon${rowIdx}" onClick="deleteCalibrationProcedure(
-        ${rowIdx},
-		'${procedureId}',
-        )" class='fa-sharp-duotone fa-solid fa-trash' style="color:white;"></i></button>`;
+    cell.innerHTML = disabledStatus + `<i id="icon${rowIdx}" onClick="deleteCalibrationProcedure('${procedureId}')" 
+        class='fa-sharp-duotone fa-solid fa-trash' style="color:white;"></i></button>`;
     return cell;
 }

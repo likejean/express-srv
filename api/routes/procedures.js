@@ -129,6 +129,65 @@ router.post('/', (req, res, next) => {
 
 });
 
+
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+///DELETE API endpoint: deletes procedure document by ID
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+
+router.delete('/:procedureId', (req, res, next) => {
+    const id = req.params.procedureId;
+    Procedure.deleteOne({_id: id})
+        .exec()
+        .then(doc => {
+            //SUCCESS:
+            console.log({
+                request: {
+                type: "DELETE",
+                url: req.originalUrl,
+                status: "SUCCESS",
+                },
+            });
+            if(doc.deletedCount === 1){
+                res.status(200).json({
+					message: `SUCCESS! Calibration procedure ${req.body.procedureName} was deleted from calibration procedure`,
+					deletedProcedure: {
+						id: req.params.procedureId,
+						EID: req.body.procedureName,
+						description: req.body.description
+					}, 
+					deletedCount: doc.deletedCount,                   
+					request: {
+						type: 'DELETE',
+						url: req.originalUrl                    
+					}    
+				});        
+            }else{
+                res.status(400).json({
+                    error: `Error: (Hint: calibration procedure id ${req.body.procedureId} was valid, but seems like not found in the database.`,
+                    request: {
+                        type: 'DELETE',
+                        url: req.originalUrl                    
+                    }    
+                })
+            }
+
+        }).catch(()=>{ 
+            res.status(400).json({
+				err,
+				message: `Failed to delete calibration procedure ${req.body.procedureName}. (Hint: the procedure id format is INVALID; thus, not found in the database...)`, 
+				isIdValid: mongoose.Types.ObjectId.isValid(id),
+				request: {
+				type: "DELETE",
+				url: req.originalUrl,
+				},
+			});
+        });
+    })
+
+
+
 module.exports = router;
 
 
