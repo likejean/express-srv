@@ -38,7 +38,8 @@ label {
 	padding: 65px 40px;
 }
 
-.new-sensor-form-title {
+.new-sensor-form-title, .user-login-form-title, 
+.new-calibration-form-title, .new-procedure-form-title {
 	color: blue;
 }
 
