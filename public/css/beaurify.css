@@ -16,6 +16,7 @@
 	}
 }
 
+
 label {
 	font-weight: bold;
 	color: darkblue;
@@ -57,16 +58,14 @@ label {
 }
 
 .avatar {
-	width: 60px;
+	width: 40px;
 }
 
 .sensor-notice-span {
 	margin-right: 40px;	
 }
 
-li {
-	display: flex; /* allows align-items to work below */
-	justify-content: center; /* Horizontally centers single-line elements */
-	text-align:center; /* Horizontally centers text within line-wrapped elements */
-	align-items: center; /* vertical */
+.login-label {
+	color:white;
+	margin-right: 15px;
 }
