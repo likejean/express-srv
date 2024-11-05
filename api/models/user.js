@@ -20,6 +20,21 @@ const userSchema = new Schema({
 		required: true,
 		unique: true
 	},	
+	firstname: {
+		type: String,
+		required: false,
+		unique: true
+	},
+	lastname: {
+		type: String,
+		required: false,
+		unique: true
+	},
+	age: {
+		type: String,
+		required: false,
+		unique: true
+	},
 	level: {
 		type: String,
 		required: true,
@@ -27,8 +42,13 @@ const userSchema = new Schema({
 	},
 	avatar: {
 		type: String,
-		required: true
-	}
+		required: true,
+		unique: true
+	}, 
+	aboutYourself: {
+		type: String,
+		required: false
+	},
 });
 
 module.exports = mongoose.model('User', userSchema);
