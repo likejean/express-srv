@@ -19,33 +19,35 @@
 			crossorigin="anonymous">
 		</script>
 		
-		<title>User Login</title>
+		<title>User Signup</title>
     </head>
     <body>
 		<div class="jumbotron vertical-center">
 			<div class="container text-center">
-				<h1 class="user-login-form-title">User Login</h1>
-				<p>Please, use this form to login</p>
+				<h1 class="user-login-form-title">User Signup</h1>
+				<p>Please, use this form to register user</p>
 				
-				<form id="user-login-form">
+				<form id="user-register-form">
+					
 					<div class="control-form-field-box form-group my-4 p-2">
 						<div class="row mx-3 my-2">
-							<!-- Username -->
-							<label for="username">Username:</label>
+							<!-- Email -->
+							<label for="email">Email:</label>
 							<input
-								name="EID"
+								name="email"
 								type="text"
 								class="form-control"
-								id="username"
-								aria-describedby="username#Help"
+								id="email"
+								aria-describedby="email#Help"
 								placeholder=""
 								required
 							/>
-							<small id="username#Help" class="form-text text-muted">
-								Please, enter your username here
+							<small id="email#Help" class="form-text text-muted">
+								Please, enter your email here
 							</small>
 						</div>
 					</div>
+
 					<div class="control-form-field-box form-group my-4 p-2">
 						<div class="row mx-3 my-2">
 							<!-- Password -->
@@ -64,6 +66,25 @@
 							</small>
 						</div>
 					</div>
+
+					<div class="control-form-field-box form-group my-4 p-2">
+						<div class="row mx-3 my-2">
+							<!-- Username -->
+							<label for="username">Username:</label>
+							<input
+								name="username"
+								type="text"
+								class="form-control"
+								id="username"
+								aria-describedby="username#Help"
+								placeholder=""
+								required
+							/>
+							<small id="username#Help" class="form-text text-muted">
+								Please, enter your username here
+							</small>
+						</div>
+					</div>					
 					
 				</form>
 			</div>
