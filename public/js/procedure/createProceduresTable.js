@@ -7,10 +7,6 @@ function createProceduresTable() {
 	for(let i = 0; i < data.length; i++){
 		// adds the row of cells to the end of the table body
         let row = document.createElement("tr");
-
-
-
-
 		row.setAttribute("id", `row${i + 1}`);
 		row.appendChild(createTableCell("th",`${i + 1}`, [],  [{attribute:"scope", value:"row"}])); //# column cell
 		row.appendChild(createTableCell("td",`${data[i].procedureName}`, [],  [])); //Procedure Name cell

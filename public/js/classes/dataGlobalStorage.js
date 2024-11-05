@@ -3,12 +3,14 @@ class dataStorage {
 			sensors,
 			procedures,
             calibrations,
-			activeSensorCard
+			activeSensorCard,
+			selectedTableRowProcedureId
         ){      
             this.sensors = sensors,
             this.procedures = procedures,
             this.calibrations = calibrations,
-			this.activeSensorCard = activeSensorCard    
+			this.activeSensorCard = activeSensorCard,
+			this.selectedTableRowProcedureId = selectedTableRowProcedureId
     }
 
     getSensorNames(){
