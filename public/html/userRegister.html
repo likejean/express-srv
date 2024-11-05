@@ -25,66 +25,146 @@
 		<div class="jumbotron vertical-center">
 			<div class="container text-center">
 				<h1 class="user-login-form-title">User Signup</h1>
-				<p>Please, use this form to register user</p>
+				<p>Please, use this form to sign up</p>
 				
 				<form id="user-register-form">
 					
 					<div class="control-form-field-box form-group my-4 p-2">
-						<div class="row mx-3 my-2">
-							<!-- Email -->
-							<label for="email">Email:</label>
-							<input
-								name="email"
-								type="text"
-								class="form-control"
-								id="email"
-								aria-describedby="email#Help"
-								placeholder=""
-								required
-							/>
-							<small id="email#Help" class="form-text text-muted">
-								Please, enter your email here
-							</small>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12 mb-sm-4">
+									<!-- Email -->
+									<label for="email">Email:</label>
+									<input
+										name="email"
+										type="text"
+										class="form-control"
+										id="email"
+										aria-describedby="email#Help"
+										placeholder=""
+										required
+									/>
+									<small id="email#Help" class="form-text text-muted">
+										Please, enter your email here
+									</small>
+								</div>
+								<div class="col-lg-6 col-sm-12 mb-sm-4">
+									<!-- Password -->
+									<label for="password">Password:</label>
+									<input
+										name="EID"
+										type="password"
+										class="form-control"
+										id="password"
+										aria-describedby="password#Help"
+										placeholder=""
+										required
+									/>
+									<small id="password#Help" class="form-text text-muted">
+										Please, enter your password here
+									</small>
+								</div>
+							</div>
 						</div>
 					</div>
 
 					<div class="control-form-field-box form-group my-4 p-2">
-						<div class="row mx-3 my-2">
-							<!-- Password -->
-							<label for="password">Password:</label>
-							<input
-								name="EID"
-								type="password"
-								class="form-control"
-								id="password"
-								aria-describedby="password#Help"
-								placeholder=""
-								required
-							/>
-							<small id="password#Help" class="form-text text-muted">
-								Please, enter your password here
-							</small>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-4 col-sm-12 mb-sm-4">
+									<!-- Username -->
+									<label for="username">Username:</label>
+									<input
+										name="username"
+										type="text"
+										class="form-control"
+										id="username"
+										aria-describedby="username#Help"
+										placeholder=""
+										required
+									/>
+									<small id="username#Help" class="form-text text-muted">
+										Please, enter your username here
+									</small>
+								</div>
+								<div class="col-lg-3 col-sm-12 mb-sm-4">
+									<!-- First Name -->
+									<label for="firstname">First Name:</label>
+									<input
+										name="firstname"
+										type="text"
+										class="form-control"
+										id="firstname"
+										aria-describedby="firstname#Help"
+										placeholder=""
+										required
+									/>
+									<small id="firstname#Help" class="form-text text-muted">
+										Please, enter your first name here
+									</small>
+								</div>
+								<div class="col-lg-3 col-sm-12 mb-sm-4">
+									<!-- Last Name -->
+									<label for="lastname">Last Name:</label>
+									<input
+										name="lastname"
+										type="text"
+										class="form-control"
+										id="lastname"
+										aria-describedby="lastname#Help"
+										placeholder=""
+										required
+									/>
+									<small id="lastname#Help" class="form-text text-muted">
+										Please, enter your last name here
+									</small>
+								</div>
+								<div class="col-lg-2 col-sm-12 mb-sm-4">
+									<!-- Age -->
+									<label for="age">Age:</label>
+									<input
+										name="age"
+										type="number"
+										class="form-control"
+										id="age"
+										aria-describedby="age#Help"
+										placeholder=""
+										required
+									/>
+									<small id="age#Help" class="form-text text-muted">
+										Please, enter your age here
+									</small>
+								</div>								
+							</div>
 						</div>
 					</div>
 
 					<div class="control-form-field-box form-group my-4 p-2">
-						<div class="row mx-3 my-2">
-							<!-- Username -->
-							<label for="username">Username:</label>
-							<input
-								name="username"
-								type="text"
-								class="form-control"
-								id="username"
-								aria-describedby="username#Help"
-								placeholder=""
-								required
-							/>
-							<small id="username#Help" class="form-text text-muted">
-								Please, enter your username here
-							</small>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12 mb-sm-4">
+									<!-- Avatar -->									
+									<div>
+										<label for="formFileLg" class="form-label mb-3">Uplod image for your avatar</label>
+										<input class="form-control form-control-lg" id="formFileLg" type="file">
+									</div>
+								</div>
+								<div class="col-lg-6 col-sm-12 mb-sm-4">
+									<!-- About Yourself -->
+									<div class="form-group">
+										<label for="aboutYourself">Briefly tell about yourself</label>
+										<textarea
+											name="aboutYourself"
+											class="form-control my-3"
+											id="aboutYourself"
+											rows="10"
+										></textarea>
+									</div>
+									
+								</div>
+							</div>
 						</div>
-					</div>					
+					</div>
 					
 				</form>
 			</div>
