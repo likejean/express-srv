@@ -6,6 +6,8 @@ const userLevels = [
     'Quest'
 ];
 
+
+
 const userSchema = new Schema({
     _id: mongoose.Schema.Types.ObjectId,
     email: {
@@ -41,10 +43,9 @@ const userSchema = new Schema({
 		enum: userLevels
 	},
 	avatar: {
-		type: String,
-		required: true,
-		unique: true
-	}, 
+        data: Buffer,
+        contentType: String
+    }, 
 	aboutYourself: {
 		type: String,
 		required: false

@@ -137,33 +137,80 @@
 								</div>								
 							</div>
 						</div>
-					</div>
+					</div>					
 
 					<div class="control-form-field-box form-group my-4 p-2">
                         <div class="container">
-                            <div class="row">
-                                <div class="col-lg-6 col-sm-12 mb-sm-4">
-									<!-- Avatar -->									
-									<div>
-										<label for="formFileLg" class="form-label mb-3">Uplod image for your avatar</label>
-										<input class="form-control form-control-lg" id="formFileLg" type="file">
-									</div>
-								</div>
-								<div class="col-lg-6 col-sm-12 mb-sm-4">
-									<!-- About Yourself -->
-									<div class="form-group">
-										<label for="aboutYourself">Briefly tell about yourself</label>
-										<textarea
-											name="aboutYourself"
-											class="form-control my-3"
-											id="aboutYourself"
-											rows="10"
-										></textarea>
-									</div>
-									
+                            <div class="row"> 
+								<!-- About Yourself -->
+								<div class="form-group">
+									<label for="aboutYourself">Briefly tell about yourself</label>
+									<textarea
+										name="aboutYourself"
+										class="form-control my-3"
+										id="aboutYourself"
+										rows="10"
+									></textarea>
 								</div>
 							</div>
 						</div>
+					</div>
+					
+				</form>
+
+                                
+				<!-- Avatar -->									
+				<form action="/" method="POST" enctype="multipart/form-data">
+					<div class="control-form-field-box form-group my-4 p-2">
+						<div class="container">
+                            <div class="form-group">
+								<div class="row">
+									<!-- image name -->
+									<label for="title">Avatar Image Title</label>
+									<input
+										type="text"
+										id="title"
+										placeholder="Name"
+										class="form-control"
+										value=""
+										name="title"
+										aria-describedby="title#Help"									
+										required
+									/>
+									<small id="title#Help" class="form-text text-muted">
+										Please, enter avatar image name here
+									</small>
+								</div>
+							
+								<div class="row">
+									<label for="description">Image Description</label>
+									<textarea
+										id="description"
+										name="description"
+										class="form-control my-3"
+										value=""
+										rows="5"
+										placeholder="Description"									
+										aria-describedby="description#Help"									
+										required
+									></textarea>						
+									<small id="description#Help" class="form-text text-muted">
+										Please, enter image description
+									</small>
+								</div>
+								<!-- image name -->
+								
+							</div>
+						</div>
+						
+						<div class="container">
+							<div class="form-group my-3">
+								<label for="mage" class="form-label">Select image for avatar</label>
+								<input class="form-control form-control-lg" type="file" id="image" name="image" value="" required>									
+							</div>
+							<button ttype="submit" class="btn btn-primary">Submit</button>
+						</div>
+						
 					</div>
 					
 				</form>
@@ -176,7 +223,7 @@
 			<div class="row m-5">
 				<div class="form-group col text-center">
 					<button id="get-login-form-values" type="submit" class="btn btn-primary">
-						Login
+						Signup
 					</button>
 					<a href="../index.html" class="btn btn-dark">Back</a>
 					<button type="button" class="btn btn-secondary">
