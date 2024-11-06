@@ -40,10 +40,12 @@ app.use((req, res, next) => {
 
 
 //Intec Calibration & Sensor Routes
+const userRoutes = require('./api/routes/users');
 const sensorRoutes = require('./api/routes/sensors');
 const calibrationRoutes = require('./api/routes/calibrations');
 const procedureRoutes = require('./api/routes/procedures');
 
+app.use('/api/users', userRoutes);
 app.use('/api/sensors', sensorRoutes);
 app.use('/api/calibrations', calibrationRoutes);
 app.use('/api/procedures', procedureRoutes);
