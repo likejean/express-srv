@@ -194,28 +194,37 @@
 									</small>
 								</div>
 							</div>
-							<div class="row">
-								<div class="container">
-									<div class="form-group my-3">
-										<label for="file" class="form-label">Select image for avatar</label>
-										<input 
-											class="form-control form-control-lg" 
-											type="file" 
-											id="file" 
-											accept='image/*'
-											name="avatar" 
-											value="" 
-											aria-describedby="avatar#Help"
-											onchange="document.getElementById('avatar-image').src = window.URL.createObjectURL(this.files[0])"
-											required>
-										<small id="avatar#Help" class="form-text text-muted">
-											There is no restrictions on photo size
-										</small>									
+							<div class="row">								
+								<div class="col-lg-12 col-sm-12 mb-sm-2">
+									<label for="avatar" class="form-label">Select image for avatar</label>										
+									<input 
+										class="form-control form-control-lg" 
+										type="file" 
+										id="avatar" 
+										accept='image/*'
+										name="avatar" 
+										value="" 
+										aria-describedby="avatar#Help"
+										onchange="document.getElementById('avatar-image').src = window.URL.createObjectURL(this.files[0])"
+										required>
 									</div>
+									<small id="avatar#Help" class="form-text text-muted">
+										There is no restrictions on photo size
+									</small>
+									
+										
 								</div>
-								<div class="container">
-									<p><img class="view-avatar-fit p-3" src='#' id='avatar-image'></p>
-								</div>
+								<button 
+									type="button" 
+									id="clear-avatar-image-selection" 
+									onclick=resetAvatarImageSelection()
+									class="btn btn-secondary my-3">
+										Clear Image
+								</button>
+							</div>
+							
+							<div class="container">
+								<p><img class="view-avatar-fit p-3" src='#' id='avatar-image'></p>
 							</div>
 						</div>
 					</div>
@@ -235,21 +244,18 @@
 								</button>
 							</div>
 						</div>
-					</div>
-					
+					</div>					
 				</form>
-
 			</div>
 		</div>
-				
-
-		
         
     </body>
 
 	<script src="../js/classes/userGlobalFactory.js"></script>
 	<script src="../js/collections/newUserFormContainer.js"></script>
 	<script src="../js/user/getNewUserFormData.js"></script>
+	<script src="../js/user/utils/clearAvatarImageSelection.js"></script>
+	<scirpt src="../js/user/createNewUserProfile.js"></scirpt>
 
 	<script>
 		function resetNewUserForm() {

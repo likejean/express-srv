@@ -48,13 +48,13 @@ const newUserFormContainer = {
 		regex: "",
 	},
 	description: {
-		value: "My Photo",
+		value: "My Photos",
 		validator: () => {},
 		inputRule: ``,
 		regex: "",
 	},
 	avatar: {
-		value: "",
+		noFileChosen: true,
 		validator: () => {},
 		inputRule: ``,
 		regex: "",

@@ -10,7 +10,7 @@ class userFactory {
 
     isSubmitButtonActive() {      
         for (const [item, obj] of Object.entries(this.newUserFormInputs)) {            
-            if (obj.value === "") {
+            if (obj.value === "" || obj.noFileChosen) {
                 return false;
             }
         }
@@ -18,7 +18,8 @@ class userFactory {
     }
 
     isFormInputFieldEmpty(inputName) {
-        return this.newUserFormInputs[inputName].value.length === 0
+		if(inputName === "avatar") return this.newUserFormInputs[inputName].noFileChosen;		
+        else return this.newUserFormInputs[inputName].value.length === 0
     }
 
 	isPatchButtonActive() {
