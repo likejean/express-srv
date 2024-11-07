@@ -34,7 +34,10 @@ function submitNewUserData (event) {
     for (const [key, value] of formData.entries()) {
         newUserPostData[key] = value;
     }
+	createNewUserRecord();
 }
+
+
 
 
 

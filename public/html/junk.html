@@ -7,143 +7,143 @@
     <link rel="stylesheet" href="./normalize.css" />
     <link rel="stylesheet" href="./styles.css" />
     <title>Javascript</title>
-  </head>
-  <body>
-    <nav>
-      <div class="nav-center">
-        <h5>HTTP Methods</h5>
-        <div>
-          <a href="index.html">regular </a>
-          <a href="javascript.html">javascript </a>
-        </div>
-      </div>
-    </nav>
-    <main>
-      <section>
-        <form>
-          <h3>Javascript Form</h3>
-          <div class="form-row">
+	</head>
+	<body>
+		<nav>
+		<div class="nav-center">
+			<h5>HTTP Methods</h5>
+			<div>
+			<a href="index.html">regular </a>
+			<a href="javascript.html">javascript </a>
+			</div>
+		</div>
+		</nav>
+		<main>
+		<section>
+			<form>
+			<h3>Javascript Form</h3>
+			<div class="form-row">
             <label for="name"> enter name </label>
             <input
-              type="text"
-              name="name"
-              id="name"
-              class="form-input"
-              autocomplete="false"
-            />
-            <small class="form-alert"></small>
-          </div>
-          <div class="form-row">
-            <button type="submit" class="block submit-btn">submit</button>            
-          </div>
+				type="text"
+				name="name"
+				id="name"
+				class="form-input"
+				autocomplete="false"
+				/>
+				<small class="form-alert"></small>
+			</div>
+			<div class="form-row">
+				<button type="submit" class="block submit-btn">submit</button>            
+			</div>
 
         </form>
         <div class="result"></div>
-      </section>
-    </main>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
-      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
-      crossorigin="anonymous"
-    ></script>
-    <script>
-      const result = document.querySelector('.result')
+		</section>
+		</main>
+		<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+		integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+		crossorigin="anonymous"
+		></script>
+		<script>
+		const result = document.querySelector('.result')
 
-      const fetchPeople = async () => {
-        try {
-          const { data } = await axios.get('/api/people')
+		const fetchPeople = async () => {
+			try {
+			const { data } = await axios.get('/api/people')
 
-          const people = data.data.map((person) => {
-            return `<h5>${person.name}</h5>`
-          })
-          result.innerHTML = people.join('')          
-        } catch (error) {
-          result.innerHTML = `<div class="alert alert-danger">ERROR! Can't Fetch Data</div>`
-        }
-      }
-      fetchPeople()
-      // submit form
-      const btn = document.querySelector('.submit-btn')
-      const input = document.querySelector('.form-input')
-      const formAlert = document.querySelector('.form-alert')
-      btn.addEventListener('click', async (e) => {
-        e.preventDefault()
-        const nameValue = input.value
+			const people = data.data.map((person) => {
+				return `<h5>${person.name}</h5>`
+			})
+			result.innerHTML = people.join('')          
+			} catch (error) {
+			result.innerHTML = `<div class="alert alert-danger">ERROR! Can't Fetch Data</div>`
+			}
+		}
+		fetchPeople()
+		// submit form
+		const btn = document.querySelector('.submit-btn')
+		const input = document.querySelector('.form-input')
+		const formAlert = document.querySelector('.form-alert')
+		btn.addEventListener('click', async (e) => {
+			e.preventDefault()
+			const nameValue = input.value
 
-        try {
-          const { data } = await axios.post('/api/people', { name: nameValue })
-          const h5 = document.createElement('h5')
-          h5.textContent = data.person
-          result.appendChild(h5)          
-        } catch (error) {          
-          formAlert.textContent = error.response.data.msg
-        }
-        input.value = ''
-      })
-    </script>
-    <script>
-      const tableBody = document.querySelector(".selected-calibration-list");
-      const optionsAvailable = document.querySelector(".options-available");
-      const clearSelectionButton = document.getElementById(
-        "clearCalibrationSelectionList"
-      ); // select the button element
-      let selectedCals = {};
+			try {
+			const { data } = await axios.post('/api/people', { name: nameValue })
+			const h5 = document.createElement('h5')
+			h5.textContent = data.person
+			result.appendChild(h5)          
+			} catch (error) {          
+			formAlert.textContent = error.response.data.msg
+			}
+			input.value = ''
+		})
+		</script>
+		<script>
+		const tableBody = document.querySelector(".selected-calibration-list");
+		const optionsAvailable = document.querySelector(".options-available");
+		const clearSelectionButton = document.getElementById(
+			"clearCalibrationSelectionList"
+		); // select the button element
+		let selectedCals = {};
 
-      let data = JSON.parse(window.localStorage.getItem("calibrations"));
+		let data = JSON.parse(window.localStorage.getItem("calibrations"));
 
-      data.forEach((item, idx) => {
-        let option = document.createElement("option");
-        let text = document.createTextNode(item.calibrationName);
-        selectedCals[`${idx + 1}`] = new calibrationlProcedure(
-          item._id,
-          item.calibrationName,
-          item.calibrationRangePercent
-        );
-        option.setAttribute("value", idx + 1);
-        option.appendChild(text);
-        optionsAvailable.appendChild(option);
-      });
-      clearSelectionButton.style.visibility = "hidden";
-      // submit form
+		data.forEach((item, idx) => {
+			let option = document.createElement("option");
+			let text = document.createTextNode(item.calibrationName);
+			selectedCals[`${idx + 1}`] = new calibrationlProcedure(
+			item._id,
+			item.calibrationName,
+			item.calibrationRangePercent
+			);
+			option.setAttribute("value", idx + 1);
+			option.appendChild(text);
+			optionsAvailable.appendChild(option);
+		});
+		clearSelectionButton.style.visibility = "hidden";
+		// submit form
 
-      document
-        .querySelector("#calibrationListSelection")
-        .addEventListener("change", function (e) {
-          let name = e.target.options[e.target.selectedIndex].text;
-          let val = e.target.value;
-          let row = document.createElement("tr");
-          row.setAttribute("id", `row${val}`);
-          row.appendChild(createTableCell(`${val}`, []));
-          row.appendChild(
-            createTableCell("td",`${selectedCals[val].procedureName}`, [])
-          );
-          row.appendChild(
-            createTableCell("td",`${selectedCals[val].calibrationPrinciple}`, [])
-          );
-          clearSelectionButton.style.visibility = "visible";
-          tableBody.appendChild(row);
-        });
+		document
+			.querySelector("#calibrationListSelection")
+			.addEventListener("change", function (e) {
+			let name = e.target.options[e.target.selectedIndex].text;
+			let val = e.target.value;
+			let row = document.createElement("tr");
+			row.setAttribute("id", `row${val}`);
+			row.appendChild(createTableCell(`${val}`, []));
+			row.appendChild(
+				createTableCell("td",`${selectedCals[val].procedureName}`, [])
+			);
+			row.appendChild(
+				createTableCell("td",`${selectedCals[val].calibrationPrinciple}`, [])
+			);
+			clearSelectionButton.style.visibility = "visible";
+			tableBody.appendChild(row);
+			});
 
-      clearSelectionButton.addEventListener("click", (e) => {
-        // add a click event listener
-        e.preventDefault();
-        removeAllChildNodes(tableBody);
-        clearSelectionButton.style.visibility = "hidden";
-      });
+		clearSelectionButton.addEventListener("click", (e) => {
+			// add a click event listener
+			e.preventDefault();
+			removeAllChildNodes(tableBody);
+			clearSelectionButton.style.visibility = "hidden";
+		});
 
-      function getFormValues() {
-        // Get the form element
-        const form = document.getElementById("newCalibrationEvent");
+		function getFormValues() {
+			// Get the form element
+			const form = document.getElementById("newCalibrationEvent");
 
-        // Get the input values
-        const EID = form.elements["EID"].value;
-        console.log(form.elements);
-        //const email = form.elements["email"].value;
+			// Get the input values
+			const EID = form.elements["EID"].value;
+			console.log(form.elements);
+			//const email = form.elements["email"].value;
 
-        // Do something with the values (e.g., display them)
-        console.log("Name:", EID);
-        //console.log("Email:", email);
-      }
-    </script>
-  </body>
+			// Do something with the values (e.g., display them)
+			console.log("Name:", EID);
+			//console.log("Email:", email);
+		}
+		</script>
+	</body>
 </html>
