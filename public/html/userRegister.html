@@ -27,8 +27,7 @@
 				<h1 class="user-login-form-title">User Signup</h1>
 				<p>Please, use this form to sign up</p>
 				
-				<form id="user-register-form">
-					
+				<form id="new-user-form">					
 					<div class="control-form-field-box form-group my-4 p-2">
                         <div class="container">
                             <div class="row">
@@ -155,22 +154,18 @@
 							</div>
 						</div>
 					</div>
-					
-				</form>
 
-                                
-				<!-- Avatar -->									
-				<form action="/api/users/upload" method="POST" enctype="multipart/form-data">
+					<!-- AVATAR -->
 					<div class="control-form-field-box form-group my-4 p-2">
-						<div class="container">
-                            <div class="form-group">
-								<div class="row mb-3">
-									<!-- image name -->
+                        <div class="container">
+                            <div class="row my-3">
+                                <div class="col-lg-6 col-sm-12 mb-sm-4">
+									<!-- image title -->
 									<label for="title">Avatar Image Title</label>
 									<input
 										type="text"
 										id="title"
-										placeholder="Name"
+										placeholder=""
 										class="form-control"
 										value=""
 										name="title"
@@ -181,56 +176,89 @@
 										Please, enter avatar image name here
 									</small>
 								</div>
-							
-								<div class="row mb-5">
+								<!-- image description -->
+								<div class="col-lg-6 col-sm-12 mb-sm-4">
 									<label for="description">Image Description</label>
-									<textarea
+									<input
+										type="text"
 										id="description"
-										name="description"
+										placeholder=""
 										class="form-control"
 										value=""
-										rows="5"
-										placeholder="Description"									
+										name="description"
 										aria-describedby="description#Help"									
 										required
-									></textarea>						
+									/>					
 									<small id="description#Help" class="form-text text-muted">
 										Please, enter image description
 									</small>
 								</div>
-								<!-- image name -->
-								
+							</div>
+							<div class="row">
+								<div class="container">
+									<div class="form-group my-3">
+										<label for="file" class="form-label">Select image for avatar</label>
+										<input 
+											class="form-control form-control-lg" 
+											type="file" 
+											id="file" 
+											accept='image/*'
+											name="avatar" 
+											value="" 
+											aria-describedby="avatar#Help"
+											onchange="document.getElementById('avatar-image').src = window.URL.createObjectURL(this.files[0])"
+											required>
+										<small id="avatar#Help" class="form-text text-muted">
+											There is no restrictions on photo size
+										</small>									
+									</div>
+								</div>
+								<div class="container">
+									<p><img class="view-avatar-fit p-3" src='#' id='avatar-image'></p>
+								</div>
 							</div>
 						</div>
-						
-						<div class="container">
-							<div class="form-group my-3">
-								<label for="file" class="form-label">Select image for avatar</label>
-								<input class="form-control form-control-lg" type="file" id="file" name="avatar" value="" required>									
-							</div>
-							<button ttype="submit" class="btn btn-primary">Submit</button>
-						</div>
-						
 					</div>
+									
+				
+
+					<!--Button Container-->
+					<div class="container">
+						<div class="row m-5">
+							<div class="form-group col text-center">
+								<button id="get-register-user-form-values" type="submit" class="btn btn-primary">
+									Signup
+								</button>
+								<a href="../index.html" class="btn btn-dark">Back</a>
+								<button type="button" class="btn btn-secondary" onclick="resetNewUserForm()">
+									Reset
+								</button>
+							</div>
+						</div>
+					</div>
+					
 				</form>
+
 			</div>
 		</div>
 				
 
-		<!--Button Container-->
-		<div class="container">
-			<div class="row m-5">
-				<div class="form-group col text-center">
-					<button id="get-login-form-values" type="submit" class="btn btn-primary">
-						Signup
-					</button>
-					<a href="../index.html" class="btn btn-dark">Back</a>
-					<button type="button" class="btn btn-secondary">
-						Reset
-					</button>
-				</div>
-			</div>
-		</div>
+		
         
     </body>
+
+	<script src="../js/classes/userGlobalFactory.js"></script>
+	<script src="../js/collections/newUserFormContainer.js"></script>
+	<script src="../js/user/getNewUserFormData.js"></script>
+
+	<script>
+		function resetNewUserForm() {
+			window.location.reload();
+		}
+
+		function displayAvatarImage() {
+			document.getElementById('avatar-image').src = window.URL.createObjectURL(this.files[0]);
+		}
+		
+	</script>
 </html>

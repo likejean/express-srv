@@ -29,8 +29,10 @@ class calibrationFactory {
         return true;
     }
 
-    //this method determines if validation rule applied to any field in New Calibration Record Form
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+	//////this method determines if validation rule applied to any field in New Calibration Record Form
     //if there is a validation rule applied, it outputs warning message for any user's rule valiolation.
+
     isValidationRuleApplied(inputName, inputValue) {
         // Convert the function to a string and remove whitespace
         const funcString = this.newCalRecordFormInputs[inputName].validator
@@ -39,18 +41,18 @@ class calibrationFactory {
 
         // Check if the function body for validator is empty
         if (funcString === "function () {}" || funcString === "() => {}") {
-        return {
-            rule: "",
-            isValid: true,
-        };
+			return {
+				rule: "",
+				isValid: true,
+			};
         } else {
-        return {
-            rule: this.newCalRecordFormInputs[inputName].validator(inputValue)
-            ? ""
-            : this.newCalRecordFormInputs[inputName].inputRule,
-            isValid: this.newCalRecordFormInputs[inputName].validator(inputValue),
-        };
-        }
+			return {
+				rule: this.newCalRecordFormInputs[inputName].validator(inputValue)
+				? ""
+				: this.newCalRecordFormInputs[inputName].inputRule,
+				isValid: this.newCalRecordFormInputs[inputName].validator(inputValue),
+			};
+		}
     }
 
     //this method determines if there is any empty string in n New Calibration Record Form input field

@@ -38,8 +38,7 @@ function submitNewSensorData (event) {
     const formData = new FormData(form);
 
     //concatenate and populate sensor EID in modal header
-    sensFormModalHeaderText.innerText = "Sensor:\u00a0" 
-    + _sensfactory.newSensorFormInputs["EID"].value;
+    sensFormModalHeaderText.innerText = "Sensor:\u00a0"  + _sensfactory.newSensorFormInputs["EID"].value;
    
     // Loop through all form data and prepare data object for POST request
     for (const [key, value] of formData.entries()) {

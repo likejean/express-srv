@@ -70,3 +70,8 @@ label {
 	color:white;
 	margin-right: 15px;
 }
+
+.view-avatar-fit {
+	max-width: 99%;
+	max-height: 99%;
+}

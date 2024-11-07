@@ -1,5 +1,5 @@
 const newSensorFormContainer = {
- 	EID: {
+	EID: {
 		value: "EIDXXX",
 		validator: () => {},
 		inputRule: ``,
