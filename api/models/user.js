@@ -42,10 +42,11 @@ const userSchema = mongoose.Schema(
 			required: true,
 			enum: userLevels
 		},
-		avatar: {
-			data: Buffer,
-			contentType: String
-		}, 
+		avatarId: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Avatar',
+			required: false
+		},
 		aboutYourself: {
 			type: String,
 			required: false
