@@ -31,12 +31,40 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({ storage, fileFilter });
 
 
-router.get('/getAvatar/:id', (req, res) => {
-    const { id: _id } = req.params;
-    // If you dont use lean(), you wont decode image as base64
-    User.findOne({ _id }).lean().exec();
-    res.send(image);
-});
+router.get('/profile/:userId', async (req, res) => {
+	try {
+		const user = await User.findById(req.params.userId);
+	
+		if (!user) {
+			return res.status(404).send('User not found.');
+		}
+	
+		console.log({
+			request: {
+				type: 'GET',
+				url: req.originalUrl,
+				status: "SUCCESS"
+			}});
+
+		return res.status(200).json({
+			user,
+			request: {
+				type: 'GET',
+				url: req.originalUrl                    
+			}  
+		});
+
+		} catch (error) {
+			res.status(500).json({
+				message: "Failure: Unable to fetch user record...",
+				serverError: error.message,
+				request: {
+				type: "GET",
+				url: req.originalUrl,
+				},
+			});
+		}
+	});
 
 
 router.post('/register', upload.single("avatar"), (req, res) => {	
@@ -54,10 +82,13 @@ router.post('/register', upload.single("avatar"), (req, res) => {
 		description
 
     } = req.body;
+		
+	const avatar = { 
+		data: new Buffer.from(req.file.buffer, 'base64'), 
+		contentType: req.file.mimetype, 
+		originalName: req.file.originalname 
+	};
 
-	console.log(req.file, "req.body", req.body)
-	
-	const avatar = { data: new Buffer.from(req.file.buffer, 'base64'), contentType: req.file.mimetype, originalName: req.file.originalname };
 	const user = new User({
 		_id,
         email,

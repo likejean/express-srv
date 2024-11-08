@@ -10,7 +10,7 @@ var textNode = document.createTextNode("\u00a0");
 &amp;nbsp; and &amp;#160; are strictly HTML (or XML) notations. In JavaScript, you need to use an escape sequence starting with '\\' for special characters in strings.
 
 
-4. How does Mongoose know which collection?
+4. HOW DOES MONGOOSE KNOW WHICH COLLECTION?
 Mongoose uses the model name, as passed when it was created: mongoose. model("User", UserSchema) , 
 converted to lower case and with an 's' appended. 
 For the model User it uses the collection users by default. 
