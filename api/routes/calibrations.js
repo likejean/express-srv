@@ -51,10 +51,10 @@ router.get("/", (req, res, next) => {
             },
         });
     })
-    .catch(() => {
+    .catch((error) => {
         res.status(500).json({
-            message:
-                "Failure: Calibration events were not fetched... Something went wrong",
+            message: "Failure: Calibration events were not fetched... Something went wrong",
+			serverError: error.message,
             request: {
                 type: "GET",
                 url: req.originalUrl,
@@ -111,10 +111,10 @@ router.get("/:calibrationId", (req, res, next) => {
 				});
 			}
 		})
-		.catch((err) => {
+		.catch((error) => {
 			res.status(500).json({
 				message: "Failure: Unable to fetch calibration records...",
-				error: err,
+				serverError: error.message,
 				request: {
 				type: "GET",
 				url: req.originalUrl,
@@ -151,11 +151,11 @@ router.patch("/:calibrationId", (req, res, next) => {
 				result,
 			});
 		})
-		.catch((err) => {
+		.catch((error) => {
 			res.status(500).json({
 				message: "Failure: Unable to update calibration...",
 				isIdValid: mongoose.Types.ObjectId.isValid(id),
-				error: err,
+				serverError: error.message,
 				request: {
 					type: "PATCH",
 					url: req.originalUrl,
@@ -254,10 +254,11 @@ router.post("/", (req, res, next) => {
             });
         })
         //FAILURE: if calibration record was not saved
-        .catch(() => {
+        .catch((error) => {
         res.status(500).json({
             message:
             "Failed to save a calibration procedure (possibly, failed to meet Schema model requirements)",
+			serverError: error.message,
             request: {
             type: "POST",
             url: req.originalUrl,
@@ -320,9 +321,9 @@ router.delete("/:calibrationId", (req, res, next) => {
 					});
 					})
 				//FAILURE: if mutated sensor and/or procedure documents were not saved
-					.catch((err) => {
+					.catch((error) => {
 						res.status(500).json({
-						err,
+						serverError: error.message,
 						message:
 							"Failed to cleanup sensor and/or procedure documents associated with deleted calibration record...",
 						request: {
@@ -356,9 +357,9 @@ router.delete("/:calibrationId", (req, res, next) => {
 			});
 			}
 		})
-		.catch((err) => {
+		.catch((error) => {
 			res.status(400).json({
-				err,
+				serverError: error.message,
 				message: `Failed to delete calibration record associated with ID ${id}. The ID format is most likely INVALID. {CHECK: mongoose.Types.ObjectId.isValid(${id})}`,
 				isIdValid: mongoose.Types.ObjectId.isValid(id),
 				request: {

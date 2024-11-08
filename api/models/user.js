@@ -18,7 +18,8 @@ const userSchema = mongoose.Schema(
 		},
 		password: { 
 			type: String, 
-			required: true 
+			required: true,
+			unique: true
 		},
 		username: {
 			type: String,
@@ -27,43 +28,36 @@ const userSchema = mongoose.Schema(
 		},	
 		firstname: {
 			type: String,
-			required: false,
-			unique: true
+			required: false
 		},
 		lastname: {
 			type: String,
-			required: false,
-			unique: true
+			required: false
 		},
 		age: {
 			type: String,
-			required: false,
-			unique: true
+			required: false
 		},
 		level: {
 			type: String,
-			required: true,
+			default: "User",
+			required: false,
 			enum: userLevels
-		},
-		avatarId: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Avatar',
-			required: false
 		},
 		aboutYourself: {
 			type: String,
 			required: false
 		},
-		avatar: {
+		image: {
 			title: { 
 				type: String, 
-				required: true 
+				required: true		
 			},
 			description: { 
 				type: String, 
 				required: true 
 			},
-			image:
+			avatar:
 			{
 				data: Buffer,
 				contentType: String

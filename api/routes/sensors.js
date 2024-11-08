@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const Sensor = require('../models/sensor');
-const Calibration = require('../models/calibration');
 const router = express.Router();
 
 
@@ -57,11 +56,11 @@ router.get('/', (req, res, next) => {
             }
             });
         })
-        .catch(err => {
+        .catch((error) => {
             res.status(500).json({
 				message:
                 	"Failure: Sensor events were not fetched... Something went wrong",
-                error: err,
+                serverError: error.message,
                 request: {
                     type: 'GET',
                     url: req.originalUrl                    
@@ -121,10 +120,10 @@ router.get('/:sensorId', (req, res, next) => {
 				});
             }
         })
-        .catch(err => {
+        .catch((error) => {
             res.status(500).json({
 				message: "Failure: Unable to fetch sensor records...",
-				error: err,
+				serverError: error.message,
 				request: {
 				type: "GET",
 				url: req.originalUrl,
@@ -160,11 +159,11 @@ router.patch("/:sensorId", (req, res, next) => {
             result,
         });
     })
-    .catch((err) => {
+    .catch((error) => {
         res.status(500).json({
             message: "Failure: Unable to update sensor record...",
             isIdValid: mongoose.Types.ObjectId.isValid(id),
-            error: err,
+            serverError: error.message,
             request: {
                 type: "PATCH",
                 url: req.originalUrl,
@@ -236,9 +235,10 @@ router.post('/', (req, res, next) => {
             }
         });
     })
-    .catch(() => {
+    .catch((error) => {
         res.status(500).json({
             message: "Failed to create a new sensor to Database",
+            serverError: error.message,
             request: {
                 type: 'POST',
                 url: req.originalUrl                    
@@ -293,9 +293,10 @@ router.delete('/:sensorId', (req, res, next) => {
                 })
             }
 
-        }).catch(()=>{                
+        }).catch((error)=>{                
             res.status(400).json({
                 error: `Failed to delete sensor ${req.body.EID} with id {${id}}. (Hint: the sensor ${req.body.EID} id {${id}} format is INVALID; thus, not found in the database...)`,  
+                serverError: error.message,
                 request: {
                     type: 'DELETE',
                     url: req.originalUrl                    

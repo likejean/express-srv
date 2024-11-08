@@ -10,7 +10,14 @@ var textNode = document.createTextNode("\u00a0");
 &amp;nbsp; and &amp;#160; are strictly HTML (or XML) notations. In JavaScript, you need to use an escape sequence starting with '\\' for special characters in strings.
 
 
-4. HOW TO FIND MULTIPLE DOCS IN MONGOOSE MONGODB COLLECTIONS
+4. How does Mongoose know which collection?
+Mongoose uses the model name, as passed when it was created: mongoose. model("User", UserSchema) , 
+converted to lower case and with an 's' appended. 
+For the model User it uses the collection users by default. 
+You can change this by explicitly specifying the collection name in the schema.
+
+
+5. HOW TO FIND MULTIPLE DOCS IN MONGOOSE MONGODB COLLECTIONS
     // Calibration.find().where('procedureName').in(calibrationNames).exec()
     // .then(cals => {        
     //     if(cals.length > 0){
@@ -75,7 +82,7 @@ var textNode = document.createTextNode("\u00a0");
     // })
 
 
-    5. HOW TO SEQUENCE TWO AXIOS REQUESTS 
+    6. HOW TO SEQUENCE TWO AXIOS REQUESTS 
      
     //axios.patch(`../api/calibrations/${id}`, calPatchRequestData
     //  ).then(response) => {
@@ -89,102 +96,103 @@ var textNode = document.createTextNode("\u00a0");
     //  })
     //  }
 
-    6. HOW TO SEARCH IN ENTIRE VISUAL STUDIO CODE
+    7. HOW TO SEARCH IN ENTIRE VISUAL STUDIO CODE
     
     //VS Code allows you to quickly search over all files in the currently opened folder. 
     //Press Ctrl+Shift+F and enter your search term.
 
 
-	7. HOW TO CHANGE ALL occurrences in VS CODE file
+	8. HOW TO CHANGE ALL occurrences in VS CODE file
 	// use Ctrl+shift+L in Visual Studio Code to select all occurrences of word in local page!
 
 
 	/// API endpoint: delete a single sensor by MongoDB id
-/// this client reques MUST HAVE the following body! 
-//{
-//    "calibrations":[
-//      '4ed3ede8844f0f351100000c',
-//      '4ed3ede8844f0f351100000a',
-//      '4ed3ede8844f0f351100000d,
-//       ......
-//       ......
-//    ],
-//    "description": "Load Cell Transducer",
-//    "EID": "EIDXXX"      
-///////////////EXAMPLE: /////////////////////////////////////////
-//const ids =  [
-//    '4ed3ede8844f0f351100000c',
-//    '4ed3f117a844e0471100000d', 
-//   '4ed3f18132f50c491100000e',
-//];
-//}   Model.find().where('_id').in(ids).exec((err, records) => {});
+    /// this client reques MUST HAVE the following body! 
+    //{
+    //    "calibrations":[
+    //      '4ed3ede8844f0f351100000c',
+    //      '4ed3ede8844f0f351100000a',
+    //      '4ed3ede8844f0f351100000d,
+    //       ......
+    //       ......
+    //    ],
+    //    "description": "Load Cell Transducer",
+    //    "EID": "EIDXXX"      
+    ///////////////EXAMPLE: /////////////////////////////////////////
+    //const ids =  [
+    //    '4ed3ede8844f0f351100000c',
+    //    '4ed3f117a844e0471100000d', 
+    //   '4ed3f18132f50c491100000e',
+    //];
+    //}   Model.find().where('_id').in(ids).exec((err, records) => {});
 
-router.delete('/:sensorId', (req, res, next) => {
-//     const id = req.params.sensorId;
-//     Sensor.deleteOne({_id: id})
-//         .exec()
-//         .then(doc => {
-//             if(doc.deletedCount === 1){
+    router.delete('/:sensorId', (req, res, next) => {
+    //     const id = req.params.sensorId;
+    //     Sensor.deleteOne({_id: id})
+    //         .exec()
+    //         .then(doc => {
+    //             if(doc.deletedCount === 1){
 
-//                 //If a sensor document was found, then find associated calibration procedure(s) by specified id's
-//                 //in req.body.calibrations array and remove sensor ID from all FOUND cals.sensor[i] arrays
-//                 //NOTE: could be multiple calibrations found!
-//                 Calibration.find().where('_id').in(req.body.calibrations).exec()
-//                 .then(cals => { 
-//                     for (let i = 0; i < cals.length; i++) {
-//                         for (let j = 0; j < cals[i].sensors.length; j++) {
-//                             if (cals[i].sensors[j].toString() === id) {
-//                                 cals[i].sensors.splice(j, 1);   //use splice() method to mutate existing arrays in cal documents
-//                                 break;
-//                             }
-//                         }                                
-//                     }
-//                     const saveCals = cals.map(cal => cal.save());
-//                     //resolves all async promises
-//                     Promise.all(saveCals)
-//                     .then(() => {                        
-//                         res.status(200).json({
-//                             message: `SUCCESS! Sensor ${req.body.description} ${req.body.EID} was deleted from calibration procedure`,
-//                             deletedSensor: {
-//                                 id: req.params.sensorId,
-//                                 EID: req.body.EID,
-//                                 description: req.body.description
-//                             }, 
-//                             deletedCount: doc.deletedCount,                   
-//                             request: {
-//                                 type: 'DELETE',
-//                                 url: req.originalUrl                    
-//                             }    
-//                         });                           
-//                     }).catch(err => {
-//                         throw new Error(err);
-//                     })
-//                 }).catch(() => {
-//                     res.status(500).json({
-//                         error: "Internal Server Error: Sensor was not deleted...",
-//                         request: {
-//                             type: 'DELETE',
-//                             url: req.originalUrl                    
-//                         }    
-//                     });
-//                 });
-//             }else{
-//                 res.status(400).json({
-//                     error: `Error: Hint: the sensor ${req.body.EID} id {${id}} is valid, but seems like not found in the database.`,
-//                     request: {
-//                         type: 'DELETE',
-//                         url: req.originalUrl                    
-//                     }    
-//                 })
-//             }
+    //                 //If a sensor document was found, then find associated calibration procedure(s) by specified id's
+    //                 //in req.body.calibrations array and remove sensor ID from all FOUND cals.sensor[i] arrays
+    //                 //NOTE: could be multiple calibrations found!
+    //                 Calibration.find().where('_id').in(req.body.calibrations).exec()
+    //                 .then(cals => { 
+    //                     for (let i = 0; i < cals.length; i++) {
+    //                         for (let j = 0; j < cals[i].sensors.length; j++) {
+    //                             if (cals[i].sensors[j].toString() === id) {
+    //                                 cals[i].sensors.splice(j, 1);   //use splice() method to mutate existing arrays in cal documents
+    //                                 break;
+    //                             }
+    //                         }                                
+    //                     }
+    //                     const saveCals = cals.map(cal => cal.save());
+    //                     //resolves all async promises
+    //                     Promise.all(saveCals)
+    //                     .then(() => {                        
+    //                         res.status(200).json({
+    //                             message: `SUCCESS! Sensor ${req.body.description} ${req.body.EID} was deleted from calibration procedure`,
+    //                             deletedSensor: {
+    //                                 id: req.params.sensorId,
+    //                                 EID: req.body.EID,
+    //                                 description: req.body.description
+    //                             }, 
+    //                             deletedCount: doc.deletedCount,                   
+    //                             request: {
+    //                                 type: 'DELETE',
+    //                                 url: req.originalUrl                    
+    //                             }    
+    //                         });                           
+    //                     }).catch(err => {
+    //                         throw new Error(err);
+    //                     })
+    //                 }).catch(() => {
+    //                     res.status(500).json({
+    //                         error: "Internal Server Error: Sensor was not deleted...",
+    //                         request: {
+    //                             type: 'DELETE',
+    //                             url: req.originalUrl                    
+    //                         }    
+    //                     });
+    //                 });
+    //             }else{
+    //                 res.status(400).json({
+    //                     error: `Error: Hint: the sensor ${req.body.EID} id {${id}} is valid, but seems like not found in the database.`,
+    //                     request: {
+    //                         type: 'DELETE',
+    //                         url: req.originalUrl                    
+    //                     }    
+    //                 })
+    //             }
 
-//         }).catch(()=>{                
-//             res.status(400).json({
-//                 error: `Failed to delete sensor ${req.body.EID} with id {${id}}. (Hint: the sensor ${req.body.EID} id {${id}} format is INVALID; thus, not found in the database...)`,  
-//                 request: {
-//                     type: 'DELETE',
-//                     url: req.originalUrl                    
-//                 }                      
-//             });
-//         });
-//     })
+    //         }).catch(()=>{                
+    //             res.status(400).json({
+    //                 error: `Failed to delete sensor ${req.body.EID} with id {${id}}. (Hint: the sensor ${req.body.EID} id {${id}} format is INVALID; thus, not found in the database...)`,  
+    //                 request: {
+    //                     type: 'DELETE',
+    //                     url: req.originalUrl                    
+    //                 }                      
+    //             });
+    //         });
+    //     })
+

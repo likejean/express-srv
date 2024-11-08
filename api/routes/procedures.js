@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const Procedure = require('../models/procedure');
-const Calibration = require('../models/calibration');
 const router = express.Router();
 
 
@@ -52,9 +51,10 @@ router.get('/', (req, res, next) => {
             }
         });
     })
-    .catch(() => {
+    .catch((error) => {
         res.status(500).json({
             message: "Failure: Calibration events were not fetched... Something went wrong",
+            serverError: error.message,
             request: {
                 type: 'GET',
                 url: req.originalUrl                    
@@ -117,9 +117,10 @@ router.post('/', (req, res, next) => {
             }
         });
     })
-    .catch(() => {
+    .catch((error) => {
         res.status(500).json({
             message: "Failed to create a new calibration procedure to Database",
+            serverError: error.message,
             request: {
                 type: 'POST',
                 url: req.originalUrl                    
@@ -173,11 +174,12 @@ router.delete('/:procedureId', (req, res, next) => {
                 })
             }
 
-        }).catch(()=>{ 
+        }).catch((error)=>{ 
             res.status(400).json({
 				err,
 				message: `Failed to delete calibration procedure ${req.body.procedureName}. (Hint: the procedure id format is INVALID; thus, not found in the database...)`, 
 				isIdValid: mongoose.Types.ObjectId.isValid(id),
+                serverError: error.message,
 				request: {
 				type: "DELETE",
 				url: req.originalUrl,

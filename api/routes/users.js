@@ -53,48 +53,52 @@ router.post('/register', upload.single("avatar"), (req, res) => {
 		age,
 		aboutYourself,
 		title,
-		description,
-		avatar
+		description
 
     } = req.body;
 
-	console.log(req.file, req.body);
-
-	// const user = new User({
-    //     _id,
-    //     username: "admin",
-    //     title: req.body.title,
-    //     description: req.body.description,
-    //     image: {
-    //         data: fs.readFileSync(avatarPath + '/' + req.file.filename),
-    //         contentType: 'image/jpg'
-    //     }
-    // });
-
-	// user
-	// 	.save() //save calibration record document
-	// 	.then((result) => {
-	// 		console.log({
-	// 			request: {
-	// 				type: "POST",
-	// 				url: req.originalUrl,
-	// 				status: "SUCCESS",
-	// 			},
-	// 		});
-	// 		res.json({
-	// 			result,
-	// 			file: req.file
-	// 		});
-	// 	})
-	// 	.catch(() => {
-	// 		res.status(500).json({
-	// 			message: "Failed to save avatar image in the database",
-	// 			request: {
-	// 				type: 'POST',
-	// 				url: req.originalUrl                    
-	// 			}  
-	// 		});
-	// 	});
+	console.log(req.file, "req.body", req.body)
+	const user = new User({
+		_id,
+        email,
+		password,
+		username,
+		firstname,
+		lastname,
+		age,
+		aboutYourself,	
+		image: {
+			title,
+			description,
+			avatar: req.file.buffer
+		}
+    });
+	user
+		.save() //save calibration record document
+		.then((result) => {
+			console.log({
+				request: {
+					type: "POST",
+					url: req.originalUrl,
+					status: "SUCCESS",
+				},
+			});
+			res.json({
+				result,
+				file: req.file
+			});
+		})
+		.catch((error) => {
+			console.log(error)
+			res.status(500).json({
+				serverError: error.message,
+				message: "Failed to save avatar image in the database",
+				request: {
+					type: 'POST',
+					url: req.originalUrl                    
+				}  
+			});
+		});
 });
 
 
