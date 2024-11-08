@@ -8,14 +8,16 @@ var multer = require('multer');
 
 const avatarPath = path.join(__dirname + '/../../public/img/avatars');
 
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, avatarPath);
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname)
-	}
-});
+// var storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, avatarPath);
+//     },
+//     filename: function (req, file, cb) {
+//         cb(null, file.originalname)
+// 	}
+// });
+
+const storage = multer.memoryStorage();
 
 // my mimetype check here
 const fileFilter = (req, file, cb) => {
@@ -29,15 +31,11 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({ storage, fileFilter });
 
 
-router.get('/upload', (req, res) => {
-    //res.sendFile(path.join(__dirname + '/../../public/html/userRegister.html'));
-	// Avatar.find({})
-    // .then((data, err)=>{
-    //     if(err){
-    //         console.log(err);
-    //     }
-    //     res.render("/api/users/avatar",{items: data})
-    // })
+router.get('/getAvatar/:id', (req, res) => {
+    const { id: _id } = req.params;
+    // If you dont use lean(), you wont decode image as base64
+    User.findOne({ _id }).lean().exec();
+    res.send(image);
 });
 
 
@@ -58,6 +56,8 @@ router.post('/register', upload.single("avatar"), (req, res) => {
     } = req.body;
 
 	console.log(req.file, "req.body", req.body)
+	
+	const avatar = { data: new Buffer.from(req.file.buffer, 'base64'), contentType: req.file.mimetype, originalName: req.file.originalname };
 	const user = new User({
 		_id,
         email,
@@ -70,7 +70,7 @@ router.post('/register', upload.single("avatar"), (req, res) => {
 		image: {
 			title,
 			description,
-			avatar: req.file.buffer
+			avatar
 		}
     });
 	user
@@ -85,11 +85,13 @@ router.post('/register', upload.single("avatar"), (req, res) => {
 			});
 			res.json({
 				result,
-				file: req.file
+				request: {
+					type: 'POST',
+					url: req.originalUrl
+				}
 			});
 		})
 		.catch((error) => {
-			console.log(error)
 			res.status(500).json({
 				serverError: error.message,
 				message: "Failed to save avatar image in the database",
