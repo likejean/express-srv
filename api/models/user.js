@@ -60,7 +60,8 @@ const userSchema = mongoose.Schema(
 			avatar:
 			{
 				data: Buffer,
-				contentType: String
+				contentType: String,
+				originalName: String
 			}
 		}
 	});
