@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="../css/beaurify.css">
+		<link 
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+			rel="stylesheet" 
+			integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+			crossorigin="anonymous">
+		<link rel="stylesheet" 
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" 
+		/>
+		<script 
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+			crossorigin="anonymous">
+		</script>
+
+		<title>Users</title>
+    </head>
+    <body>		
+		<div class="container-fluid">
+			<div class="row d-flex justify-content-center">
+				<div class="card border-success my-5" style="max-width: 75rem;">
+					<div class="card-footer text-center my-3"><h2>Users</h2></div>
+					<p style="color:red;">Note: Only administrator can update user settings.</p>
+					<table class="table table-hover">
+						<thead class="table-dark">
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Avatar</th>
+								<th scope="col" class="d-none d-sm-table-cell">Name</th>
+								<th scope="col">Username</th>
+								<th scope="col">Email</th>
+								<th scope="col" class="d-none d-sm-table-cell">Age</th>
+								<th scope="col" class="d-none d-sm-table-cell">About</th>
+								<th scope="col">Settings</th>
+							</tr>
+
+						</thead>
+						<tbody class="user-records-data">
+							<!-- here is where dynamically generated list HTML elements are appended (list of all user records)-->
+						</tbody>
+					</table>
+
+
+					<!-- Delete User Modal: -->
+					<div
+						class="modal fade"
+						id="deleteUserRecordModal"
+						data-bs-backdrop="static"
+						data-bs-keyboard="false"
+						tabindex="-1"
+						aria-labelledby="deleteUserRecordModal"
+						aria-hidden="true"
+					>
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h1 class="modal-title fs-5 text-center container-fluid" id="deleteUserRecordModal">
+									<span class="delete-user-record-name badge bg-info"></span>  
+								</h1> 
+								<button
+									type="button"
+									class="btn-close"
+									data-bs-dismiss="modal"
+									aria-label="Close"
+								></button>
+							</div>
+							<div class="modal-body">
+								<h5>Are you sure you want to delete this user permanently?</h5>
+							</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary" onclick=deleteUserRecord()>Delete</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="card-footer bg-transparent border-success text-center">
+						<div class="container">
+							
+							<div class="row d-none d-sm-flex">
+								<div class="form-group col m-2 text-center">									
+									<!--TBD <button id="patch-user-record" type="submit" class="btn btn-primary m-2" onclick=patchUserRecord() disabled>Submit</button> -->								
+									<a href="../index.html" class="btn btn-dark">Back</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+		integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+		crossorigin="anonymous"></script>    
+    </script>
+
+	<script src="../js/classes/dataGlobalStorage.js"></script>
+	<script src="../js/utils/toBase64Decoder.js"></script>
+	<script src="../js/utils/createTableCell.js"></script>
+	<script src="../js/user/utils/navigateUserProfile.js"></script>
+	<script src="../js/user/createAvatarThumbnail.js"></script>
+	<script src="../js/user/createTrashIcon.js"></script>
+	<script src="../js/user/fetchAllUsers.js"></script>
+	<script src="../js/user/createUsersTable.js"></script>
+
+</html>

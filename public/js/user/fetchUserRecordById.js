@@ -12,12 +12,7 @@ const fetchUserRecordById = async () => {
     await axios
     .get(`../api/users/profile/${id}`)
 		.then((result) => {
-			const imgArray = result.data.user.image.avatar.data.data;
-			function toBase64(arr) {
-				//arr = new Uint8Array(arr) if it's an ArrayBuffer
-				//btoa: decodes a string into bytes using Latin-1 (ISO-8859), and encodes those bytes into a string using Base64.
-				return btoa(arr.reduce((data, byte) => data + String.fromCharCode(byte), ''));
-			}
+			const imgArray = result.data.user.image.avatar.data.data;			
 			//render decoded image
 			avatarImg.src = `data:image/*; base64, ${toBase64(imgArray)}`;
 		})

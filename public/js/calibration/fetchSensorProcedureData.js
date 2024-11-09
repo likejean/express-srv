@@ -1,4 +1,4 @@
-const _store = new dataStorage();
+const _store = new dataStorage();   //store all sensors and procedures data
 
 const fetchSensorProcedureData = async () => {
   // fetch all data using POST API endpoints: sensors, procedures

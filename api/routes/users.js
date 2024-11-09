@@ -66,7 +66,7 @@ router.get('/', (req, res, next) => {
 						aboutYourself: doc.aboutYourself,
 						avatarTitle: doc.image.title,
 						avatarDescription: doc.image.description,
-						avatarImageData: doc.image.avatar, 
+						avatarImageData: doc.image.avatar.data, 
                         request: {
                             type: 'GET',
                             url: req.originalUrl                    
@@ -164,7 +164,7 @@ router.post('/register', upload.single("avatar"), (req, res) => {
 		description
 
     } = req.body;
-		
+
 	const avatar = { 
 		data: new Buffer.from(req.file.buffer, 'base64'), 
 		contentType: req.file.mimetype, 
