@@ -186,7 +186,7 @@ router.delete('/:procedureId', (req, res, next) => {
 				},
 			});
         });
-    })
+    });
 
 
 

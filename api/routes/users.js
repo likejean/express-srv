@@ -46,11 +46,11 @@ router.get('/', (req, res, next) => {
                 }});
             res.status(200).json({
                 message: `Successfully fetched ${docs.length} user record(s)`,
-            	collectionName: "users",
+				collectionName: "users",
                 payload: docs.map(doc => {                    
                     return {
                         _id: doc._id,
-        				email: doc.email,
+						email: doc.email,
 						password: doc.password,
 						username: doc.username,
 						firstname: doc.firstname,
@@ -157,58 +157,151 @@ router.post('/register', upload.single("avatar"), (req, res) => {
 		description
 
     } = req.body;
+	
 
-	const avatar = { 
-		data: new Buffer.from(req.file.buffer, 'base64'), 
-		contentType: req.file.mimetype, 
-		originalName: req.file.originalname 
-	};
+	//Check if a user exists with the current req.body.email
+	User.find({email})
+		.exec()
+		.then(user => {
+			//Throw error if a user already exists with the current req.body.email
+			if (user.length >= 1) {
+				console.log({
+                    request: {
+						message: `User with ${req.body.email} email already exists...`,
+                        type: 'POST',
+                        url: req.originalUrl,
+                        status: "FAILURE"
+                    }});
+                return res.status(409).json({
+					message: `User with ${req.body.email} email already exists...`,
+					request: {
+						type: 'POST',
+						url: req.originalUrl                    
+					} 
+                })
+            } else {
+			//hash a new user password
+			bcrypt.hash(password, 10, (error, hash) => {
+				if (error) {
+					return res.status(500).json({
+						serverError: error,
+						request: {
+							type: 'POST',
+							url: req.originalUrl                    
+						} 
+					});
+				} else {
+					//Create buffer data for avatar image
+					const avatar = { 
+						data: new Buffer.from(req.file.buffer, 'base64'), 
+						contentType: req.file.mimetype, 
+						originalName: req.file.originalname 
+					};
 
-	const user = new User({
-		_id,
-        email,
-		password,
-		username,
-		firstname,
-		lastname,
-		age,
-		aboutYourself,	
-		image: {
-			title,
-			description,
-			avatar
+					//Create a user document
+					const user = new User({
+						_id,
+						email,
+						password: hash,
+						username,
+						firstname,
+						lastname,
+						age,
+						aboutYourself,	
+						image: {
+							title,
+							description,
+							avatar
+						}
+					});
+
+					user
+					.save() //save calibration record document
+					.then((result) => {
+						console.log({
+							request: {
+								type: "POST",
+								url: req.originalUrl,
+								status: "SUCCESS",
+							},
+						});
+						res.json({
+							result,
+							request: {
+								type: 'POST',
+								url: req.originalUrl
+							}
+						});
+					})
+					.catch((error) => {
+						res.status(500).json({
+							serverError: error.message,
+							message: "Failed to save avatar image in the database",
+							request: {
+								type: 'POST',
+								url: req.originalUrl                    
+							}  
+						});
+					});
+				}
+			})
 		}
-    });
+	})
+});
 
-	user
-		.save() //save calibration record document
-		.then((result) => {
-			console.log({
+
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+///DELETE API endpoint: deletes user document by ID
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+
+router.delete('/:userId', (req, res, next) => {
+    const id = req.params.userId;
+    User.deleteOne({_id: id})
+        .exec()
+        .then(doc => {
+            //SUCCESS:
+            console.log({
+                request: {
+                type: "DELETE",
+                url: req.originalUrl,
+                status: "SUCCESS",
+                },
+            });
+            if(doc.deletedCount === 1){
+                res.status(200).json({
+					message: `SUCCESS! User ${req.body.email} was deleted`,
+					deletedUser: doc, 
+					deletedCount: doc.deletedCount,                   
+					request: {
+						type: 'DELETE',
+						url: req.originalUrl                    
+					}    
+				});        
+            }else{
+                res.status(400).json({
+                    error: `Error: (Hint: User with id ${req.params.userId} was valid, but seems like not found in the database.`,
+                    request: {
+                        type: 'DELETE',
+                        url: req.originalUrl                    
+                    }    
+                })
+            }
+
+        }).catch((error)=>{ 
+            res.status(400).json({
+				err,
+				message: `Failed to delete user record registered. (Hint: the user id format could be INVALID; thus, not found in the database...)`, 
+				isIdValid: mongoose.Types.ObjectId.isValid(id),
+                serverError: error.message,
 				request: {
-					type: "POST",
-					url: req.originalUrl,
-					status: "SUCCESS",
+				type: "DELETE",
+				url: req.originalUrl,
 				},
 			});
-			res.json({
-				result,
-				request: {
-					type: 'POST',
-					url: req.originalUrl
-				}
-			});
-		})
-		.catch((error) => {
-			res.status(500).json({
-				serverError: error.message,
-				message: "Failed to save avatar image in the database",
-				request: {
-					type: 'POST',
-					url: req.originalUrl                    
-				}  
-			});
-		});
-});
+        });
+    })
 
 
 module.exports = router;
