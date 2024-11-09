@@ -1,7 +1,7 @@
 function openUserWarningModal (id) {
     const modalTitle = document.querySelector('.delete-user-record-email');
 	_store.selectedTableRowUserId = id;
-    modalTitle.innerText = "User email: " + _store.users.data.payload.find(item => item._id === id).email;
+    modalTitle.innerText = _store.users.data.payload.find(item => item._id === id).email;
 }
 
 
