@@ -59,7 +59,7 @@ router.get('/', (req, res, next) => {
         .catch((error) => {
             res.status(500).json({
 				message:
-                "Failure: Sensor events were not fetched... Something went wrong",
+                "Failure: Sensor documents were not fetched... Something went wrong",
                 serverError: error.message,
                 request: {
                     type: 'GET',
