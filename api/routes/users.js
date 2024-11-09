@@ -2,21 +2,14 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const User = require('../models/user');
+const bcrypt = require('bcrypt');
 var path = require("path");
 var fs = require('fs');
 var multer = require('multer');
 
 const avatarPath = path.join(__dirname + '/../../public/img/avatars');
 
-// var storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         cb(null, avatarPath);
-//     },
-//     filename: function (req, file, cb) {
-//         cb(null, file.originalname)
-// 	}
-// });
-
+///The memory storage engine stores the files in memory as Buffer objects. It dumps data after request ends.
 const storage = multer.memoryStorage();
 
 // my mimetype check here
@@ -186,6 +179,7 @@ router.post('/register', upload.single("avatar"), (req, res) => {
 			avatar
 		}
     });
+
 	user
 		.save() //save calibration record document
 		.then((result) => {

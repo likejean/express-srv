@@ -196,3 +196,14 @@ You can change this by explicitly specifying the collection name in the schema.
     //         });
     //     })
 
+    9. MULTER DISCSTORAGE: saves a file to server
+	
+	// var storage = multer.diskStorage({
+	//     destination: function (req, file, cb) {
+	//         cb(null, avatarPath);
+	//     },
+	//     filename: function (req, file, cb) {
+	//         cb(null, file.originalname)
+	// 	}
+	// });
+
