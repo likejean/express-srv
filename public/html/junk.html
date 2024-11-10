@@ -89,8 +89,6 @@
 		); // select the button element
 		let selectedCals = {};
 
-		let data = JSON.parse(window.localStorage.getItem("calibrations"));
-
 		data.forEach((item, idx) => {
 			let option = document.createElement("option");
 			let text = document.createTextNode(item.calibrationName);

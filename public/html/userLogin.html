@@ -31,19 +31,19 @@
 					<div class="control-form-field-box form-group my-4 p-2">
 						
 						<div class="row mx-3 my-2">
-							<!-- Username -->
-							<label for="username">Username:</label>
+							<!-- Email -->
+							<label for="email">Your Email:</label>
 							<input
-								name="EID"
+								name="email"
 								type="text"
 								class="form-control"
-								id="username"
-								aria-describedby="username#Help"
+								id="email"
+								aria-describedby="email#Help"
 								placeholder=""
 								required
 							/>
-							<small id="username#Help" class="form-text text-muted">
-								Please, enter your username here
+							<small id="email#Help" class="form-text text-muted">
+								Please, enter your email here
 							</small>
 						</div>			
 						
@@ -51,7 +51,7 @@
 							<!-- Password -->
 							<label for="password">Password:</label>
 							<input
-								name="EID"
+								name="password"
 								type="password"
 								class="form-control"
 								id="password"
@@ -64,26 +64,48 @@
 							</small>
 						</div>
 					</div>
+
+					<!--Button Container-->
+					<div class="container">
+						<div class="row m-5">
+							<div class="form-group col text-center">
+								<button id="get-user-login-form-values" type="submit" class="btn btn-primary">
+									Login
+								</button>
+								<a href="../index.html" class="btn btn-dark">Back</a>
+								<button type="button" class="btn btn-secondary" onclick="resetUserLoginForm()">
+									Reset
+								</button>
+							</div>
+						</div>
+					</div>
 					
 				</form>
 			</div>
 		</div>
 				
 
-		<!--Button Container-->
-		<div class="container">
-			<div class="row m-5">
-				<div class="form-group col text-center">
-					<button id="get-login-form-values" type="submit" class="btn btn-primary">
-						Login
-					</button>
-					<a href="../index.html" class="btn btn-dark">Back</a>
-					<button type="button" class="btn btn-secondary">
-						Reset
-					</button>
-				</div>
-			</div>
-		</div>
+		
         
     </body>
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+		integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+		crossorigin="anonymous"></script>    
+    </script>
+
+	<script src="../js/user/getLoginUserFormData.js"></script>
+	<script src="../js/user/userLogin.js"></script>
+
+	
+
+
+	<script>
+		function resetUserLoginForm() {
+			window.location.reload();
+		}
+	</script>
+
+	
 </html>

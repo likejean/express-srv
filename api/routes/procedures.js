@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const express = require('express');
 const Procedure = require('../models/procedure');
 const router = express.Router();
+const auth = require('../auth/authentication');
+const jwt = require('jsonwebtoken');
+const config = require('../auth/config');
 
 
 
@@ -12,56 +15,75 @@ const router = express.Router();
 // GET endpoint: get ALL calibration procedures
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
-router.get('/', (req, res, next) => {
-    Procedure
-        .find()
-		.populate("calibrations")
-        .exec()
-        .then(docs => {
-        console.log({
-            total: docs.length,
-            request: {
-                type: 'GET',
-                url: req.originalUrl,
-                status: "SUCCESS"
-            }});
-        res.status(200).json({
-            message:   `Successfully fetched ${docs.length} calibration procedures`,
-            collectionName: "procedures",
-            payload: docs.map(doc => {
-                return {
-                    _id: doc._id,
-                    procedureName: doc.procedureName,
-                    calibratorModel: doc.calibratorModel,
-                    measurementQuantity: doc.measurementQuantity,
-                    units: doc.units,                    
-                    startRangeLevel: doc.startRangeLevel,
-                    endRangeLevel: doc.endRangeLevel,
-                    description: doc.description,                    
-                    comment: doc.comment,
-                    manufacturer: doc.manufacturer,
-                    calibrations: doc.calibrations,
-                    createdAt: doc.createdAt,
-                };
-            }),
-            total: docs.length,
-            request: {
-                type: 'GET',
-                url: req.originalUrl
-            }
-        });
-    })
-    .catch((error) => {
-        res.status(500).json({
-            message: "Failure: Calibration events were not fetched... Something went wrong",
-            serverError: error.message,
-            request: {
-                type: 'GET',
-                url: req.originalUrl                    
-            }  
-        });
-    });
-});
+router.get('/', auth.verifyToken, (req, res, next) => {
+	jwt.verify(req.token, config.secretKey, (err, authData) => {
+		if (err) {
+			console.log({
+				errorMessage: err.message,
+				request: {
+					type: 'GET',
+					url: req.originalUrl,
+					status: "SUCCESS"
+				}});
+			res.status(403).json({
+				authStatus: false,
+				errorMessage: err.message,
+				message: 'Your login session is expired! Sign in again to perform this action...'
+			});
+		} else {
+			Procedure
+			.find()
+			.populate("calibrations")
+			.exec()
+			.then(docs => {
+				console.log({
+					total: docs.length,
+					request: {
+						type: 'GET',
+						url: req.originalUrl,
+						status: "SUCCESS"
+					}});
+					res.status(200).json({
+						message:   `Successfully fetched ${docs.length} calibration procedures`,
+						collectionName: "procedures",
+						payload: docs.map(doc => {
+							return {
+								_id: doc._id,
+								procedureName: doc.procedureName,
+								calibratorModel: doc.calibratorModel,
+								measurementQuantity: doc.measurementQuantity,
+								units: doc.units,                    
+								startRangeLevel: doc.startRangeLevel,
+								endRangeLevel: doc.endRangeLevel,
+								description: doc.description,                    
+								comment: doc.comment,
+								manufacturer: doc.manufacturer,
+								calibrations: doc.calibrations,
+								createdAt: doc.createdAt,
+							};
+						}),
+						total: docs.length,
+						request: {
+							type: 'GET',
+							url: req.originalUrl
+						}
+					});
+				})
+				.catch((error) => {
+					res.status(500).json({
+						message: "Failure: Calibration events were not fetched... Something went wrong",
+						serverError: error.message,
+						request: {
+							type: 'GET',
+							url: req.originalUrl                    
+						}  
+					});
+				});
+
+			}
+		});
+		
+	});
 
 
 

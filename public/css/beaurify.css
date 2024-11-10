@@ -66,7 +66,7 @@ label {
 	margin-right: 40px;	
 }
 
-.login-label, .register-label {
+.login-label, .logout-label, .register-label {
 	color:white;
 	margin-right: 15px;
 }

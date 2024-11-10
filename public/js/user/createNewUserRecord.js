@@ -12,11 +12,11 @@ function createNewUserRecord() {
 			}
 		})
 		.then(response => {
-			console.log('Image uploaded successfully:', response);
+			console.log('User created successfully:', response);
 			const id = response.data.result._id;
 			window.location.href = `../../html/userProfile.html?id=${id}`;	
 		})
 		.catch(error => {
-			console.error('Error uploading image:', error);
+			console.error('Error: failed to create a new user', error);
 	});
 }
