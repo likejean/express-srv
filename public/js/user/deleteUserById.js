@@ -4,7 +4,7 @@ function openUserWarningModal (id) {
     modalTitle.innerText = _store.users.data.payload.find(item => item._id === id).email;
 }
 
-
+//axios call to delete a user
 function deleteUserRecord() {
 	const userId = _store.selectedTableRowUserId;
     axios

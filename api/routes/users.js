@@ -3,12 +3,11 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
-var path = require("path");
-var fs = require('fs');
+const auth = require('../auth/authentication');
+const config = require('../auth/config');
 var multer = require('multer');
 
-const avatarPath = path.join(__dirname + '/../../public/img/avatars');
-
+//const avatarPath = path.join(__dirname + '/../../public/img/avatars');
 ///The memory storage engine stores the files in memory as Buffer objects. It dumps data after request ends.
 const storage = multer.memoryStorage();
 
@@ -247,6 +246,58 @@ router.post('/register', upload.single("avatar"), (req, res) => {
 			})
 		}
 	})
+});
+
+
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+///DELETE API endpoint: obtains TOKEN for user login
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+
+router.post('/login', (req, res, next) => {
+    User.find({email: req.body.email})
+        .exec()
+        .then(user => {
+            if(user.length < 1) {
+                return res.status(401).json({
+                    message: 'Authentification failed',
+                    description: 'Incorrect username!'
+                });
+            }
+            bcrypt.compare(req.body.password, user[0].password, (err, result) => {
+				console.log(req.body.password, user[0].password)
+                if (result) {
+                    auth.signUser({
+                        email: user[0].email,
+                        userId: user[0]._id
+                    }, config.secretKey, res);
+                }else{
+					console.log({
+						error: 'Authentification failed',						
+					});
+                    return res.status(401).json({
+                        message: 'Authentification failed',
+                        error: err,					
+						message: "Incorrect password!",
+						request: {
+							type: 'POST',
+							url: req.originalUrl                    
+						}  
+                    });
+                }
+            });
+		})
+        .catch((error) => {
+            res.status(500).json({
+				serverError: error.message,
+				message: "Internal Server Error: Failed to authenticate...",
+				request: {
+					type: 'POST',
+					url: req.originalUrl                    
+				}  
+			});
+        });
 });
 
 

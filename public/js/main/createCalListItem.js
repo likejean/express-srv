@@ -22,6 +22,10 @@ function createCalibrationListItem (data, list, calName, calLocation) {     //ca
 		listItem.classList.add('list-group-item');
 		badgeItem.classList.add('d-flex');
 		listItem.classList.add('d-flex');
+
+		console.log(data[i])
+
+		if(data[i].calibrationExtended) badgeItem.innerHTML = `<span id="extensionStatus" class="badge badge-success">EXT</span>`;
 		
 		//CAL INFO LIST/////////////////////////////////////////////////////////
 		//add css styles to calName badge and calInfo list item

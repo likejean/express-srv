@@ -1,5 +1,4 @@
 
-
 function editSensorIconClickEventCallback (event) {
 	
 	//construct wrapper name to access sensor factory collections
