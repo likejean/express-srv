@@ -2,10 +2,22 @@
 class userFactory {
     constructor(
 			inputWrappers,
-            newUserFormInputs
+            newUserFormInputs,
+			loginHtmlLabel,
+			logoutHtmlLabel,
+			userToken,
+			userAuthStatus,
+			userId,
+			userAvatar
         ){
 		this.inputWrappers = inputWrappers,
-        this.newUserFormInputs = newUserFormInputs
+        this.newUserFormInputs = newUserFormInputs,
+		this.loginHtmlLabel = loginHtmlLabel,
+		this.logoutHtmlLabel = logoutHtmlLabel,
+		this.userToken = userToken,
+		this.userAuthStatus = userAuthStatus,
+		this.userId = userId,
+		this.userAvatar = userAvatar
     }
 
     isSubmitButtonActive() {      

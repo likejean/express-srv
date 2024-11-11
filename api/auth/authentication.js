@@ -2,10 +2,16 @@ const jwt = require('jsonwebtoken');
 
 
 //Generate Token for User Login
-function signUser(user, secretKey, response) {
+function signUser(user, secretKey, res, req) {
 	return jwt.sign({user}, secretKey, {expiresIn: '100s'},(err, token) => {
-		console.log('TOKEN:', token);
-		response.json({
+		console.log({
+			request: {
+				type: 'POST',
+				url: req.originalUrl                    
+			},
+			token
+		});
+		res.json({
 			user,
 			message: "Authentication is successful!",
 			token

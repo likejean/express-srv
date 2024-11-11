@@ -29,11 +29,11 @@
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
-					<div>						
+					<div id="user-labels">						
 						<a class="register-anchor-link" style="text-decoration:none;" href="../html/userRegister.html"><span class="text-uppercase register-label">Signup</span></a>
 						<a id="login-anchor" class="login-anchor-link" style="text-decoration:none;" href="../html/userLogin.html"><span class="text-uppercase login-label">Login</span></a>
 						<a id="logout-anchor" class="login-anchor-link" style="text-decoration:none;" onclick="userLogout()" href=""><span class="text-uppercase logout-label">Logout</span></a>
-						<img src="./img/calibration.jpg" alt="" class="img-thumbnail avatar m-1">
+						<img id="main-bar-avatar-image" src="" alt="" class="img-thumbnail avatar m-1">
 					</div>					
 				</div>
 			</nav>
@@ -202,10 +202,12 @@
 	<script src="./js/collections/getHtmlElements.js"></script>
 	<script src="./js/collections/updateSensorImages.js"></script>
 	<script src="./js/classes/dataGlobalStorage.js"></script>
+	<script src="./js/classes/userGlobalFactory.js"></script>
 
 	<!-- UTILS SCRIPTS -->
+	<script src="./js/utils/toBase64Decoder.js"></script>
 	<script src="./js/main/displayLoginUserStatus.js"></script>
-	<script src="./js/main/userLogout.js"></script>
+	<script src="./js/main/userLogout.js"></script>	
 	<script src="./js/utils/createTableCell.js"></script>
 	<script src="./js/utils/getHtmlElementById.js"></script>
 	<script src="./js/utils/addTextNodeToHtmlElement.js"></script>

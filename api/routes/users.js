@@ -91,7 +91,7 @@ router.get('/', (req, res, next) => {
 // GET endpoint: get a user record by ID
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
-router.get('/profile/:userId', async (req, res) => {
+router.get('/:userId', async (req, res) => {
 	try {
 		const user = await User.findById(req.params.userId);	
 		if (!user) {
@@ -265,13 +265,12 @@ router.post('/login', (req, res, next) => {
                     description: 'Incorrect username!'
                 });
             }
-            bcrypt.compare(req.body.password, user[0].password, (err, result) => {
-				console.log(req.body.password, user[0].password)
+            bcrypt.compare(req.body.password, user[0].password, (err, result) => {				
                 if (result) {
                     auth.signUser({
                         email: user[0].email,
                         userId: user[0]._id
-                    }, config.secretKey, res);
+                    }, config.secretKey, res, req);
                 }else{
 					console.log({
 						error: 'Authentification failed',						

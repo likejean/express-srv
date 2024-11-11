@@ -10,7 +10,7 @@ const fetchUserRecordById = async () => {
 
  	 // fetch all data using POST API endpoints: sensors, calibrations, procedures
     await axios
-    .get(`../api/users/profile/${id}`)
+    .get(`../api/users/${id}`)
 		.then((result) => {
 			const imgArray = result.data.user.image.avatar.data.data;			
 			//render decoded image
