@@ -1,6 +1,7 @@
 var _userfactory = new userFactory();  //instantiate user factory;
 
 const avatarImage = document.getElementById("main-bar-avatar-image");
+const userProfileImgAnchor = document.getElementById("user-profile-anchor");
 
 _userfactory.loginHtmlLabel = document.getElementById("login-anchor");
 _userfactory.logoutHtmlLabel = document.getElementById("logout-anchor");
@@ -17,6 +18,7 @@ function displayLoginUserStatus() {
 		_userfactory.userAuthStatus = true;
 		_userfactory.loginHtmlLabel.remove();	
 		avatarImage.src	= `data:image/*; base64, ${toBase64(avatar.data)}`;
+		userProfileImgAnchor.href = `../../html/userProfile.html?id=${_userfactory.userId}`;
 	}
 	//if no user logged in and token doesn't exist in localStorage
 	else {	

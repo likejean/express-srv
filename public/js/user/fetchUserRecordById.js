@@ -1,5 +1,6 @@
 const username = document.getElementById("sensor-name");
 const avatarImg = document.getElementById("avatar-image");
+const userFullName = document.getElementById("user-fullname");
 
 const fetchUserRecordById = async () => {
     
@@ -15,6 +16,7 @@ const fetchUserRecordById = async () => {
 			const imgArray = result.data.user.image.avatar.data.data;			
 			//render decoded image
 			avatarImg.src = `data:image/*; base64, ${toBase64(imgArray)}`;
+			userFullName.innerHTML = result.data.user.firstname + " " + result.data.user.lastname;
 		})
 		.catch((error) => {
 			//display error message if data fetch failure occurs or any other internal error detected
