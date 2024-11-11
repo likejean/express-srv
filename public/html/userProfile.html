@@ -25,15 +25,15 @@
 		<div class="container light-style flex-grow-1 container-p-y">
 
 			<h4 class="font-weight-bold py-3 mb-4">
-				Account settings
+				User Account
 			</h4>
 		
-			<div class="card overflow-hidden">
+			<div class="card overflow-hidden my-4">
 				<div class="row no-gutters row-bordered row-border-light">
 					<div class="col-md-3 pt-0">
 						<div class="list-group list-group-flush account-settings-links">
 							<a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">General</a>
-							<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Change password</a>
+							<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-password-change">Change password</a>
 							<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info">Info</a>
 							<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-social-links">Social links</a>
 							<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-connections">Connections</a>
@@ -44,26 +44,23 @@
 						<div class="tab-content">
 							<div class="tab-pane fade active show" id="account-general">
 								
-									<div class="card-body text-center media">
-										<div class="row">
-		
+								<div class="card-body text-center media">
+									
+									<div class="row justify-content-center">											
+										<img id="avatar-image" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="d-block ui-w-80">
+										<div class="text-center"><span id="user-fullname">Sergey Popach</span></div>
+										<div class="media-body my-3 ml-4">
+											<label class="btn btn-outline-primary">
+													Upload new photo
+												<input type="file" class="account-settings-fileinput">
+											</label> &nbsp;												
+											<div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
 										</div>
-										<div class="row justify-content-center">											
-											<img id="avatar-image" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="d-block ui-w-80">
-											<div class="text-center"><span id="user-fullname">Sergey Popach</span></div>
-											<div class="media-body my-3 ml-4">
-												<label class="btn btn-outline-primary">
-														Upload new photo
-													<input type="file" class="account-settings-fileinput">
-												</label> &nbsp;												
-												<div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
-											</div>
-										
-										</div>
-										
-										
+									
 									</div>
-								
+									
+									
+								</div>								
 							
 							<hr class="border-light m-0">
 				
@@ -71,10 +68,8 @@
 								<div class="row">
 									<p class="username-item"></p>
 								</div>
-							</div>
-			
-						</div>
-						
+							</div>			
+						</div>						
 					</div>
 				</div>
 			</div>
@@ -88,6 +83,12 @@
 				</div>
 			</div>
 		
+		</div>
+		<div id="account-password-change">
+			Change User Password
+		</div>
+		<div id="account-info">
+			Account Information
 		</div>
 	</body>
     
