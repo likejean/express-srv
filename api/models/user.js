@@ -1,10 +1,5 @@
 const mongoose = require('mongoose');
-
-const userLevels = [
-    'Admin',
-    'User',
-    'Quest'
-];
+const { userLevels } = require('../../enums/modelEnums');
 
 
 const userSchema = mongoose.Schema(

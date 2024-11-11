@@ -1,22 +1,5 @@
 const mongoose = require('mongoose');
-
-const calibrationPriorities = [
-    'Mandatory',
-    'Optional',
-    'Unserviceable',
-    'Broken'
-];
-
-const calibrationFrequencies = [
-    'Weekly',
-    'Biweekly',
-    'Monthly',
-    'Quarterly',
-    'Semiannually',
-    'Annually',
-    'Discretionary'
-];
-
+const { calibrationPriorities, calibrationFrequencies } = require('../../enums/modelEnums');
 
 const sensorSchema = mongoose.Schema(
     {

@@ -1,18 +1,5 @@
 const mongoose = require('mongoose');
-
-const calibrationPrinciples = [
-    'Dimensional',
-    'Temperature',
-    'Pressure',
-    'Force',
-    'Humidity',
-    'Alignment',
-    'Electrical',
-    'Radio',
-    'Flow'
-];
-
-
+const { calibrationPrinciples } = require('../../enums/modelEnums');
 
 const procedureSchema = mongoose.Schema(
     {
