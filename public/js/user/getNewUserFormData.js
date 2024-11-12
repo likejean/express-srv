@@ -1,5 +1,5 @@
 const form = document.getElementById("new-user-form");
-const avatarImg = document.getElementById("avatar-image");
+const avatarImg = document.getElementById("user-register-avatar-image");
 const submitButton = document.getElementById("get-register-user-form-values");
 
 

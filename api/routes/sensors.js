@@ -140,7 +140,6 @@ router.get('/:sensorId', (req, res, next) => {
 /////////////COMPLETED and TESTED////////////////////////////////
 router.patch("/:sensorId", (req, res, next) => {
     const id = req.params.sensorId;
-    console.log("Request Body:", req.body);
     Sensor.updateOne({ _id: id }, { $set: { ...req.body } })
     .exec()
     .then((result) => {

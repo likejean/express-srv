@@ -84,9 +84,10 @@ label {
 	margin: auto;
 }
 
-#avatar-image {
+#user-register-avatar-image, #user-profile-avatar-image {
 	width: 50%;
-	border: 10px solid #f3f1f1;
+	border-radius: 10px;
+	border: 2px solid #0e1d64;
 	padding: 0px 0px;
 }
 

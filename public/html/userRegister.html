@@ -205,32 +205,31 @@
 										name="avatar" 
 										value="" 
 										aria-describedby="avatar#Help"
-										onchange="document.getElementById('avatar-image').src = window.URL.createObjectURL(this.files[0])"
+										onchange="document.getElementById('user-register-avatar-image').src = window.URL.createObjectURL(this.files[0]);"
 										required>
 									</div>
 									<small id="avatar#Help" class="form-text text-muted">
 										There is no restrictions on photo size
 									</small>
-									
-										
 								</div>
+								<!---->
 								<button 
 									type="button" 
-									id="clear-avatar-image-selection" 
-									onclick=resetAvatarImageSelection()
+									id="user-register-clear-avatar-image-selection" 
+									onclick="resetAvatarImageSelection('user-register-clear-avatar-image-selection')"
 									class="btn btn-secondary my-3">
 										Clear Image
 								</button>
 							</div>
 							
+
 							<div class="container">
-								<p><img class="view-avatar-fit p-3" src='#' id='avatar-image'></p>
+								<p><img class="view-avatar-fit p-3" src='#' id='user-register-avatar-image'></p>
 							</div>
 						</div>
 					</div>
 									
 				
-
 					<!--Button Container-->
 					<div class="container">
 						<div class="row m-5">
@@ -244,7 +243,8 @@
 								</button>
 							</div>
 						</div>
-					</div>					
+					</div>		
+
 				</form>
 			</div>
 		</div>
@@ -261,7 +261,8 @@
 	<script src="../js/collections/newUserFormContainer.js"></script>
 	<script src="../js/user/createNewUserRecord.js"></script>
 	<script src="../js/user/getNewUserFormData.js"></script>
-	<script src="../js/user/utils/clearAvatarImageSelection.js"></script>
+	<script src="../js/user/utils/resetAvatarImageSelection.js"></script>
+	
 	
 
 	<script>
@@ -269,9 +270,5 @@
 			window.location.reload();
 		}
 
-		function displayAvatarImage() {
-			document.getElementById('avatar-image').src = window.URL.createObjectURL(this.files[0]);
-		}
-		
 	</script>
 </html>

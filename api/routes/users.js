@@ -11,11 +11,12 @@ var multer = require('multer');
 ///The memory storage engine stores the files in memory as Buffer objects. It dumps data after request ends.
 const storage = multer.memoryStorage();
 
+
 // my mimetype check here
 const fileFilter = (req, file, cb) => {
 
     if (!file.mimetype.includes('image')) {
-        return cb(new Error('not an image'));
+        return cb(new Error('this file not an image'));
     }
     cb(null, true);
 };
@@ -86,6 +87,7 @@ router.get('/', (req, res, next) => {
 });
 
 
+
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
 // GET endpoint: get a user record by ID
@@ -130,6 +132,64 @@ router.get('/:userId', async (req, res) => {
 			url: req.originalUrl,
 			},
 		});
+	}
+});
+
+
+
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+//PATCH endpoint: update image for user avatar found by ID
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+router.patch('/updateAvatar/:userId', upload.single('avatar'), async (req, res) => {
+	try {
+		const title = req.body.title;
+		const description = req.body.description;
+		const id = req.params.userId;
+		const imageData = req.file.buffer;
+		const contentType = req.file.mimetype;		
+	
+		const result = await User.findByIdAndUpdate(
+			id,			
+			{ 
+				image: {
+					avatar: imageData, 
+					contentType, 
+					title,
+					description
+				}
+			},
+			{ new: true }
+		);
+	
+		if (!result) {
+			return res.status(404).send(`User {id:${id}} not found`);
+		}  
+		console.log({
+            request: {
+                type: "PATCH",
+                url: req.originalUrl,
+                status: "SUCCESS",
+            },
+        });
+        res.status(200).json({
+            message: `Avatar image updated successfully for a user {id:${id}}`,
+            request: {
+                type: "PATCH",
+            },
+            result,
+        });
+	} catch (error) {
+		res.status(500).json({
+            message: "Failure: Unable to update user avatar image...",
+            isIdValid: mongoose.Types.ObjectId.isValid(id),
+            serverError: error.message,
+            request: {
+                type: "PATCH",
+                url: req.originalUrl,
+            },
+        });
 	}
 });
 
