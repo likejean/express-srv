@@ -143,54 +143,45 @@ router.get('/:userId', async (req, res) => {
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
 router.patch('/updateAvatar/:userId', upload.single('avatar'), async (req, res) => {
+
 	try {
-		const title = req.body.title;
-		const description = req.body.description;
-		const id = req.params.userId;
-		const imageData = req.file.buffer;
-		const contentType = req.file.mimetype;		
-	
-		const result = await User.findByIdAndUpdate(
-			id,			
-			{ 
-				image: {
-					avatar: imageData, 
-					contentType, 
-					title,
-					description
-				}
-			},
-			{ new: true }
-		);
-	
-		if (!result) {
-			return res.status(404).send(`User {id:${id}} not found`);
-		}  
+			const user = await User.findById(req.params.userId);
+			if (!user) {
+			return res.status(404).json({ error: 'User not found' });
+		}
+		
+		if (req.file) {
+			user.image.avatar.data = req.file.buffer;
+			user.image.avatar.contentType = req.file.mimetype;
+			user.image.avatar.original = req.file.originalname;
+			user.image.title = req.body.title;
+			user.image.description = req.body.description;
+		}
+		
+		await user.save();
 		console.log({
-            request: {
-                type: "PATCH",
-                url: req.originalUrl,
-                status: "SUCCESS",
-            },
-        });
-        res.status(200).json({
-            message: `Avatar image updated successfully for a user {id:${id}}`,
-            request: {
-                type: "PATCH",
-            },
-            result,
-        });
-	} catch (error) {
-		res.status(500).json({
-            message: "Failure: Unable to update user avatar image...",
-            isIdValid: mongoose.Types.ObjectId.isValid(id),
-            serverError: error.message,
-            request: {
-                type: "PATCH",
-                url: req.originalUrl,
-            },
-        });
-	}
+			request: {
+				type: "PATCH",
+				url: req.originalUrl,
+				status: "SUCCESS",
+			},
+		});
+		res.status(200).json({
+			message: `Avatar image updated successfully for a user {id:${req.params.userId}}`,
+			request: {
+				type: "PATCH",
+			}
+		});
+		} catch (error) {
+			res.status(500).json({
+				message: "Failure: Unable to update user avatar image...",
+				serverError: error.message,
+				request: {
+					type: "PATCH",
+					url: req.originalUrl,
+				},
+			});
+		}
 });
 
 

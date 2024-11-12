@@ -13,8 +13,7 @@ function patchSensorRecord() {
 	console.log(sensorPatchRequestData);
   
   //use PATCH API endpoint to update existing sensor record
-    axios
-    .patch(`../api/sensors/${id}`, sensorPatchRequestData)
+    axios.patch(`../api/sensors/${id}`, sensorPatchRequestData)
     .then((response) => {
         icons.forEach((icon) => {
             icon.removeEventListener("click", editSensorIconClickEventCallback);

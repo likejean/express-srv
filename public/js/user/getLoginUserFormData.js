@@ -4,8 +4,6 @@ const submitButton = document.getElementById("get-user-login-form-values");
 
 var loginUserPostData = {};  //this object for storing POST request body
 
-
-
 //Attach eventListener to Login User Form data Submission event
 form.addEventListener("submit", submitUserLoginData);
 

@@ -13,6 +13,7 @@ function createNewUserRecord() {
 		})
 		.then(response => {
 			console.log('User created successfully:', response);
+			userRegisterSubmitButton.removeEventListener("click", clearFileInput);
 			const id = response.data.result._id;
 			window.location.href = `../../html/userProfile.html?id=${id}`;	
 		})

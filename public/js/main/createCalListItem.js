@@ -23,8 +23,6 @@ function createCalibrationListItem (data, list, calName, calLocation) {     //ca
 		badgeItem.classList.add('d-flex');
 		listItem.classList.add('d-flex');
 
-		console.log(data[i])
-
 		if(data[i].calibrationExtended) badgeItem.innerHTML = `<span id="extensionStatus" class="badge badge-success">EXT</span>`;
 		
 		//CAL INFO LIST/////////////////////////////////////////////////////////
