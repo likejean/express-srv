@@ -30,39 +30,44 @@
 				<form id="user-login-form">
 					<div class="control-form-field-box form-group my-4 p-2">
 						
-						<div class="row mx-3 my-2">
+						<div class="row mx-3 my-5 justify-content-center">
 							<!-- Email -->
-							<label for="email">Your Email:</label>
-							<input
-								name="email"
-								type="text"
-								class="form-control"
-								id="email"
-								aria-describedby="email#Help"
-								placeholder=""
-								required
-							/>
-							<small id="email#Help" class="form-text text-muted">
-								Please, enter your email here
-							</small>
+							<div class="w-50">
+								<label for="email">Your Email:</label>
+								<input
+									name="email"
+									type="text"
+									class="form-control"
+									id="email"
+									aria-describedby="email#Help"
+									placeholder=""
+									required
+								/>
+								<small id="email#Help" class="form-text text-muted">
+									Please, enter your email here
+								</small>
+							</div>
+
+							<div class="w-50 mx-3 my-3">
+								<!-- Password -->
+								<label for="password">Password:</label>
+								<input
+									name="password"
+									type="password"
+									class="form-control"
+									id="password"
+									aria-describedby="password#Help"
+									placeholder=""
+									required
+								/>
+								<small id="password#Help" class="form-text text-muted">
+									Please, enter your password here
+								</small>
+							</div>
+							
 						</div>			
 						
-						<div class="row mx-3 my-2">
-							<!-- Password -->
-							<label for="password">Password:</label>
-							<input
-								name="password"
-								type="password"
-								class="form-control"
-								id="password"
-								aria-describedby="password#Help"
-								placeholder=""
-								required
-							/>
-							<small id="password#Help" class="form-text text-muted">
-								Please, enter your password here
-							</small>
-						</div>
+						
 					</div>
 
 					<!--Button Container-->

@@ -24,23 +24,23 @@
 	<body>
 		<div class="container light-style flex-grow-1 container-p-y">
 
-			<h4 class="font-weight-bold py-3 mb-4">
+			<h1 class="user-account-title font-weight-bold py-3 mb-4">
 				User Account
-			</h4>
+			</h1>
 		
 			<div class="card overflow-hidden my-4">
 				<div class="row no-gutters row-bordered row-border-light">
 					<div class="col-md-3 pt-0">
 						<div class="list-group list-group-flush account-settings-links">
-							<a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">General</a>
+							<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-general">General</a>
+							<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-avatar-change">Change avatar</a>
 							<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-password-change">Change password</a>
 							<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info">Info</a>
-							<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-social-links">Social links</a>
-							<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-connections">Connections</a>
+							<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-social-links">Social links</a>							
 							<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-notifications">Notifications</a>
 						</div>
 					</div>
-					<div class="col-md-9">
+					<div style="background-color: #f9f9f9;" class="col-md-9">
 						<div class="tab-content">
 							<div class="tab-pane fade active show" id="account-general">
 								
@@ -51,9 +51,10 @@
 										
 										<div class="text-center"><span id="user-fullname"></span></div>
 										
-										<form id="user-account-avatar">
-											<!-- AVATAR -->
-											<div class="control-form-field-box form-group my-4 p-5">
+
+										<!-- AVATAR -->
+										<form id="user-account-avatar">											
+											<div id="account-avatar-change" class="control-form-field-box form-group my-4 p-5">
 												<div class="container">
 													<div class="row my-3">
 														<div class="col-lg-6 col-sm-12 mb-sm-4">
@@ -118,7 +119,7 @@
 																Clear Image
 														</button>
 														<button id="get-user-account-avatar-form-values" type="submit" class="btn btn-primary">
-															Update
+															Change Avatar
 														</button>
 													</div>													
 
@@ -129,11 +130,39 @@
 											</div>
 
 										</form>
-										
-									
-									</div>
-									
-									
+
+										<!--PASSWORD -->
+										<form id="user-account-password">											
+											<div id="account-password-change" class="control-form-field-box form-group my-4 p-5">
+												<div class="container">
+													<div class="row my-1 justify-content-center">
+														<div class="mb-4 w-50">
+															<!-- Password -->
+															<label for="password">New Password:</label>
+															<input
+																name="password"
+																type="password"
+																class="form-control"
+																id="password"
+																aria-describedby="password#Help"
+																placeholder=""
+																required
+															/>
+															<small id="password#Help" class="form-text text-muted">
+																Please, enter your new password here
+															</small>
+														</div>														
+														<div>
+															<button id="get-user-account-password-form-values" type="submit" class="btn btn-primary">
+																Change Password
+															</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+
+									</div>									
 								</div>								
 							
 							<hr class="border-light m-0">
@@ -158,12 +187,7 @@
 			</div>
 		
 		</div>
-		<div id="account-password-change">
-			Change User Password
-		</div>
-		<div id="account-info">
-			Account Information
-		</div>
+		
 	</body>
     
 
@@ -176,6 +200,7 @@
 	<script src="../js/classes/userGlobalFactory.js"></script>
 	<script src="../js/collections/newUserFormContainer.js"></script>
 	<script src="../js/utils/toBase64Decoder.js"></script>
+	<script src="../js/user/utils/selectUserAccountSettings.js"></script>
 	<script src="../js/user/fetchUserRecordById.js"></script>
 	<script src="../js/user/utils/resetUserProfileAvatarImage.js"></script>
 	<script src="../js/user/getUpdateUserAccountData.js"></script>
@@ -184,8 +209,11 @@
 
 	<script>
 		function resetUserProfile() {
-			window.location.reload();
+			window.location.reload();		
 		}
+
+		window.location.hash = '';//remove hash text after # symbol
+				
 	</script>
 	
 

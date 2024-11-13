@@ -1,118 +1,119 @@
 @media screen and (min-width: 200px) {
-  .list-group-item {
-    font-size: 70%;
-  }
+	.list-group-item {
+		font-size: 70%;
+	}
 }
 
 @media screen and (min-width: 750px) {
-  .list-group-item {
-    font-size: 85%;
-  }
+	.list-group-item {
+		font-size: 85%;
+	}
 }
 
 @media screen and (min-width: 1440px) {
-  .list-group-item {
-    font-size: 100%;
-  }
+	.list-group-item {
+		font-size: 100%;
+	}
 }
 
 label {
-  font-weight: bold;
-  color: darkblue;
+	font-weight: bold;
+	color: darkblue;
 }
 
 #new-sensor-extention {
-  font-size: 12px;
-  color: darkred;
+	font-size: 12px;
+	color: darkred;
 }
 
 #inputErrorMessage {
-  color: red;
+	color: red;
 }
 
 .control-form-field-box {
-  border-radius: 4px;
-  border: 1px solid #f3f1f1;
-  box-shadow: 0px 0px 5px 5px #e7e7e7;
-  padding: 65px 40px;
+	border-radius: 4px;
+	border: 1px solid #f3f1f1;
+	box-shadow: 0px 0px 5px 5px #e7e7e7;
+	padding: 65px 40px;
 }
 
 .new-sensor-form-title,
 .user-login-form-title,
 .new-calibration-form-title,
-.new-procedure-form-title {
-  color: blue;
+.new-procedure-form-title,
+.user-account-title {
+	color: blue;
 }
 
 .calibration-card-item {
-  display: inline-block;
+display: inline-block;
 }
 
 .cal-notice-span,
 .sensor-notice-span {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 #range-levels-validation,
 .new-calibration-valid-input {
-  color: red;
-  font-weight: bold;
+	color: red;
+	font-weight: bold;
 }
 
 .avatar {
-  width: 40px;
+	width: 40px;
 }
 
 .sensor-notice-span {
-  margin-right: 40px;
+	margin-right: 40px;
 }
 
 .login-label,
 .logout-label,
 .register-label {
-  color: white;
-  margin-right: 15px;
+	color: white;
+	margin-right: 15px;
 }
 
 .view-avatar-fit {
-  max-width: 99%;
-  max-height: 99%;
+	max-width: 99%;
+	max-height: 99%;
 }
 
 #user-fullname {
-  font-family: "Times New Roman", Times, serif;
-  font-size: xx-large;
+	font-family: "Times New Roman", Times, serif;
+	font-size: xx-large;
 }
 
 /*image*/
 .img-thumbnail {
-  width: 50px;
-  height: 50px;
-  overflow: hidden;
-  margin: auto;
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+	margin: auto;
 }
 
 #user-register-avatar-image,
 #user-profile-avatar-image {
-  width: 50%;
-  border-radius: 10px;
-  border: 2px solid #0e1d64;
-  padding: 0px 0px;
+	width: 50%;
+	border-radius: 10px;
+	border: 2px solid #0e1d64;
+	padding: 0px 0px;
 }
 
 th,
 td {
-  vertical-align: middle;
+	vertical-align: middle;
 }
 
 #extensionStatus {
-  background-color: yellow;
-  color: red;
-  border: 1px solid red;
-  border-radius: 2px;
-  position: absolute;
-  font-size: 10px;
-  right: -11px;
-  top: 13px;
-  padding: 1px 2px;
+	background-color: yellow;
+	color: red;
+	border: 1px solid red;
+	border-radius: 2px;
+	position: absolute;
+	font-size: 10px;
+	right: -11px;
+	top: 13px;
+	padding: 1px 2px;
 }
