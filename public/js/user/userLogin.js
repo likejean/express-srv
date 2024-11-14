@@ -21,6 +21,14 @@ function userLogin() {
 			});
 		})
 		.catch(error => {
-			console.error(error);
+			console.error(error.response);
+
+			const userLoginErrorCode = error.response.data.errorStatusCode;
+			const userLoginErrorTextContent = error.response.data.errorMessage;
+
+			const modal = document.getElementById('login-error-modal');
+			const span = document.getElementById('error-text-content');
+			new bootstrap.Modal(modal).show();
+			span.innerText = userLoginErrorTextContent;
 	});
 }

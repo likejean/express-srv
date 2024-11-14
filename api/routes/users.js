@@ -288,23 +288,33 @@ router.post("/register", upload.single("avatar"), (req, res) => {
     });
 });
 
+
+
+
+
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
 ///DELETE API endpoint: obtains TOKEN for user login
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
-
 router.post("/login", (req, res, next) => {
 	User.find({ email: req.body.email })
 		.exec()
 		.then((user) => {
 		if (user.length < 1) {
-			return res.status(401).json({
-			message: "Authentification failed",
-			description: "Incorrect username!",
+			console.log({
+				error: "Authentification failed: Invalid user email!",
+			});
+			return res.status(401).json({			
+				errorStatusCode: 1,
+				errorMessage: "Authentification failed: Invalid user email!",
+				request: {
+					type: "POST",
+					url: req.originalUrl,
+				}
 			});
 		}
-		bcrypt.compare(req.body.password, user[0].password, (err, result) => {
+		bcrypt.compare(req.body.password, user[0].password, (error, result) => {
 			if (result) {
 			auth.signUser(
 				{
@@ -317,12 +327,12 @@ router.post("/login", (req, res, next) => {
 				);
 			} else {
 			console.log({
-				error: "Authentification failed",
+				error: "Authentification failed: Invalid user password!",
 			});
 			return res.status(401).json({
-					message: "Authentification failed",
-					error: err,
-					message: "Incorrect password!",
+					errorStatusCode: 2,
+					errorMessage: "Authentification failed: Invalid user password!",
+					error,
 					request: {
 					type: "POST",
 					url: req.originalUrl,
@@ -332,12 +342,12 @@ router.post("/login", (req, res, next) => {
 		});
 		})
 		.catch((error) => {
-		res.status(500).json({
-			serverError: error.message,
-			message: "Internal Server Error: Failed to authenticate...",
-			request: {
-			type: "POST",
-			url: req.originalUrl,
+			res.status(500).json({
+				errorStatusCode: 3,
+				errorMessage: error.message,
+				request: {
+				type: "POST",
+				url: req.originalUrl,
 			},
 		});
     });
