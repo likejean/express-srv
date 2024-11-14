@@ -129,6 +129,72 @@ router.get("/:userId", async (req, res) => {
 	}
 });
 
+
+
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+//PATCH endpoint: update user password for user found by ID
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+
+router.patch("/updatePassword/:userId",
+	async (req, res) => {
+		const { email, oldPassword, newPassword } = req.body;
+
+		console.log(email, oldPassword, newPassword)
+
+		try {
+			const user = await User.findOne({ email });
+
+			if (!user) {
+				console.log({
+					error: "Authentification failed: Invalid user email!",
+				});
+				return res.status(401).json({
+						errorStatusCode: 1,
+						errorMessage: "Authentification failed: Invalid user email!",
+						error,
+						request: {
+						type: "POST",
+						url: req.originalUrl,
+					},
+				});
+			}
+
+			const isMatch = await bcrypt.compare(oldPassword, user.password);
+
+			if (!isMatch) {
+				console.log({
+					error: "Authentification failed: Invalid old password entered!!",
+				});
+				return res.status(401).json({
+						errorStatusCode: 2,
+						errorMessage: "Authentification failed: Invalid old password entered!",
+						error,
+						request: {
+						type: "POST",
+						url: req.originalUrl,
+					},
+				});
+			}
+
+			
+			// Hash the new password
+			const salt = await bcrypt.genSalt(10);
+			const hashedPassword = await bcrypt.hash(newPassword, salt);
+			user.password = hashedPassword;
+
+			await user.save();
+
+			res.status(200).json({ message: 'Password changed successfully' });
+		} catch (error) {
+			console.error(error);
+			res.status(500).json({ message: 'Internal server error' });
+		}
+	}
+);
+
+
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
 //PATCH endpoint: update image for user avatar found by ID
@@ -137,43 +203,44 @@ router.get("/:userId", async (req, res) => {
 router.patch("/updateAvatar/:userId",  upload.single("avatar"),
 	async (req, res) => {
 		try {
-		const user = await User.findById(req.params.userId);
-		if (!user) {
-			return res.status(404).json({ error: "User not found" });
-		}
+			const user = await User.findById(req.params.userId);
 
-		if (req.file) {
-			user.image.avatar.data = req.file.buffer;
-			user.image.avatar.contentType = req.file.mimetype;
-			user.image.avatar.original = req.file.originalname;
-			user.image.title = req.body.title;
-			user.image.description = req.body.description;
-		}
+			if (!user) {
+				return res.status(404).json({ error: "User not found" });
+			}
 
-		const result = await user.save();
-		console.log({
-			request: {
-			type: "PATCH",
-			url: req.originalUrl,
-			status: "SUCCESS",
-			},
-		});
-		res.status(200).json({
-			message: `Avatar image updated successfully for a user: {email: ${result.email}, username: ${result.username}}`,
-			result,
-			request: {
-			type: "PATCH",
-			},
-		});
+			if (req.file) {
+				user.image.avatar.data = req.file.buffer;
+				user.image.avatar.contentType = req.file.mimetype;
+				user.image.avatar.original = req.file.originalname;
+				user.image.title = req.body.title;
+				user.image.description = req.body.description;
+			}
+
+			const result = await user.save();
+			console.log({
+				request: {
+				type: "PATCH",
+				url: req.originalUrl,
+				status: "SUCCESS",
+				},
+			});
+			res.status(200).json({
+				message: `Avatar image updated successfully for a user: {email: ${result.email}, username: ${result.username}}`,
+				result,
+				request: {
+				type: "PATCH",
+				},
+			});
 		} catch (error) {
-		res.status(500).json({
-			message: "Failure: Unable to update user avatar image...",
-			serverError: error.message,
-			request: {
-			type: "PATCH",
-			url: req.originalUrl,
-			},
-		});
+			res.status(500).json({
+				message: "Failure: Unable to update user avatar image...",
+				serverError: error.message,
+				request: {
+				type: "PATCH",
+				url: req.originalUrl,
+				},
+			});
 		}
 	}
 );
@@ -204,85 +271,90 @@ router.post("/register", upload.single("avatar"), (req, res) => {
 		//Throw error if a user already exists with the current req.body.email
 		if (user.length >= 1) {
 			console.log({
-			request: {
-				message: `User with ${req.body.email} email already exists...`,
-				type: "POST",
-				url: req.originalUrl,
-				status: "FAILURE",
-			},
+				request: {
+					message: `User with ${req.body.email} email already exists...`,
+					type: "POST",
+					url: req.originalUrl,
+					status: "FAILURE",
+				},
 			});
 			return res.status(409).json({
-			message: `User with ${req.body.email} email already exists...`,
-			request: {
-				type: "POST",
-				url: req.originalUrl,
-			},
-			});
-		} else {
-			//hash a new user password
-			bcrypt.hash(password, 10, (error, hash) => {
-			if (error) {
-				return res.status(500).json({
-				serverError: error,
+				message: `User with ${req.body.email} email already exists...`,
 				request: {
 					type: "POST",
 					url: req.originalUrl,
 				},
-				});
-			} else {
-				//Create buffer data for avatar image
-					const avatar = {
-					data: new Buffer.from(req.file.buffer, "base64"),
-					contentType: req.file.mimetype,
-					originalName: req.file.originalname,
-				};
+			});
+		} else {
 
-				//Create a user document
-				const user = new User({
-					_id,
-					email,
-					password: hash,
-					username,
-					firstname,
-					lastname,
-					age,
-					aboutYourself,
-					image: {
-						title,
-						description,
-						avatar,
-					},
+			//hash a new user password
+			const saltRounds = 10;
+			bcrypt.genSalt(saltRounds, (error, salt) => {
+				if (error) throw error;				
+				bcrypt.hash(password, salt, (error, hash) => {
+					if (error) {
+						return res.status(500).json({
+							serverError: error,
+							request: {
+								type: "POST",
+								url: req.originalUrl,
+							}
+						});
+					} else {
+						//Create buffer data for avatar image
+						const avatar = {
+							data: new Buffer.from(req.file.buffer, "base64"),
+							contentType: req.file.mimetype,
+							originalName: req.file.originalname,
+						};
+	
+						//Create a user document
+						const user = new User({
+							_id,
+							email,
+							password: hash,
+							username,
+							firstname,
+							lastname,
+							age,
+							aboutYourself,
+							image: {
+								title,
+								description,
+								avatar,
+							},
+						});
+	
+						user
+						.save() //save calibration record document
+						.then((result) => {
+							console.log({
+								request: {
+									type: "POST",
+									url: req.originalUrl,
+									status: "SUCCESS",
+								},
+							});
+							res.json({
+								result,
+								request: {
+									type: "POST",
+									url: req.originalUrl,
+								},
+							});
+						})
+						.catch((error) => {
+								res.status(500).json({
+								serverError: error.message,
+								message: "Failed to save avatar image in the database",
+								request: {
+									type: "POST",
+									url: req.originalUrl,
+								},
+							});
+						});
+					}
 				});
-
-				user
-				.save() //save calibration record document
-				.then((result) => {
-					console.log({
-					request: {
-						type: "POST",
-						url: req.originalUrl,
-						status: "SUCCESS",
-					},
-					});
-					res.json({
-					result,
-					request: {
-						type: "POST",
-						url: req.originalUrl,
-					},
-					});
-				})
-				.catch((error) => {
-					res.status(500).json({
-					serverError: error.message,
-					message: "Failed to save avatar image in the database",
-					request: {
-						type: "POST",
-						url: req.originalUrl,
-					},
-					});
-				});
-			}
 			});
 		}
     });
@@ -301,45 +373,37 @@ router.post("/login", (req, res, next) => {
 	User.find({ email: req.body.email })
 		.exec()
 		.then((user) => {
-		if (user.length < 1) {
-			console.log({
-				error: "Authentification failed: Invalid user email!",
-			});
-			return res.status(401).json({			
-				errorStatusCode: 1,
-				errorMessage: "Authentification failed: Invalid user email!",
-				request: {
-					type: "POST",
-					url: req.originalUrl,
+			if (user.length < 1) {
+				console.log({
+					error: "Authentification failed: Invalid user email!",
+				});
+				return res.status(401).json({			
+					errorStatusCode: 1,
+					errorMessage: "Authentification failed: Invalid user email!",
+					request: {
+						type: "POST",
+						url: req.originalUrl,
+					}
+				});
+			}
+			bcrypt.compare(req.body.password, user[0].password, (error, result) => {
+				if (result) {
+					auth.signUser({email: user[0].email, userId: user[0]._id}, config.secretKey, res, req);
+				} else {
+					console.log({
+						error: "Authentification failed: Invalid user password!",
+					});
+					return res.status(401).json({
+							errorStatusCode: 2,
+							errorMessage: "Authentification failed: Invalid user password!",
+							error,
+							request: {
+							type: "POST",
+							url: req.originalUrl,
+						},
+					});
 				}
 			});
-		}
-		bcrypt.compare(req.body.password, user[0].password, (error, result) => {
-			if (result) {
-			auth.signUser(
-				{
-					email: user[0].email,
-					userId: user[0]._id,
-				},
-					config.secretKey,
-					res,
-					req
-				);
-			} else {
-			console.log({
-				error: "Authentification failed: Invalid user password!",
-			});
-			return res.status(401).json({
-					errorStatusCode: 2,
-					errorMessage: "Authentification failed: Invalid user password!",
-					error,
-					request: {
-					type: "POST",
-					url: req.originalUrl,
-				},
-			});
-			}
-		});
 		})
 		.catch((error) => {
 			res.status(500).json({

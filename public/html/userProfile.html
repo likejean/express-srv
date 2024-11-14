@@ -137,18 +137,34 @@
 												<div class="container">
 													<div class="row my-1 justify-content-center">
 														<div class="mb-4 w-50">
-															<!-- Password -->
-															<label for="password">New Password:</label>
+															<!-- Old Password -->
+															<label for="oldPassword">Old Password:</label>
 															<input
-																name="password"
+																name="oldPassword"
 																type="password"
 																class="form-control"
-																id="password"
-																aria-describedby="password#Help"
+																id="oldPassword"
+																aria-describedby="oldPassword#Help"
 																placeholder=""
 																required
 															/>
-															<small id="password#Help" class="form-text text-muted">
+															<small id="oldPassword#Help" class="form-text text-muted">
+																Please, enter your old password here
+															</small>
+														</div>				
+														<div class="mb-4 w-50">
+															<!-- New Password -->
+															<label for="newPassword">New Password:</label>
+															<input
+																name="newPassword"
+																type="password"
+																class="form-control"
+																id="newPassword"
+																aria-describedby="newPassword#Help"
+																placeholder=""
+																required
+															/>
+															<small id="newPassword#Help" class="form-text text-muted">
 																Please, enter your new password here
 															</small>
 														</div>														
@@ -203,8 +219,12 @@
 	<script src="../js/user/utils/selectUserAccountSettings.js"></script>
 	<script src="../js/user/fetchUserRecordById.js"></script>
 	<script src="../js/user/utils/resetUserProfileAvatarImage.js"></script>
-	<script src="../js/user/getUpdateUserAccountData.js"></script>
+
+	<script src="../js/user/getNewUserAvatarData.js"></script>
 	<script src="../js/user/updateUserAvatarImage.js"></script>
+
+	<script src="../js/user/getNewUserPassword.js"></script>
+	<script src="../js/user/updateUserPassword.js"></script>
 
 
 	<script>

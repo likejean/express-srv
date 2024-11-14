@@ -22,8 +22,7 @@ function userLogin() {
 		})
 		.catch(error => {
 			console.error(error.response);
-
-			const userLoginErrorCode = error.response.data.errorStatusCode;
+			
 			const userLoginErrorTextContent = error.response.data.errorMessage;
 
 			const modal = document.getElementById('login-error-modal');
