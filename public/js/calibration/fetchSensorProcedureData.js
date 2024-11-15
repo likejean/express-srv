@@ -18,7 +18,15 @@ const fetchSensorProcedureData = async () => {
 		})
 		.catch((error) => {
 		//display error message if data fetch failure occurs or any other internal error detected
-		console.log(error);
+		console.error(error.response);
+			
+		const userLoginErrorTextContent = error.response.data.message;
+
+		const modal = document.getElementById('new-cal-record-auth-error-modal');
+		const span = document.getElementById('error-text-content');
+
+		new bootstrap.Modal(modal).show();
+		span.innerText = userLoginErrorTextContent;
     });
 };
 

@@ -18,6 +18,7 @@ const config = require('../auth/config');
 router.get('/', auth.verifyToken, (req, res, next) => {
 	jwt.verify(req.token, config.secretKey, (err, authData) => {
 		if (err) {
+			
 			console.log({
 				errorMessage: err.message,
 				request: {
@@ -27,8 +28,8 @@ router.get('/', auth.verifyToken, (req, res, next) => {
 				}});
 			res.status(403).json({
 				authStatus: false,
-				errorMessage: err.message,
-				message: 'Your login session is expired! Sign in again to perform this action...'
+				err,
+				message: 'Your login session is expired or you are not logged in! Sign in again to perform this action...'
 			});
 		} else {
 			Procedure

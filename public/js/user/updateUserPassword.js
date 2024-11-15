@@ -7,6 +7,7 @@ function updateUserPassword() {
 	axios.patch(`../api/users/updatePassword/${id}`, newPasswordPostData)
 		.then((response) => {
 			console.log(response.data);
+			window.location.reload();
 		})
 		.catch((error) => {
 			console.error("Error: failed to update user password", error.response);

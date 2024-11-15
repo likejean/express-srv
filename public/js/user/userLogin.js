@@ -25,8 +25,9 @@ function userLogin() {
 			
 			const userLoginErrorTextContent = error.response.data.errorMessage;
 
-			const modal = document.getElementById('login-error-modal');
+			const modal = document.getElementById('user-login-auth-error-modal');
 			const span = document.getElementById('error-text-content');
+
 			new bootstrap.Modal(modal).show();
 			span.innerText = userLoginErrorTextContent;
 	});

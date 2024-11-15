@@ -140,9 +140,6 @@ router.get("/:userId", async (req, res) => {
 router.patch("/updatePassword/:userId",
 	async (req, res) => {
 		const { email, oldPassword, newPassword } = req.body;
-
-		console.log(email, oldPassword, newPassword)
-
 		try {
 			const user = await User.findOne({ email });
 
@@ -179,11 +176,10 @@ router.patch("/updatePassword/:userId",
 			}
 
 			
-			// Hash the new password
+			// Hash and save a new password
 			const salt = await bcrypt.genSalt(10);
 			const hashedPassword = await bcrypt.hash(newPassword, salt);
 			user.password = hashedPassword;
-
 			await user.save();
 
 			res.status(200).json({ message: 'Password changed successfully' });
@@ -246,6 +242,9 @@ router.patch("/updateAvatar/:userId",  upload.single("avatar"),
 		}
 	}
 );
+
+
+
 
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
