@@ -2,7 +2,9 @@ const _store = new dataStorage();   //store all sensors and procedures data
 
 const fetchSensorProcedureData = async () => {
   // fetch all data using POST API endpoints: sensors, procedures
-	await Promise.all([axios.get("/api/sensors"), axios.get("/api/procedures")])
+	await Promise.all([axios.get("/api/sensors"), axios.get("/api/procedures", {
+			headers: getRequestHeaders()
+		})])
 		.then((result) => {
 
 		//store all data in local data storage
