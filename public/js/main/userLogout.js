@@ -1,6 +1,4 @@
 function userLogout () {
-	window.localStorage.removeItem('token');
-	window.localStorage.removeItem('userEmail');
-	window.localStorage.removeItem('userId');
+	localStorage.clear();
 	window.location.reload();
 }

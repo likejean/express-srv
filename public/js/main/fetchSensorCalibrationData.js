@@ -32,14 +32,12 @@ const fetchSensorCalibrationData = async () => {
 			if (errorCode === 500){
 				//display error message if undefined internal server error occurs (not related to user authentification)
 				notification.innerHTML = `<div class="text-center">
-					<div class="alert alert-danger" role="alert"> NOTE! No sensor data exists or unable to fetch due to system failure.</div>
 					<div class="alert alert-danger" role="alert">${error.response.statusText}</div>
 				</div>`;
 			}			
 			else
 				//display error message if auth token invalid or user is not logged in
 				notification.innerHTML = `<div class="text-center">
-					<div class="alert alert-danger" role="alert"> NOTE! No sensor data exists or unable to fetch due to system failure.</div>
 					<div class="alert alert-danger" role="alert">${error.response.data.message}</div>
 				</div>`;
 			

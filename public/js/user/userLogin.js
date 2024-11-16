@@ -4,17 +4,20 @@ function userLogin() {
 			const token = response.data.token;
 			const email = response.data.user.email;
 			const id = response.data.user.userId;
+			const rank = response.data.user.level;
 			
 			window.localStorage.setItem("token", token);
 			window.localStorage.setItem("userEmail", email);
 			window.localStorage.setItem("userId", id);
+
 						
 			console.log('User logged in successfully:', response);
 
-			return axios.get(`../api/users/${id}`)
+			return axios.get(`../api/users/${id}`)				
 				.then(response => {
-					window.localStorage.setItem("userAvatar", JSON.stringify(response.data.user.image.avatar.data));
 					window.location.href = "../../index.html";
+					window.localStorage.setItem("userAvatar", JSON.stringify(response.data.user.image.avatar.data));
+					window.localStorage.setItem("userLevel", response.data.user.level);					
 				})
 				.catch(error => {
 					console.error(error);
