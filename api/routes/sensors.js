@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const Sensor = require('../models/sensor');
+const auth = require('../auth/authentication');
+const jwt = require('jsonwebtoken');
+const config = require('../auth/config');
 const router = express.Router();
 
 
@@ -11,62 +14,80 @@ const router = express.Router();
 // GET endpoint: get ALL sensor documents/records
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
-router.get('/', (req, res, next) => {
-    Sensor
-        .find()
-        .exec()
-        .then(docs => {
-            console.log({
-                total: docs.length,
-                request: {
-                    type: 'GET',
-                    url: req.originalUrl,
-                    status: "SUCCESS"
-                }});
-            res.status(200).json({
-                message: `Successfully fetched ${docs.length} sensor record(s)`,
-            	collectionName: "sensors",
-                payload: docs.map(doc => {                    
-                    return {
-                        _id: doc._id,
-                        calibrations: doc.calibrations,
-                        EID: doc.EID,
-                        type: doc.type,                    
-                        calibrationPriority: doc.calibrationPriority,
-                        calibrationFrequency: doc.calibrationFrequency,
-                        calibratedBy: doc.calibratedBy,
-						capacityRange: doc.capacityRange,
-                        location: doc.location,
-                        description: doc.description,                        
-                        comment: doc.comment,
-                        quantity: doc.quantity,
-                        model: doc.model,
-                        manufacturer: doc.manufacturer,
-                        createdAt: doc.createdAt,
-                        request: {
-                            type: 'GET',
-                            url: req.originalUrl                    
-                        }  
-                    };                    
-                }),
-                total: docs.length,
-                request: {
-                type: 'GET',
-                url: req.originalUrl
-            }
-            });
-        })
-        .catch((error) => {
-            res.status(500).json({
-				message:
-                "Failure: Sensor documents were not fetched... Something went wrong",
-                serverError: error.message,
-                request: {
-                    type: 'GET',
-                    url: req.originalUrl                    
-                }  
-            });
-        });
+router.get('/', auth.verifyToken, (req, res, next) => {
+	jwt.verify(req.token, config.secretKey, (err) => {
+		if (err) {
+			console.log({
+				errorMessage: err.message,
+				request: {
+					type: 'GET',
+					url: req.originalUrl,
+					status: "SUCCESS"
+				}});
+			res.status(403).json({
+				authStatus: false,
+				err,
+				message: 'Your login session is expired or you are not logged in! Sign in again to perform this action...'
+			});
+		}
+		else{
+			Sensor
+			.find()
+			.exec()
+			.then(docs => {
+				console.log({
+					total: docs.length,
+					request: {
+						type: 'GET',
+						url: req.originalUrl,
+						status: "SUCCESS"
+					}});
+				res.status(200).json({
+					message: `Successfully fetched ${docs.length} sensor record(s)`,
+					collectionName: "sensors",
+					payload: docs.map(doc => {                    
+						return {
+							_id: doc._id,
+							calibrations: doc.calibrations,
+							EID: doc.EID,
+							type: doc.type,                    
+							calibrationPriority: doc.calibrationPriority,
+							calibrationFrequency: doc.calibrationFrequency,
+							calibratedBy: doc.calibratedBy,
+							capacityRange: doc.capacityRange,
+							location: doc.location,
+							description: doc.description,                        
+							comment: doc.comment,
+							quantity: doc.quantity,
+							model: doc.model,
+							manufacturer: doc.manufacturer,
+							createdAt: doc.createdAt,
+							request: {
+								type: 'GET',
+								url: req.originalUrl                    
+							}  
+						};                    
+					}),
+					total: docs.length,
+					request: {
+					type: 'GET',
+					url: req.originalUrl
+				}
+				});
+			})
+			.catch((error) => {
+				res.status(500).json({
+					message:
+					"Failure: Sensor documents were not fetched... Something went wrong",
+					serverError: error.message,
+					request: {
+						type: 'GET',
+						url: req.originalUrl                    
+					}  
+				});
+			});
+		}
+	});
 });
 
 

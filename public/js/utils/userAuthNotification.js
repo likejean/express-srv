@@ -12,13 +12,11 @@ if(localStorage.getItem("userEmail")) {
         headers: getRequestHeaders()
     })
     .then(response => {
-        console.log(response);
         const tokenValid = response.data.tokenValid;
         tokenValid && userAuthNotification("auth-email-home-page", "auth-status-home-page", "green", localStorage.getItem("userEmail"), "logged in.")
         
     })
-    .catch(error => {
-            console.error(error.response.data);
+    .catch((err) => {
             userAuthNotification("auth-email-home-page", "auth-status-home-page", "red", localStorage.getItem("userEmail"), "login session expired.");
         }
     );			

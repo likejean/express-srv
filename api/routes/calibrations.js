@@ -3,64 +3,84 @@ const express = require("express");
 const Calibration = require("../models/calibration");
 const Procedure = require("../models/procedure");
 const Sensor = require("../models/sensor");
+const auth = require('../auth/authentication');
+const jwt = require('jsonwebtoken');
+const config = require('../auth/config');
 const router = express.Router();
 
 //Routers
-
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
 // GET endpoint: get ALL calibration documents/records
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
 
-router.get("/", (req, res, next) => {
-    Calibration.find()
-    .exec()
-    .then((docs) => {
-        console.log({
-        total: docs.length,
-            request: {
-                type: "GET",
-                url: req.originalUrl,
-                status: "SUCCESS",
-            },
-        });
-        res.status(200).json({
-            message: `Successfully fetched ${docs.length} calibration event(s)`,
-            collectionName: "calibrations",
-            payload: docs.map((doc) => {
-                return {
-                    _id: doc._id,
-                    calibrationName: doc.calibrationName,
-                    procedureId: doc.procedureId,
-                    sensorId: doc.sensorId,
-                    lastCalibrationDate: doc.lastCalibrationDate,
-                    dueCalibrationDate: doc.dueCalibrationDate,
-                    adjustmentsMade: doc.adjustmentsMade,
-                    calibrationExtended: doc.calibrationExtended,
-                    maxCalibrationExtension: doc.maxCalibrationExtension,
-                    calibrationRangePercent: doc.calibrationRangePercent,
-                    comment: doc.comment,
-                    createdAt: doc.createdAt,
-                };
-            }),
-            total: docs.length,
-            request: {
-                type: "GET",
-                url: req.originalUrl,
-            },
-        });
-    })
-    .catch((error) => {
-        res.status(500).json({
-            message: "Failure: Calibration events were not fetched... Something went wrong",
-			serverError: error.message,
-            request: {
-                type: "GET",
-                url: req.originalUrl,
-            },
-        });
-    });
+router.get("/", auth.verifyToken, (req, res, next) => {
+	jwt.verify(req.token, config.secretKey, (err) => {
+		if (err) {	
+			console.log({
+				errorMessage: err.message,
+				request: {
+					type: 'GET',
+					url: req.originalUrl,
+					status: "SUCCESS"
+				}});
+			res.status(403).json({
+				authStatus: false,
+				err,
+				message: 'Your login session is expired or you are not logged in! Sign in again to perform this action...'
+			});		
+		} else {
+			Calibration.find()
+			.exec()
+			.then((docs) => {
+				console.log({
+				total: docs.length,
+					request: {
+						type: "GET",
+						url: req.originalUrl,
+						status: "SUCCESS",
+					},
+				});
+				res.status(200).json({
+					message: `Successfully fetched ${docs.length} calibration event(s)`,
+					collectionName: "calibrations",
+					payload: docs.map((doc) => {
+						return {
+							_id: doc._id,
+							calibrationName: doc.calibrationName,
+							procedureId: doc.procedureId,
+							sensorId: doc.sensorId,
+							lastCalibrationDate: doc.lastCalibrationDate,
+							dueCalibrationDate: doc.dueCalibrationDate,
+							adjustmentsMade: doc.adjustmentsMade,
+							calibrationExtended: doc.calibrationExtended,
+							maxCalibrationExtension: doc.maxCalibrationExtension,
+							calibrationRangePercent: doc.calibrationRangePercent,
+							comment: doc.comment,
+							createdAt: doc.createdAt,
+						};
+					}),
+					total: docs.length,
+					request: {
+						type: "GET",
+						url: req.originalUrl,
+					},
+				});
+			})
+			.catch((error) => {
+				res.status(500).json({
+					message: "Failure: Calibration events were not fetched... Something went wrong",
+					serverError: error.message,
+					request: {
+						type: "GET",
+						url: req.originalUrl,
+					},
+				});
+			});
+		}
+	});
+    
 });
 
 

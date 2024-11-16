@@ -7,7 +7,11 @@ const fetchSensorCalibrationData = async () => {
 	let notification = document.querySelector(".notification");
 
 	// fetch all data using POST API endpoints: sensors, calibrations, procedures
-	await Promise.all([axios.get("/api/sensors"), axios.get("/api/calibrations")])
+	await Promise.all([axios.get("/api/sensors", {
+			headers: getRequestHeaders()
+		}), axios.get("/api/calibrations", {
+			headers: getRequestHeaders()
+		})])
 		.then((result) => {
 
 			//store all data in browser's local storage
@@ -23,12 +27,22 @@ const fetchSensorCalibrationData = async () => {
 			);
 		})
 		.catch((error) => {
-		//display error message if data fetch failure occurs or any other internal error detected
-		notification.innerHTML = `
-			<div class="text-center">
-				<div class="alert alert-danger" role="alert"> NOTE! No sensor data exists or unable to fetch due to system failure.</div>
-				<div class="alert alert-danger" role="alert">${error}</div>
-			</div>`;
+			const errorCode = error.response.status;			
+						
+			if (errorCode === 500){
+				//display error message if undefined internal server error occurs (not related to user authentification)
+				notification.innerHTML = `<div class="text-center">
+					<div class="alert alert-danger" role="alert"> NOTE! No sensor data exists or unable to fetch due to system failure.</div>
+					<div class="alert alert-danger" role="alert">${error.response.statusText}</div>
+				</div>`;
+			}			
+			else
+				//display error message if auth token invalid or user is not logged in
+				notification.innerHTML = `<div class="text-center">
+					<div class="alert alert-danger" role="alert"> NOTE! No sensor data exists or unable to fetch due to system failure.</div>
+					<div class="alert alert-danger" role="alert">${error.response.data.message}</div>
+				</div>`;
+			
 		});
 	};
 

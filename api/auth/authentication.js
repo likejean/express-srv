@@ -28,7 +28,7 @@ function verifyToken (req, res, next) {
     if (typeof bearerHeader !== 'undefined'){
         const bearer = bearerHeader.split(' ');		
         req.token = bearer[1];   //assigns token to API request
-        next();
+        next();   //if a token found, then proceed to next API endpoint layer
     } else {
         //Forbidden
         res.sendStatus(403).json({
