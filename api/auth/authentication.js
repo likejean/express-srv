@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 //Generate Token for User Login
 function signUser(user, secretKey, res, req) {
-	return jwt.sign({user}, secretKey, {expiresIn: '1000s'},(err, token) => {
+	return jwt.sign({user}, secretKey, {expiresIn: '3000s'},(err, token) => {
 		console.log({
 			request: {
 				type: 'POST',
@@ -24,11 +24,10 @@ function signUser(user, secretKey, res, req) {
 function verifyToken (req, res, next) {
     //Get auth header value
     const bearerHeader = req.headers['authorization'];
-	console.log('headers', req.headers['authorization'])
     //Check if bearer is undefined
     if (typeof bearerHeader !== 'undefined'){
         const bearer = bearerHeader.split(' ');		
-        req.token = bearer[1];
+        req.token = bearer[1];   //assigns token to API request
         next();
     } else {
         //Forbidden
