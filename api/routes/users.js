@@ -5,6 +5,7 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const auth = require("../auth/authentication");
 const config = require("../auth/config");
+const jwt = require('jsonwebtoken');
 var multer = require("multer");
 
 //const avatarPath = path.join(__dirname + '/../../public/img/avatars');
@@ -360,6 +361,36 @@ router.post("/register", upload.single("avatar"), (req, res) => {
 		}
     });
 });
+
+
+router.post("/verifyToken", (req, res, next) => {
+
+	console.log(req.token);
+	jwt.verify(req.token, config.secretKey, (err) => {
+		if (err) {			
+			console.log({
+				errorMessage: err.message,
+				request: {
+					type: 'POST',
+					url: req.originalUrl,
+					status: "SUCCESS"
+				}});
+			res.status(403).json({
+				authStatus: "Forbidden",
+				err,
+				message: 'Your login session is expired or you are not logged in! Sign in again to perform this action...'
+			});
+		} else {
+			res.status(200).json({
+				authStatus: "Authorized",
+				request: {
+					type: 'POST',
+					url: req.originalUrl
+				}
+			});
+		}
+	});	
+})
 
 
 

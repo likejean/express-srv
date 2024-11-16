@@ -16,9 +16,8 @@ const config = require('../auth/config');
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
 router.get('/', auth.verifyToken, (req, res, next) => {
-	jwt.verify(req.token, config.secretKey, (err, authData) => {
-		if (err) {
-			
+	jwt.verify(req.token, config.secretKey, (err) => {
+		if (err) {			
 			console.log({
 				errorMessage: err.message,
 				request: {

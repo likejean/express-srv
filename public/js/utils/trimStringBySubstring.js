@@ -7,6 +7,5 @@ function trimBySubstring(str, substr) {
     while (str.endsWith(substr)) {
         str = str.slice(0, -substr.length);
     }
-
     return str;
 }

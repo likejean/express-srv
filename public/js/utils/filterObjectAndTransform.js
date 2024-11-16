@@ -1,5 +1,4 @@
 //this helper function filters Collection and prepares body JSON object for PATCH API endpoint
-
 const filterObjectAndTransform = (obj, filterFn) => {
     const result = {};
     for (const key in obj) {
