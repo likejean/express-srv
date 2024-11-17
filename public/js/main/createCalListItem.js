@@ -3,22 +3,26 @@
 function generateToastHtmlItem (link, certificateName, data, location) {
 	//Get a current time in unix format
     const unixTimestamp = moment().unix();
+	const timeDuration = calculateTimeDuration(moment.utc(data.lastCalibrationDate).format('YYYY-MM-DD'), getCurrentDate());
+	
+	console.log(timeDuration);
 
-	return `<div class="toast-header">
+	return `<div class="toast-header mt-3" style="background-color:#F0F0F0;">
 			<a href="${link}">
-				<i class="fas fa-2x fa-certificate mx-1" style="color:${moment.utc(data.dueCalibrationDate).unix() > unixTimestamp ? "green" : "red"};">
+				<i class="fas fa-2x fa-certificate" 
+					style="color:${moment.utc(data.dueCalibrationDate).unix() > unixTimestamp ? "green" : "red"}; margin-right:10px;">
 				</i>
 			</a>
-			<strong id="certificate-name" class="me-auto">${certificateName}</strong>
-			<small>11 mins ago</small>
+			<strong style="font-size:18px;" id="certificate-name" class="me-auto">${certificateName}</strong>
+			<small style="color: blue;">Calibrated ${timeDuration.years} years, ${timeDuration.years} months, ${timeDuration.days} days ago</small>
 			<button type="button" class="btn-close" data-bs-dismiss="toast"></button>			
 		</div>
 		<div class="toast-body">
-			<p>Location: ${location}</p>
-			<p>Last Date: ${moment.utc(data.lastCalibrationDate).format('dddd, MM/DD/YYYY')}</p>
-			<p>Due Date: ${moment.utc(data.dueCalibrationDate).format('dddd, MM/DD/YYYY')}</p>
-			<p>Extended? ${data.calibrationExtended ? 'YES' : 'NO'}</p>
-			<p>Expired? ${moment.utc(data.dueCalibrationDate).unix()>unixTimestamp? "NO" : "YES"}</p>
+			<p><span>Calibration Location:</span>&nbsp<span style="font-weight:bold;">${location}</span></p>
+			<p><span>Last Calibrtion Date:</span>&nbsp<span style="font-weight:bold;">${moment.utc(data.lastCalibrationDate).format('dddd, MM/DD/YYYY')}</span></p>
+			<p><span>Due Calibration Date:</span>&nbsp<span style="font-weight:bold;">${moment.utc(data.dueCalibrationDate).format('dddd, MM/DD/YYYY')}</span></p>
+			<p><span>Extended?</span>&nbsp<span style="font-weight:bold;">${data.calibrationExtended ? 'YES' : 'NO'}</span></p>
+			<p><span>Expired?</span>&nbsp<span style="font-weight:bold;">${moment.utc(data.dueCalibrationDate).unix()>unixTimestamp? "NO" : "YES"}</span></p>
 		</div>`
 }
 
@@ -33,6 +37,7 @@ function createCalibrationListItem (data, list, calName, calLocation, certList) 
 		toastItem.classList.add("show");
 		toastItem.classList.add("mx-2");
 		toastItem.classList.add("my-2");
+		toastItem.classList.add("w-50");
 		toastItem.setAttribute('id', `${data[i]._id}`)
 		toastItem.setAttribute("role","alert");		
 		toastItem.setAttribute("aria-live", "assertive")
