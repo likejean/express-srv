@@ -1,35 +1,54 @@
 //this function creates list of all calibrations associated with specified sensor
 
-function generateToastHtmlItem (id, link, certificateName, data) {
-	return `<div id="${id}" class="toast show mx-2 my-1" role="alert" aria-live="assertive" aria-atomic="true">
-		<div class="toast-header">
-			<a href="${link}"><i class="fas fa-2x fa-certificate mx-1"></i></a>
+function generateToastHtmlItem (link, certificateName, data, location) {
+	//Get a current time in unix format
+    const unixTimestamp = moment().unix();
+
+	return `<div class="toast-header">
+			<a href="${link}">
+				<i class="fas fa-2x fa-certificate mx-1" style="color:${moment.utc(data.dueCalibrationDate).unix() > unixTimestamp ? "green" : "red"};">
+				</i>
+			</a>
 			<strong id="certificate-name" class="me-auto">${certificateName}</strong>
 			<small>11 mins ago</small>
 			<button type="button" class="btn-close" data-bs-dismiss="toast"></button>			
 		</div>
 		<div class="toast-body">
-			Hello, world! This is a toast message.
-		</div>
-	</div>`
+			<p>Location: ${location}</p>
+			<p>Last Date: ${moment.utc(data.lastCalibrationDate).format('dddd, MM/DD/YYYY')}</p>
+			<p>Due Date: ${moment.utc(data.dueCalibrationDate).format('dddd, MM/DD/YYYY')}</p>
+			<p>Extended? ${data.calibrationExtended ? 'YES' : 'NO'}</p>
+			<p>Expired? ${moment.utc(data.dueCalibrationDate).unix()>unixTimestamp? "NO" : "YES"}</p>
+		</div>`
 }
 
-function createCalibrationListItem (data, list, calName, calLocation) {     //called in showSensorInfoCard.js
+function createCalibrationListItem (data, list, calName, calLocation, certList) {     //called in showSensorInfoCard.js
     //Get a current time in unix format
     const unixTimestamp = moment().unix();     
 
     for (let i = 0; i < data.length; i++){
 
 		let toastItem = document.createElement("div");
+		toastItem.classList.add("toast");
+		toastItem.classList.add("show");
+		toastItem.classList.add("mx-2");
+		toastItem.classList.add("my-2");
+		toastItem.setAttribute('id', `${data[i]._id}`)
+		toastItem.setAttribute("role","alert");		
+		toastItem.setAttribute("aria-live", "assertive")
+		toastItem.setAttribute("aria-atomic","true")
 		
 		toastItem.innerHTML = generateToastHtmlItem (
-			`${data[i]._id}`,
 			`./html/editCalibrationEvent.html?id=${data[i]._id}`, 
 			`${data[i].calibrationName.replace(/{/g, "").replace(/}/g, "")}`, 
-			data
+			data[i],
+			calLocation
 		);
-		
-		document.getElementById("calibration-certificates").appendChild(toastItem);
+
+		certList.appendChild(toastItem);
+
+
+
 
 		let listItem = document.createElement("li");
 		let calLinkItem = document.createElement("a");        

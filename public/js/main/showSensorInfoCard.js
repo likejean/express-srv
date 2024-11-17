@@ -48,6 +48,8 @@ function showSensorInfoCard(
 			removeAllChildNodes(htmlElementCollection.sensorMeasurementQuantityHtml);
 			removeAllChildNodes(htmlElementCollection.sensorCapacityRangeHtml);
 			removeAllChildNodes(htmlElementCollection.calRecordsNoticeHtml);
+
+			removeAllChildNodes(htmlElementCollection.certificateListHtmL);
 		}
 	}
 
@@ -83,7 +85,8 @@ function showSensorInfoCard(
 				parsedJSON,
 				htmlElementCollection.calProcedureInfoHtml,
 				htmlElementCollection.calProcedureNameHtml,
-				location
+				location,
+				htmlElementCollection.certificateListHtmL
 			);
 		}			
 		else {
@@ -107,5 +110,7 @@ function showSensorInfoCard(
         removeAllChildNodes(htmlElementCollection.sensorMeasurementQuantityHtml);
         removeAllChildNodes(htmlElementCollection.sensorCapacityRangeHtml);
         removeAllChildNodes(htmlElementCollection.calRecordsNoticeHtml);
+		
+		removeAllChildNodes(htmlElementCollection.certificateListHtmL);
     }
 }

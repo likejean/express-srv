@@ -9,7 +9,8 @@ const htmlClassCollection = {
     manufacturerNameHtml: 'sensor-manufacturer',
     calProcedureNameHtml: 'calibration-procedures-badges',
     calProcedureInfoHtml: 'calibration-procedures-list',
-    calRecordsNoticeHtml: 'cal-records'
+    calRecordsNoticeHtml: 'cal-records',
+	certificateListHtmL: 'calibration-certificates',
 }
 
 
