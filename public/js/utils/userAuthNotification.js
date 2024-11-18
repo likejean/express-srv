@@ -15,8 +15,17 @@ if(localStorage.getItem("userEmail")) {
         const tokenValid = response.data.tokenValid;
         tokenValid && userAuthNotification("auth-email-home-page", "auth-status-home-page", "green", localStorage.getItem("userEmail"), "logged in.")
         
+		return axios.get(`../api/users/${localStorage.getItem("userId")}`)
+			.then(response => {
+				const userAvatar = response.data.user.image.avatar.data;			
+				localStorage.setItem("userAvatar", JSON.stringify(userAvatar));				
+			})
+			.catch((error) => {
+				console.error(error.response);
+			})
+
     })
-    .catch((err) => {
+    .catch(() => {
             userAuthNotification("auth-email-home-page", "auth-status-home-page", "red", localStorage.getItem("userEmail"), "login session expired.");
         }
     );			

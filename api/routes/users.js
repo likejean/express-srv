@@ -364,7 +364,6 @@ router.post("/register", upload.single("avatar"), (req, res) => {
 
 
 router.post("/verifyToken", auth.verifyToken, (req, res, next) => {
-	console.log(req.body);	
 	jwt.verify(req.token, config.secretKey, (err) => {
 		if (err) {			
 			console.log({

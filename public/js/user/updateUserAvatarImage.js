@@ -11,18 +11,17 @@ function updateUserAvatarImage() {
 	formData.append("description", avatarPostData.description);
 
 	axios.patch(`../api/users/updateAvatar/${id}`, formData, {
-		headers: {
-			"Content-Type": "multipart/form-data",
-		},
+			headers: {
+				"Content-Type": "multipart/form-data",
+			},
 		})
-		.then((response) => {
-			const userAvatar = response.data.result.image.avatar.data;
-			window.localStorage.setItem("userAvatar", JSON.stringify(userAvatar));
+		.then(() => {
 			userProfileAvatarSubmitButton.removeEventListener(
 				"click",
 				clearFileInput
 			);
-			window.location.reload();
+			window.location.reload(); 
+			
 		})
 		.catch((error) => {
 		console.error("Error: failed to update user avatar", error);
