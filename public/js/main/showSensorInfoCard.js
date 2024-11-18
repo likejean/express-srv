@@ -41,14 +41,11 @@ function showSensorInfoCard(
 			removeAllChildNodes(htmlElementCollection.descriptionHeaderHtml);
 			removeAllChildNodes(htmlElementCollection.sensorCommentHtml);
 			removeAllChildNodes(htmlElementCollection.manufacturerNameHtml);
-			removeAllChildNodes(htmlElementCollection.calProcedureInfoHtml);
-			removeAllChildNodes(htmlElementCollection.calProcedureNameHtml);
 			removeAllChildNodes(htmlElementCollection.sensorModelHtml);
 			removeAllChildNodes(htmlElementCollection.sensorTypeHtml);
 			removeAllChildNodes(htmlElementCollection.sensorMeasurementQuantityHtml);
 			removeAllChildNodes(htmlElementCollection.sensorCapacityRangeHtml);
 			removeAllChildNodes(htmlElementCollection.calRecordsNoticeHtml);
-
 			removeAllChildNodes(htmlElementCollection.certificateListHtmL);
 		}
 	}
@@ -80,14 +77,8 @@ function showSensorInfoCard(
 
 		if (parsedJSON.length > 0) {
 			if (!deleteBtn.disabled) deleteBtn.disabled = true;
-			createCalibrationListItem(
 			//createCalListItem.js
-				parsedJSON,
-				htmlElementCollection.calProcedureInfoHtml,
-				htmlElementCollection.calProcedureNameHtml,
-				location,
-				htmlElementCollection.certificateListHtmL
-			);
+			createCalibrationListItem(parsedJSON, location, htmlElementCollection.certificateListHtmL);
 		}			
 		else {
 			deleteBtn.disabled = false;
@@ -103,14 +94,11 @@ function showSensorInfoCard(
         removeAllChildNodes(htmlElementCollection.descriptionHeaderHtml);
         removeAllChildNodes(htmlElementCollection.sensorCommentHtml);
         removeAllChildNodes(htmlElementCollection.manufacturerNameHtml);
-        removeAllChildNodes(htmlElementCollection.calProcedureInfoHtml);
-        removeAllChildNodes(htmlElementCollection.calProcedureNameHtml);
         removeAllChildNodes(htmlElementCollection.sensorModelHtml);
         removeAllChildNodes(htmlElementCollection.sensorTypeHtml);
         removeAllChildNodes(htmlElementCollection.sensorMeasurementQuantityHtml);
         removeAllChildNodes(htmlElementCollection.sensorCapacityRangeHtml);
         removeAllChildNodes(htmlElementCollection.calRecordsNoticeHtml);
-		
 		removeAllChildNodes(htmlElementCollection.certificateListHtmL);
     }
 }

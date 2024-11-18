@@ -5,13 +5,15 @@ class calibrationFactory {
         procedure,
         calibrationName,
         inputWrappers,
-        newCalRecordFormInputs
+        newCalRecordFormInputs,
+		certificateInfoIcon
     ) {
         this.sensor = sensor;
         this.procedure = procedure;
         this.calibrationName = calibrationName;
         this.inputWrappers = inputWrappers;
         this.newCalRecordFormInputs = newCalRecordFormInputs;
+		this.certificateInfoIcon = certificateInfoIcon;
     }
 
     isSubmitButtonActive() {

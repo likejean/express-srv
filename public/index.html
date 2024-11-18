@@ -40,6 +40,7 @@
 				</div>
 			</nav>
 
+			<!-- displays if a user authentificated/logged in -->
 			<div class="row justify-content-center">
 				<div class="container text-center">
 					<span id="auth-email-home-page"></span>
@@ -121,23 +122,9 @@
 											</div>
 
 											<div id="calibration-certificates" aria-live="polite" aria-atomic="true" class="row d-flex align-items-center justify-content-center flex-column mb-3">
-												
+												<!-- here is where dynamically generated list HTML elements are appended (list of calibrations associated with selected sensor)--> 
 											</div>
 											
-
-											
-											<div class="row d-flex align-items-center">
-												<div class="col-12 col-sm-2">
-													<ul class="mx-1 list-group row" id="calibration-procedures-badges">
-														<!-- here is where dynamically generated list HTML elements are appended (list of calibrations associated with selected sensor)-->                    
-													</ul>
-												</div>  
-												<div class="col-10">
-													<ul class="mx-1 list-group row d-none d-sm-block" id="calibration-procedures-list">
-														<!-- here is where dynamically generated list HTML elements are appended (list of calibrations associated with selected sensor)-->                    
-													</ul>
-												</div>                        
-											</div>
 											<div id="cal-records" class="mt-3 mx-1 d-flex text-center justify-content-center"></div>
 										</div>
 									</div>
@@ -228,6 +215,7 @@
 	<script src="./js/utils/toBase64Decoder.js"></script>
 	<script src="./js/utils/getCurrentDate.js"></script>
 	<script src="./js/utils/calculateTimeDuration.js"></script>
+	<script src="./js/utils/toggleCertificateComment.js"></script>
 	<script src="./js/main/displayLoginUserStatus.js"></script>
 	<script src="./js/main/userLogout.js"></script>	
 	<script src="./js/utils/createTableCell.js"></script>
