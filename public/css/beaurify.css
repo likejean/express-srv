@@ -64,6 +64,12 @@ display: inline-block;
 	width: 40px;
 }
 
+#avatar-image {
+	border-radius: 25px;
+	border: 2px solid #c7c7c7;
+	box-shadow: 0px 0px 10px 10px #c4c4c4;
+}
+
 .sensor-notice-span {
 	margin-right: 40px;
 }
@@ -80,7 +86,7 @@ display: inline-block;
 	max-height: 99%;
 }
 
-#user-fullname {
+#user-profile-fullname {
 	font-family: "Times New Roman", Times, serif;
 	font-size: xx-large;
 }
