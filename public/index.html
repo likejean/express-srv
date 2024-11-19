@@ -56,11 +56,11 @@
 					<div class="mb-4 text-body-secondary">The table below lists calibration status of Intec devices used for measurements</div>
 						<div class="notification">
 							<div class="col-sm-12 my-4 text-center">
-								<a href="./html/createNewSensor.html" class="btn btn-primary btn-sm mb-1">Add Sensor</a> 
-								<a href="./html/createNewCalibrationEvent.html" class="btn btn-secondary btn-sm mb-1">Add Calibration Event</a>   
-								<a href="./html/createNewProcedure.html" class="btn btn-primary btn-sm mb-1">Add Procedure</a> 
-								<a href="../html/editCalibrationProcedure.html" class="btn btn-dark btn-sm mb-1">Calibration Procedures</a>
-								<a href="../html/adminSettings.html" class="btn btn-outline-warning btn-sm mb-1">Admin</a>
+								<a href="./html/createNewSensor.html" class="admin-classified btn btn-primary btn-sm mb-1">Add Sensor</a> 
+								<a href="./html/createNewCalibrationEvent.html" class="admin-classified btn btn-secondary btn-sm mb-1">Add Calibration Event</a>   
+								<a href="./html/createNewProcedure.html" class="admin-classified btn btn-primary btn-sm mb-1">Add Procedure</a> 
+								<a href="../html/editCalibrationProcedure.html" class="admin-classified btn btn-dark btn-sm mb-1">Calibration Procedures</a>
+								<a href="../html/adminSettings.html" class="admin-classified btn btn-outline-warning btn-sm mb-1">Admin</a>
 							</div>
 							
 						</div>
@@ -134,12 +134,12 @@
 
 							<!-- Sensor UPDATE and DELETE buttons -->
 							<div class="col-sm-12 mt-3 text-center">
-								<a id="fetch-patch-sensor-info" href="" class="btn btn-primary btn-sm">Update</a>
+								<a id="fetch-patch-sensor-info" href="" class="admin-classified btn btn-primary btn-sm">Update</a>
 								<button 
 									onclick=openSensorWarningModal()
 									id="delete-sensor-button" 
 									type="button" 
-									class="btn btn-danger btn-sm" 
+									class="admin-classified btn btn-danger btn-sm" 
 									data-bs-toggle="modal" 
 									data-bs-target="#deleteSensorModal"
 								>

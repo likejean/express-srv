@@ -5,10 +5,11 @@ function generateToastHtmlItem (link, certificateName, data, location) {
     const unixTimestamp = moment().unix();
 	//Calculate time duration from last calibration date to current date
 	const timeDuration = calculateTimeDuration(moment.utc(data.lastCalibrationDate).format('YYYY-MM-DD'), getCurrentDate());
+	const userLevelStatus = window.localStorage.getItem("userLevel");
 
 	return `<div class="toast-header mt-3" style="background-color:#F0F0F0;">
-			<a href="${link}">
-				<i class="fas fa-2x fa-certificate" 
+			<a href="${link}" style="pointer-events:${userLevelStatus !== "Admin" ? "none;": "auto"};">						
+				<i class="fas fa-2x fa-certificate admin-classified" 
 					style="color:${moment.utc(data.dueCalibrationDate).unix() > unixTimestamp ? "green" : "red"}; margin-right:10px;">
 				</i>
 			</a>

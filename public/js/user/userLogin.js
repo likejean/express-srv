@@ -4,7 +4,6 @@ function userLogin() {
 			const token = response.data.token;
 			const email = response.data.user.email;
 			const id = response.data.user.userId;
-			const rank = response.data.user.level;
 			
 			window.localStorage.setItem("token", token);
 			window.localStorage.setItem("userEmail", email);
@@ -15,9 +14,14 @@ function userLogin() {
 
 			return axios.get(`../api/users/${id}`)				
 				.then(response => {
+
+					const avatar = response.data.user.image.avatar.data;
+					const rank = response.data.user.level;
+					
 					window.location.href = "../../index.html";
-					window.localStorage.setItem("userAvatar", JSON.stringify(response.data.user.image.avatar.data));
-					window.localStorage.setItem("userLevel", response.data.user.level);					
+					window.localStorage.setItem("userAvatar", JSON.stringify(avatar));
+					window.localStorage.setItem("userLevel", rank);
+							
 				})
 				.catch(error => {
 					console.error(error);

@@ -25,6 +25,25 @@ const fetchSensorCalibrationData = async () => {
 				_store.sensors.data.payload,
 				_store.calibrations.data.payload
 			);
+
+			//disable all UPDATE, PATCH, DELETE buttons if authenticated user is not administrator!
+			if(window.localStorage.getItem("userLevel") !== "Admin") {
+				const adminClassifiedButtons = document.querySelectorAll(".admin-classified");
+				adminClassifiedButtons.forEach(btn => {					
+					if(btn.tagName === "A") {
+						while (btn.classList.length > 0) {
+							btn.classList.remove(btn.classList.item(0));
+						}
+						btn.style.pointerEvents="none";
+						btn.style.cursor="default";	
+						btn.classList.add("btn");					
+						btn.classList.add("btn-outline-secondary");
+						
+					}
+					else btn.style.display = "none";
+				});			
+			}	
+					
 		})
 		.catch((error) => {
 			const errorCode = error.response.status;			
