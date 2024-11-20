@@ -1,6 +1,6 @@
 const limitCommentText = /^.{10,300}$/;
 
-const editUsernputContainer = {
+const editUserInputContainer = {
 
 	userNickNameWrapper: {
         tag: "input",

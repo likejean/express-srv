@@ -23,6 +23,16 @@ const editSensorInputContainer = {
         databaseName: "calibrationPriority"
     },
 
+	sensorLocationWrapper: {
+        tag: "input",
+		attributes: {type: "text", name: "sensorLocation", style:"border-color:blue;"},
+        classes: ["form-control"],
+        status: false,
+        value: "",
+        childNodes: [],
+        databaseName: "location"
+    },
+
 	sensorCommentWrapper: {
         tag: "textarea",
 		attributes: {type: "text", name: "sensorComment", rows: "10", style:"border-color:blue;"},

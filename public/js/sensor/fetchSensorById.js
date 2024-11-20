@@ -1,6 +1,7 @@
 const sensorName = document.getElementById("sensor-name");
 const sensorModel = document.getElementById("sensor-model");
 const sensorComment = document.getElementById("sensorComment");
+const sensorLocation = document.getElementById("sensorLocation");
 const sensorCalibrationPriority = document.getElementById("calibrationPriority");
 const sensorDescription = document.getElementById("sensorDescription");
 
@@ -21,6 +22,7 @@ const fetchSensordById = async () => {
 			sensorDescription.innerText = result.data.sensor.description;
 			sensorCalibrationPriority.innerText = result.data.sensor.calibrationPriority;
 			sensorComment.innerText = result.data.sensor.comment;
+			sensorLocation.innerText = result.data.sensor.location;
 		})
 		.catch((error) => {
 			//display error message if data fetch failure occurs or any other internal error detected
