@@ -62,6 +62,6 @@ const newUserFormContainer = {
 };
 
 var _userfactory = new userFactory(
-	[], 
+	editUsernputContainer, 
 	newUserFormContainer
 );
