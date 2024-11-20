@@ -48,38 +48,41 @@
 									
 									<div class="container-fluid">											
 										
-										<div class="d-flex justify-content-center align-items-center">
-											<img id="avatar-image" width="250" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="d-block my-4 ui-w-85">
+										<div class="d-flex justify-content-center align-items-center">											
+											<img id="avatar-image" width="250" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
 										</div>
+
+										<form id="user-account-info">	
+											<div id="edit-user-account-info" class="control-form-field-box form-group my-4 p-5">
+												<div class="container">
+													<div class="row my-3">
+														<ul class="list-group list-group-flush">
+															<li class="list-group-item d-flex justify-content-center align-items-center">
+																<div class="text-center"><span id="user-profile-fullname"></span></div>
+															</li>
+															<li class="list-group-item d-flex justify-content-center align-items-center">
+																<div>Email: <span id="user-profile-email"></span></div>
+															</li>
+															<li class="list-group-item d-flex justify-content-center align-items-center">
+																<div>Username: <span id="user-profile-nickname"></span></div>
+															</li>
+															<li class="list-group-item d-flex justify-content-center align-items-center">
+																<div><span id="user-profile-level"></span></div>
+															</li>
+															<li class="list-group-item d-flex justify-content-center align-items-center">
+																<div><span id="user-profile-age"></span> years old</div>
+															</li>
+															<li class="list-group-item d-flex justify-content-center align-items-center">
+																<div><span id="user-profile-about-yourself"></span></div>
+															</li>
+														</ul>
+													</div>
+													
+												</div>
+												
+											</div>
+										</form>
 										
-										<div class="text-center"><span id="user-profile-fullname"></span></div>
-										
-										<div class="row justify-content-center">
-											<div>Email: <span id="user-profile-email"></span></div>
-
-										</div>
-
-										<div class="row justify-content-center">
-											<div>Username: <span id="user-profile-nickname"></span></div>
-
-										</div>
-
-
-										<div class="row justify-content-center">
-											<div><span id="user-profile-level"></span></div>
-
-										</div>
-
-										<div class="row justify-content-center">
-											<div><span id="user-profile-age">48</span> years old</div>
-
-										</div>
-										
-										<div class="row justify-content-center">
-											<div><span id="user-profile-about-yourself">I'm Intec Test Engineer</span></div>
-
-										</div>
-
 
 										<!-- AVATAR -->
 										<form id="user-account-avatar">											
@@ -162,9 +165,9 @@
 
 										<!--PASSWORD -->
 										<form id="user-account-password">											
-											<div id="account-password-change" class="control-form-field-box form-group my-4 p-5">
+											<div id="account-password-change" class="control-form-field-box form-group my-5 mx-2 p-5">
 												<div class="container">
-													<div class="row my-1 justify-content-center">
+													<div class="row my-1">
 														<div class="mb-4 w-50">
 															<!-- Old Password -->
 															<label for="oldPassword">Old Password:</label>
