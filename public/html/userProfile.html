@@ -48,7 +48,7 @@
 									
 									<div class="container-fluid">											
 										
-										<div class="d-flex justify-content-center align-items-center">											
+										<div class="d-flex justify-content-center align-items-center my-5">											
 											<img id="avatar-image" width="250" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
 										</div>
 
@@ -67,7 +67,7 @@
 																<div>Username: <span id="user-profile-nickname"></span></div>
 															</li>
 															<li class="list-group-item d-flex justify-content-center align-items-center">
-																<div><span id="user-profile-level"></span></div>
+																<div>User Level: <span id="user-profile-level"></span></div>
 															</li>
 															<li class="list-group-item d-flex justify-content-center align-items-center">
 																<div><span id="user-profile-age"></span> years old</div>
@@ -268,8 +268,20 @@
 		}
 
 		window.location.hash = '';  //remove hash text after # symbol
+
+
+		
 				
 	</script>
+	<script>
+
+		//attach event listener to all icons in User Info flushlist for updates/edits
+		let listItems = document.querySelectorAll(".list-group-item");
+
+		console.log(listItems)
+		
+
+    </script>
 	
 
 </html>
