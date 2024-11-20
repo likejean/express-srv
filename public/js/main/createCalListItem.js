@@ -18,7 +18,7 @@ function generateToastHtmlItem (link, certificateName, data, location) {
 			<i class="fa fa-2x fa-info-circle" aria-hidden="true" onclick="viewCertificateComment('${data._id}','${data.comment}')"></i>			
 		</div>
 		<div class="toast-body">
-			<p><span>Calibration Location:</span>&nbsp<span style="font-weight:bold;">${location}</span></p>
+			<p><span>Sensor Location:</span>&nbsp<span style="font-weight:bold;">${location}</span></p>
 			<p><span>Last Calibrtion Date:</span>&nbsp<span style="font-weight:bold;">${moment.utc(data.lastCalibrationDate).format('dddd, MM/DD/YYYY')}</span></p>
 			<p><span>Due Calibration Date:</span>&nbsp<span style="font-weight:bold;">${moment.utc(data.dueCalibrationDate).format('dddd, MM/DD/YYYY')}</span></p>
 			<p><span>Extended?</span>&nbsp<span style="font-weight:bold;">${data.calibrationExtended ? 'YES' : 'NO'}</span></p>
