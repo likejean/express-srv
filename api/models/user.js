@@ -5,6 +5,7 @@ const { userLevels } = require('../../enums/modelEnums');
 const userSchema = mongoose.Schema(
 	{
 		_id: mongoose.Schema.Types.ObjectId,
+		registeredAt:  { type: Date, default: Date.now, required: false},
 		email: {
 			type: String,
 			required: true,

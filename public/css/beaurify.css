@@ -50,7 +50,8 @@ display: inline-block;
 }
 
 .cal-notice-span,
-.sensor-notice-span {
+.sensor-notice-span, 
+.user-notice-span {
 	font-weight: bold;
 }
 

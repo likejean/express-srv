@@ -2,6 +2,16 @@ const limitCommentText = /^.{10,300}$/;
 
 const editUserInputContainer = {
 
+	userEmailWrapper: {
+        tag: "input",
+		attributes: {type: "text", name: "userEmail", style:"border-color:blue;"},
+        classes: ["form-control"],
+        status: false,
+        value: "",
+        childNodes: [],
+        databaseName: "email"
+    },
+
 	userNickNameWrapper: {
         tag: "input",
 		attributes: {type: "text", name: "userNickName", style:"border-color:blue;"},

@@ -52,39 +52,70 @@
 											<img id="avatar-image" width="250" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
 										</div>
 
+										<div class="d-flex justify-content-center align-items-center my-5">
+											<div class="text-center"><span id="user-profile-fullname"></span></div>
+										</div>
+
+										<div class="d-flex justify-content-center align-items-center my-5">
+											<div class="text-center"><span id="userLevel"></span></div>
+										</div>
+										
+										<!-- user ACCOUNT INFO edit form-->
+
 										<form id="user-account-info">	
 											<div id="edit-user-account-info" class="control-form-field-box form-group my-4 p-5">
 												<div class="container">
 													<div class="row my-3">
-														<ul class="list-group list-group-flush">
-															<li class="list-group-item d-flex justify-content-center align-items-center">
-																<div class="text-center"><span id="user-profile-fullname"></span></div>
+														<ul class="list-group list-group-flush">														
+															<li class="list-group-item d-flex justify-content-center align-items-center">																
+																<div class="col-6 d-none d-sm-flex mx-1 justify-content-end">First Name:</div>               
+																<div id="userFirstNameWrapper" class="col-11 col-sm-5 mx-1 gutter text-start"><span class="user-notice-span" id="userFirstName"></span></div>                
+																<div class="p-2 col-1"><i id="userFirstNameIcon" class="fa-solid fa-2x fa-ellipsis-vertical"></i></div>															
 															</li>
-															<li class="list-group-item d-flex justify-content-center align-items-center">
-																<div>Email: <span id="user-profile-email"></span></div>
+															<li class="list-group-item d-flex justify-content-center align-items-center">																
+																<div class="col-6 d-none d-sm-flex mx-1 justify-content-end">Last Name:</div>               
+																<div id="userLastNameWrapper" class="col-11 col-sm-5 mx-1 gutter text-start"><span class="user-notice-span" id="userLastName"></span></div>                
+																<div class="p-2 col-1"><i id="userLastNameIcon" class="fa-solid fa-2x fa-ellipsis-vertical"></i></div>															
 															</li>
-															<li class="list-group-item d-flex justify-content-center align-items-center">
-																<div>Username: <span id="user-profile-nickname"></span></div>
+															<li class="list-group-item d-flex justify-content-center align-items-center">																
+																<div class="col-6 d-none d-sm-flex mx-1 justify-content-end">Email:</div>               
+																<div id="userEmailWrapper" class="col-11 col-sm-5 mx-1 gutter text-start"><span class="user-notice-span" id="userEmail"></span></div>                
+																<div class="p-2 col-1"><i id="userEmailIcon" class="fa-solid fa-2x fa-ellipsis-vertical"></i></div>
 															</li>
-															<li class="list-group-item d-flex justify-content-center align-items-center">
-																<div>User Level: <span id="user-profile-level"></span></div>
-															</li>
-															<li class="list-group-item d-flex justify-content-center align-items-center">
-																<div><span id="user-profile-age"></span> years old</div>
+															<li class="list-group-item d-flex justify-content-center align-items-center">																
+																<div class="col-6 d-none d-sm-flex mx-1 justify-content-end">Username:</div>               
+																<div id="userNickNameWrapper" class="col-11 col-sm-5 mx-1 gutter text-start"><span class="user-notice-span" id="userNickName"></span></div>                
+																<div class="p-2 col-1"><i id="userNickNameIcon" class="fa-solid fa-2x fa-ellipsis-vertical"></i></div>
+															</li>															
+															<li class="list-group-item d-flex justify-content-center align-items-center">																
+																<div class="col-6 d-none d-sm-flex mx-1 justify-content-end">Age:</div>               
+																<div id="userAgeWrapper" class="col-11 col-sm-5 mx-1 gutter text-start"><span class="user-notice-span" id="userAge"></span></div>                
+																<div class="p-2 col-1"><i id="userAgeIcon" class="fa-solid fa-2x fa-ellipsis-vertical"></i></div>
 															</li>
 															<li class="list-group-item d-flex justify-content-center align-items-center">
 																<div><span id="user-profile-about-yourself"></span></div>
+																<div id="userAboutYourselfWrapper" class="col-11 mx-2 gutter text-center"><span class="user-notice-span" id="userAboutYourself"></span></div>                
+																<div class="p-2 col-1"><i id="userAboutYourselfIcon" class="fa-solid fa-2x fa-ellipsis-vertical"></i></div>
 															</li>
+
+															<div class="card-footer bg-transparent border-success text-center">
+																<div class="container">
+																	<div class="row d-none d-sm-flex">
+																		<div class="form-group col m-2 text-center">                           
+																			<button id="patch-user-infor-record" type="submit" class="btn btn-primary m-2" disabled>Submit</button>								
+																			
+																		</div>
+																	</div>
+																</div>
+															</div>
 														</ul>
 													</div>
-													
 												</div>
-												
 											</div>
 										</form>
 										
 
-										<!-- AVATAR -->
+										<!-- AVATAR edit form -->
 										<form id="user-account-avatar">											
 											<div id="account-avatar-change" class="control-form-field-box form-group my-4 p-5">
 												<div class="container">
@@ -163,7 +194,7 @@
 
 										</form>
 
-										<!--PASSWORD -->
+										<!--PASSWORD edit form -->
 										<form id="user-account-password">											
 											<div id="account-password-change" class="control-form-field-box form-group my-5 mx-2 p-5">
 												<div class="container">
@@ -249,9 +280,15 @@
 	<script src="../js/collections/editUserProfileContainer.js"></script>
 	<script src="../js/collections/newUserFormContainer.js"></script>
 	<script src="../js/utils/toBase64Decoder.js"></script>
+	<script src="../js/utils/attachEventListenersToIcons.js"></script>
+	<script src="../js/utils/trimStringBySubstring.js"></script>
+	<script src="../js/utils/removeAllChildNodes.js"></script>
+
+	<!-- Fetch user by specific id-->
 	<script src="../js/user/utils/selectUserAccountSettings.js"></script>
 	<script src="../js/user/fetchUserRecordById.js"></script>
 	<script src="../js/user/utils/resetUserProfileAvatarImage.js"></script>
+	<script src="../js/user/utils/editUserAccountInfoEventCallback.js"></script>
 
 	<!-- Get new user avatar -->
 	<script src="../js/user/getNewUserAvatarData.js"></script>
@@ -268,18 +305,14 @@
 		}
 
 		window.location.hash = '';  //remove hash text after # symbol
-
-
-		
 				
 	</script>
 	<script>
 
 		//attach event listener to all icons in User Info flushlist for updates/edits
-		let listItems = document.querySelectorAll(".list-group-item");
-
-		console.log(listItems)
+		let icons = document.querySelectorAll(".fa-ellipsis-vertical");
 		
+		attachEventListenersToIcons(icons, editUserAccountInfoClickEventCallback);		
 
     </script>
 	

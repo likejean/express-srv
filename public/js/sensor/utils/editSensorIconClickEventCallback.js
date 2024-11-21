@@ -8,7 +8,7 @@ function editSensorIconClickEventCallback (event) {
 	let icon = document.getElementById(_sensfactory.inputWrappers[wrapperName].attributes.name.concat("Icon"));
 	const patchButton = document.getElementById("patch-sensor-record");
 
-	//console.log(wrapper, icon)
+	
 	//creates toggle functionality for icons in Sensor Summary Card
 	if (!_sensfactory.inputWrappers[wrapperName].status) {
 		//replace ellipsis-vertical icon with file-open icon to signify edit mode
