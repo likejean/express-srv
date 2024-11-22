@@ -1,5 +1,5 @@
 function patchSensorRecord() {
-    sensorPatchRequestData = {};
+    let sensorPatchRequestData = {};
 
 	//obtain query string by id
     const queryString = window.location.search;
