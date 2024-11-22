@@ -1,5 +1,5 @@
 function filterSensorsByDescription() {
-	const sensorDescriptionTableHeader = document.getElementById("sensorDescriptionTableHeader");
+	const sensorDescriptionTableHeader = document.getElementById("sensorDescriptionTableHeader");	
 	const textNode = sensorDescriptionTableHeader.firstChild; 
 	sensorDescriptionTableHeader.removeAttribute("onclick");
 	sensorDescriptionTableHeader.removeAttribute("scope");
@@ -26,12 +26,16 @@ function filterSensorsByDescription() {
 
 	select.addEventListener("change", (e) => {
 		const optionSelected = e.target.value;
-		//if (optionSelected === "Clear Filter") 
+		if (optionSelected === "Clear Filter") {
+			removeAllChildNodes(sensorDescriptionTableHeader)
+			sensorDescriptionTableHeader.appendChild(textNode);
+			sensorDescriptionTableHeader.setAttribute("onclick", "filterSensorsByDescription()");		
+			sensorDescriptionTableHeader.setAttribute("scope", "col");
+			sensorDescriptionTableHeader.removeAttribute("style");
+		}
+		
 	});
-
-	
 
 	sensorDescriptionTableHeader.appendChild(select);
 
-	console.log(select);
 }

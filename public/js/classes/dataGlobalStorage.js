@@ -7,7 +7,8 @@ class dataStorage {
 			activeSensorCard,
 			selectedTableRowProcedureId,
 			selectedTableRowUserId,
-			certificateInfoIcon
+			certificateInfoIcon,
+            tableHeaders
         ){      
 			this.users = users,
             this.sensors = sensors,
@@ -17,6 +18,7 @@ class dataStorage {
 			this.selectedTableRowProcedureId = selectedTableRowProcedureId,
 			this.selectedTableRowUserId = selectedTableRowUserId,
 			this.certificateInfoIcon = certificateInfoIcon
+            this.tableHeaders = tableHeaders
     }
 
     getSensorNames(){
