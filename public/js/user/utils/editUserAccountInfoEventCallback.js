@@ -7,12 +7,6 @@ function editUserAccountInfoClickEventCallback (event) {
 	let icon = document.getElementById(_userfactory.inputWrappers[wrapperName].attributes.name.concat("Icon"));
 	const patchButton = document.getElementById("patch-user-info-record");
 
-	console.log(wrapper);
-
-	console.log(input)
-
-	console.log(icon);
-
 	//creates toggle functionality for icons in Sensor Summary Card
 	if (!_userfactory.inputWrappers[wrapperName].status) {
 		//replace ellipsis-vertical icon with file-open icon to signify edit mode
@@ -35,17 +29,21 @@ function editUserAccountInfoClickEventCallback (event) {
 			input.setAttribute(key, value);
 		});
 		
-		wrapper.appendChild(input);
+		wrapper.appendChild(input);		
+		input.addEventListener("input", editUserAccountInfoChangeValueCallback);
+		patchButton.disabled = !_userfactory.isPatchButtonActive();
 
 	} else {
 
 		//reverse changes to original wrapper state and sensor global factory
+		input.removeEventListener("input", editUserAccountInfoChangeValueCallback);
+		document.getElementById("inputErrorMessage").textContent = "";
 		removeAllChildNodes(wrapper);
 		icon.classList.replace("fa-file-pen", "fa-ellipsis-vertical");
 		_userfactory.inputWrappers[wrapperName].status = false;
 		wrapper.append(..._userfactory.inputWrappers[wrapperName].childNodes);
-		_userfactory.inputWrappers[wrapperName].childNodes = [];
-		
+		_userfactory.inputWrappers[wrapperName].childNodes = [];		
+		patchButton.disabled = !_userfactory.isPatchButtonActive();
 	}
 
 }

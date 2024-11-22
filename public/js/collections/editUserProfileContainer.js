@@ -1,4 +1,5 @@
 const limitCommentText = /^.{10,300}$/;
+const emailValidFormat = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
 const editUserInputContainer = {
 
@@ -9,6 +10,8 @@ const editUserInputContainer = {
         status: false,
         value: "",
         childNodes: [],
+        validator: (text) => (emailValidFormat.test(text) ? true : false),
+        inputRule: `Invalid email format entered... see example: aaaaaa@bbbb.com`,
         databaseName: "email"
     },
 
