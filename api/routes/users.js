@@ -134,6 +134,46 @@ router.get("/:userId", async (req, res) => {
 
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
+//PATCH endpoint: update PARTIALLY existing user record/document by ID
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+router.patch("/:userId", (req, res, next) => {
+    const id = req.params.userId;
+    User.updateOne({ _id: id }, { $set: { ...req.body } })
+    .exec()
+    .then((result) => {
+        console.log({
+            request: {
+                type: "PATCH",
+                url: req.originalUrl,
+                status: "SUCCESS",
+            },
+        });
+        res.status(200).json({
+            message: `User record w/ id: '${id}' was Updated.`,
+            request: {
+                type: "PATCH",
+            },
+            result,
+        });
+    })
+    .catch((error) => {
+        res.status(500).json({
+            message: "Failure: Unable to update user record...",
+            isIdValid: mongoose.Types.ObjectId.isValid(id),
+            serverError: error.message,
+            request: {
+                type: "PATCH",
+                url: req.originalUrl,
+            },
+        });
+    });
+});
+
+
+
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
 //PATCH endpoint: update user password for user found by ID
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////

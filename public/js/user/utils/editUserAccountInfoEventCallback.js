@@ -1,4 +1,4 @@
-function editUserAccountInfoClickEventCallback (event) {
+function editUserAccountInfoClickEventCallback(event) {
 	
 	//construct wrapper name to access sensor factory collections
 	const wrapperName = trimBySubstring(event.target.id, "Icon").concat("Wrapper");

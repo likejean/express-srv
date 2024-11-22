@@ -8,8 +8,21 @@ function patchUserAccountInfo() {
 
 
   //get this helper function from utils...
-  userInfoPatchRequestData = filterObjectAndTransform(_userfactory.inputWrappers, (item) => item.status === true); 
+    userInfoPatchRequestData = filterObjectAndTransform(_userfactory.inputWrappers, (item) => item.status === true); 
 	
-	console.log(userInfoPatchRequestData, id);
+	
+
+    //use PATCH API endpoint to update existing sensor record
+    axios.patch(`../api/users/${id}`, userInfoPatchRequestData)
+    .then((response) => {
+        icons.forEach((icon) => {
+            icon.removeEventListener("click", editUserAccountInfoClickEventCallback);
+        });
+        window.location.reload();
+        console.log("User record updated successfully:", response);              
+    })
+    .catch((error) => {
+        console.log("ERROR", error);
+    });
   
 }
