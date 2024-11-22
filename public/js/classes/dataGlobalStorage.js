@@ -25,6 +25,13 @@ class dataStorage {
             return obj;
         }, {});
     }
+	
+	getSensorDescriptionList() {
+		const descriptions = this.sensors.data.payload.map(obj => obj["description"]);
+		return [...new Set(descriptions)];
+	}
+
+
     getCalProcedureNames(){
         return this.procedures.data.payload.reduce((obj, procedure) => {
             obj[`${procedure.procedureName}`] = procedure._id;
@@ -37,5 +44,7 @@ class dataStorage {
             return obj;
         }, {});
     }
+
+	
 }
 

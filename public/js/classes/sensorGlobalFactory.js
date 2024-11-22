@@ -21,11 +21,13 @@ class sensorFactory {
         return this.newSensorFormInputs[inputName].value.length === 0
     }
 
+	//activates SUBMIT/SAVE button if, at least, one input field is active (updated)
 	isPatchButtonActive() {
         for (const [item, value] of Object.entries(this.inputWrappers)) {
             if (value.status) return true;
         }
         return false;
     }
+
 }
 

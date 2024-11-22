@@ -70,11 +70,11 @@
 							<thead class="table-dark">
 								<tr>
 									<th scope="col">#</th>
-									<th scope="col">EID</th>
-									<th scope="col">Description</th>
-									<th scope="col" class="d-none d-sm-table-cell">Sensor Capacity</th>
-									<th scope="col">Calibration Status</th>  
-									<th scope="col">Settings</th>              
+									<th id="sensorEIDTableHeader" scope="col">EID</th>
+									<th id="sensorDescriptionTableHeader" scope="col" onclick="filterSensorsByDescription()">Description</th>
+									<th id="sensorCapacityTableHeader" scope="col" class="d-none d-sm-table-cell">Sensor Capacity</th>
+									<th id="sensorCalibrationStatusTableHeader" scope="col">Calibration Status</th>  
+									<th id="sensorSettingsTableHeader" scope="col">Settings</th>              
 								</tr>
 								<!-- here is where dynamically generated table html cells are appended -->
 							</thead>            
@@ -225,6 +225,7 @@
 	<script src="./js/utils/removeAllChildNodes.js"></script>	
 	<script src="./js/utils/addHtmlChildElementToParent.js"></script>
 	<script src="./js/utils/generateToastHtmlItem.js"></script>
+	<script src="./js/utils/filterSensorsByDescription.js"></script>
 
 	<!--MAIN SCRIPTS-->
 	<script src="./js/main/fetchSensorCalibrationData.js"></script>
