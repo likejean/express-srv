@@ -3,7 +3,7 @@ const tableBody = document.createElement("tbody");
 var tableRowObj = {};
 
 function createMainSensorTable(sensors, calibrations) {     //comes from fetchAllData.js
-    // creating all table cells
+    // creating all table cells	
     for (let i = 0; i < sensors.length; i++) {
         // adds the row of cells to the end of the table body
         let row = document.createElement("tr");

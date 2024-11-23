@@ -12,6 +12,16 @@ const editSensorInputContainer = {
         databaseName: "description"
     },
 
+	sensorCapacityWrapper: {
+        tag: "input",
+		attributes: {type: "text", name: "sensorCapacity", style:"border-color:blue;"},
+        classes: ["form-control"],
+        status: false,
+        value: "",
+        childNodes: [],
+        databaseName: "capacityRange"
+    },
+
 
 	calibrationPriorityWrapper: {
         tag: "select",
