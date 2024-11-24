@@ -10,8 +10,6 @@ function patchSensorRecord() {
   //get this helper function from utils...
     sensorPatchRequestData = filterObjectAndTransform(_sensfactory.inputWrappers, (item) => item.status === true); 
 	
-	console.log(sensorPatchRequestData);
-  
   //use PATCH API endpoint to update existing sensor record
     axios.patch(`../api/sensors/${id}`, sensorPatchRequestData)
     .then((response) => {

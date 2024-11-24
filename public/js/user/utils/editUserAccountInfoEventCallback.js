@@ -15,6 +15,9 @@ function editUserAccountInfoClickEventCallback(event) {
 		//reserve the previous html child nodes in the sensor factory
 		_userfactory.inputWrappers[wrapperName].childNodes = Array.from(wrapper.childNodes);
 
+		//initilize edit input for user account info
+		input.value = wrapper.textContent;
+
 		//remove all child nodes of the text wrapper
 
 		removeAllChildNodes(wrapper);
