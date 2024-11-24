@@ -55,6 +55,7 @@ function submitNewProcedureData(event) {
 
     // Loop through all form data and prepare data object for POST request
     for (const [key, value] of formData.entries()) {
+		console.log(value)
         key == "startRangeLevel" || key == "endRangeLevel"
         ? (newProcedurePostData[key] = Number(value))
         : (newProcedurePostData[key] = value);
