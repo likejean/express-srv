@@ -209,3 +209,7 @@ router.delete('/:sensorId', (req, res, next) => {
 // 	}
 // });
 
+
+10. TO REMOVE LAST 2 GIT COMMITS LOCALLY: 
+git reset --hard HEAD^^
+
