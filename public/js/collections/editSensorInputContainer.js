@@ -1,4 +1,5 @@
 const limitCommentText = /^.{10,300}$/;
+const noSpecial = /^[^*|\":<>[\]{}`\\()';@&$]+$/;
 
 const editSensorInputContainer = {
 
@@ -51,7 +52,7 @@ const editSensorInputContainer = {
         value: "",
         childNodes: [],
         databaseName: "comment",        
-        validator: (text) => (limitCommentText.test(text) ? true : false),
-        inputRule: `Minimum 10 and maximum 300 characters are allowed here...`,
+        validator: (text) => (limitCommentText.test(text) && noSpecial.test(text)) ? true : false,
+        inputRule: `No special characters allowed and minimum 10 and maximum 300 characters are allowed here...`,
     },
 }
