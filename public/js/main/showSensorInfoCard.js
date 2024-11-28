@@ -78,7 +78,7 @@ function showSensorInfoCard(
 		if (parsedJSON.length > 0) {
 			if (!deleteBtn.disabled) deleteBtn.disabled = true;
 			//createCalListItem.js
-			createCalibrationListItem(parsedJSON, location, quantity, htmlElementCollection.certificateListHtmL);
+			createCalibrationListItem(parsedJSON, location, htmlElementCollection.certificateListHtmL);
 		}			
 		else {
 			deleteBtn.disabled = false;

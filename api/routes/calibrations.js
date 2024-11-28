@@ -32,6 +32,7 @@ router.get("/", auth.verifyToken, (req, res, next) => {
 			});		
 		} else {
 			Calibration.find()
+			.populate("procedureId")
 			.exec()
 			.then((docs) => {
 				console.log({
