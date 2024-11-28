@@ -1,6 +1,6 @@
 //this function creates toast item for calibration certificate associated with specific sensor
 
-function generateToastHtmlItem (link, certificateName, data, location) {
+function generateToastHtmlItem (link, certificateName, data, location, quantity) {
 	//Get a current time in unix format
     const unixTimestamp = moment().unix();
 	//Calculate time duration from last calibration date to current date
@@ -19,6 +19,7 @@ function generateToastHtmlItem (link, certificateName, data, location) {
 		</div>
 		<div class="toast-body">
 			<p><span>Sensor Location:</span>&nbsp<span style="font-weight:bold;">${location}</span></p>
+			<p><span>Measure Quantity:</span>&nbsp<span style="font-weight:bold;">${quantity}</span></p>
 			<p><span>Last Calibrtion Date:</span>&nbsp<span style="font-weight:bold;">${moment.utc(data.lastCalibrationDate).format('dddd, MM/DD/YYYY')}</span></p>
 			<p><span>Due Calibration Date:</span>&nbsp<span style="font-weight:bold;">${moment.utc(data.dueCalibrationDate).format('dddd, MM/DD/YYYY')}</span></p>
 			<p><span>Extended?</span>&nbsp<span style="font-weight:bold;">${data.calibrationExtended ? 'YES' : 'NO'}</span></p>

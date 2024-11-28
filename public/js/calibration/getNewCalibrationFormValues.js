@@ -64,7 +64,7 @@ function submitNewCalibrationData(event) {
 	// Loop through all form data and prepare data object for POST request
 	for (const [key, value] of formData.entries()) {
 		if (key === "sensorId")
-		newCalibrationPostData[key] = _store.getSensorNames()[value];
+		newCalibrationPostData[key] = _store.getSensorEIDs()[value];
 		//get ObjectId instead of sensor name
 		else if (key === "procedureId")
 		newCalibrationPostData[key] = _store.getCalProcedureNames()[value];

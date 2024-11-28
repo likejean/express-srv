@@ -1,4 +1,4 @@
-function createCalibrationListItem (data, calLocation, calList) {     //called in showSensorInfoCard.js
+function createCalibrationListItem (data, calLocation, sensorQuantity, calList) {     //called in showSensorInfoCard.js
     
     for (let i = 0; i < data.length; i++){
 
@@ -13,7 +13,8 @@ function createCalibrationListItem (data, calLocation, calList) {     //called i
 			`./html/editCalibrationEvent.html?id=${data[i]._id}`, 
 			`${data[i].calibrationName.replace(/{/g, "").replace(/}/g, "")}`, 
 			data[i],
-			calLocation
+			calLocation,
+			sensorQuantity
 		);
 
 		calList.appendChild(toastItem);		

@@ -15,7 +15,7 @@ const fetchSensorProcedureData = async () => {
 			_store[name] = elem;
 		});
 
-		generateSensorProcedureNameLists(_store.getSensorNames(), _store.getCalProcedureNames());
+		generateSensorProcedureNameLists(_store.getSensorEIDs(), _store.getCalProcedureNames());
 
 		})
 		.catch((error) => {

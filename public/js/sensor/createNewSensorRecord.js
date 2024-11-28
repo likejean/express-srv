@@ -1,5 +1,5 @@
 function createNewSensorRecord() {
-  //use POST API endpoint to create new sensor
+  //use POST API endpoint to create new sensor	
     axios
         .post(`../api/sensors`, newSensorPostData)
         .then((response) => {

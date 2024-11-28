@@ -21,11 +21,16 @@ class dataStorage {
             this.tableHeaders = tableHeaders
     }
 
-    getSensorNames(){
+	getSensorEIDs(){
         return this.sensors.data.payload.reduce((obj, sensor) => {
             obj[`${sensor.EID}`] = sensor._id;
             return obj;
         }, {});
+    }
+
+	getSensorTypeList(){
+        const types = this.sensors.data.payload.map(obj => obj["type"]);
+		return [...new Set(types)];
     }
 	
 	getSensorDescriptionList() {
