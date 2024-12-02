@@ -13,7 +13,7 @@ function showSensorInfoCard(
     comment,
 	sensorId
 ) {
-    var parsedJSON = JSON.parse(calibrations.replace(/\&/g, '"'));
+	var parsedJSON = JSON.parse(calibrations.replace(/\&/g, '"'));
 	var deleteBtn = document.getElementById("delete-sensor-button");
 
     var tableRow;
