@@ -7,6 +7,7 @@ const sensorImageCollection = {
 	EID604: "extensometer_EID604.jpg",
 	EID199: "deflectometer_EID199.jpg",
 	EID3005: "load_transducer_EID3005.jpg",
+	EID3006: "load_transducer_EID3006.jpg",
 	EID1663: "load_transducer_EID1663.jpg",
 	EID161: "load_transducer_EID161.jpg",
 	EID1280: "load_transducer_EID1280.jpg",
