@@ -33,7 +33,7 @@ function showSensorInfoCard(
   //Check if any 'active' table rows left over from previous click/touch events
     for (const [key, value] of Object.entries(tableRowObj)) {
         //deactivate any different tables rows and hide info card (if it's still displayed)
-			if (value === "active" && key !== `row${tableRowIndex}`) {
+		if (value === "active" && key !== `row${tableRowIndex}`) {
 			tableRowObj[`${key}`] = "inactive";
 			tableRow = document.getElementById(key);
 			tableRow.classList.remove("table-active");
@@ -101,4 +101,6 @@ function showSensorInfoCard(
         removeAllChildNodes(htmlElementCollection.calRecordsNoticeHtml);
 		removeAllChildNodes(htmlElementCollection.certificateListHtmL);
     }
+
+	console.log('ShowInfoCard',tableRowObj);
 }
