@@ -8,7 +8,7 @@ class dataStorage {
 			selectedTableRowProcedureId,
 			selectedTableRowUserId,
 			certificateInfoIcon,
-            tableHeaders
+            tableHeaders,
         ){      
 			this.users = users,
             this.sensors = sensors,
@@ -18,8 +18,16 @@ class dataStorage {
 			this.selectedTableRowProcedureId = selectedTableRowProcedureId,
 			this.selectedTableRowUserId = selectedTableRowUserId,
 			this.certificateInfoIcon = certificateInfoIcon
-            this.tableHeaders = tableHeaders
+            this.tableHeaders = tableHeaders,
+			this.sensorTableActiveRowObject = {}
     }
+
+	getSensorTableActiveRowObject(length){	
+		this.sensorTableActiveRowObject = {};	
+		for (var i = 0; i < length; i++){
+			this.sensorTableActiveRowObject[`row${i + 1}`] = `inactive`;
+		}
+	}
 
 	getSensorEIDs(){
         return this.sensors.data.payload.reduce((obj, sensor) => {
@@ -45,13 +53,12 @@ class dataStorage {
             return obj;
         }, {});
     }
+
     getCalRecordNames(){
         return this.calibrations.data.payload.reduce((obj, calibration) => {
             obj[`${calibration.calibrationName}`] = calibration._id;
             return obj;
         }, {});
     }
-
-	
 }
 

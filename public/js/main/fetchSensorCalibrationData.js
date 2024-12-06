@@ -20,11 +20,16 @@ const fetchSensorCalibrationData = async () => {
 				_store[name] = elem;
 			});
 
+			
 			//function call to create all cells for main sensor table
 			createMainSensorTable(
 				_store.sensors.data.payload,
 				_store.calibrations.data.payload
 			);
+
+			//initialize Main Sensor Table ActiveRow Object
+			_store.getSensorTableActiveRowObject(_store.sensors.data.payload.length);
+
 
 			//disable all UPDATE, PATCH, DELETE buttons if authenticated user is not administrator!
 			if(window.localStorage.getItem("userLevel") !== "Admin") {

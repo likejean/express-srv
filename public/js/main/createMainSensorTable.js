@@ -1,8 +1,9 @@
 const sensorTable = document.querySelector(".data-result");
 const tableBody = document.createElement("tbody");
-var tableRowObj = {};
+
 
 function createMainSensorTable(sensors, calibrations) {     //comes from fetchAllData.js
+
     // creating all table cells	
     for (let i = 0; i < sensors.length; i++) {
         // adds the row of cells to the end of the table body
@@ -16,7 +17,6 @@ function createMainSensorTable(sensors, calibrations) {     //comes from fetchAl
         
         // create table row for each sensor
         row.setAttribute("id", `row${i + 1}`);
-        tableRowObj[`row${i + 1}`] = `inactive`;
         row.appendChild(createTableCell("th",`${i + 1}`, [], [{attribute:"scope", value:"row"}])); //# column cell
         row.appendChild(createTableCell("td",`${sensors[i].EID}`, [], [])); //EID cell
         row.appendChild(createTableCell("td",`${sensors[i].description}`, [], [])); //Description cell
@@ -26,6 +26,8 @@ function createMainSensorTable(sensors, calibrations) {     //comes from fetchAl
 
         //append each constructed table row to the table body <tb></tb>
         tableBody.appendChild(row);
+
+		
     }
     //append the <tb> body to identified table in index.html
     sensorTable.appendChild(tableBody);

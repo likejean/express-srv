@@ -14,5 +14,6 @@ const sensorImageCollection = {
 	EID756: "cod_clipon-gage_EID756.jpg",
 	EID757: "cod_clipon-gage_EID757.jpg",
 	EID807: "extensometer_EID807.jpg",
-	EID105: "LVDT_sensor.jpg"
+	EID105: "LVDT_sensor.jpg",
+	EID167: "LVDT_sensor.jpg"
 };

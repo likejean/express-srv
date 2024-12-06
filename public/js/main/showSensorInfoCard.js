@@ -18,6 +18,7 @@ function showSensorInfoCard(
 
     var tableRow;
 
+
 	//construct .href value (url w/ query string containing sensor id) for "UPDATE" button
 	const fetchEditSensorButton = document.getElementById("fetch-patch-sensor-info");
 	fetchEditSensorButton.href = `./html/editSensor.html?id=${sensorId}`;
@@ -31,10 +32,10 @@ function showSensorInfoCard(
 
   //CHECK//
   //Check if any 'active' table rows left over from previous click/touch events
-    for (const [key, value] of Object.entries(tableRowObj)) {
+    for (const [key, value] of Object.entries(_store.sensorTableActiveRowObject)) {
         //deactivate any different tables rows and hide info card (if it's still displayed)
 		if (value === "active" && key !== `row${tableRowIndex}`) {
-			tableRowObj[`${key}`] = "inactive";
+			_store.sensorTableActiveRowObject[`${key}`] = "inactive";
 			tableRow = document.getElementById(key);
 			tableRow.classList.remove("table-active");
 			htmlElementCollection.card.style.visibility = "hidden";
@@ -53,8 +54,8 @@ function showSensorInfoCard(
 
 	//TOGGLE FUNCTION//
 	//activates the current table row [tableRowIndex] and displays associated info card for selected sensor...
-    if (tableRowObj[`row${tableRowIndex}`] === "inactive") {
-		tableRowObj[`row${tableRowIndex}`] = "active";
+    if (_store.sensorTableActiveRowObject[`row${tableRowIndex}`] === "inactive") {
+		_store.sensorTableActiveRowObject[`row${tableRowIndex}`] = "active";
 		tableRow = document.getElementById(`row${tableRowIndex}`);
 		tableRow.classList.add("table-active");
 		_store.activeSensorCard = {description, tableRowIndex, EID, sensorId}
@@ -87,7 +88,7 @@ function showSensorInfoCard(
     //deactive a current table row [tableRowIndex] and hide its info card
     //(only if it was activated during previous click event)
     } else {
-        tableRowObj[`row${tableRowIndex}`] = "inactive";
+        _store.sensorTableActiveRowObject[`row${tableRowIndex}`] = "inactive";
         tableRow = document.getElementById(`row${tableRowIndex}`);
         tableRow.classList.remove("table-active");
         htmlElementCollection.card.style.visibility = "hidden";
@@ -102,5 +103,4 @@ function showSensorInfoCard(
 		removeAllChildNodes(htmlElementCollection.certificateListHtmL);
     }
 
-	console.log('ShowInfoCard',tableRowObj);
 }

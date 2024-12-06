@@ -24,9 +24,9 @@ function filterSensorsByDescription() {
 	})
 
 	var tableBody = document.getElementsByTagName("tbody");
-	for (const [key, value] of Object.entries(tableRowObj)) {
+	for (const [key, value] of Object.entries(_store.sensorTableActiveRowObject)) {
 		if (value === "active") {
-			tableRowObj[`${key}`] = "inactive";
+			_store.sensorTableActiveRowObject[`${key}`] = "inactive";
 			let tableRow = document.getElementById(key);
 			tableRow.classList.remove("table-active");
 			htmlElementCollection.card.style.visibility = "hidden";
@@ -42,42 +42,18 @@ function filterSensorsByDescription() {
 		}
 	}
 
-	console.log(tableRowObj);
-
 	//filter Sensor Table based on description
 	select.addEventListener("change", (e) => {
 		const optionSelected = e.target.value;
 
 		//Display all sensors in the table
 		if (optionSelected === "All") {
-			removeAllChildNodes(tableBody[0]);
-			createMainSensorTable(
-				_store.sensors.data.payload,
-				_store.calibrations.data.payload
-			);
-			
-		}
-		//Remove filter from the table header and restore all previous html/css elements
-		else if (optionSelected === "Clear Filter") {
 
-			console.log('Clear Filter')
-			console.log(tableRowObj);
 
-			removeAllChildNodes(sensorDescriptionTableHeader)
-			sensorDescriptionTableHeader.appendChild(textNode);
-			sensorDescriptionTableHeader.setAttribute("onclick", "filterSensorsByDescription()");		
-			sensorDescriptionTableHeader.setAttribute("scope", "col");
-			sensorDescriptionTableHeader.removeAttribute("style");
-			removeAllChildNodes(tableBody[0]);
-			createMainSensorTable(
-				_store.sensors.data.payload,
-				_store.calibrations.data.payload
-			);
-
-			for (const [key, value] of Object.entries(tableRowObj)) {
+			for (const [key, value] of Object.entries(_store.sensorTableActiveRowObject)) {
 				//deactivate any different tables rows and hide info card (if it's still displayed)
-				if (value === "active" && key !== `row${tableRowIndex}`) {
-					tableRowObj[`${key}`] = "inactive";
+				if (value === "active") {
+					_store.sensorTableActiveRowObject[`${key}`] = "inactive";
 					tableRow = document.getElementById(key);
 					tableRow.classList.remove("table-active");
 					htmlElementCollection.card.style.visibility = "hidden";
@@ -92,21 +68,87 @@ function filterSensorsByDescription() {
 					removeAllChildNodes(htmlElementCollection.certificateListHtmL);
 				}
 			}
+			
+			removeAllChildNodes(tableBody[0]);
+			createMainSensorTable(
+				_store.sensors.data.payload,
+				_store.calibrations.data.payload
+			);
+
+			//initialize Main Sensor Table ActiveRow Object
+			_store.getSensorTableActiveRowObject(_store.sensors.data.payload.length);
+			
+		}
+		//Remove filter from the table header and restore all previous html/css elements
+		else if (optionSelected === "Clear Filter") {
+
+			for (const [key, value] of Object.entries(_store.sensorTableActiveRowObject)) {
+				//deactivate any different tables rows and hide info card (if it's still displayed)
+				if (value === "active") {
+					_store.sensorTableActiveRowObject[`${key}`] = "inactive";
+					tableRow = document.getElementById(key);
+					tableRow.classList.remove("table-active");
+					htmlElementCollection.card.style.visibility = "hidden";
+					removeAllChildNodes(htmlElementCollection.descriptionHeaderHtml);
+					removeAllChildNodes(htmlElementCollection.sensorCommentHtml);
+					removeAllChildNodes(htmlElementCollection.manufacturerNameHtml);
+					removeAllChildNodes(htmlElementCollection.sensorModelHtml);
+					removeAllChildNodes(htmlElementCollection.sensorTypeHtml);
+					removeAllChildNodes(htmlElementCollection.sensorMeasurementQuantityHtml);
+					removeAllChildNodes(htmlElementCollection.sensorCapacityRangeHtml);
+					removeAllChildNodes(htmlElementCollection.calRecordsNoticeHtml);
+					removeAllChildNodes(htmlElementCollection.certificateListHtmL);
+				}
+			}
+
+			removeAllChildNodes(sensorDescriptionTableHeader)
+			sensorDescriptionTableHeader.appendChild(textNode);
+			sensorDescriptionTableHeader.setAttribute("onclick", "filterSensorsByDescription()");		
+			sensorDescriptionTableHeader.setAttribute("scope", "col");
+			sensorDescriptionTableHeader.removeAttribute("style");
+			removeAllChildNodes(tableBody[0]);
+			createMainSensorTable(
+				_store.sensors.data.payload,
+				_store.calibrations.data.payload
+			);
+
+			//initialize Main Sensor Table ActiveRow Object
+			_store.getSensorTableActiveRowObject(_store.sensors.data.payload.length);
+
+			
 		
 		//Filter the sensor list with a respect of sensor description
 		}else{
+
+			for (const [key, value] of Object.entries(_store.sensorTableActiveRowObject)) {
+				//deactivate any different tables rows and hide info card (if it's still displayed)
+				if (value === "active") {
+					_store.sensorTableActiveRowObject[`${key}`] = "inactive";
+					tableRow = document.getElementById(key);
+					tableRow.classList.remove("table-active");
+					htmlElementCollection.card.style.visibility = "hidden";
+					removeAllChildNodes(htmlElementCollection.descriptionHeaderHtml);
+					removeAllChildNodes(htmlElementCollection.sensorCommentHtml);
+					removeAllChildNodes(htmlElementCollection.manufacturerNameHtml);
+					removeAllChildNodes(htmlElementCollection.sensorModelHtml);
+					removeAllChildNodes(htmlElementCollection.sensorTypeHtml);
+					removeAllChildNodes(htmlElementCollection.sensorMeasurementQuantityHtml);
+					removeAllChildNodes(htmlElementCollection.sensorCapacityRangeHtml);
+					removeAllChildNodes(htmlElementCollection.calRecordsNoticeHtml);
+					removeAllChildNodes(htmlElementCollection.certificateListHtmL);
+				}
+			}
 			
 			removeAllChildNodes(tableBody[0]);
 			createMainSensorTable(
 				_store.sensors.data.payload.filter(item => item.description === e.target.value),
 				_store.calibrations.data.payload
-			);
-			for (const [key, value] of Object.entries(tableRowObj)) {
-				if (value === "active") {
-					tableRowObj[`${key}`] = "inactive";
-					
-				}
-			}
+			);	
+
+			
+			
+			//initialize Main Sensor Table ActiveRow Object
+			_store.getSensorTableActiveRowObject(_store.sensors.data.payload.filter(item => item.description === e.target.value).length);
 		}
 		
 	});
