@@ -9,7 +9,6 @@ function userLogin() {
 			window.localStorage.setItem("userEmail", email);
 			window.localStorage.setItem("userId", id);
 
-						
 			console.log('User logged in successfully:', response);
 
 			return axios.get(`../api/users/${id}`)				
