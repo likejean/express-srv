@@ -19,6 +19,8 @@
 			crossorigin="anonymous">
 		</script>
 		
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		
 		<title>Intec Sensors</title>
 	</head>
 	<body>
@@ -109,6 +111,32 @@
 															<li id="sensor-manufacturer" class="list-group-item"></li>
 														</ul>
 													</div>
+
+													<div class="chart-container" style="position: relative; height:40vh; width:80vw">
+														<canvas id="chart"></canvas>
+													</div>
+
+													<script>
+														const ctx = document.getElementById('chart');
+														
+														const output_errors = [0.0043, 0.0023, 0.0053, 0.0111, 0.309];
+														
+														
+														new Chart(ctx, {
+															type: 'line',
+															data: {
+																labels: [1, 2, 3, 4, 5],
+																datasets:[
+																	{
+																		label: 'Absolute Error',
+																		borderColor: 'green',
+																		data: output_errors
+																	}
+																]
+															}
+															
+														});
+													</script>
 												</div>
 											</div>
 										</div>
@@ -192,6 +220,7 @@
 		</main>
 
 	</body>
+	
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
 		integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
