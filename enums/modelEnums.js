@@ -27,6 +27,16 @@ const calibrationFrequencies = [
     'Discretionary'
 ];
 
+const calibrationUnits = [
+	'in',
+	'microstrain',
+	'kips',
+	'lbf',
+	'Volts',
+	'degrees',
+	'%'
+];
+
 const userLevels = [
     'Admin',
     'User',
@@ -37,6 +47,7 @@ module.exports = {
 	calibrationPrinciples,
 	calibrationPriorities,
 	calibrationFrequencies,
+	calibrationUnits,
 	userLevels
 }
 

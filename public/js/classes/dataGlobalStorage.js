@@ -36,6 +36,10 @@ class dataStorage {
         }, {});
     }
 
+	getSensorCalibrationData(){
+
+	}
+
 	getSensorTypeList(){
         const types = this.sensors.data.payload.map(obj => obj["type"]);
 		return [...new Set(types)];
@@ -45,7 +49,6 @@ class dataStorage {
 		const descriptions = this.sensors.data.payload.map(obj => obj["description"]);
 		return [...new Set(descriptions)];
 	}
-
 
     getCalProcedureNames(){
         return this.procedures.data.payload.reduce((obj, procedure) => {

@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-const { calibrationPriorities, calibrationFrequencies } = require('../../enums/modelEnums');
+const { calibrationPriorities, calibrationFrequencies, calibrationUnits } = require('../../enums/modelEnums');
 
 const sensorSchema = mongoose.Schema(
     {
         _id: mongoose.Schema.Types.ObjectId,
-        createdAt: { type: Date, default: Date.now, required: false},       
+        createdAt: { type: Date, default: Date.now, required: false},
         calibrations: [
             {
                 type: mongoose.Schema.Types.ObjectId,
