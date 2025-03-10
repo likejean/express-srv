@@ -60,8 +60,7 @@ router.get('/', (req, res, next) => {
 	})
 	.catch((error) => {
 		res.status(500).json({
-			message:
-			"Failure: Sensor datasets documents were not fetched... Something went wrong",
+			message: "Failure: Sensor datasets documents were not fetched... Something went wrong",
 			serverError: error.message,
 			request: {
 				type: 'GET',

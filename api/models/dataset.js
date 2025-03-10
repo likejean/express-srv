@@ -47,11 +47,10 @@ const datasetSchema = mongoose.Schema(
 			},
 			chartLegend: {
 				type: String,
-				required: false,
+				required: true,
 				default: 'None'
 			},
-			dataset: [Number],
-			required: false
+			dataset: [Number]
 		}],			
 		errorUpperLimit: {
 			type: [Number],
