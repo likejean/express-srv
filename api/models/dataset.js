@@ -11,6 +11,11 @@ const datasetSchema = mongoose.Schema(
 			ref: 'Sensor',
 			required: true
 		}, 
+		sensorDescription: {
+			type: String,
+			required: false,
+			default: 'Extensometer'
+		},
 		units: { 
 			type: String, 
 			required: true,
@@ -53,7 +58,7 @@ const datasetSchema = mongoose.Schema(
 			dataset: [Number],
 			hysteresis: [Number]
 		}],	
-		errorPercent: {
+		errorPercentLimit: {
 			type: Number,
 			required: false,
 			default: 1
