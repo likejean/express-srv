@@ -50,8 +50,14 @@ const datasetSchema = mongoose.Schema(
 				required: true,
 				default: 'None'
 			},
-			dataset: [Number]
-		}],			
+			dataset: [Number],
+			hysteresis: [Number]
+		}],	
+		errorPercent: {
+			type: Number,
+			required: false,
+			default: 1
+		},
 		errorUpperLimit: {
 			type: [Number],
 			required: true

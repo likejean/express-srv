@@ -1,35 +1,95 @@
 const ctx = document.getElementById('chart');
-														
-const output_errors = [0, 0.0043, 0.0023, 0.0053, -0.0111, 0.00309, 0.0043, 0.0351, 0.00643, -0.002, 0.0181];
-const upper_bound = [0, 0.002, 0.004, 0.006, 0.008, 0.010, 0.012, 0.014, 0.016, 0.018, 0.02];
-const lower_bound = [0, -0.002, -0.004, -0.006, -0.008, -0.010, -0.012, -0.014, -0.016, -0.018, -0.02];
 
-
-new Chart(ctx, {
-	type: 'line',
-	data: {
-		labels: [0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2],
-		datasets:[
+const data = {
+		datasets: [
 			{
-				label: 'Upper Limit',
+				label: 'Sensor Absolute Error Outputs',
+				data: [
+					{x: -0.2, y: -0.00024},
+					{x: -0.16, y: -0.00066},
+					{x: -0.10, y: -0.00085},
+					{x: -0.04, y: -0.00045},
+					{x: -0.02, y: -0.00033},
+					{x: 0, y: 0.00021},
+					{x: 0.02, y: 0.00041},
+					{x: 0.04, y: 0.0006},
+					{x: 0.10, y: 0.00098},
+					{x: 0.16, y: 0.0011},
+					{x: 0.20, y: 0.00133},
+				],
+				borderColor: 'blue',
+				tension: 0.5
+			},
+					
+			{
+				label: 'Upper Error Limit',
 				pointRadius: 0,
 				borderColor: 'rgba(247, 172, 172, 0.9)',
 				borderWidth: 1,
-				data: upper_bound
+				fill: true,
+				backgroundColor: 'rgba(186, 251, 203, 0.2)',
+				data: [
+					{x: -0.2, y: -0.0020},
+					{x: -0.16, y: -0.0016},
+					{x: -0.10, y: -0.0010},
+					{x: -0.04, y: -0.0004},
+					{x: -0.02, y: -0.0002},
+					{x: 0, y: 0.0000},
+					{x: 0.02, y: 0.0002},
+					{x: 0.04, y: 0.0004},
+					{x: 0.10, y: 0.0010},
+					{x: 0.16, y: 0.0016},
+					{x: 0.20, y: 0.0020},
+				],
 			},
 			{
-				label: 'Lower Limit',
+				label: 'Lower Error Limit',
 				pointRadius: 0,
 				borderColor: 'rgba(247, 172, 172, 0.9)',
 				borderWidth: 1,
-				data: lower_bound
+				fill: true,
+				backgroundColor: 'rgba(186, 251, 203, 0.2)',
+				data: [
+					{x: -0.2, y: 0.0020},
+					{x: -0.16, y: 0.0016},
+					{x: -0.10, y: 0.0010},
+					{x: -0.04, y: 0.0004},
+					{x: -0.02, y: 0.0002},
+					{x: 0, y: 0.0000},
+					{x: 0.02, y: -0.0002},
+					{x: 0.04, y: -0.0004},
+					{x: 0.10, y: -0.0010},
+					{x: 0.16, y: -0.0016},
+					{x: 0.20, y: -0.0020},
+				],
 			},
-			{
-				label: 'Absolute Error',
-				borderColor: 'green',
-				data: output_errors
-			}
 		]
-	}
+	};
 	
-});
+const config = {
+	type: 'line',
+	data: data,
+	options: {
+		scales: {
+			x: {
+			type: 'linear',
+				title: {
+					display: true,
+					text: 'Calibrator Output, [in]'
+				}
+			},
+			y: {
+				title: {
+					display: true,
+					text: 'Sensor Absolute Error, [in]'
+				}
+			}
+		}
+	}
+};
+
+const myChart = new Chart(
+	ctx,
+	config
+);
+

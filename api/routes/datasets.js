@@ -15,6 +15,7 @@ router.get('/', (req, res, next) => {
 	.find()
 	.exec()
 	.then(docs => {
+		//Server Side Terminal Logs
 		console.log({
 			total: docs.length,
 			request: {
@@ -22,6 +23,8 @@ router.get('/', (req, res, next) => {
 				url: req.originalUrl,
 				status: "SUCCESS"
 			}});
+
+		// Client Side Response 
 		res.status(200).json({
 			message: docs.length === 0 ? `MongoDB collection is EMPTY` : `Successfully fetched ${docs.length} sensor datasets`,
 			collectionName: "datasets",
