@@ -1,4 +1,4 @@
-const _store = new dataStorage();  //store all sensors and calibrations data
+const _store = new dataStorage();  //to store all sensors and calibrations data
 
 //HOW IT GETS TO CALIBRATION CARD: 
 //fetchSensorCalibrationData.js -> createMainSensorTable.js -> createGearIcon.js -> showSensorInfoCard.js -> createCalListItem.js
