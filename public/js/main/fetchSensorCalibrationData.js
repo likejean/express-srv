@@ -7,11 +7,15 @@ const fetchSensorCalibrationData = async () => {
 	let notification = document.querySelector(".notification");
 
 	// fetch all data using POST API endpoints: sensors, calibrations, procedures
-	await Promise.all([axios.get("/api/sensors", {
-			headers: getRequestHeaders()
-		}), axios.get("/api/calibrations", {
-			headers: getRequestHeaders()
-		})])
+	await Promise.all([
+				axios.get("/api/sensors", {
+				headers: getRequestHeaders()
+			}), axios.get("/api/calibrations", {
+				headers: getRequestHeaders()
+			}), axios.get("/api/datasets", {
+				headers: getRequestHeaders()
+			})
+		])
 		.then((result) => {
 
 			//store all data in browser's local storage
@@ -30,8 +34,10 @@ const fetchSensorCalibrationData = async () => {
 			//initialize Main Sensor Table ActiveRow Object
 			_store.getSensorTableActiveRowObject(_store.sensors.data.payload.length);
 
+			console.log(_store)
 
-			//disable all UPDATE, PATCH, DELETE buttons if authenticated user is not administrator!
+
+			//disable all UPDATE, PATCH, DELETE buttons if authenticated user is NOT administrator!
 			if(window.localStorage.getItem("userLevel") !== "Admin") {
 				const adminClassifiedButtons = document.querySelectorAll(".admin-classified");
 				adminClassifiedButtons.forEach(btn => {					
