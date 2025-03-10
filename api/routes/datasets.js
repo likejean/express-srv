@@ -23,9 +23,9 @@ router.get('/', (req, res, next) => {
 				status: "SUCCESS"
 			}});
 		res.status(200).json({
-			message: `Successfully fetched ${docs.length} sensor datasets`,
+			message: docs.length === 0 ? `MongoDB collection is EMPTY` : `Successfully fetched ${docs.length} sensor datasets`,
 			collectionName: "datasets",
-			payload: docs.map(doc => {                    
+			payload: docs.map(doc => {
 				return {
 					_id: doc._id,
 					sensorId: doc.sensorId,
@@ -44,11 +44,7 @@ router.get('/', (req, res, next) => {
 					}),	
 					errorUpperLimit: doc.errorUpperLimit.map(val => val),
 					errorLowerLimit: doc.errorLowerLimit.map(val => val),
-					createdAt: doc.createdAt,
-					request: {
-						type: 'GET',
-						url: req.originalUrl                    
-					}  
+					createdAt: doc.createdAt
 				};                    
 			}),
 			total: docs.length,
