@@ -6,7 +6,7 @@ const _store = new dataStorage();  //to store all sensors and calibrations data
 const fetchSensorCalibrationData = async () => {
 	let notification = document.querySelector(".notification");
 
-	// fetch all data using POST API endpoints: sensors, calibrations, procedures
+	// fetch all data using POST API endpoints: sensors, calibrations, and datasets
 	await Promise.all([
 				axios.get("/api/sensors", {
 				headers: getRequestHeaders()
@@ -33,9 +33,6 @@ const fetchSensorCalibrationData = async () => {
 
 			//initialize Main Sensor Table ActiveRow Object
 			_store.getSensorTableActiveRowObject(_store.sensors.data.payload.length);
-
-			console.log(_store)
-
 
 			//disable all UPDATE, PATCH, DELETE buttons if authenticated user is NOT administrator!
 			if(window.localStorage.getItem("userLevel") !== "Admin") {
