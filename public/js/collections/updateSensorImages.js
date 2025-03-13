@@ -14,6 +14,7 @@ const sensorImageCollection = {
 	EID1663: "load_transducer_EID1663.jpg",
 	EID161: "load_transducer_EID161.jpg",
 	EID1280: "load_transducer_EID1280.jpg",
+	EID1477: "load_transducer_EID1477.jpg",
 	EID756: "cod_clipon-gage_EID756.jpg",
 	EID757: "cod_clipon-gage_EID757.jpg",
 	EID807: "extensometer_EID807.jpg",
@@ -27,5 +28,6 @@ const sensorImageCollection = {
 	EID53: "LVDT_sensor.jpg",
 	EID54: "LVDT_sensor.jpg",
 	EID851: "thermometer_EID851.jpg",
+	EID853: "thermometer_EID853.jpg",
 	EID855: "thermometer_EID855.jpg"
 };
