@@ -1,3 +1,6 @@
+var commentValidFormat = /[`'"]/;
+
+
 const newCalRecordFormContainer = {
 	sensorId: {
 		value: "",
@@ -12,7 +15,7 @@ const newCalRecordFormContainer = {
 		regex:""
 	},
 	calibrationName: {
-		value: "55520241212-TC",
+		value: "55520250315-TC",
 		validator: () => {},
 		inputRule: ``,
 		regex:""
@@ -43,8 +46,8 @@ const newCalRecordFormContainer = {
 	},
 	comment: {
 		value: "TBD...",
-		validator: () => {},
-		inputRule: ``,
+		validator: str => commentValidFormat.test(str) ? false : true,
+		inputRule: `Invalid characters used! Remove these special characters from your comment text:(')(")(\`)`,
 		regex:""
 	},
 	maxCalibrationExtension: {
@@ -55,7 +58,7 @@ const newCalRecordFormContainer = {
 	},
 	calibrationRangePercent: {
 		value: 100,
-		validator: number => number < 100 && number > 0,
+		validator: number => number <= 100 && number > 0,
 		inputRule: `percentage value should be within 0%-100%`,
 		regex:""
 	},

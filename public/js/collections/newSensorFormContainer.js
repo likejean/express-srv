@@ -1,3 +1,6 @@
+
+var commentValidFormat = /[`'"]/;
+
 const newSensorFormContainer = {
 	EID: {
 		value: "EIDXXX",
@@ -49,8 +52,8 @@ const newSensorFormContainer = {
 	},
 	comment: {
 		value: "None",
-		validator: () => {},
-		inputRule: ``,
+		validator: str => commentValidFormat.test(str) ? false : true,
+		inputRule: `Invalid characters used! Remove these special characters from your comment text:(')(")(\`)`,
 		regex: "",
 	},
 	model: {

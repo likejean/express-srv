@@ -19,14 +19,18 @@ for (i = 0; i < inputs.length; i++) {
 	inputs[i].oninput = inputHandler;
 }
 
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //callback input handler function for ONINPUT EventListener
 function inputHandler(e) {
 	let name = e.target.name;
 	let value = name === "calibrationRangePercent" ? Number(e.target.value) : e.target.value;
 
-	if(name === "calibrationRangePercent") e.target.value = Math.trunc(parseFloat(value));
+	//if(name === "calibrationRangePercent") e.target.value = Math.trunc(parseFloat(value));
 
 	inputValidationText.innerText = _calfactory.isValidationRuleApplied(name, value).rule;
+
 
 	if (name === "calibrationExtended" || name === "adjustmentsMade") {
 		_calfactory.newCalRecordFormInputs[name].checked = e.target.checked;
@@ -35,8 +39,9 @@ function inputHandler(e) {
 		submitButton.disabled = !_calfactory.isSubmitButtonActive();
 	}
 
+	//higlights field input border based upon emptiness of the input
 	if (_calfactory.isFormInputFieldEmpty(name)) {
-		e.target.style.border = "2px solid red";
+		e.target.style.border = "3px solid red";
 	} else {
 		e.target.style.border = "2px solid blue";
 	}
@@ -48,14 +53,14 @@ function inputHandler(e) {
 form.addEventListener("submit", submitNewCalibrationData);
 
 
-
+//////////////////////////////////////////////////////////////////////////////////
 //callback function for ONSUBMIT EventListener
 function submitNewCalibrationData(event) {
 	event.preventDefault(); // Prevent default form submission
 
 	const formData = new FormData(form);
 
-	//NOTE!!Unable to obtain data from checkboxes inside form, so get the "checked" status directly from the calibration factory
+	//NOTE!!!!!!Unable to obtain data from checkboxes inside form, so get the "checked" status directly from the calibration factory
 	newCalibrationPostData["calibrationExtended"] = _calfactory.newCalRecordFormInputs["calibrationExtended"].checked;
 	newCalibrationPostData["adjustmentsMade"] = _calfactory.newCalRecordFormInputs["adjustmentsMade"].checked;
 
