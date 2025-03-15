@@ -100,8 +100,8 @@ router.post('/', (req, res, next) => {
 		sensorDescription,
 		units,
 		chartTitle,
-		chartYLabel: chartYLabel + ` ,${units}`,
-		chartXLabel: chartXLabel + ` ,${units}`,
+		chartYLabel: chartYLabel + `, ${units}`,
+		chartXLabel: chartXLabel + `, ${units}`,
 		calibratorDataset,
 		sensorDatasets: [{
 			seriesDescription,
