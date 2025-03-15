@@ -41,8 +41,8 @@ const datasetSchema = mongoose.Schema(
 			required: true
 		},
 		sensorDatasets: [{
-			datasetId: {
-				type: String, 
+			seriesDescription: {
+				type: Number, 
 				required: false
 			},
 			calibrationId: {
@@ -50,13 +50,12 @@ const datasetSchema = mongoose.Schema(
 				ref: 'Calibration',
 				required: true
 			},
-			chartLegend: {
+			seriesLabel: {
 				type: String,
 				required: true,
 				default: 'None'
 			},
-			dataset: [Number],
-			hysteresis: [Number]
+			dataset: [Number]
 		}],	
 		errorPercentLimit: {
 			type: Number,

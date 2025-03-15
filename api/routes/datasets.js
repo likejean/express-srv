@@ -38,9 +38,9 @@ router.get('/', (req, res, next) => {
 					calibratorDataset: doc.calibratorDataset.map(item => item),
 					sensorDatasets: doc.sensorDatasets.map(set => {
 						return {
-							datasetId: set.datasetId,
+							seriesDescription: set.seriesDescription,
 							calibrationId: set.calibrationId,
-							chartLegend: set.chartLegend,
+							seriesLabel: set.seriesLabel,
 							dataset: set.dataset.map(val => val)
 						}
 					}),	
@@ -84,11 +84,10 @@ router.post('/', (req, res, next) => {
 		chartYLabel,
 		chartXLabel,
 		calibratorDataset,
-		datasetId,
 		calibrationId,
-		chartLegend,
+		seriesLabel,
 		dataset,
-		hysteresis,	
+		seriesDescription,	
 		errorPercentLimit,
 		errorUpperLimit,
 		errorLowerLimit      
@@ -102,16 +101,13 @@ router.post('/', (req, res, next) => {
 		units,
 		chartTitle,
 		chartYLabel,
-		chartXLabel,		
-		datasetId,
-		calibrationId,
+		chartXLabel,
 		calibratorDataset,
 		sensorDatasets: [{
-			datasetId,
+			seriesDescription,
 			calibrationId,
-			chartLegend,
-			dataset,
-			hysteresis
+			seriesLabel,
+			dataset
 		}],
 		errorPercentLimit,
 		errorUpperLimit,
