@@ -42,7 +42,7 @@ const datasetSchema = mongoose.Schema(
 		},
 		sensorDatasets: [{
 			seriesDescription: {
-				type: Number, 
+				type: String, 
 				required: false
 			},
 			calibrationId: {
