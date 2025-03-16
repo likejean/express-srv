@@ -153,7 +153,6 @@ router.get("/:calibrationId", (req, res, next) => {
 
 router.patch("/:calibrationId", (req, res, next) => {
     const id = req.params.calibrationId;
-    console.log("Request Body:", req.body);
     Calibration.updateOne({ _id: id }, { $set: { ...req.body } })
 		.exec()
 		.then((result) => {
@@ -165,7 +164,7 @@ router.patch("/:calibrationId", (req, res, next) => {
 				},
 			});
 			res.status(200).json({
-				message: `Calibration record w/ id: '${id}' was Updated.`,
+				message: `Calibration record w/ id: '${id}' was updated successfully.`,
 				request: {
 					type: "PATCH",
 				},

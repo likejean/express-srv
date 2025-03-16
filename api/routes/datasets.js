@@ -94,7 +94,7 @@ router.post('/', (req, res, next) => {
 	} = req.body;
    
 
-	const sensor = new Dataset({
+	const calibrationDataset = new Dataset({
 		_id,   
 		sensorId, 
 		sensorDescription,
@@ -114,7 +114,7 @@ router.post('/', (req, res, next) => {
 		errorLowerLimit       
 	});  
 	
-	sensor
+	calibrationDataset
 		.save()
 		.then(result => {
 		console.log({
@@ -144,5 +144,86 @@ router.post('/', (req, res, next) => {
 		});
 	});
 });
+
+//POST endpoint: push a new DATASET into array of DATASET MongoDB document
+
+router.patch("/push/:datasetId", (req, res, next) => {
+	const id = req.params.datasetId;
+	const newDataset = {
+		seriesDescription: req.body.seriesDescription,
+		calibrationId: req.body.calibrationId,
+		seriesLabel: req.body.seriesLabel,
+		dataset: req.body.dataset
+	};
+	Dataset.updateOne({ _id: id },
+		{ $push: { sensorDatasets: newDataset } })
+		.exec()
+		.then((result) => {
+			console.log({
+				request: {
+					type: "PATCH",
+					url: req.originalUrl,
+					status: "SUCCESS",
+				},
+			});
+			res.status(200).json({
+				message: `Dataset record w/ id: '${id}' was updated successfully. A new dataset was push into dataset array`,
+				request: {
+					type: "PATCH",
+				},
+				result,
+			});
+		})
+		.catch((error) => {
+			res.status(500).json({
+				message: "Failure: Unable to update a dataset...",
+				isIdValid: mongoose.Types.ObjectId.isValid(id),
+				serverError: error.message,
+				request: {
+					type: "PATCH",
+					url: req.originalUrl,
+				},
+			});
+		});
+	});
+
+
+//POST endpoint: push a new DATASET into array of DATASET MongoDB document
+
+router.patch("/pull/:datasetId", (req, res, next) => {
+	const id = req.params.datasetId;
+	const datasetObjectId = req.body.datasetObjectId;
+	
+	Dataset.updateOne({ _id: id },
+		{ $pull: { sensorDatasets: { _id: datasetObjectId } } })
+		.exec()
+		.then((result) => {
+			console.log({
+				request: {
+					type: "PATCH",
+					url: req.originalUrl,
+					status: "SUCCESS",
+				},
+			});
+			res.status(200).json({
+				message: `Dataset record w/ id: '${id}' was updated successfully: dataset '${datasetObjectId}' was pulled out`,
+				request: {
+					type: "PATCH",
+				},
+				result,
+			});
+		})
+		.catch((error) => {
+			res.status(500).json({
+				message: "Failure: Unable to update a dataset...",
+				isIdValid: mongoose.Types.ObjectId.isValid(id),
+				serverError: error.message,
+				request: {
+					type: "PATCH",
+					url: req.originalUrl,
+				},
+			});
+		});
+	});
 
 module.exports = router;
