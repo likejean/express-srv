@@ -9,6 +9,7 @@ const htmlClassCollection = {
     manufacturerNameHtml: 'sensor-manufacturer',
     calRecordsNoticeHtml: 'cal-records',
 	certificateListHtmL: 'calibration-certificates',
+	sensorChartHtml: 'sensor-chart-wrapper'
 }
 
 

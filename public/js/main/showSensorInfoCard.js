@@ -1,10 +1,11 @@
-//called in createGearIcon.js
+//called in createGearIcon.js.....
+//this function displays all information associated with selected sensor
+
 function showSensorInfoCard(
     tableRowIndex,
     description,
     manufacturer,
-    quantity,
-    calibrations, //should get array from createGearIcon
+    quantity,    
     EID,
     model,
     type,
@@ -13,11 +14,15 @@ function showSensorInfoCard(
     comment,
 	sensorId
 ) {
-	var parsedJSON = JSON.parse(calibrations.replace(/\&/g, '"'));
 	var deleteBtn = document.getElementById("delete-sensor-button");
 
     var tableRow;
 
+	//Filters calibrations and datasets associated with a selected sensor (from global storage)
+	var associatedCalibrations = _store.calibrations.data.payload.filter(item => item.sensorId === sensorId);
+	var associatedDatasets = _store.datasets.data.payload.filter(item => item.sensorId === sensorId);
+
+	
 
 	//construct .href value (url w/ query string containing sensor id) for "UPDATE" button
 	const fetchEditSensorButton = document.getElementById("fetch-patch-sensor-info");
@@ -26,14 +31,16 @@ function showSensorInfoCard(
     //Updates html .src attribute to display sensor image
     updateSensorImage(EID);
 
-    //this function call runs document.getElementById() method and mutates globally available object in collection folder; this object stores all
-    //dynamically updated card information html elements in tableRowIndex.html
+    //this function utilizes document.getElementById() method to collect references to HTML DOM elements w/ specified IDs
+	//removeAllChildNodes() and addTextNodeToHtmlElement() methods mutate these HTML elements in collection folder
+    //these HTML elements are dynamically updated w/ respect of _store.sensorTableActiveRowObject active/inactive status
     getHtmlElementsById();
 
-  //CHECK//
-  //Check if any 'active' table rows left over from previous click/touch events
+	//////////////////USER CHECKS/////////////////////////////
+  	//Check if any 'active' table rows left over from previous click/touch events
     for (const [key, value] of Object.entries(_store.sensorTableActiveRowObject)) {
-        //deactivate any different tables rows and hide info card (if it's still displayed)
+        
+		//deactivate any different tables rows and hide info card (if it's still displayed)
 		if (value === "active" && key !== `row${tableRowIndex}`) {
 			_store.sensorTableActiveRowObject[`${key}`] = "inactive";
 			tableRow = document.getElementById(key);
@@ -48,6 +55,7 @@ function showSensorInfoCard(
 			removeAllChildNodes(htmlElementCollection.sensorCapacityRangeHtml);
 			removeAllChildNodes(htmlElementCollection.calRecordsNoticeHtml);
 			removeAllChildNodes(htmlElementCollection.certificateListHtmL);
+			removeAllChildNodes(htmlElementCollection.sensorChartHtml);
 		}
 	}
 
@@ -60,6 +68,7 @@ function showSensorInfoCard(
 		tableRow.classList.add("table-active");
 		_store.activeSensorCard = {description, tableRowIndex, EID, sensorId}
 		htmlElementCollection.card.style.visibility = "visible";
+		
 		addTextNodeToHtmlElement(description + "\u00a0" + EID, htmlElementCollection.descriptionHeaderHtml);
 		addTextNodeToHtmlElement("NOTE:\u00a0" + comment, htmlElementCollection.sensorCommentHtml);
 		addTextNodeToHtmlElement("Manufacturer:\u00a0" + manufacturer, htmlElementCollection.manufacturerNameHtml);
@@ -68,18 +77,20 @@ function showSensorInfoCard(
 		addTextNodeToHtmlElement("Measurement Quantity:" + "\u00a0" + quantity, htmlElementCollection.sensorMeasurementQuantityHtml);
 		addTextNodeToHtmlElement("Sensor Capacity Range:" + "\u00a0" + capacity, htmlElementCollection.sensorCapacityRangeHtml);
 
-		parsedJSON.length === 0
+		if(associatedDatasets.length > 0) createSensorDatasetsChart(associatedDatasets);
+
+		associatedCalibrations.length === 0
 			? addHtmlChildElementToParent(htmlElementCollection.calRecordsNoticeHtml,
 				`<span class='badge bg-danger'>No Records Found</span>`)
 			: addHtmlChildElementToParent(htmlElementCollection.calRecordsNoticeHtml,
-				parsedJSON.length === 1 
+				associatedCalibrations.length === 1 
 				? `<span class='badge bg-info'>1 Record Found</span>`
-				:`<span class='badge bg-info'>${parsedJSON.length} Records Found</span>`);
+				:`<span class='badge bg-info'>${associatedCalibrations.length} Records Found</span>`);
 
-		if (parsedJSON.length > 0) {
+		if (associatedCalibrations.length > 0) {
 			if (!deleteBtn.disabled) deleteBtn.disabled = true;
 			//createCalListItem.js
-			createCalibrationListItem(parsedJSON, location, htmlElementCollection.certificateListHtmL);
+			createCalibrationListItem(associatedCalibrations, location, htmlElementCollection.certificateListHtmL);
 		}			
 		else {
 			deleteBtn.disabled = false;
@@ -101,6 +112,6 @@ function showSensorInfoCard(
         removeAllChildNodes(htmlElementCollection.sensorCapacityRangeHtml);
         removeAllChildNodes(htmlElementCollection.calRecordsNoticeHtml);
 		removeAllChildNodes(htmlElementCollection.certificateListHtmL);
+		removeAllChildNodes(htmlElementCollection.sensorChartHtml);
     }
-
 }
