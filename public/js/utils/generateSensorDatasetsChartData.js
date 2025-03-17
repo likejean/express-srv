@@ -1,67 +1,39 @@
-function generateSensorDatasetsChartData() {
-	return {
-		datasets: [
-			{
-				label: 'Sensor Absolute Error Outputs',
-				data: [
-					{x: -0.2, y: -0.00024},
-					{x: -0.16, y: -0.00066},
-					{x: -0.10, y: -0.00085},
-					{x: -0.04, y: -0.00045},
-					{x: -0.02, y: -0.00033},
-					{x: 0, y: 0.00021},
-					{x: 0.02, y: 0.00041},
-					{x: 0.04, y: 0.0006},
-					{x: 0.10, y: 0.00098},
-					{x: 0.16, y: 0.0011},
-					{x: 0.20, y: 0.00133},
-				],
-				borderColor: 'blue',
-				tension: 0.5
-			},
-					
-			{
-				label: 'Upper Error Limit',
-				pointRadius: 0,
-				borderColor: 'rgba(247, 172, 172, 0.9)',
-				borderWidth: 1,
-				fill: true,
-				backgroundColor: 'rgba(186, 251, 203, 0.2)',
-				data: [
-					{x: -0.2, y: -0.0020},
-					{x: -0.16, y: -0.0016},
-					{x: -0.10, y: -0.0010},
-					{x: -0.04, y: -0.0004},
-					{x: -0.02, y: -0.0002},
-					{x: 0, y: 0.0000},
-					{x: 0.02, y: 0.0002},
-					{x: 0.04, y: 0.0004},
-					{x: 0.10, y: 0.0010},
-					{x: 0.16, y: 0.0016},
-					{x: 0.20, y: 0.0020},
-				],
-			},
-			{
-				label: 'Lower Error Limit',
-				pointRadius: 0,
-				borderColor: 'rgba(247, 172, 172, 0.9)',
-				borderWidth: 1,
-				fill: true,
-				backgroundColor: 'rgba(186, 251, 203, 0.2)',
-				data: [
-					{x: -0.2, y: 0.0020},
-					{x: -0.16, y: 0.0016},
-					{x: -0.10, y: 0.0010},
-					{x: -0.04, y: 0.0004},
-					{x: -0.02, y: 0.0002},
-					{x: 0, y: 0.0000},
-					{x: 0.02, y: -0.0002},
-					{x: 0.04, y: -0.0004},
-					{x: 0.10, y: -0.0010},
-					{x: 0.16, y: -0.0016},
-					{x: 0.20, y: -0.0020},
-				],
-			},
-		]
-	};
+//This functions prepares a list of all datasets for Sensor CHART
+function generateSensorDatasetsChartData(sensorErrorData) {
+
+	let datasets = [];
+
+	console.log(sensorErrorData);
+
+	//This function recieves "sensorErrorData" as an array, which should contians usually a single element ONLY (means a single CHART per a sensor)... 
+	//but this configuration might be simplify later....
+	for (var i = 0; i < sensorErrorData.length; i++){
+
+		//Generate a Line Plot for LOWER Error Limit
+		datasets.push({
+			...chartFormats.LOWER_ERROR_LIMIT,
+			label: "Lower Error Limit",
+			data: generateChartLine(sensorErrorData[i].calibratorDataset, sensorErrorData[i].errorLowerLimit)
+		});
+			
+		//Generate a Line Plot for UPPER Error Limit
+		datasets.push({
+			...chartFormats.UPPER_ERROR_LIMIT,
+			label: "Upper Error Limit",
+			data: generateChartLine(sensorErrorData[i].calibratorDataset, sensorErrorData[i].errorUpperLimit)
+		});
+
+		//Generate Line Plot(s) for Sendor ABSOLUTE Error Outputs (could be more than one plot, for current, previous, ascending or decending order data)
+		for (var j = 0; j < sensorErrorData[i].sensorDatasets.length; j++){
+			
+			datasets.push({
+				label: `${sensorErrorData[i].sensorDatasets[j].seriesLabel} - ${sensorErrorData[i].sensorDatasets[j].seriesDescription}`,
+				borderColor: chartFormats.ABSOLUTE_ERROR_OUTPUT.borderColor[j],
+				tension: chartFormats.ABSOLUTE_ERROR_OUTPUT.tension,
+				data: generateChartLine(sensorErrorData[i].calibratorDataset, sensorErrorData[i].sensorDatasets[j].dataset)
+			});
+		}
+	}
+
+	return { datasets };
 }
