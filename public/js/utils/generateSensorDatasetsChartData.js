@@ -3,8 +3,6 @@ function generateSensorDatasetsChartData(sensorErrorData) {
 
 	let datasets = [];
 
-	console.log(sensorErrorData);
-
 	//This function recieves "sensorErrorData" as an array, which should contians usually a single element ONLY (means a single CHART per a sensor)... 
 	//but this configuration might be simplify later....
 	for (var i = 0; i < sensorErrorData.length; i++){
