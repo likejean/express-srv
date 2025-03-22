@@ -38,8 +38,11 @@ class dataStorage {
         }, {});
     }
 
-	getSensorCalibrationData(){
-
+	getSensorCalibrationNames(){
+		return this.activeSensorCard.calibrations.reduce((obj, calibration) => {
+            obj[`${calibration.calibrationName}`] = calibration._id;
+            return obj;
+        }, {});;
 	}
 
 	getSensorTypeList(){
