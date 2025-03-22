@@ -4,15 +4,15 @@ const newChartDatasetFormContainer = {
 		validator: () => {},
 		inputRule: ``,
 		regex:""
-	}, 
-    sensorDescription: {
-        value: "",
-		validator: () => {},
-		inputRule: ``,
+	},
+    datasetSize: { 
+        value: 5,
+		validator: number => number <= 20 && number > 0,
+		inputRule: `dataset range should be at least 5 datapoints and no more than 20 datapoints`,
 		regex:""
     },
-    units: { 
-        value: "",
+	errorPercentLimit: { 
+        value: 1,
 		validator: () => {},
 		inputRule: ``,
 		regex:""
@@ -35,6 +35,18 @@ const newChartDatasetFormContainer = {
 		inputRule: ``,
 		regex:""
     },
+    seriesLabel: {
+        value: "",
+		validator: () => {},
+		inputRule: ``,
+		regex:""
+    },
+    seriesDescription: {
+        value: "",
+		validator: () => {},
+		inputRule: ``,
+		regex:""
+    }
 };
 
 //Instantiation of datasetFactory Class

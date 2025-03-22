@@ -65,10 +65,149 @@
                                 class="form-text text-muted">
                                     Please, select calibration associated which this sensor
                                 </small>
-                            </div>                            
+                            </div>   
+							<div class="col-lg-3 col-sm-6 mb-sm-4">
+								<label class="font-weight-bold" for="datasetSize">Dataset Range Size, N</label>
+								<input
+									name="datasetSize"
+									type="number"
+									class="form-control"
+									id="datasetSize"
+									aria-describedby="datasetSize#Help"
+									placeholder="1"
+									required
+								/>
+								<small
+									id="datasetSize#Help"
+									class="form-text text-muted"
+								>
+									Please, enter integer for dataset range size. Negative values are not allowed.
+								</small>
+							</div>   
+
+							<div class="col-lg-3 col-sm-6 mb-sm-4">
+								<label class="font-weight-bold" for="errorPercentLimit">Error Limit Percent, [%]</label>
+								<input
+									name="errorPercentLimit"
+									type="number"
+									class="form-control"
+									id="errorPercentLimit"
+									aria-describedby="errorPercentLimit#Help"
+									placeholder="1.0"
+									required
+								/>
+								<small
+									id="errorPercentLimit#Help"
+									class="form-text text-muted"
+								>
+									Please, set percent error limit (usually, Error Limit Percent = 1.0%).
+								</small>
+							</div>                     
                         </div>
                     </div>
                 </div>
+
+				<div class="control-form-field-box form-group my-4 p-2">
+                    <div class="container">
+                        <div class="row mx-1">
+                            <label for="chartTitle">Chart Title</label>
+                            <input
+                                name="chartTitle"
+                                type="text"
+                                class="form-control"
+                                id="chartTitle"
+                                aria-describedby="chartTitle#Help"
+                                placeholder=""
+                                required
+                            />
+                            <small id="chartTitle#Help" class="form-text text-muted">
+                                Please, enter chart title here
+                            </small>
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+				<div class="control-form-field-box form-group my-4 p-2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-5 col-sm-11 col-11 mb-sm-4">
+                                <label for="chartYLabel">Y Axis</label>
+								<input
+									name="chartYLabel"
+									type="text"
+									class="form-control"
+									id="chartYLabel"
+									aria-describedby="chartYLabel#Help"
+									placeholder=""
+									required
+								/><span></span>
+								<small id="chartYLabel#Help" class="form-text text-muted">
+									Please, enter label for Y axis
+								</small>
+                            </div>
+							<div class="col-1 my-4 py-1"><span></span></div>
+
+                            <div class="col-lg-5 col-sm-11 col-11 mb-sm-4">
+                                <label for="chartXLabel">X Axis</label>
+								<input
+									name="chartXLabel"
+									type="text"
+									class="form-control"
+									id="chartXLabel"
+									aria-describedby="chartXLabel#Help"
+									placeholder=""
+									required
+								/>
+								<small id="chartXLabel#Help" class="form-text text-muted">
+									Please, enter label for X axis
+								</small>
+                            </div>    
+							<div class="col-1 my-4 py-1"><span></span></div>     
+                        </div>
+                    </div>
+                </div>
+
+
+				<div class="control-form-field-box form-group my-4 p-2">
+					<div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-12 mb-sm-4">
+								<label for="seriesLabel">Series Label</label>
+								<input
+									name="seriesLabel"
+									type="text"
+									class="form-control"
+									id="seriesLabel"
+									aria-describedby="seriesLabel#Help"
+									placeholder=""
+									required
+								/>
+								<small id="seriesLabel#Help" class="form-text text-muted">
+									Please, enter series label here
+								</small>
+							</div>
+							<div class="col-lg-6 col-sm-12 mb-sm-4">
+								<label for="seriesDescription">Dataset Description</label>
+								<input
+									name="seriesDescription"
+									type="text"
+									class="form-control"
+									id="seriesDescription"
+									aria-describedby="seriesDescription#Help"
+									placeholder=""
+									required
+								/>
+								<small id="seriesDescription#Help" class="form-text text-muted">
+									Please, enter a description for current chart dataset
+								</small>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
                 <div class="container"><span class="new-chart-valid-input"></span></div>
 
 
