@@ -39,8 +39,6 @@ function inputHandler(e) {
 		submitButton.disabled = !_calfactory.isSubmitButtonActive();   //disables SUBMIT button if empty string detected for required user input
 	}
 
-	console.log(_calfactory.newCalRecordFormInputs[name])
-
 	//higlights field input border based upon emptiness of the input
 	if (_calfactory.isFormInputFieldEmpty(name)) {
 		e.target.style.border = "3px solid red";
@@ -62,6 +60,8 @@ function submitNewCalibrationData(event) {
 
 	const formData = new FormData(form);
 
+	
+
 	//NOTE!!!!!!Unable to obtain data from checkboxes inside form, so get the "checked" status directly from the calibration factory
 	newCalibrationPostData["calibrationExtended"] = _calfactory.newCalRecordFormInputs["calibrationExtended"].checked;
 	newCalibrationPostData["adjustmentsMade"] = _calfactory.newCalRecordFormInputs["adjustmentsMade"].checked;
@@ -70,6 +70,7 @@ function submitNewCalibrationData(event) {
 
 	// Loop through all form data and prepare data object for POST request
 	for (const [key, value] of formData.entries()) {
+		
 		if (key === "sensorId")
 		newCalibrationPostData[key] = _store.getSensorEIDs()[value];
 		//get ObjectId instead of sensor name

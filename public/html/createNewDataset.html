@@ -64,6 +64,7 @@
                 <div class="container"><span class="new-chart-valid-input"></span></div>
 
 
+                <!--//////////////////////////////////////////////////////////////////////////////////////////////////////-->
                 <!-- Warning Modal: -->
                 <div
                     class="modal fade"
@@ -78,7 +79,7 @@
                         <div class="modal-content">
                             <div class="modal-header"> 
                                 <h1 class="modal-title fs-5 text-center container-fluid" id="createNewChartModal">
-                                    <span class="new-chart-dataset-modal-header badge bg-info"></span>  
+                                    <span class="new-cal-record-modal-header badge bg-info"></span>  
                                 </h1>  
                                 <button
                                     type="button"
@@ -88,13 +89,13 @@
                                 ></button>
                             </div>
                             <div class="modal-body">
-                                <h3>Do you want to add new chart for this sensor?</h3>
+                                <h3>Do you want to add this chart dataset to database?</h3>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                     Close
                                 </button>
-                                <button type="button" class="btn btn-primary">
+                                <button type="button" class="btn btn-primary" onclick=createNewCalibrationRecord()>
                                     Create
                                 </button>
                             </div>
@@ -102,10 +103,19 @@
                     </div>
                 </div>
 
-                <!--Buttons Container-->
+
+				<!--Buttons Container-->
                 <div class="container">
                     <div class="row m-5">
-                        <div class="form-group col text-center">                            
+                        <div class="form-group col text-center">
+                            <button 
+                                id="get-chart-dataset-form-values"
+                                type="submit"
+                                data-bs-toggle="modal"
+                                data-bs-target="#createNewChartModal"
+                                class="btn btn-primary">Submit</button>
+                            </button>                            
+                            <button type="button" class="btn btn-secondary" onclick=resetNewChartDatasetForm()>Reset</button>
                             <a href="../index.html" class="btn btn-dark">Back</a>
                         </div>
                     </div>
@@ -131,8 +141,19 @@
 
     <!--Fetch all neccessary data from database for this page-->
 	<script src="../js/datasets/fetchAllSensorInfoById.js"></script>
+	
 
-    <!--Get both containers for _calfactory-->
+    <!--Get both containers for _chartfactory-->
     <script src="../js/collections/newChartDatasetFormContainer.js"></script>
+	<script src="../js/datasets/getNewChartFormValues.js"></script>
+	
+
+
+	<script>
+        function resetNewChartDatasetForm() {
+            window.location.reload();
+        }
+
+    </script>
 
 </html>

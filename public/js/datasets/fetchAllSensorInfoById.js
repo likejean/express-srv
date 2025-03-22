@@ -12,8 +12,7 @@ const fetchAllSensorInfoById = async () => {
     await axios
 		.get(`../api/sensors/${id}`)
 		.then((result) => {
-			_store.activeSensorCard = result.data.sensor
-			console.log('_store', _store);
+			_store.activeSensorCard = result.data.sensor;
 		})
 		.catch((error) => {
 			//display error message if data fetch failure occurs or any other internal error detected
