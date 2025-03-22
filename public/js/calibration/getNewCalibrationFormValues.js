@@ -13,7 +13,7 @@ Object.entries(_calfactory.newCalRecordFormInputs).forEach(([key, obj]) => {
 	submitButton.disabled = !_calfactory.isSubmitButtonActive();
 });
 
-//Attach eventListeners to all New Calibration Form Inputs to detect input entry events
+//Attach eventListener callbacks to all New Calibration Form Inputs to guide input entry events
 var inputs = document.querySelectorAll("input, select, textarea");
 for (i = 0; i < inputs.length; i++) {
 	inputs[i].oninput = inputHandler;
@@ -22,7 +22,7 @@ for (i = 0; i < inputs.length; i++) {
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//callback input handler function for ONINPUT EventListener
+//callback handler function for "ONINPUT" EventListener
 function inputHandler(e) {
 	let name = e.target.name;
 	let value = name === "calibrationRangePercent" ? Number(e.target.value) : e.target.value;
@@ -33,11 +33,13 @@ function inputHandler(e) {
 
 
 	if (name === "calibrationExtended" || name === "adjustmentsMade") {
-		_calfactory.newCalRecordFormInputs[name].checked = e.target.checked;
+		_calfactory.newCalRecordFormInputs[name].checked = e.target.checked;   //use event.target.checked attribute for checkboxes only
 	} else {
 		_calfactory.newCalRecordFormInputs[name].value = value;
-		submitButton.disabled = !_calfactory.isSubmitButtonActive();
+		submitButton.disabled = !_calfactory.isSubmitButtonActive();   //disables SUBMIT button if empty string detected for required user input
 	}
+
+	console.log(_calfactory.newCalRecordFormInputs[name])
 
 	//higlights field input border based upon emptiness of the input
 	if (_calfactory.isFormInputFieldEmpty(name)) {

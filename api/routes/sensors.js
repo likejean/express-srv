@@ -99,6 +99,7 @@ router.get('/', auth.verifyToken, (req, res, next) => {
 router.get('/:sensorId', (req, res, next) => {
     const id = req.params.sensorId;
     Sensor.findById(id)
+        .populate('calibrations')
         .exec()
         .then(doc => {
             console.log({

@@ -16,24 +16,22 @@ class calibrationFactory {
 		this.certificateInfoIcon = certificateInfoIcon;
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //if a value of active input is empty string, returns FALSE (disables SUBMIT button); Otherwise, it returns TRUE to activate SUBMIT button in New Calibration Form
     isSubmitButtonActive() {
         for (const key in this.newCalRecordFormInputs) {
-        if (typeof this.newCalRecordFormInputs[key] === "object") {
-            for (const subkey in this.newCalRecordFormInputs[key]) {
-            if (
-                subkey === "value" &&
-                this.newCalRecordFormInputs[key][subkey] === ""
-            )
-                return false;
+            if (typeof this.newCalRecordFormInputs[key] === "object") {
+                for (const subkey in this.newCalRecordFormInputs[key]) {                    
+                    if(subkey === "value" && this.newCalRecordFormInputs[key][subkey] === "") return false; 
+                }
             }
-        }
         }
         return true;
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////
-	//////this method determines if validation rule applied to any field in New Calibration Record Form
-    //if there is a validation rule applied, it outputs warning message for any user's rule valiolation.
+	//////this method determines if a validation rule applied to any field in New Calibration Record Form
+    //if there is a validation rule applied, it outputs a warning message if user inputs do not meet validation rules.
 
     isValidationRuleApplied(inputName, inputValue) {
         // Convert the function to a string and remove whitespace
@@ -57,7 +55,7 @@ class calibrationFactory {
 		}
     }
 
-    //this method determines if there is any empty string in n New Calibration Record Form input field
+    //this method determines if there is any empty string in a New Calibration Record Form input field left
     isFormInputFieldEmpty(inputName) {
         if (inputName === "adjustmentsMade" || inputName === "calibrationExtended")
         return false;
