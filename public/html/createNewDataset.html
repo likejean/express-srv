@@ -40,7 +40,6 @@
                 <div class="control-form-field-box form-group my-4 p-2">
                     <div class="container">
                         <div class="row">
-                            
                             <div class="col-lg-6 col-sm-12 mb-sm-4">
                                 <label for="calibrationId">Select Calibration</label>
                                 <select
@@ -59,6 +58,55 @@
                                     Please, select calibration associated which this sensor
                                 </small>
                             </div>                            
+                        </div>
+                    </div>
+                </div>
+                <div class="container"><span class="new-chart-valid-input"></span></div>
+
+
+                <!-- Warning Modal: -->
+                <div
+                    class="modal fade"
+                    id="createNewChartModal"
+                    data-bs-backdrop="static"
+                    data-bs-keyboard="false"
+                    tabindex="-1"
+                    aria-labelledby="createNewChartModalLabel"
+                    aria-hidden="true"
+                >
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header"> 
+                                <h1 class="modal-title fs-5 text-center container-fluid" id="createNewChartModal">
+                                    <span class="new-chart-dataset-modal-header badge bg-info"></span>  
+                                </h1>  
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                ></button>
+                            </div>
+                            <div class="modal-body">
+                                <h3>Do you want to add new chart for this sensor?</h3>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                                <button type="button" class="btn btn-primary">
+                                    Create
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Buttons Container-->
+                <div class="container">
+                    <div class="row m-5">
+                        <div class="form-group col text-center">                            
+                            <a href="../index.html" class="btn btn-dark">Back</a>
                         </div>
                     </div>
                 </div>
