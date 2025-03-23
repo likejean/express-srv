@@ -10,7 +10,7 @@ class datasetFactory {
 
 	//allows to activate submit button only if all input fields are not empty
     isSubmitButtonActive() {      
-        for (const [item, obj] of Object.entries(this.newDatasetFormInputs)) {            
+        for (const [item, obj] of Object.entries(this.newDatasetFormInputs)) {
             if (obj.value === "") {
                 return false;
             }

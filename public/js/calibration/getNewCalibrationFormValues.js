@@ -70,6 +70,7 @@ function submitNewCalibrationData(event) {
 
 	// Loop through all form data and prepare data object for POST request
 	for (const [key, value] of formData.entries()) {
+
 		
 		if (key === "sensorId") newCalibrationPostData[key] = _store.getSensorEIDs()[value];
 		//get ObjectId instead of sensor name
@@ -77,11 +78,11 @@ function submitNewCalibrationData(event) {
 		//get ObjectId instead of procedure name
 		else if (key === "calibrationExtended" || key === "adjustmentsMade")
 		//edge case: if form submission includes checkbox data, use calibration factory data instead
-		newCalibrationPostData[key] =_calfactory.newCalRecordFormInputs[key].checked;
+			newCalibrationPostData[key] =_calfactory.newCalRecordFormInputs[key].checked;
 		else
-		key == "calibrationRangePercent"
-			? (newCalibrationPostData[key] = Number(value))
-			: (newCalibrationPostData[key] = value);
+			key == "calibrationRangePercent"
+				? (newCalibrationPostData[key] = Number(value))
+				: (newCalibrationPostData[key] = value);
 	}
 
 	inputs.forEach((item) => item.removeEventListener("input", inputHandler));
