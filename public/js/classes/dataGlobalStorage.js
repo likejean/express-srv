@@ -45,6 +45,10 @@ class dataStorage {
         }, {});;
 	}
 
+	getActiveSensorCard(){
+		return this.activeSensorCard;
+	}
+
 	getSensorTypeList(){
         const types = this.sensors.data.payload.map(obj => obj["type"]);
 		return [...new Set(types)];

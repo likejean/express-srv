@@ -1,4 +1,4 @@
-function createSensorDatasetsChart(datasets) {
+function createSensorDatasetsChart(datasets, options) {
 
 	const sensorChartWrapper = document.getElementById('sensor-chart-wrapper');
 
@@ -7,7 +7,7 @@ function createSensorDatasetsChart(datasets) {
 	
 	new Chart(
 		ctx.getContext('2d'),
-		getSensorDatasetsChartConfig(generateSensorDatasetsChartData(datasets))
+		getSensorDatasetsChartConfig(generateSensorDatasetsChartData(datasets), options)
 	);
 
 

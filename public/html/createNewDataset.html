@@ -24,20 +24,28 @@
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"
         ></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
         <title>New Procedure Form</title>
     </head>
     <body>
         <div class="container">
             <div class="jumbotron pt-4">
-                <h1 class="new-sensor-form-title">New Chart</h1>
-                <h4>Please, use this form to create a new data chart</h4>
-                <p>This html page is intended for display sensor linearity and hysteresis performance.</p>
+                <h1 class="new-sensor-form-title">Hysteresis Chart</h1>
+                <h4>Please, use this form to create a hysteresis chart for sensor</h4>
+                <p>This page is intended to enter sensor output to display sensor linearity and hysteresis performance.</p>
             </div>
 
 			<div class="container">
-				<div class="row m-5">
+				<div class="row mt-5">
 					<div class="form-group col text-center">
 						<div class="badge bg-success"><span class="h3 text-uppercase" id="sensor-name"></span></div>
+					</div>
+					
+				</div>
+				<div class="row m-3">
+					<div class="form-group col text-center">
+						<span class="h5" id="sensor-capacity"></span>
 					</div>
 				</div>
 			</div>
@@ -212,14 +220,15 @@
 
 
                 <!--//////////////////////////////////////////////////////////////////////////////////////////////////////-->
-                <!-- Warning Modal: -->
+                <!-- MODALS: -->
+				<!--//////////////////////////////////////////////////////////////////////////////////////////////////////-->
                 <div
                     class="modal fade"
                     id="createNewChartModal"
                     data-bs-backdrop="static"
                     data-bs-keyboard="false"
                     tabindex="-1"
-                    aria-labelledby="createNewChartModalLabel"
+                    aria-labelledby="createNewChartModalLabel".
                     aria-hidden="true"
                 >
                     <div class="modal-dialog">
@@ -269,6 +278,10 @@
                 </div>
 
             </form>
+
+			<div id="preview-new-chart-wrapper" class="chart-container d-flex flex-column align-items-center">
+				<!-- here is where dynamically generated datasets charts are appended -->
+			</div>
             
         </div>
 
@@ -292,9 +305,10 @@
 
     <!--Get both containers for _chartfactory-->
     <script src="../js/collections/newChartDatasetFormContainer.js"></script>
-	<script src="../js/datasets/getNewChartFormValues.js"></script>
 	
-
+	
+	<script src="../js/datasets/getNewChartFormValues.js"></script>	
+	<script src="../js/datasets/utils/previewNewChart.js"></script>
 	<script src="../js/datasets/utils/generateCalibrationNameList.js"></script>
 
 	<script>

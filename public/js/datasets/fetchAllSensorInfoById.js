@@ -1,4 +1,5 @@
 const sensorName = document.getElementById("sensor-name");
+const sensorCapacity = document.getElementById("sensor-capacity");
 
 
 const _store = new dataStorage();   //store all information for active/selected sensor card
@@ -15,8 +16,10 @@ const fetchAllSensorInfoById = async () => {
     await axios
 		.get(`../api/sensors/${id}`)
 		.then((result) => {
+
 			_store.activeSensorCard = result.data.sensor;
 			sensorName.innerText = result.data.sensor.description + "\u00a0" + result.data.sensor.EID;
+			sensorCapacity.innerText = "Sensor Capacity Range:\u00a0" + result.data.sensor.capacityRange;
 
 			generateCalibrationNameList(_store.getSensorCalibrationNames());
 		})

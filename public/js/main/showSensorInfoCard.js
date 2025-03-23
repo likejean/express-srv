@@ -23,7 +23,6 @@ function showSensorInfoCard(
 	var associatedDatasets = _store.datasets.data.payload.filter(item => item.sensorId === sensorId);
 
 	
-
 	//construct .href value (url w/ query string containing sensor id) for "UPDATE" button
 	const fetchEditSensorButton = document.getElementById("fetch-patch-sensor-info");
 	fetchEditSensorButton.href = `./html/editSensor.html?id=${sensorId}`;
@@ -81,7 +80,16 @@ function showSensorInfoCard(
 		addTextNodeToHtmlElement("Measurement Quantity:" + "\u00a0" + quantity, htmlElementCollection.sensorMeasurementQuantityHtml);
 		addTextNodeToHtmlElement("Sensor Capacity Range:" + "\u00a0" + capacity, htmlElementCollection.sensorCapacityRangeHtml);
 
-		if(associatedDatasets.length > 0) createSensorDatasetsChart(associatedDatasets);
+		if(associatedDatasets.length > 0) {
+			//Obtains sensor information for chart options (labels and title)
+			//NOTE!!! This code might have to revised in the future if multiple charts with varying options must be displayed for a single sensor!!!!
+			var chartOptions = {
+				sensorUnits: associatedDatasets[0].units,
+				chartTitle: associatedDatasets[0].chartTitle
+			};
+
+			createSensorDatasetsChart(associatedDatasets, chartOptions);
+		}
 
 		associatedCalibrations.length === 0
 			? addHtmlChildElementToParent(htmlElementCollection.calRecordsNoticeHtml,

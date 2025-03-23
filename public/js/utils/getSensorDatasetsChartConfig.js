@@ -1,27 +1,28 @@
-function getSensorDatasetsChartConfig(data) {
+function getSensorDatasetsChartConfig(data, options) {
 	return {
 		type: 'line',
 		data,
 		options: {
+			responsive: true,
 			scales: {
 				x: {
 					type: 'linear',
 					title: {
 						display: true,
-						text: 'Calibrator Output, [in]'
+						text: `Calibrator Output, [${options.sensorUnits}]`
 					}
 				},
 				y: {
 					title: {
 						display: true,
-						text: 'Sensor Absolute Error, [in]'
+						text: `Abs. Error, [${options.sensorUnits}]`
 					}
 				}
 			},
 			plugins: {
 				title: {
 					display: true,
-					text: 'Sensor Linearity and Hysteresis Performance',
+					text: `${options.chartTitle}`,
 					color: 'blue',
 					padding: {
 						top: 10,
