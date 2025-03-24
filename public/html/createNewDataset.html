@@ -107,6 +107,8 @@
 								<label class="font-weight-bold" for="datasetSize">Dataset Size, N</label>
 								<input
 									name="datasetSize"
+									min="5"
+									max="20"
 									type="number"
 									class="form-control"
 									id="datasetSize"
@@ -345,7 +347,6 @@
                         <div class="form-group col text-center">
 							<button 
                                 id="get-chart-dataset-form-values"
-                                onclick=handleBtnClick()
                                 data-bs-toggle="modal"
                                 data-bs-target="#createNewChartModal"
                                 class="btn btn-primary">Submit</button>
@@ -382,8 +383,9 @@
     <script src="../js/collections/newChartDatasetFormContainer.js"></script>
 	
 	
-	
+	<script src="../js/datasets/utils/previewChartInitConfig.js"></script>
 	<script src="../js/datasets/utils/previewNewChart.js"></script>
+	<script src="../js/datasets/utils/updateChartLabelUnits.js"></script>
 	<script src="../js/datasets/utils/generateCalibrationNameList.js"></script>
 
 	<script src="../js/datasets/getNewChartFormValues.js"></script>	

@@ -22,6 +22,7 @@ const fetchAllSensorInfoById = async () => {
 			sensorCapacity.innerText = "Sensor Capacity Range:\u00a0" + result.data.sensor.capacityRange;
 
 			generateCalibrationNameList(_store.getSensorCalibrationNames());
+			newChartInit(_chartfactory.newDatasetFormInputs);
 		})
 		.catch((error) => {
 			//display error message if data fetch failure occurs or any other internal error detected

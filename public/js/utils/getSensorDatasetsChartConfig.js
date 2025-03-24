@@ -1,4 +1,5 @@
 function getSensorDatasetsChartConfig(data, options) {
+	
 	return {
 		type: 'line',
 		data,

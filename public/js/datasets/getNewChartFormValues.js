@@ -18,6 +18,16 @@ for (i = 0; i < inputs.length; i++) {
 	inputs[i].oninput = inputHandler;
 }
 
+inputs.forEach((element) => {
+	if (element.name === "datasetSize"){
+		element.addEventListener('keydown', function(event) {
+			if (event.key === '-') {
+				event.preventDefault();
+			}
+		}); 
+	}
+});
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //callback handler function for "ONINPUT" EventListener
@@ -28,42 +38,27 @@ function inputHandler(e) {
 
 	if(name === "datasetSize") e.target.value = Math.trunc(parseFloat(value));
 
-	console.log(_chartfactory.newDatasetFormInputs);
-
 	_chartfactory.newDatasetFormInputs[name].value = e.target.value;
 	newChartDatasetPostData[name] = value;
 	submitButton.disabled = !_chartfactory.isSubmitButtonActive();
+
+	//Updates preview chart x and y labels
+	if(name === "datasetUnits" || name === "chartXLabel" || name === "chartYLabel") {
+		updateChartLabelUnits(
+			_chartfactory.newDatasetFormInputs.chartXLabel.value, 
+			_chartfactory.newDatasetFormInputs.chartYLabel.value, 
+			_chartfactory.newDatasetFormInputs.datasetUnits.value);
+	}
+
+	//Upates preview chart title
+	if(name === "chartTitle") {
+		updateChartTitle(_chartfactory.newDatasetFormInputs.chartTitle.value);
+	}
 	
 }
 
 
-//Attach eventListener to New Password Form data Submission event
-form.addEventListener("submit", submitNewChartDatasetData);
-
-
-const formData = new FormData(form);
-
-
-for (const [key, value] of formData.entries()) {
-	newChartDatasetPostData[key] = value;
-	console.log(key, value)
-}
-
-console.log(newChartDatasetPostData)
-
-
-function handleBtnClick() {
-	console.log(newChartDatasetPostData)
-}
-
-//////////////////////////////////////////////////////////////////////////////////
-//callback function for ONSUBMIT EventListener
-function submitNewChartDatasetData(event) {
-	event.preventDefault(); // Prevent default form submission
-
-	console.log('kfjaldjflkdjj-----ppppppppppppppppppppp')
-
-	
+submitButton.onclick = function() {
 	const formData = new FormData(form);
 
 
@@ -72,7 +67,7 @@ function submitNewChartDatasetData(event) {
 		console.log(key, value)
 	}
 
-	
-
 	inputs.forEach((item) => item.removeEventListener("input", inputHandler));
 }
+
+

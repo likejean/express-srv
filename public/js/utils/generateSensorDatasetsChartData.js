@@ -21,7 +21,8 @@ function generateSensorDatasetsChartData(sensorErrorData) {
 			data: generateChartLine(sensorErrorData[i].calibratorDataset, sensorErrorData[i].errorUpperLimit)
 		});
 
-		//Generate Line Plot(s) for Sendor ABSOLUTE Error Outputs (could be more than one plot, for current, previous, ascending or decending order data)
+		//Generate Line Plot(s) for Sendor ABSOLUTE Error Outputs (could be more than one plot, for current, previous, 
+		//ascending or decending order data)
 		for (var j = 0; j < sensorErrorData[i].sensorDatasets.length; j++){
 			
 			datasets.push({
