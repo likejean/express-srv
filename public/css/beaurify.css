@@ -37,6 +37,13 @@ label {
 	padding: 65px 40px;
 }
 
+.control-form-chart-entries {
+	border-radius: 20px;
+	border: 1px solid #59c0fc;
+	box-shadow: 0px 0px 10px 10px #9fa2ee;
+	padding: 65px 40px;
+}
+
 .new-sensor-form-title,
 .user-login-form-title,
 .new-calibration-form-title,

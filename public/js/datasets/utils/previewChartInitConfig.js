@@ -1,13 +1,21 @@
 const config = {
 	type: 'line',
 	data: {
-		datasets: []
+		datasets: [{
+				label: '<blank2>',
+				data: [{x: 10, y: 20}],
+				borderColor: 'red',
+				borderWidth: 2,
+				fill: false
+			}
+		],
 	},
 	options: {
 		responsive: true,
 		maintainAspectRatio: false,
 		scales: {
 			x: {
+				type: 'linear',
 				title: {
 					display: true,
 					text: '<blank>'
