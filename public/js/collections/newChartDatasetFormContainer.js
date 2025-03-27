@@ -29,6 +29,18 @@ const newChartDatasetFormContainer = {
 		inputRule: ``,
 		regex:""
     },
+	calibratorOutput: { 
+        value: 0,
+		validator: () => {},
+		inputRule: ``,
+		regex:""
+    },
+	sensorError: { 
+        value: 0,
+		validator: () => {},
+		inputRule: ``,
+		regex:""
+    },
 	datasetUnits: { 
         value: "",
 		validator: () => {},

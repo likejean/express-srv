@@ -9,10 +9,22 @@ function updateChartTitle (title) {
 	previewChart.update();
 }
 
-function updateChartXRange (start, end, size) {
-	
-	
-	//previewChart.data.labels = range;
+function updateCurrentChartLine() {
+
+	previewChart.data.datasets[0].data.push({
+		x: _chartfactory.currentChartDatapointEntry.x,
+		y: _chartfactory.currentChartDatapointEntry.y
+	});
+
 	previewChart.update();
 
 }
+
+function updateCurrentDatasetLegend(legendText) {
+
+	previewChart.data.datasets[0].label = legendText;
+
+	previewChart.update();
+
+}
+

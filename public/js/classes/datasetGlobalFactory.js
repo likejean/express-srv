@@ -2,11 +2,17 @@
 class datasetFactory {
     constructor(
 			inputWrappers,
-            newDatasetFormInputs
+            newDatasetFormInputs,
+			currentChartDatapointEntry = {x: 0, y: 0}
         ){
 		this.inputWrappers = inputWrappers,
-        this.newDatasetFormInputs = newDatasetFormInputs
+        this.newDatasetFormInputs = newDatasetFormInputs,
+		this.currentChartDatapointEntry = currentChartDatapointEntry
     }
+
+	insertChartDatapoint(value, type) {
+		type === "calibratorOutput" ? this.currentChartDatapointEntry.x = value :  this.currentChartDatapointEntry.y = value;
+	}
 
 	//allows to activate submit button only if all input fields are not empty
     isSubmitButtonActive() {      

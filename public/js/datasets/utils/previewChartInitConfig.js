@@ -2,8 +2,8 @@ const config = {
 	type: 'line',
 	data: {
 		datasets: [{
-				label: '<blank2>',
-				data: [{x: 10, y: 20}],
+				label: '<blank1>',
+				data: [],
 				borderColor: 'red',
 				borderWidth: 2,
 				fill: false

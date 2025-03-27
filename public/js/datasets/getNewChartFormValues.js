@@ -38,8 +38,11 @@ function inputHandler(e) {
 
 	if(name === "datasetSize") e.target.value = Math.trunc(parseFloat(value));
 
+
 	_chartfactory.newDatasetFormInputs[name].value = e.target.value;
+	
 	newChartDatasetPostData[name] = value;
+
 	submitButton.disabled = !_chartfactory.isSubmitButtonActive();
 
 	//Updates preview chart x and y labels
@@ -50,14 +53,27 @@ function inputHandler(e) {
 			_chartfactory.newDatasetFormInputs.datasetUnits.value);
 	}
 
+
+	if(name === "calibratorOutput" || name === "sensorError") {
+		name === "calibratorOutput" ? 
+		_chartfactory.insertChartDatapoint(value, "calibratorOutput") 
+		: 
+		_chartfactory.insertChartDatapoint(value, "sensorError")
+	}
+
+	if(name === "seriesLabel") updateCurrentDatasetLegend(_chartfactory.newDatasetFormInputs.seriesLabel.value)
+
+
+
 	//Upates preview chart title
 	if(name === "chartTitle") {
 		updateChartTitle(_chartfactory.newDatasetFormInputs.chartTitle.value);
 	}
+
 	
 }
 
-
+//Function handler on button submission
 submitButton.onclick = function() {
 	const formData = new FormData(form);
 
@@ -70,4 +86,9 @@ submitButton.onclick = function() {
 	inputs.forEach((item) => item.removeEventListener("input", inputHandler));
 }
 
+
+function addNewDatapointToChart() {
+	updateCurrentChartLine();
+}
+ 
 

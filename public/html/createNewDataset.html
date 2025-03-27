@@ -191,14 +191,53 @@
 				</div>
 
 				<!--Input for Sensor Output Data-->
-
 				<div class="control-form-chart-entries form-group my-4 p-2">
                     <div class="container">
 						<div class="row">
-
+							<div class="col-lg-2 col-sm-6 mb-sm-4">
+								<label class="font-weight-bold" for="calibratorOutput">X-value</label>
+								<input
+									name="calibratorOutput"
+									type="number"
+									class="form-control"
+									id="calibratorOutput"
+									aria-describedby="calibratorOutput#Help"
+									placeholder="1"
+									required
+								/>
+								<small
+									id="calibratorOutput#Help"
+									class="form-text text-muted"
+								>
+									Calibrator Output
+								</small>
+							</div>
+							<div class="col-lg-2 col-sm-6 mb-sm-4">
+								<label class="font-weight-bold" for="sensorError">Y-value</label>
+								<input
+									name="sensorError"
+									type="number"
+									class="form-control"
+									id="sensorError"
+									aria-describedby="sensorError#Help"
+									placeholder="1"
+									required
+								/>
+								<small
+									id="sensorError#Help"
+									class="form-text text-muted"
+								>
+									Sensor Error
+								</small>
+							</div>
+							<div class="col-lg-2 col-sm-6 my-4">
+								<button type="button" class="btn btn-secondary" onclick=addNewDatapointToChart()>Add Datapoint</button>
+							</div>
+							
 						</div>
 					</div>
 				</div>
+
 
 				<!--Chart TITLE-->
 				<div class="control-form-field-box form-group my-4 p-2">
@@ -395,7 +434,9 @@
 	
 	<script src="../js/datasets/utils/previewChartInitConfig.js"></script>
 	<script src="../js/datasets/utils/previewNewChart.js"></script>
-	<script src="../js/datasets/utils/updateChartLabelUnits.js"></script>
+
+	
+	<script src="../js/datasets/utils/updateCurrentChart.js"></script>	
 	<script src="../js/datasets/utils/generateCalibrationNameList.js"></script>
 
 	<script src="../js/datasets/getNewChartFormValues.js"></script>	
