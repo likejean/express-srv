@@ -7,7 +7,8 @@ var newChartDatasetPostData = {}; //this object for storing POST request body
 
 
 //Preset New Calibration Form fields with initial values using GLOBAL DATASET FACTORY
-Object.entries(_chartfactory.newDatasetFormInputs).forEach(([key, obj]) => {	
+Object.entries(_chartfactory.newDatasetFormInputs).forEach(([key, obj]) => {
+	
 	form.elements[key].value = obj.value;
 	submitButton.disabled = !_chartfactory.isSubmitButtonActive();
 });
@@ -18,6 +19,8 @@ for (i = 0; i < inputs.length; i++) {
 	inputs[i].oninput = inputHandler;
 }
 
+
+//
 inputs.forEach((element) => {
 	if (element.name === "datasetSize"){
 		element.addEventListener('keydown', function(event) {
@@ -31,6 +34,8 @@ inputs.forEach((element) => {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //callback handler function for "ONINPUT" EventListener
+
+var lastValue = ""; 
 function inputHandler(e) {
 
 	let name = e.target.name;
@@ -38,11 +43,16 @@ function inputHandler(e) {
 
 	if(name === "datasetSize") e.target.value = Math.trunc(parseFloat(value));
 
-
-	_chartfactory.newDatasetFormInputs[name].value = e.target.value;
+	// Allow a user enter only valid positive or negative decimal numbers
+	if(name === "sensorError" || name === "calibratorOutput" || name === "datasetStartAt" || name === "datasetEndAt") {	
+		if (!value.match(_chartfactory.newDatasetFormInputs[name].regex) || value === null)
+			e.target.value = lastValue;
+		else
+			lastValue = value;
+	}
 	
+	_chartfactory.newDatasetFormInputs[name].value = e.target.value;	
 	newChartDatasetPostData[name] = value;
-
 	submitButton.disabled = !_chartfactory.isSubmitButtonActive();
 
 	//Updates preview chart x and y labels
