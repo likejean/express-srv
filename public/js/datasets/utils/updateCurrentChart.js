@@ -37,7 +37,6 @@ function updateCurrentDatasetLegend(legendText) {
 //This function updates legent text for the first series dataset
 function addErrorLimitChartLines(upperLimitDataset, lowerLimitDataset) {
 
-	
 	var upperErrorLimitLineFormats  = {
 		label: 'UPPER ERROR LIMIT',
 		data: upperLimitDataset,

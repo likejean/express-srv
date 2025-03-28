@@ -103,8 +103,7 @@ function addNewDatapointToChart() {
 
 function addErrorLimitLinesToChart() {
 	_chartfactory.buildErrorLimitChartLines();
-	addErrorLimitChartLines(_chartfactory.errorUpperLimitLineDataset, _chartfactory.errorLowerLimitLineDataset);	
-	_chartfactory.errorUpperLimitLineDataset = [];
+	addErrorLimitChartLines(_chartfactory.errorUpperLimitLineDataset, _chartfactory.errorLowerLimitLineDataset);
 	addChartErrorLimitsButton.disabled = true;
 }
 
@@ -112,26 +111,25 @@ function addErrorLimitLinesToChart() {
 submitButton.onclick = function() {
 
 	const formData = new FormData(form);
-
+	const keysToRemove = ["sensorError", "calibratorOutput", "datasetSize"];
+	
 	for (const [key, value] of formData.entries()) {
-		if (key === "calibrationId") newChartDatasetPostData[key] = _store.activeSensorCard.calibrations.filter(item => item.calibrationName === value)[0]._id;
 		
+		if (key === "calibrationId") newChartDatasetPostData[key] = _store.activeSensorCard.calibrations.filter(item => item.calibrationName === value)[0]._id;		
+		if (key === "datasetStartAt" || key === "datasetEndAt" || key === "errorPercentLimit") newChartDatasetPostData[key] = Number(value);
 		else newChartDatasetPostData[key] = value;
 	}
 
+	
 	//adds new key-pairs to POST request object
 	newChartDatasetPostData["sensorDescription"] = _store.activeSensorCard.description;
 	newChartDatasetPostData["sensorId"] = _store.activeSensorCard._id;
-	newChartDatasetPostData["sensorDatasets"] = _chartfactory.sensorErrorLineDataset;
-	
+	newChartDatasetPostData["sensorDatasets"] = _chartfactory.sensorErrorLineDataset;	
 	newChartDatasetPostData["errorUpperLimit"] = _chartfactory.errorUpperLimitLineDataset;
-
 	newChartDatasetPostData["errorLowerLimit"] = _chartfactory.errorLowerLimitLineDataset;
 
-	console.log(_chartfactory);
-
-	console.log(newChartDatasetPostData);
-
+	DeleteKeys(newChartDatasetPostData, keysToRemove);
+	
 	inputs.forEach((item) => item.removeEventListener("input", inputHandler));
 }
  
