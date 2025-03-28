@@ -60,8 +60,6 @@ function submitNewCalibrationData(event) {
 
 	const formData = new FormData(form);
 
-	
-
 	//NOTE!!!!!!Unable to obtain data from checkboxes inside form, so get the "checked" status directly from the calibration factory
 	newCalibrationPostData["calibrationExtended"] = _calfactory.newCalRecordFormInputs["calibrationExtended"].checked;
 	newCalibrationPostData["adjustmentsMade"] = _calfactory.newCalRecordFormInputs["adjustmentsMade"].checked;

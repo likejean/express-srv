@@ -46,6 +46,7 @@ function inputHandler(e) {
 	let name = e.target.name;
 	let value = name === "datasetSize" ? Number(e.target.value) : e.target.value;
 
+
 	// Allow a user to enter positive integers only
 	if(name === "datasetSize") e.target.value = Math.trunc(parseFloat(value));
 
@@ -86,6 +87,7 @@ function inputHandler(e) {
 		updateChartTitle(_chartfactory.newDatasetFormInputs.chartTitle.value);
 	}
 
+	
 
 	//Highlights the user input field border
 	if (_chartfactory.isFormInputFieldEmpty(name)) e.target.style.border = "3px solid red";
@@ -101,7 +103,7 @@ function addNewDatapointToChart() {
 
 function addErrorLimitLinesToChart() {
 	_chartfactory.buildErrorLimitChartLines();
-	addErrorLimitChartLines(_chartfactory.errorUpperLimitLineDataset, _chartfactory.errorLowerLimitLineDataset);
+	addErrorLimitChartLines(_chartfactory.errorUpperLimitLineDataset, _chartfactory.errorLowerLimitLineDataset);	
 	_chartfactory.errorUpperLimitLineDataset = [];
 	addChartErrorLimitsButton.disabled = true;
 }
@@ -112,9 +114,21 @@ submitButton.onclick = function() {
 	const formData = new FormData(form);
 
 	for (const [key, value] of formData.entries()) {
-		newChartDatasetPostData[key] = value;
-		console.log(key, value)
+		if (key === "calibrationId") newChartDatasetPostData[key] = _store.activeSensorCard.calibrations.filter(item => item.calibrationName === value)[0]._id;
+		
+		else newChartDatasetPostData[key] = value;
 	}
+
+	//adds new key-pairs to POST request object
+	newChartDatasetPostData["sensorDescription"] = _store.activeSensorCard.description;
+	newChartDatasetPostData["sensorId"] = _store.activeSensorCard._id;
+	newChartDatasetPostData["sensorDatasets"] = _chartfactory.sensorErrorLineDataset;
+	
+	newChartDatasetPostData["errorUpperLimit"] = _chartfactory.errorUpperLimitLineDataset;
+
+	newChartDatasetPostData["errorLowerLimit"] = _chartfactory.errorLowerLimitLineDataset;
+
+	console.log(_chartfactory);
 
 	console.log(newChartDatasetPostData);
 

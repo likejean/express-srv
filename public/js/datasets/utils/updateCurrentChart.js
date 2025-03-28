@@ -14,8 +14,8 @@ function updateChartTitle (title) {
 function updateCurrentChartLine() {
 	//updates a chart global factory
 	_chartfactory.buildSensorErrorOutputChartLine({
-		x: _chartfactory.currentChartDatapointEntry.x,
-		y: _chartfactory.currentChartDatapointEntry.y
+		x: Number(_chartfactory.currentChartDatapointEntry.x),
+		y: Number(_chartfactory.currentChartDatapointEntry.y)
 	});
 
 	//updates a preview chart
