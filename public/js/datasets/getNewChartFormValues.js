@@ -1,6 +1,7 @@
 //const form = document.getElementById("new-chart-dataset-form");
 const form = document.getElementById("new-chart-dataset-form");
 const submitButton = document.getElementById("get-chart-dataset-form-values");
+const addChartErrorLimitsButton = document.getElementById("add-chart-error-limits");
 
 
 var newChartDatasetPostData = {}; //this object for storing POST request body
@@ -10,6 +11,7 @@ var newChartDatasetPostData = {}; //this object for storing POST request body
 Object.entries(_chartfactory.newDatasetFormInputs).forEach(([key, obj]) => {
 	
 	form.elements[key].value = obj.value;
+	if (key === "errorPercentLimit") form.elements[key].value = obj.value.toFixed(2);
 	submitButton.disabled = !_chartfactory.isSubmitButtonActive();
 });
 
@@ -35,12 +37,16 @@ inputs.forEach((element) => {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //callback handler function for "ONINPUT" EventListener
 
-var lastValue = ""; 
+
+
 function inputHandler(e) {
+
+	var lastValue = ""; 
 
 	let name = e.target.name;
 	let value = name === "datasetSize" ? Number(e.target.value) : e.target.value;
 
+	// Allow a user to enter positive integers only
 	if(name === "datasetSize") e.target.value = Math.trunc(parseFloat(value));
 
 	// Allow a user enter only valid positive or negative decimal numbers
@@ -64,6 +70,7 @@ function inputHandler(e) {
 	}
 
 
+	//Updates a current datapoint entry for sensor output
 	if(name === "calibratorOutput" || name === "sensorError") {
 		name === "calibratorOutput" ? 
 		_chartfactory.insertChartDatapoint(value, "calibratorOutput") 
@@ -72,7 +79,6 @@ function inputHandler(e) {
 	}
 
 	if(name === "seriesLabel") updateCurrentDatasetLegend(_chartfactory.newDatasetFormInputs.seriesLabel.value)
-
 
 
 	//Upates preview chart title
@@ -102,19 +108,11 @@ function addNewDatapointToChart() {
 }
 
 function addErrorLimitLinesToChart() {
-	var upperErrorLimitLineFormats  = {
-		label: 'UPPER ERROR LIMIT',
-		data: [],
-		...chartFormats.UPPER_ERROR_LIMIT
-	}; 
 
-	var lowerErrorLimitLineFormats = {
-		label: 'LOWER ERROR LIMIT',
-		data: [],
-		...chartFormats.LOWER_ERROR_LIMIT
-	}
-	
-	console.log(chartFormats.LOWER_ERROR_LIMIT);
+	_chartfactory.buildErrorLimitChartLines();
+	addErrorLimitChartLines(_chartfactory.errorUpperLimitLineDataset, _chartfactory.errorLowerLimitLineDataset);
+	_chartfactory.errorUpperLimitLineDataset = [];
+	addChartErrorLimitsButton.disabled = true;
 }
  
 

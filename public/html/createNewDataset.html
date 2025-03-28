@@ -92,12 +92,12 @@
 									id="errorPercentLimit#Help"
 									class="form-text text-muted"
 								>
-									Please, set percent error limit (usually, Error Limit Criteria = 1.0%).
+									Please, set error limit percent and click "+" button to add error limits to a new chart.
 								</small>
 							</div>     
 							
 							<div class="col-1 my-4">
-								<button type="button" class="btn btn-secondary" onclick=addErrorLimitLinesToChart()><i class="fa fa-plus" aria-hidden="true"></i></button>								
+								<button type="button" id="add-chart-error-limits" class="btn btn-secondary" onclick=addErrorLimitLinesToChart()><i class="fa fa-plus"></i></button>								
 							</div>      
                         </div>
                     </div>
@@ -124,7 +124,7 @@
 									id="datasetSize#Help"
 									class="form-text text-muted"
 								>
-									Please, enter integer for dataset range size. Only integers AND positive numbers are not allowed.
+									Please, set a dataset range size here. Increase this number if a more datapoints must be added.
 								</small>
 							</div>
 	
