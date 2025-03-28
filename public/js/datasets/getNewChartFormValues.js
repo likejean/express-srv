@@ -8,9 +8,9 @@ var newChartDatasetPostData = {}; //this object for storing POST request body
 
 
 //Preset New Calibration Form fields with initial values using GLOBAL DATASET FACTORY
-Object.entries(_chartfactory.newDatasetFormInputs).forEach(([key, obj]) => {
-	
+Object.entries(_chartfactory.newDatasetFormInputs).forEach(([key, obj]) => {	
 	form.elements[key].value = obj.value;
+	//sets the error limit percent decimal to 2 significant figures
 	if (key === "errorPercentLimit") form.elements[key].value = obj.value.toFixed(2);
 	submitButton.disabled = !_chartfactory.isSubmitButtonActive();
 });
@@ -81,38 +81,44 @@ function inputHandler(e) {
 	if(name === "seriesLabel") updateCurrentDatasetLegend(_chartfactory.newDatasetFormInputs.seriesLabel.value)
 
 
-	//Upates preview chart title
+	//Upates the preview chart title
 	if(name === "chartTitle") {
 		updateChartTitle(_chartfactory.newDatasetFormInputs.chartTitle.value);
 	}
 
+
+	//Highlights the user input field border
+	if (_chartfactory.isFormInputFieldEmpty(name)) e.target.style.border = "3px solid red";
+    else e.target.style.border = "2px solid blue";
+
 	
 }
 
-//Function handler on button submission
-submitButton.onclick = function() {
-	const formData = new FormData(form);
 
+function addNewDatapointToChart() {
+	updateCurrentChartLine();	
+}
+
+function addErrorLimitLinesToChart() {
+	_chartfactory.buildErrorLimitChartLines();
+	addErrorLimitChartLines(_chartfactory.errorUpperLimitLineDataset, _chartfactory.errorLowerLimitLineDataset);
+	_chartfactory.errorUpperLimitLineDataset = [];
+	addChartErrorLimitsButton.disabled = true;
+}
+
+//////Function handler on button submission
+submitButton.onclick = function() {
+
+	const formData = new FormData(form);
 
 	for (const [key, value] of formData.entries()) {
 		newChartDatasetPostData[key] = value;
 		console.log(key, value)
 	}
 
+	console.log(newChartDatasetPostData);
+
 	inputs.forEach((item) => item.removeEventListener("input", inputHandler));
-}
-
-
-function addNewDatapointToChart() {
-	updateCurrentChartLine();
-}
-
-function addErrorLimitLinesToChart() {
-
-	_chartfactory.buildErrorLimitChartLines();
-	addErrorLimitChartLines(_chartfactory.errorUpperLimitLineDataset, _chartfactory.errorLowerLimitLineDataset);
-	_chartfactory.errorUpperLimitLineDataset = [];
-	addChartErrorLimitsButton.disabled = true;
 }
  
 

@@ -12,6 +12,13 @@ function updateChartTitle (title) {
 
 //This function updates the first series dataset for a sensor chart
 function updateCurrentChartLine() {
+	//updates a chart global factory
+	_chartfactory.buildSensorErrorOutputChartLine({
+		x: _chartfactory.currentChartDatapointEntry.x,
+		y: _chartfactory.currentChartDatapointEntry.y
+	});
+
+	//updates a preview chart
 	previewChart.data.datasets[0].data.push({
 		x: _chartfactory.currentChartDatapointEntry.x,
 		y: _chartfactory.currentChartDatapointEntry.y

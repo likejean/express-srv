@@ -36,10 +36,6 @@ const datasetSchema = mongoose.Schema(
 			required: false,
 			default: 'Calibrator Output'
 		},
-		calibratorDataset: {
-			type: [Number],
-			required: true
-		},
 		sensorDatasets: [{
 			seriesDescription: {
 				type: String, 
@@ -55,7 +51,18 @@ const datasetSchema = mongoose.Schema(
 				required: true,
 				default: 'None'
 			},
-			dataset: [Number]
+			dataset: [{
+				x: {
+					type: Number,
+					required: false,
+					default: 0
+				},
+				y: {
+					type: Number,
+					required: false,
+					default: 0
+				}
+			}]
 		}],	
 		errorPercentLimit: {
 			type: Number,
@@ -63,11 +70,33 @@ const datasetSchema = mongoose.Schema(
 			default: 1
 		},
 		errorUpperLimit: {
-			type: [Number],
+			type: [{
+				x: {
+					type: Number,
+					required: false,
+					default: 0
+				},
+				y: {
+					type: Number,
+					required: false,
+					default: 0
+				}
+			}],
 			required: true
 		},
 		errorLowerLimit: {
-			type: [Number],
+			type: [{
+				x: {
+					type: Number,
+					required: false,
+					default: 0
+				},
+				y: {
+					type: Number,
+					required: false,
+					default: 0
+				}
+			}],
 			required: true
 		}
     }
