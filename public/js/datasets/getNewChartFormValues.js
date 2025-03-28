@@ -50,7 +50,7 @@ function inputHandler(e) {
 		else
 			lastValue = value;
 	}
-	
+
 	_chartfactory.newDatasetFormInputs[name].value = e.target.value;	
 	newChartDatasetPostData[name] = value;
 	submitButton.disabled = !_chartfactory.isSubmitButtonActive();
@@ -99,6 +99,22 @@ submitButton.onclick = function() {
 
 function addNewDatapointToChart() {
 	updateCurrentChartLine();
+}
+
+function addErrorLimitLinesToChart() {
+	var upperErrorLimitLineFormats  = {
+		label: 'UPPER ERROR LIMIT',
+		data: [],
+		...chartFormats.UPPER_ERROR_LIMIT
+	}; 
+
+	var lowerErrorLimitLineFormats = {
+		label: 'LOWER ERROR LIMIT',
+		data: [],
+		...chartFormats.LOWER_ERROR_LIMIT
+	}
+	
+	console.log(chartFormats.LOWER_ERROR_LIMIT);
 }
  
 
