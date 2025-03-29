@@ -2,6 +2,9 @@
 const form = document.getElementById("new-chart-dataset-form");
 const submitButton = document.getElementById("get-chart-dataset-form-values");
 const addChartErrorLimitsButton = document.getElementById("add-chart-error-limits");
+const chartFormModalHeaderText = document.querySelector(".new-chart-record-modal-header");
+
+
 
 
 var newChartDatasetPostData = {}; //this object for storing POST request body
@@ -116,6 +119,7 @@ submitButton.onclick = function() {
 		else newChartDatasetPostData[key] = value;
 	}
 
+	chartFormModalHeaderText.innerText = "Sensor\u00a0" + _store.activeSensorCard.EID;
 	
 	//adds new key-pairs to POST request object
 	newChartDatasetPostData["sensorDescription"] = _store.activeSensorCard.description;
