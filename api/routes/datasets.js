@@ -82,15 +82,16 @@ router.post('/', (req, res, next) => {
 		chartTitle,
 		chartYLabel,
 		chartXLabel,
-		calibratorDataset,
 		calibrationId,
 		seriesLabel,
-		dataset,
+		sensorDatasets,
 		seriesDescription,	
 		errorPercentLimit,
 		errorUpperLimit,
 		errorLowerLimit      
 	} = req.body;
+
+	console.log(req.body);
    
 
 	const calibrationDataset = new Dataset({
@@ -101,12 +102,11 @@ router.post('/', (req, res, next) => {
 		chartTitle,
 		chartYLabel: chartYLabel + `, ${datasetUnits}`,
 		chartXLabel: chartXLabel + `, ${datasetUnits}`,
-		calibratorDataset,
 		sensorDatasets: [{
 			seriesDescription,
 			calibrationId,
 			seriesLabel,
-			dataset
+			dataset: sensorDatasets
 		}],
 		errorPercentLimit,
 		errorUpperLimit,

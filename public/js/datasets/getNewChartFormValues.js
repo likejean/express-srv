@@ -119,11 +119,13 @@ submitButton.onclick = function() {
 		else newChartDatasetPostData[key] = value;
 	}
 
-	chartFormModalHeaderText.innerText = "Sensor\u00a0" + _store.activeSensorCard.EID;
+	chartFormModalHeaderText.innerText = "Sensor\u00a0" + _store.activeSensorCard.description + "\u00a0" + _store.activeSensorCard.EID;
 	
 	//adds new key-pairs to POST request object
 	newChartDatasetPostData["sensorDescription"] = _store.activeSensorCard.description;
 	newChartDatasetPostData["sensorId"] = _store.activeSensorCard._id;
+
+	
 	newChartDatasetPostData["sensorDatasets"] = _chartfactory.sensorErrorLineDataset;	
 	newChartDatasetPostData["errorUpperLimit"] = _chartfactory.errorUpperLimitLineDataset;
 	newChartDatasetPostData["errorLowerLimit"] = _chartfactory.errorLowerLimitLineDataset;
