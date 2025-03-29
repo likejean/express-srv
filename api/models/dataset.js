@@ -16,7 +16,7 @@ const datasetSchema = mongoose.Schema(
 			required: false,
 			default: 'Extensometer'
 		},
-		units: { 
+		datasetUnits: { 
 			type: String, 
 			required: true,
 			enum: calibrationUnits

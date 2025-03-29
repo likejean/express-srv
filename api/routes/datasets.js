@@ -78,7 +78,7 @@ router.post('/', (req, res, next) => {
 	const {        
 		sensorId, 
 		sensorDescription,
-		units,
+		datasetUnits,
 		chartTitle,
 		chartYLabel,
 		chartXLabel,
@@ -97,10 +97,10 @@ router.post('/', (req, res, next) => {
 		_id,   
 		sensorId, 
 		sensorDescription,
-		units,
+		datasetUnits,
 		chartTitle,
-		chartYLabel: chartYLabel + `, ${units}`,
-		chartXLabel: chartXLabel + `, ${units}`,
+		chartYLabel: chartYLabel + `, ${datasetUnits}`,
+		chartXLabel: chartXLabel + `, ${datasetUnits}`,
 		calibratorDataset,
 		sensorDatasets: [{
 			seriesDescription,

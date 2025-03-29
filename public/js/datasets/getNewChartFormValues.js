@@ -87,13 +87,9 @@ function inputHandler(e) {
 		updateChartTitle(_chartfactory.newDatasetFormInputs.chartTitle.value);
 	}
 
-	
-
 	//Highlights the user input field border
 	if (_chartfactory.isFormInputFieldEmpty(name)) e.target.style.border = "3px solid red";
     else e.target.style.border = "2px solid blue";
-
-	
 }
 
 
