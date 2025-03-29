@@ -112,10 +112,14 @@ submitButton.onclick = function() {
 	const formData = new FormData(form);
 	const keysToRemove = ["sensorError", "calibratorOutput", "datasetSize"];
 	
+	
 	for (const [key, value] of formData.entries()) {
 		
-		if (key === "calibrationId") newChartDatasetPostData[key] = _store.activeSensorCard.calibrations.filter(item => item.calibrationName === value)[0]._id;		
-		if (key === "datasetStartAt" || key === "datasetEndAt" || key === "errorPercentLimit") newChartDatasetPostData[key] = Number(value);
+		if (key === "calibrationId") {
+			newChartDatasetPostData[key] = _store.activeSensorCard.calibrations.filter(item => item.calibrationName === value)[0]._id;
+			
+		}
+		else if (key === "datasetStartAt" || key === "datasetEndAt" || key === "errorPercentLimit") newChartDatasetPostData[key] = Number(value);
 		else newChartDatasetPostData[key] = value;
 	}
 
@@ -131,8 +135,10 @@ submitButton.onclick = function() {
 	newChartDatasetPostData["errorLowerLimit"] = _chartfactory.errorLowerLimitLineDataset;
 
 	DeleteKeys(newChartDatasetPostData, keysToRemove);
+
+	console.log(newChartDatasetPostData)
 	
 	inputs.forEach((item) => item.removeEventListener("input", inputHandler));
 }
- 
+
 

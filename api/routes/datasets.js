@@ -20,7 +20,10 @@ router.get('/', (req, res, next) => {
 				type: 'GET',
 				url: req.originalUrl,
 				status: "SUCCESS"
-			}});
+			}
+		});
+
+		console.log(docs);
 
 		// Client Side Response 
 		res.status(200).json({
@@ -31,11 +34,10 @@ router.get('/', (req, res, next) => {
 					_id: doc._id,
 					sensorId: doc.sensorId,
 					sensorDescription: doc.sensorDescription,
-					units: doc.units,
+					datasetUnits: doc.datasetUnits,
 					chartTitle: doc.chartTitle,
 					chartYLabel: doc.chartYLabel,
 					chartXLabel:  doc.chartXLabel,
-					calibratorDataset: doc.calibratorDataset.map(item => item),
 					sensorDatasets: doc.sensorDatasets.map(set => {
 						return {
 							seriesDescription: set.seriesDescription,
@@ -91,17 +93,14 @@ router.post('/', (req, res, next) => {
 		errorLowerLimit      
 	} = req.body;
 
-	console.log(req.body);
-   
-
 	const calibrationDataset = new Dataset({
 		_id,   
 		sensorId, 
 		sensorDescription,
 		datasetUnits,
 		chartTitle,
-		chartYLabel: chartYLabel + `, ${datasetUnits}`,
-		chartXLabel: chartXLabel + `, ${datasetUnits}`,
+		chartYLabel: chartYLabel + `, [${datasetUnits}]`,
+		chartXLabel: chartXLabel + `, [${datasetUnits}]`,
 		sensorDatasets: [{
 			seriesDescription,
 			calibrationId,
