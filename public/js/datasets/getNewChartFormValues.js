@@ -1,8 +1,18 @@
 //const form = document.getElementById("new-chart-dataset-form");
 const form = document.getElementById("new-chart-dataset-form");
 const submitButton = document.getElementById("get-chart-dataset-form-values");
+const iconErrorLimits = document.getElementById("add-error-limits");
+const iconErrorDatapoint = document.getElementById("add-error-datapoint");
+
+const inputErrorLimits = document.getElementById("errorPercentLimit");
+const inputCalibratorOutput = document.getElementById("calibratorOutput");
+const inputSensorError = document.getElementById("sensorError");
+
 const addChartErrorLimitsButton = document.getElementById("add-chart-error-limits");
+const addChartDatapointButton = document.getElementById("add-chart-datapoint");
+
 const chartFormModalHeaderText = document.querySelector(".new-chart-record-modal-header");
+const currentSensorDatasetSize = document.getElementById("current-sensor-error-dataset-size");
 
 
 
@@ -16,6 +26,7 @@ Object.entries(_chartfactory.newDatasetFormInputs).forEach(([key, obj]) => {
 	//sets the error limit percent decimal to 2 significant figures
 	if (key === "errorPercentLimit") form.elements[key].value = obj.value.toFixed(2);
 	submitButton.disabled = !_chartfactory.isSubmitButtonActive();
+	currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
 });
 
 //Attach eventListener callbacks to all New Chart Dataset Form Inputs to guide input entry events
@@ -43,7 +54,6 @@ inputs.forEach((element) => {
 
 
 function inputHandler(e) {
-
 	var lastValue = ""; 
 
 	let name = e.target.name;
@@ -51,7 +61,14 @@ function inputHandler(e) {
 
 
 	// Allow a user to enter positive integers only
-	if(name === "datasetSize") e.target.value = Math.trunc(parseFloat(value));
+	if(name === "datasetSize") {
+		e.target.value = Math.trunc(parseFloat(value));
+		if (inputCalibratorOutput.disabled)  inputCalibratorOutput.disabled = false;
+		if (inputSensorError.disabled)  inputSensorError.disabled = false;		
+		["fa-solid", "fa-check", "fa-3x"].forEach(classItem => iconErrorDatapoint.classList.remove(classItem));
+		iconErrorDatapoint.classList.add('fa-plus');
+		currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
+	}
 
 	// Allow a user enter only valid positive or negative decimal numbers
 	if(name === "sensorError" || name === "calibratorOutput" || name === "datasetStartAt" || name === "datasetEndAt") {	
@@ -64,6 +81,7 @@ function inputHandler(e) {
 	_chartfactory.newDatasetFormInputs[name].value = e.target.value;	
 	newChartDatasetPostData[name] = value;
 	submitButton.disabled = !_chartfactory.isSubmitButtonActive();
+	
 
 	//Updates preview chart x and y labels
 	if(name === "datasetUnits" || name === "chartXLabel" || name === "chartYLabel") {
@@ -96,14 +114,31 @@ function inputHandler(e) {
 }
 
 
+//Adds a new datapoint to chart
 function addNewDatapointToChart() {
-	updateCurrentChartLine();	
+	updateCurrentChartLine();
+	if(Number(_chartfactory.newDatasetFormInputs.datasetSize.value) === _chartfactory.getSensorErrorLineDatasetCurrentLength()){
+		currentSensorDatasetSize.innerText = 'FULL';
+		inputCalibratorOutput.disabled = true;
+		inputSensorError.disabled = true;
+		addChartDatapointButton.style.backgroundColor = "green";
+		iconErrorDatapoint.classList.remove('fa-plus');
+		["fa-solid", "fa-check", "fa-3x"].forEach(classItem => iconErrorDatapoint.classList.add(classItem));
+		iconErrorDatapoint.style.color = 'white';
+	}
+	else currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();	
 }
 
+//generates plots for upper and lower error limits based upon error limit percentage input
 function addErrorLimitLinesToChart() {
 	_chartfactory.buildErrorLimitChartLines();
 	addErrorLimitChartLines(_chartfactory.errorUpperLimitLineDataset, _chartfactory.errorLowerLimitLineDataset);
 	addChartErrorLimitsButton.disabled = true;
+	inputErrorLimits.disabled = true;
+	addChartErrorLimitsButton.style.backgroundColor = "green";
+	iconErrorLimits.classList.remove('fa-plus');
+	["fa-solid", "fa-check", "fa-3x"].forEach(classItem => iconErrorLimits.classList.add(classItem));
+	iconErrorLimits.style.color = 'white';
 }
 
 //////Function handler on button submission

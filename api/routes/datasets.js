@@ -23,8 +23,6 @@ router.get('/', (req, res, next) => {
 			}
 		});
 
-		console.log(docs);
-
 		// Client Side Response 
 		res.status(200).json({
 			message: docs.length === 0 ? `MongoDB collection is EMPTY` : `Successfully fetched ${docs.length} sensor datasets`,
@@ -223,5 +221,63 @@ router.patch("/pull/:datasetId", (req, res, next) => {
 			});
 		});
 	});
+
+	/////////////COMPLETED and TESTED////////////////////////////////
+	/////////////COMPLETED and TESTED////////////////////////////////
+	///DELETE API endpoint: deletes chart dataset document by ID
+	/////////////COMPLETED and TESTED////////////////////////////////
+	/////////////COMPLETED and TESTED////////////////////////////////
+	
+	router.delete('/:datasetId', (req, res, next) => {
+		const id = req.params.datasetId;
+		Dataset.deleteOne({_id: id})
+			.exec()
+			.then(doc => {
+				//SUCCESS:
+				console.log({
+					request: {
+					type: "DELETE",
+					url: req.originalUrl,
+					status: "SUCCESS",
+					},
+				});
+				if(doc.deletedCount === 1){
+					res.status(200).json({
+						message: `SUCCESS! Chart dataset for sensor ${req.body.sensorDescription}: ${req.body.sensorEID} was deleted from database`,
+						deletedDataset: {
+							id,
+							sensorDescription: `${req.body.sensorDescription}: ${req.body.sensorEID}`
+						}, 
+						deletedCount: doc.deletedCount,                   
+						request: {
+							type: 'DELETE',
+							url: req.originalUrl                    
+						}    
+					});        
+				}else{
+					res.status(400).json({
+						error: `Error: (Hint: chart dataset id ${id} was valid, but seems like not found in the database.`,
+						request: {
+							type: 'DELETE',
+							url: req.originalUrl                    
+						}    
+					})
+				}
+	
+			}).catch((error)=>{ 
+				res.status(400).json({
+					err,
+					message: `Failed to delete chart dataset with id: ${id}. (Hint: the document id format is INVALID; thus, not found in the database...)`, 
+					isIdValid: mongoose.Types.ObjectId.isValid(id),
+					serverError: error.message,
+					request: {
+					type: "DELETE",
+					url: req.originalUrl,
+					},
+				});
+			});
+		});
+	
+
 
 module.exports = router;

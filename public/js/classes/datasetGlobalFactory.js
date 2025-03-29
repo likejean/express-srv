@@ -16,6 +16,11 @@ class datasetFactory {
 		this.errorLowerLimitLineDataset = errorLowerLimitLineDataset
     }
 
+	//obtains a current size of the sensorErrorLineDataset array
+	getSensorErrorLineDatasetCurrentLength () {
+		return this.sensorErrorLineDataset.length;
+	}
+
     //updates a current datapoint object for global factory
 	insertChartDatapoint(value, type) {
 		type === "calibratorOutput" ? this.currentChartDatapointEntry.x = value :  this.currentChartDatapointEntry.y = value;

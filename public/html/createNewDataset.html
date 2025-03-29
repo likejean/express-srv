@@ -97,7 +97,13 @@
 							</div>     
 							
 							<div class="col-1 my-4">
-								<button type="button" id="add-chart-error-limits" class="btn btn-secondary" onclick=addErrorLimitLinesToChart()><i class="fa fa-plus"></i></button>								
+								<button 
+									type="button" 
+									id="add-chart-error-limits" 
+									class="btn btn-secondary" 
+									onclick=addErrorLimitLinesToChart()
+								>
+									<i id="add-error-limits" class="fa fa-plus"></i></button>								
 							</div>      
                         </div>
                     </div>
@@ -234,8 +240,18 @@
 									Sensor Error
 								</small>
 							</div>
-							<div class="col-lg-2 col-sm-6 my-4">
-								<button type="button" class="btn btn-secondary" onclick=addNewDatapointToChart()><i class="fa fa-plus" aria-hidden="true"></i></button>
+							<div class="col-lg-1 col-sm-3 my-4">
+								<button 
+									id="add-chart-datapoint"
+									type="button" 
+									class="btn btn-secondary" 
+									onclick=addNewDatapointToChart()
+								>
+									<i id="add-error-datapoint" class="fa fa-plus" aria-hidden="true"></i>
+								</button>
+							</div>
+							<div class="col-lg-1 col-sm-3 my-4">
+								<span id="current-sensor-error-dataset-size" style="font-size: 25px;"></span>
 							</div>
 							<div class="col-lg-6 col-sm-12 mb-sm-4">
 								<label for="seriesLabel">Series Label</label>

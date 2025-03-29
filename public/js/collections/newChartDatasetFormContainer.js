@@ -12,7 +12,7 @@ const newChartDatasetFormContainer = {
 		regex:""
     },
     datasetSize: { 
-        value: 16,
+        value: 6,
 		validator: number => number <= 20 && number > 0,
 		inputRule: `dataset range should be at least 5 datapoints and no more than 20 datapoints`,
 		regex:""

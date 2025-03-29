@@ -30,7 +30,7 @@ const calibrationFrequencies = [
 const calibrationUnits = [
 	'in',
 	'microstrain',
-	'kips',
+	'kip',
 	'lbf',
 	'Volts',
 	'degrees',
