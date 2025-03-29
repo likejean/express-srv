@@ -1,5 +1,5 @@
 function getSensorDatasetsChartConfig(data, options) {
-	
+
 	return {
 		type: 'line',
 		data,
@@ -10,13 +10,13 @@ function getSensorDatasetsChartConfig(data, options) {
 					type: 'linear',
 					title: {
 						display: true,
-						text: `Calibrator Output, [${options.sensorUnits}]`
+						text: options.chartXLabel
 					}
 				},
 				y: {
 					title: {
 						display: true,
-						text: `Abs. Error, [${options.sensorUnits}]`
+						text: options.chartYLabel
 					}
 				}
 			},
