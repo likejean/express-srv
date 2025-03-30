@@ -6,6 +6,7 @@ class dataStorage {
             calibrations,
 			datasets,
 			activeSensorCard,
+			activeDatasetChart,
 			selectedTableRowProcedureId,
 			selectedTableRowUserId,
 			certificateInfoIcon,
@@ -17,6 +18,7 @@ class dataStorage {
             this.calibrations = calibrations,
 			this.datasets = datasets,
 			this.activeSensorCard = activeSensorCard,
+			this.activeDatasetChart = activeDatasetChart,
 			this.selectedTableRowProcedureId = selectedTableRowProcedureId,
 			this.selectedTableRowUserId = selectedTableRowUserId,
 			this.certificateInfoIcon = certificateInfoIcon

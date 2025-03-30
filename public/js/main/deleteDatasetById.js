@@ -1,16 +1,15 @@
-// function openDatasetWarningModal () {
-//     const modalTitle = document.querySelector('.delete-calibration-record-name');
-//     modalTitle.innerText = _calfactory.calibrationName;
-// }
+function openDatasetWarningModal () {
+    const modalTitle = document.querySelector('.delete-dataset-record-name');
+    modalTitle.innerText = `${_store.activeSensorCard.description}: ${_store.activeSensorCard.EID}`;
+}
 
-
-function deleteDatasetRecord(id) {
+function deleteDatasetRecord() {
+	const id = _store.activeDatasetChart._id;
     const data = {
         sensorEID: _store.activeSensorCard.EID,
         sensorDescription:  _store.activeSensorCard.description
     };
-
-	console.log(data, _store)
+	modal.hide();
     
     axios
         .delete(`../api/datasets/${id}`, { data })

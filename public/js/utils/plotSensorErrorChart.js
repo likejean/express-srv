@@ -1,7 +1,7 @@
 function createSensorDatasetsChart(datasets) {
 
 	//returns a html element object: <div/> wrapper for charts
-	const sensorChartWrapper = document.getElementById('sensor-chart-wrapper');
+	const sensorChartWrapper = document.getElementById('sensor-chart-wrapper');	
 	let i = 1;
 
 	//datasets is an array that could contain one or more datasets (charts) for a sensor
@@ -11,26 +11,28 @@ function createSensorDatasetsChart(datasets) {
 		//Canvas Initialization: prepare a default javascript canvas per each chart
 		const ctx = document.createElement('canvas');		
 
-		//create and customzie div wrapper for user buttons: delete, edit
-		const div = document.createElement('div');
-		div.classList.add("modal-footer");
+		//create and customzie div wrappers for user buttons: delete, edit, notifications
+		const btnDiv = document.createElement('div');
+		const noteDiv = document.createElement('div');
+		btnDiv.classList.add("modal-footer");
+		noteDiv.classList.add("container", "text-center");
 
 		//create a button to delete entire chart/dataset
 		const deleteChartButton = document.createElement('button');
 		deleteChartButton.innerText = "Delete";
 		deleteChartButton.classList.add("admin-classified", "btn", "btn-danger", "btn-sm", "m-1");
-		deleteChartButton.setAttribute('data-bs-toggle', 'modal');
-		deleteChartButton.setAttribute('data-bs-target', `#chart-1`);
-		deleteChartButton.id = `chart-${i}`;	
-
+		deleteChartButton.addEventListener("click", handleClick);
+		deleteChartButton.id = `${chart._id}`;	
 
 		
-		//attach the onclick event to execute axios delete by ID resquest when the button is clicked		
-		deleteChartButton.onclick = function() {
-			deleteDatasetRecord(chart._id);
-		};
-
-
+		function handleClick(e) {
+			// Code to execute when the button is clicked			
+			_store.activeDatasetChart = chart;
+			openDatasetWarningModal();
+			modal.show();
+		}
+		
+	
 		//create a button to delete entire chart/dataset
 		const editChartButton = document.createElement('a');
 		editChartButton.setAttribute('href', `./html/editChart.html?id=${chart._id}`);
@@ -62,12 +64,14 @@ function createSensorDatasetsChart(datasets) {
 
 		//append chart-customized canvas and buttons to html document
 		appendChildElementToParent(sensorChartWrapper, ctx);		
-		appendChildElementToParent(div, editChartButton);
-		appendChildElementToParent(div, deleteChartButton);
-		appendChildElementToParent(sensorChartWrapper, div);
+		appendChildElementToParent(btnDiv, editChartButton);
+		appendChildElementToParent(btnDiv, deleteChartButton);
+		appendChildElementToParent(sensorChartWrapper, btnDiv);
 
 		i++;
 	}
+
+	
 
 	
 }

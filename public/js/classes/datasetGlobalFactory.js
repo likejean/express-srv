@@ -7,6 +7,7 @@ class datasetFactory {
             sensorErrorLineDataset = [],
 			errorUpperLimitLineDataset = [],
 			errorLowerLimitLineDataset = [],
+			
         ){
 		this.inputWrappers = inputWrappers,
         this.newDatasetFormInputs = newDatasetFormInputs,
@@ -14,6 +15,7 @@ class datasetFactory {
         this.sensorErrorLineDataset = sensorErrorLineDataset,
 		this.errorUpperLimitLineDataset = errorUpperLimitLineDataset,
 		this.errorLowerLimitLineDataset = errorLowerLimitLineDataset
+		
     }
 
 	//obtains a current size of the sensorErrorLineDataset array
