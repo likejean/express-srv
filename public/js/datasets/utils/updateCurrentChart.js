@@ -29,6 +29,8 @@ function updateCurrentChartLine() {
 
 //This function updates legent text for the first series dataset
 function updateCurrentDatasetLegend(legendText) {
+
+	console.log(legendText);
 	previewChart.data.datasets[0].label = legendText;
 	previewChart.update();
 

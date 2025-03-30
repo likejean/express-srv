@@ -27,6 +27,9 @@ Object.entries(_chartfactory.newDatasetFormInputs).forEach(([key, obj]) => {
 	if (key === "errorPercentLimit") form.elements[key].value = obj.value.toFixed(2);
 	submitButton.disabled = !_chartfactory.isSubmitButtonActive();
 	currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
+	if (key === "calibratorOutput" && (obj.value === null || obj.value === "") 
+		|| key === "sensorError" && (obj.value === null || obj.value === "")) 
+	addChartDatapointButton.disabled = true;
 });
 
 //Attach eventListener callbacks to all New Chart Dataset Form Inputs to guide input entry events
@@ -50,8 +53,6 @@ inputs.forEach((element) => {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //callback handler function for "ONINPUT" EventListener
-
-
 
 function inputHandler(e) {
 	var lastValue = ""; 
@@ -100,7 +101,14 @@ function inputHandler(e) {
 		_chartfactory.insertChartDatapoint(value, "sensorError")
 	}
 
-	if(name === "seriesLabel") updateCurrentDatasetLegend(_chartfactory.newDatasetFormInputs.seriesLabel.value)
+	//Updates chart series label 
+	if(name === "seriesLabel") updateCurrentDatasetLegend(_chartfactory.newDatasetFormInputs.seriesLabel.value);
+
+	//Check if both calibratorOutput and sensorError are non-zero numbers: if it's true, enables add button for sensor datapoint
+	if (name === "calibratorOutput" && isNonZeroNumber(Number(value)) && isNonZeroNumber(Number(_chartfactory.newDatasetFormInputs.sensorError.value))
+		|| name === "sensorError" && isNonZeroNumber(Number(value)) && isNonZeroNumber(Number(_chartfactory.newDatasetFormInputs.calibratorOutput.value)))
+		addChartDatapointButton.disabled = false;	
+	else addChartDatapointButton.disabled = true;
 
 
 	//Upates the preview chart title
@@ -170,10 +178,15 @@ submitButton.onclick = function() {
 	newChartDatasetPostData["errorLowerLimit"] = _chartfactory.errorLowerLimitLineDataset;
 
 	DeleteKeys(newChartDatasetPostData, keysToRemove);
-
-	console.log(newChartDatasetPostData)
-	
 	inputs.forEach((item) => item.removeEventListener("input", inputHandler));
+}
+
+
+function isNonZeroNumber(input) {
+	if (typeof input !== 'number') {
+		return false;
+	}
+	return input !== 0 && !isNaN(input) && isFinite(input);
 }
 
 
