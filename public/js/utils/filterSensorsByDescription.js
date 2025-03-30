@@ -39,6 +39,7 @@ function filterSensorsByDescription() {
 			removeAllChildNodes(htmlElementCollection.sensorCapacityRangeHtml);
 			removeAllChildNodes(htmlElementCollection.calRecordsNoticeHtml);
 			removeAllChildNodes(htmlElementCollection.certificateListHtmL);
+			removeAllChildNodes(htmlElementCollection.sensorChartHtml);
 		}
 	}
 
@@ -66,6 +67,7 @@ function filterSensorsByDescription() {
 					removeAllChildNodes(htmlElementCollection.sensorCapacityRangeHtml);
 					removeAllChildNodes(htmlElementCollection.calRecordsNoticeHtml);
 					removeAllChildNodes(htmlElementCollection.certificateListHtmL);
+					removeAllChildNodes(htmlElementCollection.sensorChartHtml);
 				}
 			}
 			
@@ -98,6 +100,7 @@ function filterSensorsByDescription() {
 					removeAllChildNodes(htmlElementCollection.sensorCapacityRangeHtml);
 					removeAllChildNodes(htmlElementCollection.calRecordsNoticeHtml);
 					removeAllChildNodes(htmlElementCollection.certificateListHtmL);
+					removeAllChildNodes(htmlElementCollection.sensorChartHtml);
 				}
 			}
 
@@ -136,6 +139,7 @@ function filterSensorsByDescription() {
 					removeAllChildNodes(htmlElementCollection.sensorCapacityRangeHtml);
 					removeAllChildNodes(htmlElementCollection.calRecordsNoticeHtml);
 					removeAllChildNodes(htmlElementCollection.certificateListHtmL);
+					removeAllChildNodes(htmlElementCollection.sensorChartHtml);
 				}
 			}
 			

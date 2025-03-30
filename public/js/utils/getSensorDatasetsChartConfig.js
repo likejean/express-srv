@@ -1,3 +1,5 @@
+//chart data and options is processed and structured into a format suitable for rendering.
+
 function getSensorDatasetsChartConfig(data, options) {
 
 	return {
