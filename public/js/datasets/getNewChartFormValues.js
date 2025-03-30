@@ -69,6 +69,7 @@ function inputHandler(e) {
 		["fa-solid", "fa-check", "fa-3x"].forEach(classItem => iconErrorDatapoint.classList.remove(classItem));
 		iconErrorDatapoint.classList.add('fa-plus');
 		currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
+		
 	}
 
 	// Allow a user enter only valid positive or negative decimal numbers
@@ -105,8 +106,8 @@ function inputHandler(e) {
 	if(name === "seriesLabel") updateCurrentDatasetLegend(_chartfactory.newDatasetFormInputs.seriesLabel.value);
 
 	//Check if both calibratorOutput and sensorError are non-zero numbers: if it's true, enables add button for sensor datapoint
-	if (name === "calibratorOutput" && isNonZeroNumber(Number(value)) && isNonZeroNumber(Number(_chartfactory.newDatasetFormInputs.sensorError.value))
-		|| name === "sensorError" && isNonZeroNumber(Number(value)) && isNonZeroNumber(Number(_chartfactory.newDatasetFormInputs.calibratorOutput.value)))
+	if ((name === "calibratorOutput" && isNonZeroNumber(Number(value)) && isNonZeroNumber(Number(_chartfactory.newDatasetFormInputs.sensorError.value))
+		|| name === "sensorError" && isNonZeroNumber(Number(value)) && isNonZeroNumber(Number(_chartfactory.newDatasetFormInputs.calibratorOutput.value))))
 		addChartDatapointButton.disabled = false;	
 	else addChartDatapointButton.disabled = true;
 
@@ -125,12 +126,14 @@ function inputHandler(e) {
 //Adds a new datapoint to chart
 function addNewDatapointToChart() {
 	updateCurrentChartLine();
+	
 	if(Number(_chartfactory.newDatasetFormInputs.datasetSize.value) === _chartfactory.getSensorErrorLineDatasetCurrentLength()){
 		currentSensorDatasetSize.innerText = 'FULL';
 		inputCalibratorOutput.disabled = true;
 		inputSensorError.disabled = true;
 		addChartDatapointButton.style.backgroundColor = "green";
 		iconErrorDatapoint.classList.remove('fa-plus');
+		addChartDatapointButton.disabled = true;
 		["fa-solid", "fa-check", "fa-3x"].forEach(classItem => iconErrorDatapoint.classList.add(classItem));
 		iconErrorDatapoint.style.color = 'white';
 	}

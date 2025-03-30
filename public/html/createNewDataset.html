@@ -251,9 +251,11 @@
 								</button>
 							</div>
 							<div class="col-lg-1 col-sm-3 my-4">
-								<span id="current-sensor-error-dataset-size" style="font-size: 25px;"></span>
+								<span id="current-sensor-error-dataset-size" 
+								style="font-size: 25px; padding:2px; border-style: outset; border: 1px solid rgb(135, 240, 143); border-radius: 20%;"></span>
 							</div>
-							<div class="col-lg-6 col-sm-12 mb-sm-4">
+
+							<div class="col-lg-4 col-sm-8 mb-sm-4">
 								<label for="seriesLabel">Series Label</label>
 								<input
 									name="seriesLabel"
@@ -267,6 +269,16 @@
 								<small id="seriesLabel#Help" class="form-text text-muted">
 									Please, enter series label here
 								</small>
+							</div>
+							<div class="col-lg-2 col-sm-4 mb-sm-4 my-4">
+								<button 
+									id="add-current-line-plot"
+									type="button" 
+									class="btn btn-secondary" 
+									onclick=addCurrentLinePlot()
+								>
+									Add Line
+								</button>
 							</div>
 							
 						</div>
