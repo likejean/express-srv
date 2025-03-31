@@ -16,7 +16,6 @@ const currentSensorDatasetSize = document.getElementById("current-sensor-error-d
 
 
 
-
 var newChartDatasetPostData = {}; //this object for storing POST request body
 
 
@@ -39,7 +38,7 @@ for (i = 0; i < inputs.length; i++) {
 }
 
 
-//
+//Prevent datasetSize input entries from negative values
 inputs.forEach((element) => {
 	if (element.name === "datasetSize"){
 		element.addEventListener('keydown', function(event) {
@@ -65,10 +64,18 @@ function inputHandler(e) {
 	if(name === "datasetSize") {
 		e.target.value = Math.trunc(parseFloat(value));
 		if (inputCalibratorOutput.disabled)  inputCalibratorOutput.disabled = false;
-		if (inputSensorError.disabled)  inputSensorError.disabled = false;		
+		inputCalibratorOutput.value = null;
+		if (inputSensorError.disabled)  inputSensorError.disabled = false;	
+		inputSensorError.value = null;
+		addChartDatapointButton.style.backgroundColor = "grey";	
 		["fa-solid", "fa-check", "fa-3x"].forEach(classItem => iconErrorDatapoint.classList.remove(classItem));
 		iconErrorDatapoint.classList.add('fa-plus');
+		addChartDatapointButton.disabled = false;
 		currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
+		currentSensorDatasetSize.style.backgroundColor = 'rgb(5, 238, 94)';
+		currentSensorDatasetSize.style.borderColor = 'rgb(5, 238, 94)';
+		currentSensorDatasetSize.style.paddingTop = '0px';
+		currentSensorDatasetSize.style.paddingBottom = '0px';
 		
 	}
 
@@ -102,8 +109,6 @@ function inputHandler(e) {
 		_chartfactory.insertChartDatapoint(value, "sensorError")
 	}
 
-	//Updates chart series label 
-	if(name === "seriesLabel") updateCurrentDatasetLegend(_chartfactory.newDatasetFormInputs.seriesLabel.value);
 
 	//Check if both calibratorOutput and sensorError are non-zero numbers: if it's true, enables add button for sensor datapoint
 	if ((name === "calibratorOutput" && isNonZeroNumber(Number(value)) && isNonZeroNumber(Number(_chartfactory.newDatasetFormInputs.sensorError.value))
@@ -117,6 +122,9 @@ function inputHandler(e) {
 		updateChartTitle(_chartfactory.newDatasetFormInputs.chartTitle.value);
 	}
 
+	//Updates chart series label 
+	if(name === "seriesLabel") updateCurrentDatasetLegend(_chartfactory.newDatasetFormInputs.seriesLabel.value);
+
 	//Highlights the user input field border
 	if (_chartfactory.isFormInputFieldEmpty(name)) e.target.style.border = "3px solid red";
     else e.target.style.border = "2px solid blue";
@@ -129,6 +137,10 @@ function addNewDatapointToChart() {
 	
 	if(Number(_chartfactory.newDatasetFormInputs.datasetSize.value) === _chartfactory.getSensorErrorLineDatasetCurrentLength()){
 		currentSensorDatasetSize.innerText = 'FULL';
+		currentSensorDatasetSize.style.backgroundColor = 'red';
+		currentSensorDatasetSize.style.borderColor = 'red';
+		currentSensorDatasetSize.style.paddingTop = '12px';
+		currentSensorDatasetSize.style.paddingBottom = '12px';
 		inputCalibratorOutput.disabled = true;
 		inputSensorError.disabled = true;
 		addChartDatapointButton.style.backgroundColor = "green";

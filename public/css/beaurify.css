@@ -133,3 +133,20 @@ td {
 	padding: 1px 2px;
 }
 
+
+#current-sensor-error-dataset-size {
+	font-size: 25px;
+	padding: 0px 15px; 
+	margin-left: 5px;
+	margin-bottom: 25px;
+	border: 2px solid rgb(5, 238, 94);
+	color: white;
+	background-color: rgb(5, 238, 94);
+	font-weight: bold;
+	border-radius: 10%;
+}
+
+#add-chart-datapoint {
+	margin-bottom: 25px;
+}
+

@@ -240,7 +240,7 @@
 									Sensor Error
 								</small>
 							</div>
-							<div class="col-lg-1 col-sm-3 my-4">
+							<div class="d-flex align-items-center col-lg-2 col-sm-6">
 								<button 
 									id="add-chart-datapoint"
 									type="button" 
@@ -249,11 +249,9 @@
 								>
 									<i id="add-error-datapoint" class="fa fa-plus" aria-hidden="true"></i>
 								</button>
+								<span id="current-sensor-error-dataset-size"></span>
 							</div>
-							<div class="col-lg-1 col-sm-3 my-4">
-								<span id="current-sensor-error-dataset-size" 
-								style="font-size: 25px; padding:2px; border-style: outset; border: 1px solid rgb(135, 240, 143); border-radius: 20%;"></span>
-							</div>
+							
 
 							<div class="col-lg-4 col-sm-8 mb-sm-4">
 								<label for="seriesLabel">Series Label</label>
@@ -275,7 +273,7 @@
 									id="add-current-line-plot"
 									type="button" 
 									class="btn btn-secondary" 
-									onclick=addCurrentLinePlot()
+									onclick=resetAndBeginNewPlot()
 								>
 									Add Line
 								</button>
