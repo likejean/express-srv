@@ -2,9 +2,9 @@ const config = {
 	type: 'line',
 	data: {
 		datasets: [{
-				label: '<blank1>',
+				label: '<blank0>',
 				data: [],
-				borderColor: 'red',
+				borderColor: chartFormats.ABSOLUTE_ERROR_OUTPUT.borderColor[0],
 				borderWidth: 2,
 				fill: false
 			}

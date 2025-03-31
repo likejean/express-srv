@@ -92,7 +92,8 @@
 									id="errorPercentLimit#Help"
 									class="form-text text-muted"
 								>
-									Please, set error limit percent and click "+" button to add error limits to a new chart.
+									Please, set error limit percent and click "+" button to add error limits to a new chart. 
+									Perform this operation only after all sensor output plots are generated.
 								</small>
 							</div>     
 							
@@ -272,10 +273,18 @@
 								<button 
 									id="add-current-line-plot"
 									type="button" 
-									class="btn btn-secondary" 
-									onclick=resetAndBeginNewPlot()
+									class="btn btn-outline-info" 
+									onclick=saveAndBeginNewChartPlot()
 								>
-									Add Line
+									Create Plot
+								</button>
+								<button 
+									id="disable-sensor-data-entries"
+									type="button" 
+									class="btn btn-outline-success mx-1" 
+									onclick=diableAllSensorDataEntries()
+								>
+									Done
 								</button>
 							</div>
 							
@@ -471,8 +480,9 @@
 	
 	<script src="../js/datasets/utils/updateCurrentChart.js"></script>	
 	<script src="../js/datasets/utils/generateCalibrationNameList.js"></script>
-
 	<script src="../js/datasets/getNewChartFormValues.js"></script>	
+
+	<script src="../js/datasets/utils/saveAndBeginNewDataset.js"></script>
 
 	<script>
         function resetNewChartDatasetForm() {

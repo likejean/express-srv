@@ -14,6 +14,9 @@ const addChartDatapointButton = document.getElementById("add-chart-datapoint");
 const chartFormModalHeaderText = document.querySelector(".new-chart-record-modal-header");
 const currentSensorDatasetSize = document.getElementById("current-sensor-error-dataset-size");
 
+const addSensorDataPlotButton = document.getElementById("add-current-line-plot");
+const doneSensorDataEntriesButton = document.getElementById("disable-sensor-data-entries");
+
 
 
 var newChartDatasetPostData = {}; //this object for storing POST request body
@@ -29,6 +32,8 @@ Object.entries(_chartfactory.newDatasetFormInputs).forEach(([key, obj]) => {
 	if (key === "calibratorOutput" && (obj.value === null || obj.value === "") 
 		|| key === "sensorError" && (obj.value === null || obj.value === "")) 
 	addChartDatapointButton.disabled = true;
+	addChartErrorLimitsButton.disabled = true;
+	doneSensorDataEntriesButton.disabled = true;
 });
 
 //Attach eventListener callbacks to all New Chart Dataset Form Inputs to guide input entry events
@@ -87,10 +92,11 @@ function inputHandler(e) {
 			lastValue = value;
 	}
 
+	
 	_chartfactory.newDatasetFormInputs[name].value = e.target.value;	
 	newChartDatasetPostData[name] = value;
 	submitButton.disabled = !_chartfactory.isSubmitButtonActive();
-	
+		
 
 	//Updates preview chart x and y labels
 	if(name === "datasetUnits" || name === "chartXLabel" || name === "chartYLabel") {
@@ -114,7 +120,7 @@ function inputHandler(e) {
 	if ((name === "calibratorOutput" && isNonZeroNumber(Number(value)) && isNonZeroNumber(Number(_chartfactory.newDatasetFormInputs.sensorError.value))
 		|| name === "sensorError" && isNonZeroNumber(Number(value)) && isNonZeroNumber(Number(_chartfactory.newDatasetFormInputs.calibratorOutput.value))))
 		addChartDatapointButton.disabled = false;	
-	else addChartDatapointButton.disabled = true;
+	else if (name === "calibratorOutput" || name === "sensorError") addChartDatapointButton.disabled = true;
 
 
 	//Upates the preview chart title
@@ -123,7 +129,10 @@ function inputHandler(e) {
 	}
 
 	//Updates chart series label 
-	if(name === "seriesLabel") updateCurrentDatasetLegend(_chartfactory.newDatasetFormInputs.seriesLabel.value);
+	if(name === "seriesLabel") updateCurrentDatasetLegend(
+		_chartfactory.newDatasetFormInputs.seriesLabel.value,
+		_chartfactory.currentDatasetSeries
+	);
 
 	//Highlights the user input field border
 	if (_chartfactory.isFormInputFieldEmpty(name)) e.target.style.border = "3px solid red";
@@ -133,7 +142,7 @@ function inputHandler(e) {
 
 //Adds a new datapoint to chart
 function addNewDatapointToChart() {
-	updateCurrentChartLine();
+	updateCurrentChartLine(_chartfactory.currentDatasetSeries);
 	
 	if(Number(_chartfactory.newDatasetFormInputs.datasetSize.value) === _chartfactory.getSensorErrorLineDatasetCurrentLength()){
 		currentSensorDatasetSize.innerText = 'FULL';
@@ -155,6 +164,7 @@ function addNewDatapointToChart() {
 //generates plots for upper and lower error limits based upon error limit percentage input
 function addErrorLimitLinesToChart() {
 	_chartfactory.buildErrorLimitChartLines();
+	//_chartfactory.currentDatasetSeries = _chartfactory.currentDatasetSeries + 2;  //tracks the number of datasets inserted into a chart
 	addErrorLimitChartLines(_chartfactory.errorUpperLimitLineDataset, _chartfactory.errorLowerLimitLineDataset);
 	addChartErrorLimitsButton.disabled = true;
 	inputErrorLimits.disabled = true;

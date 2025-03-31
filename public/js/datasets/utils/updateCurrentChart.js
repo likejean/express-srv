@@ -11,7 +11,8 @@ function updateChartTitle (title) {
 }
 
 //This function updates the first series dataset for a sensor chart
-function updateCurrentChartLine() {
+function updateCurrentChartLine(datasetCount) {
+
 	//updates a chart global factory
 	_chartfactory.buildSensorErrorOutputChartLine({
 		x: Number(_chartfactory.currentChartDatapointEntry.x),
@@ -19,7 +20,7 @@ function updateCurrentChartLine() {
 	});
 
 	//updates a preview chart
-	previewChart.data.datasets[0].data.push({
+	previewChart.data.datasets[datasetCount].data.push({
 		x: _chartfactory.currentChartDatapointEntry.x,
 		y: _chartfactory.currentChartDatapointEntry.y
 	});
@@ -28,10 +29,9 @@ function updateCurrentChartLine() {
 }
 
 //This function updates legent text for the first series dataset
-function updateCurrentDatasetLegend(legendText) {
-
-	console.log(legendText);
-	previewChart.data.datasets[0].label = legendText;
+function updateCurrentDatasetLegend(legendText, datasetCount) {  
+	
+	previewChart.data.datasets[datasetCount].label = legendText;
 	previewChart.update();
 
 }
