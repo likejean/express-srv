@@ -5,7 +5,8 @@ class datasetFactory {
             newDatasetFormInputs,
 			currentDatasetSeries = 0,
 			currentChartDatapointEntry = {x: 0, y: 0},
-            sensorErrorLineDataset = [],
+            currentSensorErrorLineDataset = [],
+            sensorDatasets = [],
 			errorUpperLimitLineDataset = [],
 			errorLowerLimitLineDataset = [],
 			
@@ -14,16 +15,27 @@ class datasetFactory {
         this.newDatasetFormInputs = newDatasetFormInputs,
 		this.currentDatasetSeries = currentDatasetSeries,
 		this.currentChartDatapointEntry = currentChartDatapointEntry,
-        this.sensorErrorLineDataset = sensorErrorLineDataset,
+        this.currentSensorErrorLineDataset = currentSensorErrorLineDataset,
+        this.sensorDatasets = sensorDatasets,
 		this.errorUpperLimitLineDataset = errorUpperLimitLineDataset,
 		this.errorLowerLimitLineDataset = errorLowerLimitLineDataset
 		
     }
 
-	//obtains a current size of the sensorErrorLineDataset array
+	//obtains a current size of the currentSensorErrorLineDataset array
 	getSensorErrorLineDatasetCurrentLength () {
-		return this.sensorErrorLineDataset.length;
+		return this.currentSensorErrorLineDataset.length;
 	}
+
+    storeChartLineDataset () {
+        this.sensorDatasets.push({
+            plotId: `Plot${this.sensorDatasets.length + 1}`,
+            seriesLabel: this.newDatasetFormInputs.seriesLabel.value,
+            seriesDescription: this.newDatasetFormInputs.seriesLabel.value,
+            calibrationId: this.newDatasetFormInputs.calibrationId.value,
+            dataset: this.currentSensorErrorLineDataset
+        });
+    }
 
     //updates a current datapoint object for global factory
 	insertChartDatapoint(value, type) {
@@ -32,7 +44,7 @@ class datasetFactory {
 	
     //constructs a dataset for sensor linearity and hysteresis output
     buildSensorErrorOutputChartLine(datapoint) {
-        this.sensorErrorLineDataset.push(datapoint);
+        this.currentSensorErrorLineDataset.push(datapoint);
     }
 
     //constructs a dataset for chart lines to display upper and lower error limits

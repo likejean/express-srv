@@ -37,6 +37,10 @@ const datasetSchema = mongoose.Schema(
 			default: 'Calibrator Output'
 		},
 		sensorDatasets: [{
+			plotId: {
+				type: String,
+				required: true
+			},
 			seriesDescription: {
 				type: String, 
 				required: false

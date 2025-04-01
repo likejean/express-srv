@@ -1,6 +1,7 @@
 function saveAndBeginNewChartPlot() {
 
-	_chartfactory.sensorErrorLineDataset = [];
+	_chartfactory.storeChartLineDataset();
+	_chartfactory.currentSensorErrorLineDataset = [];
 	currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
 	_chartfactory.currentDatasetSeries = _chartfactory.currentDatasetSeries + 1;
 	
@@ -35,7 +36,11 @@ function saveAndBeginNewChartPlot() {
 
 	previewChart.data.datasets.push(newDatasetLine);
 
+	console.log(_chartfactory.sensorDatasets);
+
 }
+
+
 
 
 function diableAllSensorDataEntries() {
@@ -60,6 +65,4 @@ function diableAllSensorDataEntries() {
 	addChartErrorLimitsButton.disabled = false;
 	addSensorDataPlotButton.disabled = true;
 	
-
-	previewChart.data.datasets.pop();
 }

@@ -82,10 +82,7 @@ router.post('/', (req, res, next) => {
 		chartTitle,
 		chartYLabel,
 		chartXLabel,
-		calibrationId,
-		seriesLabel,
 		sensorDatasets,
-		seriesDescription,	
 		errorPercentLimit,
 		errorUpperLimit,
 		errorLowerLimit      
@@ -99,12 +96,7 @@ router.post('/', (req, res, next) => {
 		chartTitle,
 		chartYLabel: chartYLabel + `, [${datasetUnits}]`,
 		chartXLabel: chartXLabel + `, [${datasetUnits}]`,
-		sensorDatasets: [{
-			seriesDescription,
-			calibrationId,
-			seriesLabel,
-			dataset: sensorDatasets
-		}],
+		sensorDatasets,
 		errorPercentLimit,
 		errorUpperLimit,
 		errorLowerLimit       

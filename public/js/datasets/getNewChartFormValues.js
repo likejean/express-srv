@@ -134,6 +134,7 @@ function inputHandler(e) {
 		_chartfactory.currentDatasetSeries
 	);
 
+
 	//Highlights the user input field border
 	if (_chartfactory.isFormInputFieldEmpty(name)) e.target.style.border = "3px solid red";
     else e.target.style.border = "2px solid blue";
@@ -198,7 +199,7 @@ submitButton.onclick = function() {
 	newChartDatasetPostData["sensorId"] = _store.activeSensorCard._id;
 
 	
-	newChartDatasetPostData["sensorDatasets"] = _chartfactory.sensorErrorLineDataset;	
+	newChartDatasetPostData["sensorDatasets"] = _chartfactory.sensorDatasets;	
 	newChartDatasetPostData["errorUpperLimit"] = _chartfactory.errorUpperLimitLineDataset;
 	newChartDatasetPostData["errorLowerLimit"] = _chartfactory.errorLowerLimitLineDataset;
 
