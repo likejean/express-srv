@@ -1,5 +1,5 @@
 const newChartDatasetFormContainer = {
-	calibrationId: {
+	calibrationName: {
 		value: "",
 		validator: () => {},
 		inputRule: ``,

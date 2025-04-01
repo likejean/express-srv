@@ -38,9 +38,11 @@ router.get('/', (req, res, next) => {
 					chartXLabel:  doc.chartXLabel,
 					sensorDatasets: doc.sensorDatasets.map(set => {
 						return {
-							seriesDescription: set.seriesDescription,
+							plotId: set.plotId,
 							calibrationId: set.calibrationId,
+							calibrationName: set.calibrationName,
 							seriesLabel: set.seriesLabel,
+							seriesDescription: set.seriesDescription,
 							dataset: set.dataset.map(val => val)
 						}
 					}),	

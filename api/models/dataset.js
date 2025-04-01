@@ -13,7 +13,7 @@ const datasetSchema = mongoose.Schema(
 		}, 
 		sensorDescription: {
 			type: String,
-			required: false,
+			required: true,
 			default: 'Extensometer'
 		},
 		datasetUnits: { 
@@ -41,15 +41,20 @@ const datasetSchema = mongoose.Schema(
 				type: String,
 				required: true
 			},
-			seriesDescription: {
-				type: String, 
-				required: false
-			},
 			calibrationId: {
 				type: mongoose.Schema.Types.ObjectId,
 				ref: 'Calibration',
 				required: true
 			},
+			calibrationName: {
+				type: String,
+				required: true
+			},
+			seriesDescription: {
+				type: String, 
+				required: false
+			},
+			
 			seriesLabel: {
 				type: String,
 				required: true,

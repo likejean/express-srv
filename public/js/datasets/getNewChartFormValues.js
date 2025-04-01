@@ -179,27 +179,34 @@ function addErrorLimitLinesToChart() {
 submitButton.onclick = function() {
 
 	const formData = new FormData(form);
-	const keysToRemove = ["sensorError", "calibratorOutput", "datasetSize"];
+
+	//user input keys that must be cleaned out
+	const keysToRemove = ["sensorError", "calibratorOutput", "datasetSize", "seriesDescription", "seriesLabel", "calibrationName"];
 	
 	
 	for (const [key, value] of formData.entries()) {
 		
-		if (key === "calibrationId") {
-			newChartDatasetPostData[key] = _store.activeSensorCard.calibrations.filter(item => item.calibrationName === value)[0]._id;
-			
-		}
-		else if (key === "datasetStartAt" || key === "datasetEndAt" || key === "errorPercentLimit") newChartDatasetPostData[key] = Number(value);
+		if (key === "datasetStartAt" || key === "datasetEndAt" || key === "errorPercentLimit") newChartDatasetPostData[key] = Number(value);
 		else newChartDatasetPostData[key] = value;
 	}
 
 	chartFormModalHeaderText.innerText = "Sensor\u00a0" + _store.activeSensorCard.description + "\u00a0" + _store.activeSensorCard.EID;
 	
 	//adds new key-pairs to POST request object
-	newChartDatasetPostData["sensorDescription"] = _store.activeSensorCard.description;
 	newChartDatasetPostData["sensorId"] = _store.activeSensorCard._id;
-
+	newChartDatasetPostData["sensorDescription"] =`${_store.activeSensorCard.description} ${ _store.activeSensorCard.EID}`;
 	
+	//stores array of sensor error output dataset(s). An array element contains the following object:
+	// {
+	// 		plotId: [String],
+	// 		seriesLabel: [String],
+	// 		seriesDescription: [String],
+	// 		calibrationId: [String],
+	// 		dataset: [Array]
+	// }
 	newChartDatasetPostData["sensorDatasets"] = _chartfactory.sensorDatasets;	
+
+	//stores arrays of error upper and lower limits
 	newChartDatasetPostData["errorUpperLimit"] = _chartfactory.errorUpperLimitLineDataset;
 	newChartDatasetPostData["errorLowerLimit"] = _chartfactory.errorLowerLimitLineDataset;
 

@@ -27,12 +27,14 @@ class datasetFactory {
 		return this.currentSensorErrorLineDataset.length;
 	}
 
-    storeChartLineDataset () {
+	//store temporarily a current chart plot
+    storeChartLineDataset (calibrationId) {
         this.sensorDatasets.push({
             plotId: `Plot${this.sensorDatasets.length + 1}`,
             seriesLabel: this.newDatasetFormInputs.seriesLabel.value,
-            seriesDescription: this.newDatasetFormInputs.seriesLabel.value,
-            calibrationId: this.newDatasetFormInputs.calibrationId.value,
+            seriesDescription: this.newDatasetFormInputs.seriesDescription.value,			
+            calibrationName: this.newDatasetFormInputs.calibrationName.value,
+			calibrationId,
             dataset: this.currentSensorErrorLineDataset
         });
     }

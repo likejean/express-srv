@@ -32,7 +32,7 @@ class dataStorage {
 			this.sensorTableActiveRowObject[`row${i + 1}`] = `inactive`;
 		}
 	}
-
+	
 	getSensorEIDs(){
         return this.sensors.data.payload.reduce((obj, sensor) => {
             obj[`${sensor.EID}`] = sensor._id;
@@ -45,6 +45,10 @@ class dataStorage {
             obj[`${calibration.calibrationName}`] = calibration._id;
             return obj;
         }, {});;
+	}
+
+	getCalibrationIdByName(name){
+		return this.activeSensorCard.calibrations.find(cal => cal.calibrationName === name)._id
 	}
 
 	getActiveSensorCard(){
