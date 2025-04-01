@@ -2,6 +2,7 @@ function createSensorDatasetsChart(datasets) {
 
 	//returns a html element object: <div/> wrapper for charts
 	const sensorChartWrapper = document.getElementById('sensor-chart-wrapper');	
+
 	let i = 1;
 
 	//datasets is an array that could contain one or more datasets (charts) for a sensor
@@ -70,8 +71,6 @@ function createSensorDatasetsChart(datasets) {
 
 		i++;
 	}
-
-	
 
 	
 }

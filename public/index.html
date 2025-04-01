@@ -291,10 +291,14 @@
 	<script src="./js/sensor/deleteSensorById.js"></script>
 
 	<script>
-		var modal = new bootstrap.Modal(document.getElementById('deleteChartModal'));		
+		var modal = new bootstrap.Modal(document.getElementById('deleteChartModal'));
+		const chartIcon = document.createElement("i");
+		chartIcon.classList.add("fas", "fa-chart-bar", "fa-2xl");
+
 		function closeModal() {
 			modal.hide();
 		}
+	
 	</script>
 </html>
 

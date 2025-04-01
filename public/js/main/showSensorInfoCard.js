@@ -82,8 +82,16 @@ function showSensorInfoCard(
 		if(associatedDatasets.length > 0) {
 			//Obtains sensor information for chart options (labels and title)
 			//NOTE!!! This code might have to revised in the future if multiple charts with varying options must be displayed for a single sensor!!!!
-		
-			createSensorDatasetsChart(associatedDatasets);
+			createSensorDatasetsChart(associatedDatasets);			
+		}
+		else {
+				//if charts not found (or not created) for sensor, display alert notification
+				const notFoundChartsNotification = document.createElement('span');
+				notFoundChartsNotification.classList.add("alert",  "alert-secondary");
+				notFoundChartsNotification.setAttribute("role", "alert");
+				notFoundChartsNotification.innerText = "Charts Not Found";
+				appendChildElementToParent(document.getElementById('sensor-chart-wrapper'), notFoundChartsNotification);
+			
 		}
 
 		associatedCalibrations.length === 0
