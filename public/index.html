@@ -118,9 +118,15 @@
 														</ul>
 													</div>
 													<hr/>
-													<div id="sensor-chart-wrapper" class="chart-container d-flex flex-column align-items-center">
+													<div 
+														id="sensor-chart-wrapper" 
+														class="chart-container d-flex flex-column align-items-center d-none d-lg-block py-1">														
 														<!-- here is where dynamically generated datasets charts are appended -->
 													</div>
+													<div class="chart-container d-flex flex-column align-items-center d-block d-lg-none py-1">
+														<a src=""><img src="../../img/logos/ChartIcon.png" id="sensor-chart-nav-icon" /></a>
+													</div>
+													
 													<hr/>
 													<a id="create-new-sensor-dataset" href=""><span class="btn btn-outline-primary btn-sm m-2">Create Chart</span></a>
 
@@ -136,7 +142,11 @@
 												<h2 class="mb-3">Calibration Certificates</h2>
 											</div>
 
-											<div id="calibration-certificates" aria-live="polite" aria-atomic="true" class="row d-flex align-items-center justify-content-center flex-column mb-3">
+											<div 
+												id="calibration-certificates" 
+												aria-live="polite" 
+												aria-atomic="true" 
+												class="row d-flex align-items-center justify-content-center flex-column mb-3">
 												<!-- here is where dynamically generated list HTML elements are appended (list of calibrations associated with selected sensor)--> 
 											</div>
 											
@@ -260,6 +270,7 @@
 	<script src="./js/classes/userGlobalFactory.js"></script>
 
 	<!-- UTILS SCRIPTS -->
+	<script src="./js/utils/resizeChartIcon.js"></script>
 	<script src="./js/utils/plotSensorErrorChart.js"></script>
 	<script src="./js/utils/getSensorDatasetsChartConfig.js"></script>
 	<script src="./js/utils/generateSensorDatasetsChartData.js"></script>

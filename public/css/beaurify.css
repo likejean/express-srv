@@ -150,3 +150,7 @@ td {
 	margin-bottom: 25px;
 }
 
+#sensor-chart-nav-icon {
+	cursor: pointer;
+}
+
