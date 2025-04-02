@@ -36,7 +36,8 @@ const fetchSensorCalibrationData = async () => {
 
 			//disable all UPDATE, PATCH, DELETE buttons if authenticated user is NOT administrator!
 			if(window.localStorage.getItem("userLevel") !== "Admin") {
-				const adminClassifiedButtons = document.querySelectorAll(".admin-classified");
+				
+				const adminClassifiedButtons = document.querySelectorAll(".admin-classified");				
 				adminClassifiedButtons.forEach(btn => {					
 					if(btn.tagName === "A") {
 						while (btn.classList.length > 0) {

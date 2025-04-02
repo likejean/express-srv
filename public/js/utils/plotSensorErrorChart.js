@@ -15,8 +15,8 @@ function createSensorDatasetsChart(datasets) {
 		//create and customzie div wrappers for user buttons: delete, edit, notifications
 		const btnDiv = document.createElement('div');
 		const noteDiv = document.createElement('div');
-		btnDiv.classList.add("modal-footer");
 		noteDiv.classList.add("container", "text-center");
+		btnDiv.setAttribute("display", "block");
 
 		//create a button to delete entire chart/dataset
 		const deleteChartButton = document.createElement('button');
@@ -40,6 +40,17 @@ function createSensorDatasetsChart(datasets) {
 		editChartButton.innerText = "Edit";
 		editChartButton.classList.add("admin-classified", "btn", "btn-primary", "btn-sm", "my-1");		
 		editChartButton.id = `chart-${i}`;
+
+		if(window.localStorage.getItem("userLevel") !== "Admin") {
+			[editChartButton, deleteChartButton].forEach(btn => {
+				while (btn.classList.length > 0) {
+					btn.classList.remove(btn.classList.item(0));
+				}
+				btn.style.pointerEvents="none";
+				btn.style.cursor="default";	
+				btn.classList.add("btn", "btn-outline-secondary", "mx-2");	
+			});			
+		}
 
 				
 		//chart series data collection
