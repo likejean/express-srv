@@ -21,25 +21,25 @@ const newChartDatasetFormContainer = {
         value: -0.2,
 		validator: () => {},
 		inputRule: ``,
-		regex: /^-?\d*\.?\d{0,5}$/
+		regex: /^-?\d*\.?\d{0,4}$/
     },
 	datasetEndAt: { 
         value: 0.2,
 		validator: () => {},
 		inputRule: ``,
-		regex: /^-?\d*\.?\d{0,5}$/
+		regex: /^-?\d*\.?\d{0,4}$/
     },
 	calibratorOutput: { 
         value: null,
 		validator: () => {},
 		inputRule: `Invalid Input`,
-		regex: /^-?\d*\.?\d{0,5}$/
+		regex: /^-?\d*\.?\d{0,6}$/
     },
 	sensorError: { 
         value: null,
 		validator: () => {},
 		inputRule: `Invalid`,
-		regex: /^-?\d*\.?\d{0,5}$/
+		regex: /^-?\d*\.?\d{0,6}$/
     },
 	datasetUnits: { 
         value: "",
