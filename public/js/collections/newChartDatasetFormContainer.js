@@ -18,16 +18,16 @@ const newChartDatasetFormContainer = {
 		regex:""
     },
 	datasetStartAt: { 
-        value: -0.2,
+        value: -2.0,
 		validator: () => {},
 		inputRule: ``,
-		regex: /^-?\d*\.?\d{0,4}$/
+		regex: ""
     },
 	datasetEndAt: { 
-        value: 0.2,
+        value: 2.0,
 		validator: () => {},
 		inputRule: ``,
-		regex: /^-?\d*\.?\d{0,4}$/
+		regex: ""
     },
 	calibratorOutput: { 
         value: null,

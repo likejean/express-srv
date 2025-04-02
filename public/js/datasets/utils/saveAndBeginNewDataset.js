@@ -53,15 +53,11 @@ function saveAndBeginNewChartPlot() {
 
 
 function diableAllSensorDataEntries() {
-	
-	inputCalibratorOutput.disabled = true;
-	inputCalibratorOutput.value = 0;
-	_chartfactory.newDatasetFormInputs.calibratorOutput.value = 0;
-	
-	inputSensorError.disabled = true;	
-	inputSensorError.value = 0;
-	_chartfactory.newDatasetFormInputs.sensorError.value = 0;
 
+	inputCalibratorOutput.value = null;
+	
+	inputSensorError.value = null;
+	
 	addChartDatapointButton.style.backgroundColor = "grey";	
 	["fa-solid", "fa-check", "fa-3x"].forEach(classItem => iconErrorDatapoint.classList.remove(classItem));
 	iconErrorDatapoint.classList.add('fa-plus');

@@ -1,6 +1,8 @@
 function createNewChartDatasetRecord() {
     //use POST API endpoint to create new chart dataset record
 
+	console.log(newChartDatasetPostData);
+
     axios
         .post(`../api/datasets`, newChartDatasetPostData)
         .then((response) => {

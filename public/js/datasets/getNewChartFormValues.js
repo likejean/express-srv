@@ -27,6 +27,8 @@ Object.entries(_chartfactory.newDatasetFormInputs).forEach(([key, obj]) => {
 	form.elements[key].value = obj.value;
 	//sets the error limit percent decimal to 2 significant figures
 	if (key === "errorPercentLimit") form.elements[key].value = obj.value.toFixed(2);
+	if (key === "datasetStartAt") form.elements[key].value = obj.value.toFixed(2);
+	if (key === "datasetEndAt") form.elements[key].value = obj.value.toFixed(2);
 	submitButton.disabled = !_chartfactory.isSubmitButtonActive();
 	currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
 	if (key === "calibratorOutput" && (obj.value === null || obj.value === "") 
@@ -85,7 +87,7 @@ function inputHandler(e) {
 	}
 
 	// Allow a user enter only valid positive or negative decimal numbers
-	if(name === "sensorError" || name === "calibratorOutput" || name === "datasetStartAt" || name === "datasetEndAt") {	
+	if(name === "sensorError" || name === "calibratorOutput") {	
 		if (!value.match(_chartfactory.newDatasetFormInputs[name].regex) || value === null)
 			e.target.value = lastValue;
 		else
@@ -190,7 +192,7 @@ submitButton.onclick = function() {
 		else newChartDatasetPostData[key] = value;
 	}
 
-	chartFormModalHeaderText.innerText = "Sensor\u00a0" + _store.activeSensorCard.description + "\u00a0" + _store.activeSensorCard.EID;
+	//chartFormModalHeaderText.innerText = "Sensor\u00a0" + _store.activeSensorCard.description + "\u00a0" + _store.activeSensorCard.EID;
 	
 	//adds new key-pairs to POST request object
 	newChartDatasetPostData["sensorId"] = _store.activeSensorCard._id;
