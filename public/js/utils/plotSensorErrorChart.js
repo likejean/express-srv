@@ -71,7 +71,7 @@ function createSensorDatasetsChart(datasets) {
 		new Chart(
 			ctx.getContext('2d'),
 			//processed chart data and options into a format suitable for rendering
-			getSensorDatasetsChartConfig(generateSensorDatasetsChartData(sensorData), options)
+			getSensorDatasetsChartConfig(generateSensorDatasetsChartData(sensorData), options, chart.errorPercentLimit)
 		);
 
 		//append chart-customized canvas and buttons to html document

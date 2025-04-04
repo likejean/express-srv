@@ -32,6 +32,7 @@ router.get('/', (req, res, next) => {
 					_id: doc._id,
 					sensorId: doc.sensorId,
 					sensorDescription: doc.sensorDescription,
+					errorPercentLimit: doc.errorPercentLimit,
 					datasetUnits: doc.datasetUnits,
 					chartTitle: doc.chartTitle,
 					chartYLabel: doc.chartYLabel,
