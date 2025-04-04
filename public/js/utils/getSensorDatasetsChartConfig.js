@@ -23,6 +23,12 @@ function getSensorDatasetsChartConfig(data, options) {
 				}
 			},
 			plugins: {
+				tooltip: {
+					callbacks: {
+						label: context => `{x: ${context.raw.x}, y: ${context.raw.y}}`,
+						title: () => ""
+					}
+				},
 				title: {
 					display: true,
 					text: `${options.chartTitle}`,
