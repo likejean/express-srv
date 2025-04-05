@@ -33,6 +33,7 @@ router.get('/', auth.verifyToken, (req, res, next) => {
 		else{
 			Sensor
 			.find()
+			.populate('calibrations')
 			.exec()
 			.then(docs => {
 				console.log({

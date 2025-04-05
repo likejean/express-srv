@@ -10,7 +10,7 @@ function createMainSensorTable(sensors, calibrations) {     //comes from fetchAl
         let row = document.createElement("tr");
 
         //Filter calibration objects associated with current sensor
-        let filteredCalibrations = calibrations.filter((item) => sensors[i].calibrations.includes(item._id));
+        let filteredCalibrations = calibrations.filter((item) => sensors[i].calibrations.some(calibration => calibration._id === item._id));
         
         // create table row for each sensor
         row.setAttribute("id", `row${i + 1}`);
