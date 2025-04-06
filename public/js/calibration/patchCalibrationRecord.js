@@ -9,7 +9,7 @@ function patchCalibrationRecord() {
 
   //get this helper function from utils...
     calPatchRequestData = filterObjectAndTransform(_calfactory.inputWrappers, (item) => item.status === true);    
-  
+
   //use PATCH API endpoint to update existing calibration record
     axios
     .patch(`../api/calibrations/${id}`, calPatchRequestData)

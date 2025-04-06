@@ -73,6 +73,70 @@ router.get('/', (req, res, next) => {
 });
 
 
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+// GET endpoint: get a chart dataset record by ID
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+router.get('/:datasetId', (req, res, next) => {
+	const id = req.params.datasetId;
+	Dataset.findById(id)
+		.populate('sensorId')
+		.exec()
+		.then(doc => {
+			console.log({
+				request: {
+					type: 'GET',
+					url: req.originalUrl,
+					status: "SUCCESS"
+				}});
+			//To handle non-existing id error, but correct format...
+			if (doc) {
+				console.log({
+					request: {
+						type: 'GET',
+						url: req.originalUrl,
+						status: "SUCCESS"
+					}});
+				return res.status(200).json({
+					dataset: doc,
+					request: {
+						type: 'GET',
+						url: req.originalUrl                    
+					}  
+				});
+			} else {
+				console.log({
+					request: {
+						message: "Failed to fetch dataset record by ID. Most likely the document ID is not valid.",
+						isIdValid: mongoose.Types.ObjectId.isValid(id),
+						type: "GET",
+						url: req.originalUrl,
+						status: "FAILURE",
+					},
+				});
+				return res.status(400).json({
+					message: "Invalid Entry",
+					request: {
+						type: "GET",
+						url: req.originalUrl,
+					},
+				});
+			}
+		})
+		.catch((error) => {
+			res.status(500).json({
+				message: "Failure: Unable to fetch dataset records...",
+				serverError: error.message,
+				request: {
+				type: "GET",
+				url: req.originalUrl,
+				},
+			});
+		});
+	});
+
+
 
 //POST endpoint: creates a new DATASET RECORD MongoDB document
 router.post('/', (req, res, next) => {

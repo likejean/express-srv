@@ -153,7 +153,7 @@ router.get('/:sensorId', (req, res, next) => {
 				},
 			});
         });
-});
+	});
 
 
 /////////////COMPLETED and TESTED////////////////////////////////
