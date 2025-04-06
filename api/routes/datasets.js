@@ -32,7 +32,7 @@ router.get('/', (req, res, next) => {
 					_id: doc._id,
 					sensorId: doc.sensorId,
 					sensorDescription: doc.sensorDescription,
-					errorPercentLimit: doc.errorPercentLimit,
+					errorLimit: doc.errorLimit,
 					datasetUnits: doc.datasetUnits,
 					chartTitle: doc.chartTitle,
 					chartYLabel: doc.chartYLabel,
@@ -150,7 +150,7 @@ router.post('/', (req, res, next) => {
 		chartYLabel,
 		chartXLabel,
 		sensorDatasets,
-		errorPercentLimit,
+		errorLimit,
 		errorUpperLimit,
 		errorLowerLimit      
 	} = req.body;
@@ -164,7 +164,7 @@ router.post('/', (req, res, next) => {
 		chartYLabel: chartYLabel + `, [${datasetUnits}]`,
 		chartXLabel: chartXLabel + `, [${datasetUnits}]`,
 		sensorDatasets,
-		errorPercentLimit,
+		errorLimit,
 		errorUpperLimit,
 		errorLowerLimit       
 	});  

@@ -4,7 +4,7 @@ const submitButton = document.getElementById("get-chart-dataset-form-values");
 const iconErrorLimits = document.getElementById("add-error-limits");
 const iconErrorDatapoint = document.getElementById("add-error-datapoint");
 
-const inputErrorLimits = document.getElementById("errorPercentLimit");
+const inputErrorLimits = document.getElementById("errorLimit");
 const inputCalibratorOutput = document.getElementById("calibratorOutput");
 const inputSensorError = document.getElementById("sensorError");
 
@@ -25,16 +25,20 @@ var newChartDatasetPostData = {}; //this object for storing POST request body
 Object.entries(_chartfactory.newDatasetFormInputs).forEach(([key, obj]) => {	
 	form.elements[key].value = obj.value;
 	//sets the error limit percent decimal to 2 significant figures
-	if (key === "errorPercentLimit") form.elements[key].value = obj.value.toFixed(2);
+	if (key === "errorLimit") form.elements[key].value = obj.value.toFixed(2);
 	if (key === "datasetStartAt") form.elements[key].value = obj.value.toFixed(2);
 	if (key === "datasetEndAt") form.elements[key].value = obj.value.toFixed(2);
 	submitButton.disabled = !_chartfactory.isSubmitButtonActive();
 	currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
+	
+	
+	//disable buttons if calibrationOutput or sensorError input fields are empty
 	if (key === "calibratorOutput" && (obj.value === null || obj.value === "") 
 		|| key === "sensorError" && (obj.value === null || obj.value === "")) 
 	addChartDatapointButton.disabled = true;
 	addChartErrorLimitsButton.disabled = true;
 	doneSensorDataEntriesButton.disabled = true;
+
 
 	if (_chartfactory.newDatasetFormInputs.datasetUnits.value === "" || _chartfactory.newDatasetFormInputs.calibrationName.value === "") {
 		if (!inputCalibratorOutput.disabled) inputCalibratorOutput.disabled = true;
@@ -81,7 +85,8 @@ function inputHandler(e) {
 	submitButton.disabled = !_chartfactory.isSubmitButtonActive();
 
 	//BLOCK sensorError and calibratorOutput user entries if either datasetUnits or calibrationName (or both) not selected by a user
-	if (_chartfactory.newDatasetFormInputs.datasetUnits.value 
+	if (_chartfactory.newDatasetFormInputs.errorType.value
+		&&_chartfactory.newDatasetFormInputs.datasetUnits.value 
 		&& _chartfactory.newDatasetFormInputs.calibrationName.value 
 		&& _chartfactory.newDatasetFormInputs.datasetUnits.value 
 		&& _chartfactory.newDatasetFormInputs.calibrationName.value){
@@ -127,7 +132,7 @@ function inputHandler(e) {
 			_chartfactory.newDatasetFormInputs.datasetUnits.value);
 	}
 
-
+	
 	
 
 	// Allow a user enter only valid positive or negative decimal numbers
@@ -199,6 +204,7 @@ function addNewDatapointToChart() {
 
 //generates plots for upper and lower error limits based upon error limit percentage input
 function addErrorLimitLinesToChart() {
+	const errorType = 
 	_chartfactory.buildErrorLimitChartLines();
 	//_chartfactory.currentDatasetSeries = _chartfactory.currentDatasetSeries + 2;  //tracks the number of datasets inserted into a chart
 	addErrorLimitChartLines(_chartfactory.errorUpperLimitLineDataset, _chartfactory.errorLowerLimitLineDataset);
@@ -216,11 +222,11 @@ function submitChartDatasets() {
 	const formData = new FormData(form);
 
 	//user input keys that must be cleaned out
-	const keysToRemove = ["sensorError", "calibratorOutput", "datasetSize", "seriesDescription", "seriesLabel", "calibrationName"];
+	const keysToRemove = ["sensorError", "calibratorOutput", "errorType", "datasetSize", "seriesDescription", "seriesLabel", "calibrationName"];
 	
 	
 	for (const [key, value] of formData.entries()) {		
-		if (key === "datasetStartAt" || key === "datasetEndAt" || key === "errorPercentLimit") newChartDatasetPostData[key] = Number(value);
+		if (key === "datasetStartAt" || key === "datasetEndAt" || key === "errorLimit") newChartDatasetPostData[key] = Number(value);
 		else newChartDatasetPostData[key] = value;
 	}
 	

@@ -49,13 +49,18 @@ class datasetFactory {
         this.currentSensorErrorLineDataset.push(datapoint);
     }
 
-    //constructs a dataset for chart lines to display upper and lower error limits
+    //constructs a dataset for chart lines to display upper and lower error limits (based on error type selected)
 	buildErrorLimitChartLines() {
         let x, y;
 		var increament = (Number(this.newDatasetFormInputs.datasetEndAt.value) - Number(this.newDatasetFormInputs.datasetStartAt.value)) / 10;				
 		for (var i = 0; i <= 10; i++){
-			x = Number(this.newDatasetFormInputs.datasetStartAt.value) + i * increament;
-			y = Math.abs((Number(this.newDatasetFormInputs.datasetStartAt.value) + i * increament)) * Number(this.newDatasetFormInputs.errorPercentLimit.value) / 100;
+			if (this.newDatasetFormInputs.errorType.value === "Relative Error"){   //in error percentage [%]
+				x = Number(this.newDatasetFormInputs.datasetStartAt.value) + i * increament;
+				y = Math.abs((Number(this.newDatasetFormInputs.datasetStartAt.value) + i * increament)) * Number(this.newDatasetFormInputs.errorLimit.value) / 100;
+			}else{  //in absolute measurement units
+				x = Number(this.newDatasetFormInputs.datasetStartAt.value) + i * increament;
+				y = Number(this.newDatasetFormInputs.errorLimit.value);
+			}			
 			
 			this.errorUpperLimitLineDataset.push({x: Number(x.toFixed(4)), y: Number(y.toFixed(6))});
 			this.errorLowerLimitLineDataset.push({x: Number(x.toFixed(4)), y: -Number(y.toFixed(6))});

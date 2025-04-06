@@ -73,7 +73,7 @@ const datasetSchema = mongoose.Schema(
 				}
 			}]
 		}],	
-		errorPercentLimit: {
+		errorLimit: {
 			type: Number,
 			required: false,
 			default: 1

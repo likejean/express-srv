@@ -68,7 +68,7 @@ function diableAllSensorDataEntries() {
 	currentSensorDatasetSize.style.paddingTop = '0px';
 	currentSensorDatasetSize.style.paddingBottom = '0px';
 
-	addChartErrorLimitsButton.disabled = false;
+	if(_chartfactory.newDatasetFormInputs.errorType.value) addChartErrorLimitsButton.disabled = false;
 	addSensorDataPlotButton.disabled = true;
 	
 }

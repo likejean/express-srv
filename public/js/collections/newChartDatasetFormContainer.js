@@ -5,8 +5,14 @@ const newChartDatasetFormContainer = {
 		inputRule: ``,
 		regex:""
 	},
-	errorPercentLimit: { 
+	errorLimit: { 
         value: 1.0,
+		validator: () => {},
+		inputRule: ``,
+		regex:""
+    },
+	errorType: { 
+        value: "",
 		validator: () => {},
 		inputRule: ``,
 		regex:""
