@@ -33,8 +33,8 @@ const sensorImageCollection = {
 	EID853: "thermometer_EID853.jpg",
 	EID854: "thermometer_EID854.jpg",
 	EID855: "thermometer_EID855.jpg",
-	EID1145: "thermocouple_conditioner_EID1145",
-	EID1184: "thermocouple_conditioner_EID1184",
-	EID1345: "thermocouple_conditioner_EID1345",
-	EID1346: "thermocouple_conditioner_EID1346"
+	EID1145: "thermocouple_conditioner_EID1145.jpg",
+	EID1184: "thermocouple_conditioner_EID1184.jpg",
+	EID1345: "thermocouple_conditioner_EID1345.jpg",
+	EID1346: "thermocouple_conditioner_EID1346.jpg"
 };
