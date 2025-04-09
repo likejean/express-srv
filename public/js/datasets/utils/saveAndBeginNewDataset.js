@@ -25,7 +25,8 @@ function saveAndBeginNewChartPlot() {
 	addChartDatapointButton.style.backgroundColor = "grey";	
 	["fa-solid", "fa-check", "fa-3x"].forEach(classItem => iconErrorDatapoint.classList.remove(classItem));
 	iconErrorDatapoint.classList.add('fa-plus');
-	addChartDatapointButton.disabled = true;
+	
+	addChartDatapointButton.disabled = false;
 	currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
 	currentSensorDatasetSize.style.backgroundColor = 'rgb(5, 238, 94)';
 	currentSensorDatasetSize.style.borderColor = 'rgb(5, 238, 94)';
