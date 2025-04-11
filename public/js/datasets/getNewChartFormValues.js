@@ -30,6 +30,24 @@ Object.entries(_chartfactory.newDatasetFormInputs).forEach(([key, obj]) => {
 	if (key === "datasetEndAt") form.elements[key].value = obj.value.toFixed(2);
 	submitButton.disabled = !_chartfactory.isSubmitButtonActive();
 	currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
+	
+	
+	//disable buttons if calibrationOutput or sensorError input fields are empty
+	if (key === "calibratorOutput" && (obj.value === null || obj.value === "") 
+		|| key === "sensorError" && (obj.value === null || obj.value === "")) 
+	addChartDatapointButton.disabled = true;
+	addChartErrorLimitsButton.disabled = true;
+	doneSensorDataEntriesButton.disabled = true;
+
+
+	if (_chartfactory.newDatasetFormInputs.datasetUnits.value === "" || _chartfactory.newDatasetFormInputs.calibrationName.value === "") {
+		if (!inputCalibratorOutput.disabled) inputCalibratorOutput.disabled = true;
+		inputCalibratorOutput.value = null;
+		if (!inputSensorError.disabled) inputSensorError.disabled = true;	
+		inputSensorError.value = null;
+	}
+
+	if(_chartfactory.currentSensorErrorLineDataset.length === 0) addSensorDataPlotButton.disabled = true;
 
 });
 
@@ -66,9 +84,45 @@ function inputHandler(e) {
 	newChartDatasetPostData[name] = value;
 	submitButton.disabled = !_chartfactory.isSubmitButtonActive();
 
-	
+	//BLOCK sensorError and calibratorOutput user entries if either datasetUnits or calibrationName (or both) not selected by a user
+	if (_chartfactory.newDatasetFormInputs.errorType.value
+		&&_chartfactory.newDatasetFormInputs.datasetUnits.value 
+		&& _chartfactory.newDatasetFormInputs.calibrationName.value 
+		&& _chartfactory.newDatasetFormInputs.datasetUnits.value 
+		&& _chartfactory.newDatasetFormInputs.calibrationName.value){
+		if (inputCalibratorOutput.disabled) inputCalibratorOutput.disabled = false;
+		if (inputSensorError.disabled) inputSensorError.disabled = false;	
+	}else{
+		if (!inputCalibratorOutput.disabled) inputCalibratorOutput.disabled = true;
+		inputCalibratorOutput.value = null;
+		if (!inputSensorError.disabled) inputSensorError.disabled = true;	
+		inputSensorError.value = null;
+	}
+
 	if(_chartfactory.currentDatasetSeries.length === 0) addSensorDataPlotButton.disabled = true;
 
+	
+	// Allow a user to enter positive integers only
+	if(name === "datasetSize") {
+		e.target.value = Math.trunc(parseFloat(value));
+		if (inputCalibratorOutput.disabled)  inputCalibratorOutput.disabled = false;
+		inputCalibratorOutput.value = null;
+		if (inputSensorError.disabled)  inputSensorError.disabled = false;	
+		inputSensorError.value = null;
+		addChartDatapointButton.style.backgroundColor = "grey";	
+		["fa-solid", "fa-check", "fa-3x"].forEach(classItem => iconErrorDatapoint.classList.remove(classItem));
+		iconErrorDatapoint.classList.add('fa-plus');
+		addChartDatapointButton.disabled = false;
+		currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
+		currentSensorDatasetSize.style.backgroundColor = 'rgb(5, 238, 94)';
+		currentSensorDatasetSize.style.borderColor = 'rgb(5, 238, 94)';
+		currentSensorDatasetSize.style.paddingTop = '0px';
+		currentSensorDatasetSize.style.paddingBottom = '0px';
+		addSensorDataPlotButton.disabled = true;
+		
+	}
+
+		
 
 	//Updates preview chart x and y labels
 	if(name === "datasetUnits" || name === "chartXLabel" || name === "chartYLabel") {
@@ -78,6 +132,8 @@ function inputHandler(e) {
 			_chartfactory.newDatasetFormInputs.datasetUnits.value);
 	}
 
+	
+	
 
 	// Allow a user enter only valid positive or negative decimal numbers
 	if(name === "sensorError" || name === "calibratorOutput") {	
@@ -94,6 +150,14 @@ function inputHandler(e) {
 		: 
 		_chartfactory.insertChartDatapoint(value, "sensorError")
 	}
+	
+		//Check if both calibratorOutput and sensorError are non-zero numbers: if it's true, enables add button for sensor datapoint
+	if ((name === "calibratorOutput" && isNonZeroNumber(Number(value)) && isNonZeroNumber(Number(_chartfactory.newDatasetFormInputs.sensorError.value))
+		|| name === "sensorError" && isNonZeroNumber(Number(value)) && isNonZeroNumber(Number(_chartfactory.newDatasetFormInputs.calibratorOutput.value))))
+		addChartDatapointButton.disabled = false;	
+	else if (name === "calibratorOutput" || name === "sensorError") addChartDatapointButton.disabled = true;
+		
+
 
 	//Upates the preview chart title
 	if(name === "chartTitle") {
@@ -160,6 +224,7 @@ function submitChartDatasets() {
 	//user input keys that must be cleaned out
 	const keysToRemove = ["sensorError", "calibratorOutput", "errorType", "datasetSize", "seriesDescription", "seriesLabel", "calibrationName"];
 	
+	debugger;
 	
 	for (const [key, value] of formData.entries()) {		
 		if (key === "datasetStartAt" || key === "datasetEndAt" || key === "errorLimit") newChartDatasetPostData[key] = Number(value);
@@ -185,7 +250,9 @@ function submitChartDatasets() {
 	newChartDatasetPostData["errorLowerLimit"] = _chartfactory.errorLowerLimitLineDataset;
 
 	DeleteKeys(newChartDatasetPostData, keysToRemove);
-	createNewChartDatasetRecord();
+	console.log(newChartDatasetPostData);
+	
+	//createNewChartDatasetRecord();
 	inputs.forEach((item) => item.removeEventListener("input", inputHandler));
 }
 
@@ -196,5 +263,4 @@ function isNonZeroNumber(input) {
 	}
 	return input !== 0 && !isNaN(input) && isFinite(input);
 }
-
 

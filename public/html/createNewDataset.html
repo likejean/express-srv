@@ -408,14 +408,61 @@
 					<!-- here is where dynamically generated datasets charts are appended -->
 				</div>
 
+
+
+				<!-- Warning Modal: -->
+                <div
+                    class="modal fade"
+                    id="createNewChartModal"
+                    data-bs-backdrop="static"
+                    data-bs-keyboard="false"
+                    tabindex="-1"
+                    aria-labelledby="createNewChartModalLabel"
+                    aria-hidden="true"
+                >
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header"> 
+                                <h1 class="modal-title fs-5 text-center container-fluid" id="createNewChartModal">
+                                    <span class="new-cal-record-modal-header badge bg-info"></span>  
+                                </h1>  
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                ></button>
+                            </div>
+                            <div class="modal-body">
+                                <h3>Do you want to add this chart?</h3>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">
+                                    No
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick=createNewChartDatasetRecord()>
+                                    Yes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 				<!--Buttons Container-->
                 <div class="container">
                     <div class="row m-5">
                         <div class="form-group col text-center">
 							<button 
+                                id="get-chart-form-values"
+                                type="submit"
+                                data-bs-toggle="modal"
+                                data-bs-target="#createNewChartModal"
+                                class="btn btn-primary">Create</button>
+                            </button>  
+							<button 
 								onclick=submitChartDatasets()
                                 id="get-chart-dataset-form-values"                              
-                                class="btn btn-primary">Submit</button>
+                                class="btn btn-secondary">Prepare</button>
                             </button>                               
                             <button type="button" class="btn btn-secondary">Reset</button>
                             <a href="../index.html" class="btn btn-dark">Back</a>
