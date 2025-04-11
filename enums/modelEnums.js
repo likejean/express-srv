@@ -29,6 +29,7 @@ const calibrationFrequencies = [
 
 const calibrationUnits = [
 	'in',
+    'Fahrenheit',
 	'microstrain',
 	'kip',
 	'lbf',
