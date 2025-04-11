@@ -224,15 +224,15 @@ function submitChartDatasets() {
 	//user input keys that must be cleaned out
 	const keysToRemove = ["sensorError", "calibratorOutput", "errorType", "datasetSize", "seriesDescription", "seriesLabel", "calibrationName"];
 	
-	debugger;
 	
-	for (const [key, value] of formData.entries()) {		
+	for (const [key, value] of formData.entries()) {	
 		if (key === "datasetStartAt" || key === "datasetEndAt" || key === "errorLimit") newChartDatasetPostData[key] = Number(value);
 		else newChartDatasetPostData[key] = value;
 	}
 	
 	//adds new key-pairs to POST request object
 	newChartDatasetPostData["sensorId"] = _store.activeSensorCard._id;
+	newChartDatasetPostData["errorLimit"] = Number(newChartDatasetPostData["errorLimit"]);
 	newChartDatasetPostData["sensorDescription"] =`${_store.activeSensorCard.description} ${ _store.activeSensorCard.EID}`;
 	
 	//stores array of sensor error output dataset(s). An array element contains the following object:
