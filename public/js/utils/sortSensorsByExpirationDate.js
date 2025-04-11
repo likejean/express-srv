@@ -1,4 +1,4 @@
-function filterSensorsByDescription() {
+function sortSensorsByExpirationDate() {
 
     var tableBody = document.getElementsByTagName("tbody");	
 
