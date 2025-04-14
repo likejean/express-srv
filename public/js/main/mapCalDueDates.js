@@ -19,7 +19,5 @@ const mapCalDueDatesAndBuildTableCell = function (data, sensorId) {
         }
 		
     }
-
-
     return cell;
 };

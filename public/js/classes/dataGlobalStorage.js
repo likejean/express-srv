@@ -98,6 +98,7 @@ class dataStorage {
         }, {});
     }
 
+	//verifies if any chart(s) exist for a selected sensor
 	isDatasetChartsExist(sensorId) {
 		return this.datasets.data.payload.some(item => item.sensorId === sensorId);
 	}
