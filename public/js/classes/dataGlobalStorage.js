@@ -97,5 +97,9 @@ class dataStorage {
             return obj;
         }, {});
     }
+
+	isDatasetChartsExist(sensorId) {
+		return this.datasets.data.payload.some(item => item.sensorId === sensorId);
+	}
 }
 

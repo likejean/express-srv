@@ -42,7 +42,7 @@ function showSensorInfoCard(
   	//Check if any 'active' table rows left over from previous click/touch events
     for (const [key, value] of Object.entries(_store.sensorTableActiveRowObject)) {
         
-		//deactivate any different tables rows and hide info card (if it's still displayed)
+		//deactivates any different tables rows and hide info card (if, at least, one still displayed)
 		if (value === "active" && key !== `row${tableRowIndex}`) {
 			_store.sensorTableActiveRowObject[`${key}`] = "inactive";
 			tableRow = document.getElementById(key);
