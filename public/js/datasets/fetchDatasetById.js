@@ -1,4 +1,6 @@
 const sensorDescription = document.getElementById("sensor-full-description");
+const chartTitle = document.getElementById("edit-chart-title");
+
 
 const _store = new dataStorage();   //store all information for active/selected sensor card
 
@@ -14,8 +16,9 @@ const fetchChartDatasetById = async () => {
     .get(`../api/datasets/${id}`)
     .then((result) => {
         _store.activeDatasetChart = result.data.dataset;
-		console.log(_store.activeDatasetChart)
 		sensorDescription.innerText = _store.activeDatasetChart.sensorDescription;
+		chartTitle.innerText = _store.activeDatasetChart.chartTitle;
+		createChartDatasetsAccordion();
 		
     })
     .catch((error) => {
