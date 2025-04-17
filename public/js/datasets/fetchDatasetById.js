@@ -1,8 +1,6 @@
 const sensorDescription = document.getElementById("sensor-full-description");
-const chartTitle = document.getElementById("edit-chart-title");
+const chartTitle = document.getElementById("editChartTitleSpan");
 
-
-const _store = new dataStorage();   //store all information for active/selected sensor card
 
 const fetchChartDatasetById = async () => {
     //obtain query string by id
@@ -15,9 +13,9 @@ const fetchChartDatasetById = async () => {
     await axios
     .get(`../api/datasets/${id}`)
     .then((result) => {
-        _store.activeDatasetChart = result.data.dataset;
-		sensorDescription.innerText = _store.activeDatasetChart.sensorDescription;
-		chartTitle.innerText = _store.activeDatasetChart.chartTitle;
+        _chartfactory.dataset = result.data.dataset;
+		sensorDescription.innerText = result.data.dataset.sensorDescription;
+		chartTitle.innerText = result.data.dataset.chartTitle;
 		createChartDatasetsAccordion();
 		
     })

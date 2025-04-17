@@ -43,28 +43,35 @@
 						<div class="row d-none d-sm-flex m-2">
 							<div class="form-group col text-center">      
 
-								<div class="container">
+								<div class="row d-flex justify-content-center">
 									<div class="row my-5">
 										<div class="form-group col text-center">
 											<div class="badge bg-success"><span class="h3 text-uppercase" id="sensor-full-description"></span></div>
 										</div>
 										
 									</div>
-									<div class="row my-2">
-										<div class="alert alert-info" role="alert">
-											<h3 id="edit-chart-title"></h3>
-										</div>
-									</div>
-									<div class="row my-2">
-										<div class="form-group col text-center">
-											
-										</div>
-									</div>
 
-									<div class="accordion accordion-flush my-3" id="accordion-chart-datasets">
+									<div class="card border-success my-5" style="max-width: 55rem;">
+										<div class="card-body text-success">
+											<div class="d-flex align-items-center">
+												<div class="col-5 d-none d-sm-flex"><span style="font-size:x-large;">Chart Title:</span></div>               
+												<div id="chartTitleWrapper" class="col-11 col-sm-6 mb-1 gutter"><span style="font-size:x-large;" class="chart-title-span" id="editChartTitleSpan"></span></div>                
+												<div class="p-2 col-1"><i id="chartTitleIcon" class="fa-solid fa-2x fa-ellipsis-vertical"></i></div>							
+											</div>
+										</div>
+										<div class="card-body text-success">
+											<div class="accordion accordion-flush my-3" id="accordion-chart-datasets">
+									
+											</div>
+										</div>
 										
 									</div>
-									
+
+									<hr />
+									<div class="d-flex align-items-center">
+										<div class="col-12"><span id="inputErrorMessage"></span></div>                
+									</div>
+												
 								</div>
 
 								<a href="../index.html" class="btn btn-dark">Back</a>
@@ -85,10 +92,27 @@
 		crossorigin="anonymous"></script>    
     </script>
 
+	<script src="../js/classes/datasetGlobalFactory.js"></script>
+	<script src="../js/utils/removeAllChildNodes.js"></script>
+	<script src="../js/utils/trimStringBySubstring.js"></script>
+	<script src="../js/utils/attachEventListenersToIcons.js"></script>
 
-	<script src="../js/classes/dataGlobalStorage.js"></script>
+	<!--Get both containers for _chartfactory-->
+	<script src="../js/collections/editChartContainer.js"></script>
+    <script src="../js/collections/newChartDatasetFormContainer.js"></script>
+
+	
 	<script src="../js/datasets/fetchDatasetById.js"></script>
 	<script src="../js/datasets/utils/createChartDatasetsAccordion.js"></script>
 
+	<script src="../js/datasets/utils/editChartIconClickEventCallback.js"></script>	
+
+	<script>
+
+		//attach event listener to all icons in Calibration Card for updates/edits
+		let icons = document.querySelectorAll(".fa-ellipsis-vertical");
+		attachEventListenersToIcons(icons, editChartIconClickEventCallback);
+
+    </script>
 	
 </html>

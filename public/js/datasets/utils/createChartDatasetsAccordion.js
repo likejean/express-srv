@@ -2,8 +2,8 @@ const chartAccordionWrapper = document.getElementById('accordion-chart-datasets'
 function createChartDatasetsAccordion() {
 
 	let accordionHtmlItem;
-	const totalQtyDatasetsPerChart = _store.activeDatasetChart.sensorDatasets.length;
-	const chartDatasets = _store.activeDatasetChart.sensorDatasets;
+	const totalQtyDatasetsPerChart = _chartfactory.dataset.sensorDatasets.length;
+	const chartDatasets = _chartfactory.dataset.sensorDatasets;
 
 
 	for (let i = 0; i < totalQtyDatasetsPerChart; i++) {		

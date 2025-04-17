@@ -87,6 +87,7 @@ const newChartDatasetFormContainer = {
 
 //Instantiation of datasetFactory Class
 const _chartfactory = new datasetFactory(
-	"",
+	editChartInputContainer,
 	newChartDatasetFormContainer
 );
+
