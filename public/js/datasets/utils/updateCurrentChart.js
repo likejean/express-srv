@@ -28,6 +28,16 @@ function updateCurrentChartLine(datasetCount) {
 
 }
 
+function reduceCurrentChartLine(datasetCount) {
+	//updates a chart global factory
+	_chartfactory.currentSensorErrorLineDataset.pop();
+
+	//updates a preview chart
+	previewChart.data.datasets[datasetCount].data.pop();
+	previewChart.update();
+
+}
+
 //This function updates legent text for the first series dataset
 function updateCurrentDatasetLegend(legendText, datasetCount) {  
 	

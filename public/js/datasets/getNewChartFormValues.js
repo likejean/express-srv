@@ -182,6 +182,12 @@ function inputHandler(e) {
 }
 
 
+//Remove a datapoint from chart
+function removeDatapointFromChart() {
+	reduceCurrentChartLine(_chartfactory.currentDatasetSeries);
+	currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
+}
+
 //Adds a new datapoint to chart
 function addNewDatapointToChart() {
 	updateCurrentChartLine(_chartfactory.currentDatasetSeries);

@@ -154,7 +154,8 @@ td {
 	border-radius: 10%;
 }
 
-#add-chart-datapoint {
+#add-chart-datapoint, #remove-chart-datapoint {
+	margin-right: 2px;
 	margin-bottom: 25px;
 }
 
