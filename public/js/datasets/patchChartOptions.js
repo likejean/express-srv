@@ -10,9 +10,6 @@ function patchChartOptionsRecord() {
   //get this helper function from utils...
     chartOptionsPatchRequestData = filterObjectAndTransform(_chartfactory.inputWrappers, (item) => item.status === true);    
 
-	console.log("chartOptionsPatchRequestData", chartOptionsPatchRequestData);
-
-
   //use PATCH API endpoint to update existing calibration record
     axios
     .patch(`../api/datasets/${id}`, chartOptionsPatchRequestData)
