@@ -219,7 +219,7 @@ router.post('/', (req, res, next) => {
         quantity,
         manufacturer        
     } = req.body;
-   
+
 
     const sensor = new Sensor({
         _id,   

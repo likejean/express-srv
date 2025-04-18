@@ -5,6 +5,7 @@ function editChartIconClickEventCallback (event) {
 	const wrapper = document.getElementById(wrapperName);
 	let input = document.createElement(_chartfactory.inputWrappers[wrapperName].tag);
 	let icon = document.getElementById(_chartfactory.inputWrappers[wrapperName].attributes.name.concat("Icon"));
+	const patchButton = document.getElementById("patch-chart-options");
 
 	//creates toggle functionality for icons in Calibration Summary Card
 	if (!_chartfactory.inputWrappers[wrapperName].status) {
@@ -32,7 +33,7 @@ function editChartIconClickEventCallback (event) {
 
 		//attach event listener to edit input
 		input.addEventListener("input", editChartInputChangeValueCallback);
-		//patchButton.disabled = !_calfactory.isPatchButtonActive();
+		patchButton.disabled = !_chartfactory.isPatchButtonActive(); 
 
 	} else {
 
@@ -44,7 +45,7 @@ function editChartIconClickEventCallback (event) {
 		_chartfactory.inputWrappers[wrapperName].status = false;
 		wrapper.append(..._chartfactory.inputWrappers[wrapperName].childNodes);
 		_chartfactory.inputWrappers[wrapperName].childNodes = [];
-		//patchButton.disabled = !_calfactory.isPatchButtonActive();
+		patchButton.disabled = !_chartfactory.isPatchButtonActive();
 	}
 	
 }

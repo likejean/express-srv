@@ -137,6 +137,46 @@ router.get('/:datasetId', (req, res, next) => {
 	});
 
 
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+//PATCH endpoint: update PARTIALLY existing chart record/document by ID: (title, xLabel, yLabel)
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+router.patch("/:datasetId", (req, res, next) => {
+	const id = req.params.datasetId;
+	Dataset.updateOne({ _id: id }, { $set: { ...req.body } })
+	.exec()
+	.then((result) => {
+		console.log({
+			request: {
+				type: "PATCH",
+				url: req.originalUrl,
+				status: "SUCCESS",
+			},
+		});
+		res.status(200).json({
+			message: `Chart record w/ id: '${id}' was Updated.`,
+			request: {
+				type: "PATCH",
+			},
+			result,
+		});
+	})
+	.catch((error) => {
+		res.status(500).json({
+			message: "Failure: Unable to update dataset chart record...",
+			isIdValid: mongoose.Types.ObjectId.isValid(id),
+			serverError: error.message,
+			request: {
+				type: "PATCH",
+				url: req.originalUrl,
+			},
+		});
+	});
+});
+
+
+
 
 //POST endpoint: creates a new DATASET RECORD MongoDB document
 router.post('/', (req, res, next) => {
