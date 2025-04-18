@@ -31,13 +31,13 @@ function editChartIconClickEventCallback (event) {
 		wrapper.appendChild(input);
 
 		//attach event listener to edit input
-		//input.addEventListener("input", editCalibrationInputChangeValueCallback);
+		input.addEventListener("input", editChartInputChangeValueCallback);
 		//patchButton.disabled = !_calfactory.isPatchButtonActive();
 
 	} else {
 
 		//reverse changes to original wrapper state and calibration factory
-		//input.removeEventListener("input", editCalibrationInputChangeValueCallback);
+		input.removeEventListener("input", editChartInputChangeValueCallback);
 		document.getElementById("inputErrorMessage").textContent = "";
 		removeAllChildNodes(wrapper);
 		icon.classList.replace("fa-file-pen", "fa-ellipsis-vertical");

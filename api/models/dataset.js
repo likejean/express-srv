@@ -53,8 +53,7 @@ const datasetSchema = mongoose.Schema(
 			seriesDescription: {
 				type: String, 
 				required: false
-			},
-			
+			},			
 			seriesLabel: {
 				type: String,
 				required: true,

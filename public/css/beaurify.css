@@ -57,10 +57,17 @@ display: inline-block;
 }
 
 .cal-notice-span,
-.chart-title-span,
 .sensor-notice-span, 
 .user-notice-span {
 	font-weight: bold;
+}
+
+.chart-title-span,
+.chart-x-axis-label-span,
+.chart-y-axis-label-span
+{
+	font-weight: bold;
+	font-size: x-large;
 }
 
 #range-levels-validation,

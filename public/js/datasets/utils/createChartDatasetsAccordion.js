@@ -1,4 +1,6 @@
 const chartAccordionWrapper = document.getElementById('accordion-chart-datasets');
+
+
 function createChartDatasetsAccordion() {
 
 	let accordionHtmlItem;
@@ -7,7 +9,7 @@ function createChartDatasetsAccordion() {
 
 
 	for (let i = 0; i < totalQtyDatasetsPerChart; i++) {		
-		accordionHtmlItem = `<div class="accordion-item">
+		accordionHtmlItem = `<div class="accordion-item border border-2 border-success border-opacity-25 border-bottom-0 border-info my-3">
 			<h2 class="accordion-header">
 				<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#flush-collapse-${i + 1}" aria-expanded="false" aria-controls="flush-collapse-${i + 1}">
 					<h3>Dataset-${i + 1}: <span class="badge badge-light">PLOT#${i + 1}</span></h3>

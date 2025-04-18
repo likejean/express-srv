@@ -1,5 +1,7 @@
 const sensorDescription = document.getElementById("sensor-full-description");
 const chartTitle = document.getElementById("editChartTitleSpan");
+const editChartXLabelSpan = document.getElementById("editChartXLabelSpan");
+const editChartYLabelSpan = document.getElementById("editChartYLabelSpan");
 
 
 const fetchChartDatasetById = async () => {
@@ -16,6 +18,8 @@ const fetchChartDatasetById = async () => {
         _chartfactory.dataset = result.data.dataset;
 		sensorDescription.innerText = result.data.dataset.sensorDescription;
 		chartTitle.innerText = result.data.dataset.chartTitle;
+        editChartXLabelSpan.innerText = result.data.dataset.chartXLabel;
+        editChartYLabelSpan.innerText = result.data.dataset.chartYLabel;
 		createChartDatasetsAccordion();
 		
     })
