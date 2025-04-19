@@ -26,7 +26,7 @@ function saveAndBeginNewChartPlot() {
 	["fa-solid", "fa-check", "fa-3x"].forEach(classItem => iconErrorDatapoint.classList.remove(classItem));
 	iconErrorDatapoint.classList.add('fa-plus');
 	
-	addChartDatapointButton.disabled = false;
+	addChartDatapointButton.disabled = true;
 	currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
 	currentSensorDatasetSize.style.backgroundColor = 'rgb(5, 238, 94)';
 	currentSensorDatasetSize.style.borderColor = 'rgb(5, 238, 94)';
@@ -35,6 +35,9 @@ function saveAndBeginNewChartPlot() {
 
 	//enable the DONE button in case if a user finished plots creation for the chart
 	doneSensorDataEntriesButton.disabled = false;
+	if(_chartfactory.getSensorErrorLineDatasetCurrentLength() === 0) {
+		removeChartDatapointButton.disabled = true;
+	}
 
 	//prepare a blank object item for the next chart dataset
 	const newDatasetLine = {
@@ -52,8 +55,7 @@ function saveAndBeginNewChartPlot() {
 
 
 
-
-function diableAllSensorDataEntries() {
+function disableAllSensorDataEntries() {
 
 	inputCalibratorOutput.value = null;
 	

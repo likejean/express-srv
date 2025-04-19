@@ -16,6 +16,7 @@ const prepareDatasetButton = document.getElementById("prepare-chart-dataset-form
 const submitChartDatasets = document.getElementById("submit-chart-datasets")
 const addChartErrorLimitsButton = document.getElementById("add-chart-error-limits");
 const addChartDatapointButton = document.getElementById("add-chart-datapoint");
+const removeChartDatapointButton = document.getElementById("remove-chart-datapoint");
 const addSensorDataPlotButton = document.getElementById("add-current-line-plot");
 const doneSensorDataEntriesButton = document.getElementById("disable-sensor-data-entries");
 
@@ -52,7 +53,10 @@ Object.entries(_chartfactory.newDatasetFormInputs).forEach(([key, obj]) => {
 		inputSensorError.value = null;
 	}
 
-	if(_chartfactory.currentSensorErrorLineDataset.length === 0) addSensorDataPlotButton.disabled = true;
+	if(_chartfactory.currentSensorErrorLineDataset.length === 0) {
+		addSensorDataPlotButton.disabled = true;
+		removeChartDatapointButton.disabled = true;
+	} 
 
 });
 
@@ -186,6 +190,20 @@ function inputHandler(e) {
 function removeDatapointFromChart() {
 	reduceCurrentChartLine(_chartfactory.currentDatasetSeries);
 	currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
+
+	if(Number(_chartfactory.newDatasetFormInputs.datasetSize.value) === _chartfactory.getSensorErrorLineDatasetCurrentLength() + 1){
+		addChartDatapointButton.style.backgroundColor = "grey";	
+		["fa-solid", "fa-check", "fa-3x"].forEach(classItem => iconErrorDatapoint.classList.remove(classItem));
+		iconErrorDatapoint.classList.add('fa-plus');		
+		addChartDatapointButton.disabled = false;
+		currentSensorDatasetSize.style.backgroundColor = 'rgb(5, 238, 94)';
+		currentSensorDatasetSize.style.borderColor = 'rgb(5, 238, 94)';
+		currentSensorDatasetSize.style.paddingTop = '0px';
+		currentSensorDatasetSize.style.paddingBottom = '0px';
+	}
+	if(_chartfactory.getSensorErrorLineDatasetCurrentLength() === 0) {
+		removeChartDatapointButton.disabled = true;
+	}
 }
 
 //Adds a new datapoint to chart
@@ -209,7 +227,10 @@ function addNewDatapointToChart() {
 	}
 	else {
 		addSensorDataPlotButton.disabled = true;
-		currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();	
+		currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
+		if(_chartfactory.getSensorErrorLineDatasetCurrentLength() > 0) {
+			removeChartDatapointButton.disabled = false;
+		}	
 	}
 }
 

@@ -312,7 +312,7 @@
 									id="disable-sensor-data-entries"
 									type="button" 
 									class="btn btn-outline-success m-1" 
-									onclick=diableAllSensorDataEntries()
+									onclick=disableAllSensorDataEntries()
 								>
 									Done
 								</button>
@@ -470,9 +470,9 @@
 							<button 
 								onclick=prepareChartDatasets()
                                 id="prepare-chart-dataset-form-values"                              
-                                class="btn btn-secondary">Prepare</button>
+                                class="btn btn-outline-primary">Prepare</button>
                             </button>                               
-                            <button type="button" class="btn btn-secondary">Reset</button>
+                            <button type="button" onclick=resetNewChartDatasetForm() class="btn btn-outline-info">Reset</button>
                             <a href="../index.html" class="btn btn-dark">Back</a>
                         </div>
                     </div>
