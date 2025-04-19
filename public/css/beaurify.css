@@ -64,10 +64,13 @@ display: inline-block;
 
 .chart-title-span,
 .chart-x-axis-label-span,
-.chart-y-axis-label-span
+.chart-y-axis-label-span,
+.chart-series-label-span,
+.chart-series-description-span
 {
 	font-weight: bold;
-	font-size: x-large;
+	font-size: 20px;
+	color: #0e1d64;
 }
 
 #range-levels-validation,

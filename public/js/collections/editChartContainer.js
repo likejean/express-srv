@@ -1,5 +1,8 @@
+const limitChartSeriesDescriptionText = /^.{10,300}$/;
 const limitChartTitleText = /^.{10,75}$/;
 const limitChartAxisLabelText = /^.{10,40}$/;
+const limitChartSeriesLabelText = /^.{5,25}$/;
+const noSpecial = /^[^*|\"<>[\]{}`\\';@&$]+$/;
 
 const editChartInputContainer = {
     //Chart Options: Title, X-axis Label, Y-axis Lable
@@ -39,13 +42,16 @@ const editChartInputContainer = {
 
     //Datasets
 	seriesDescriptionWrapper: {
-        tag: "input",
-		attributes: {type: "text", name: "seriesDescription", style:"border-color:darkgreen;"},
+        tag: "textarea",
+		attributes: {type: "text", name: "seriesDescription", rows: "10", style:"border-color:blue;"},
         classes: ["form-control"],
         status: false,
         value: "",
         childNodes: [],
-        databaseName: "seriesDescription",
+        databaseName: "seriesDescription",        
+        validator: (text) => (limitChartSeriesDescriptionText.test(text)) ? (noSpecial.test(text)) ? true : false : false,
+        inputRule: `No special characters allowed and minimum 10 and maximum 300 characters are allowed here...`,
+		
     },
 	seriesLabelWrapper: {
         tag: "input",
@@ -55,5 +61,7 @@ const editChartInputContainer = {
         value: "",
         childNodes: [],
         databaseName: "seriesLabel",
+		validator: (text) => (limitChartSeriesLabelText.test(text)) ? true : false,
+        inputRule: `Minimum 5 and maximum 25 characters are allowed here...`,
     },
 }

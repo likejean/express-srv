@@ -55,7 +55,7 @@
 
 										<div class="row mt-3">
 											<div class="form-group col text-center">
-												<p class="h3 text-uppercase">Options</p>
+												<p class="h3 text-uppercase" style="color:blueviolet;">Options</p>
 											</div>
 											
 										</div>
@@ -80,13 +80,13 @@
 										<div class="card-body text-success">
 											<div class="d-flex">
 												<div class="col-5 d-none d-sm-flex"><span style="font-size:x-large;">Y-Axis Label:</span></div>               
-												<div id="chartYLabelWrapper" class="col-11 col-sm-6 mb-1 gutter text-start"><span style="font-size:x-large;" class="chart-y-axis-label-span" id="editChartYLabelSpan"></span></div>                
+												<div id="chartYLabelWrapper" class="col-11 col-sm-6 mb-1 gutter text-start"><span class="chart-y-axis-label-span pull-left" id="editChartYLabelSpan"></span></div>                
 												<div class="p-2 col-1"><i id="chartYLabelIcon" class="fa-solid fa-2x fa-ellipsis-vertical"></i></div>							
 											</div>
 										</div>
 
 										<div class="row mt-3">
-											<div class="form-group col text-center">
+											<div class="form-group col text-center" style="color:blueviolet;">
 												<p class="h3 text-uppercase">Datasets</p>
 											</div>
 											
@@ -95,7 +95,7 @@
 										<!-- chart datasets -->
 										<div class="card-body text-success">
 											<div class="accordion accordion-flush my-3" id="accordion-chart-datasets">
-									
+												<!-- Javascript will create the datasets accordion here. -->
 											</div>
 										</div>
 										
@@ -149,9 +149,15 @@
 
 	<script>
 
-		//attach event listener to all icons in Calibration Card for updates/edits
-		let icons = document.querySelectorAll(".fa-ellipsis-vertical");
-		attachEventListenersToIcons(icons, editChartIconClickEventCallback);
+		window.onload = function () {
+            setTimeout(function () {
+                //attach event listener to all icons in Calibration Card for updates/edits
+				let icons = document.querySelectorAll(".fa-ellipsis-vertical");
+				attachEventListenersToIcons(icons, editChartIconClickEventCallback);
+            }, 500); // Delay of 0.5 seconds
+        };
+
+		
 
     </script>
 	
