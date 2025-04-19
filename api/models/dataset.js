@@ -74,7 +74,7 @@ const datasetSchema = mongoose.Schema(
 		}],	
 		errorLimit: {
 			type: Number,
-			required: false,
+			required: true,
 			default: 1
 		},
 		errorUpperLimit: {
