@@ -31,9 +31,9 @@
     <body>
         <div class="container">
             <div class="jumbotron pt-4">
-                <h1 class="new-sensor-form-title">Hysteresis Chart</h1>
-                <h4>Please, use this form to create a hysteresis chart for sensor</h4>
-                <p>This page is intended to enter sensor output to display sensor linearity and hysteresis performance.</p>
+                <h1 class="new-sensor-form-title">New Chart</h1>
+                <h4>Please, use this form to create a new chart for sensor</h4>
+                <p>This page is intended to enter sensor output to display sensor absolute errors, linearity, hysteresis performance.</p>
             </div>
 
 			<div class="container">
@@ -51,7 +51,7 @@
 			</div>
 
 
-			<form id="new-chart-dataset-form">
+			<form id="new-chart-form">
 
 				<!--Calibration Selection and Error Limit Criteria-->
                 <div class="control-form-field-box form-group my-4 p-2">
@@ -496,7 +496,7 @@
 
     <!--Fetch all neccessary data from database for this page-->
 	<script src="../js/datasets/fetchAllSensorInfoById.js"></script>
-	<script src="../js/datasets/createNewDatasetRecord.js"></script>
+	<script src="../js/datasets/createNewChartRecord.js"></script>
 	
 
     <!--Get both containers for _chartfactory-->

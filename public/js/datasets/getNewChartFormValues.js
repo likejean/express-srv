@@ -1,5 +1,5 @@
-//const form = document.getElementById("new-chart-dataset-form");
-const form = document.getElementById("new-chart-dataset-form");
+//const form = document.getElementById("new-chart-form");
+const form = document.getElementById("new-chart-form");
 
 //icon HTML elements
 const iconErrorLimits = document.getElementById("add-error-limits");

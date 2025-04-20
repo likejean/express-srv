@@ -27,8 +27,8 @@ function showSensorInfoCard(
 	fetchEditSensorButton.href = `./html/editSensor.html?id=${sensorId}`;
 
 	//construct .href value (url w/ query string containing sensor id) for "UPDATE" button
-	const createNewDatasetButton = document.getElementById("create-new-sensor-dataset");
-	createNewDatasetButton.href = `./html/createNewDataset.html?id=${sensorId}`;
+	const createNewChart = document.getElementById("create-new-sensor-chart");
+	createNewChart.href = `./html/createChart.html?id=${sensorId}`;
 
     //Updates html .src attribute to display sensor image
     updateSensorImage(EID);

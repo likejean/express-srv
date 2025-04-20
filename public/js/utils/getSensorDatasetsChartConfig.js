@@ -37,12 +37,12 @@ function getSensorDatasetsChartConfig(data, options, errorLimit) {
 
 						// fixes the tooltip to show the correct value for the point
 						// and not the value of the last point in the dataset
-						footer: context => {
-							console.log("y",Math.abs(context[0].parsed.y))
-							console.log("x:",Math.abs(context[0].parsed.x));
-							console.log("errorLimit:",Number(errorLimit));
-							return Math.abs(context[0].parsed.y) > Math.abs(context[0].parsed.x) * Number(errorLimit) / 100 ? "out-of-tolerance" : null;
-						},
+						// footer: context => {
+						// 	console.log("y",Math.abs(context[0].parsed.y))
+						// 	console.log("x:",Math.abs(context[0].parsed.x));
+						// 	console.log("errorLimit:",Number(errorLimit));
+						// 	return Math.abs(context[0].parsed.y) > Math.abs(context[0].parsed.x) * Number(errorLimit) / 100 ? "out-of-tolerance" : null;
+						// },
 						// Gets the image to be used as a point style in the legend
 						// and the tooltip. The image is loaded asynchronously.
 						labelPointStyle: context => {
