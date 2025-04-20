@@ -166,3 +166,9 @@ td {
 	cursor: pointer;
 }
 
+canvas {
+	min-width: 400px;
+	width: 100%;
+	height: auto;
+}
+
