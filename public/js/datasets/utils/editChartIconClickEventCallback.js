@@ -1,7 +1,6 @@
 function editChartIconClickEventCallback (event) {
 	
 	//construct wrapper name to access sensor factory collections
-	debugger;
 	const wrapperName = trimBySubstring(event.target.id, "Icon").concat("Wrapper");
 	const wrapper = document.getElementById(wrapperName);
 	let input = document.createElement(_chartfactory.inputWrappers[wrapperName].tag);

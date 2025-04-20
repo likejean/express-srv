@@ -60,6 +60,8 @@ function disableAllSensorDataEntries() {
 	inputCalibratorOutput.value = null;
 	
 	inputSensorError.value = null;
+
+	prepareDatasetButton.disabled = false;
 	
 	addChartDatapointButton.style.backgroundColor = "grey";	
 	["fa-solid", "fa-check", "fa-3x"].forEach(classItem => iconErrorDatapoint.classList.remove(classItem));

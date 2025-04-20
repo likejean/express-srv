@@ -91,7 +91,6 @@ function inputHandler(e) {
 	
 	_chartfactory.newDatasetFormInputs[name].value = e.target.value;	
 	newChartDatasetPostData[name] = value;
-	prepareDatasetButton.disabled = !_chartfactory.isSubmitButtonActive();
 	
 	//BLOCK sensorError and calibratorOutput user entries if either datasetUnits or calibrationName (or both) not selected by a user
 	if (_chartfactory.newDatasetFormInputs.errorType.value

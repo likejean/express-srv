@@ -144,19 +144,15 @@
 
 	<script src="../js/datasets/utils/editChartIconClickEventCallback.js"></script>	
 	<script src="../js/datasets/utils/editChartInputChangeValueCallback.js"></script>
+	<script src="../js/datasets/pullChartDatasetById.js"></script>
 
 	<script src="../js/datasets/patchChartOptions.js"></script>
 
 	<script>
 
-		window.onload = function () {
-            setTimeout(function () {
-                //attach event listener to all icons in Calibration Card for updates/edits
-				let icons = document.querySelectorAll(".fa-ellipsis-vertical");
-				attachEventListenersToIcons(icons, editChartIconClickEventCallback);
-            }, 500); // Delay of 0.5 seconds
-        };
-
+		 //attach event listener to all icons in Calibration Card for updates/edits
+		let icons = document.querySelectorAll(".fa-ellipsis-vertical");
+		attachEventListenersToIcons(icons, editChartIconClickEventCallback);
 		
 
     </script>

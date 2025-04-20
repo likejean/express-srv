@@ -78,8 +78,8 @@ router.get('/', (req, res, next) => {
 // GET endpoint: get a chart dataset record by ID
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
-router.get('/:datasetId', (req, res, next) => {
-	const id = req.params.datasetId;
+router.get('/:chartId', (req, res, next) => {
+	const id = req.params.chartId;
 	Dataset.findById(id)
 		.populate('sensorId')
 		.exec()
@@ -142,8 +142,8 @@ router.get('/:datasetId', (req, res, next) => {
 //PATCH endpoint: update PARTIALLY existing chart record/document by ID: (title, xLabel, yLabel)
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
-router.patch("/:datasetId", (req, res, next) => {
-	const id = req.params.datasetId;
+router.patch("/:chartId", (req, res, next) => {
+	const id = req.params.chartId;
 	Dataset.updateOne({ _id: id }, { $set: { ...req.body } })
 	.exec()
 	.then((result) => {
@@ -291,14 +291,17 @@ router.patch("/push/:datasetId", (req, res, next) => {
 
 
 
-//TBD//
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+///PATCH API endpoint: pulls dataset item by ID from the array of datasets in the chart document
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+router.patch("/pull/:chartId", (req, res, next) => {
+	const id = req.params.chartId;
+	const datasetId = req.body.datasetId;
 
-router.patch("/pull/:datasetId", (req, res, next) => {
-	const id = req.params.datasetId;
-	const datasetObjectId = req.body.datasetObjectId;
-	
 	Dataset.updateOne({ _id: id },
-		{ $pull: { sensorDatasets: { _id: datasetObjectId } } })
+		{ $pull: { sensorDatasets: { _id: datasetId } } })
 		.exec()
 		.then((result) => {
 			console.log({
@@ -309,7 +312,7 @@ router.patch("/pull/:datasetId", (req, res, next) => {
 				},
 			});
 			res.status(200).json({
-				message: `Dataset record w/ id: '${id}' was updated successfully: dataset '${datasetObjectId}' was pulled out`,
+				message: `Chart document w/ id: '${id}' was updated successfully: dataset '${datasetId}' was pulled out`,
 				request: {
 					type: "PATCH",
 				},
@@ -318,7 +321,7 @@ router.patch("/pull/:datasetId", (req, res, next) => {
 		})
 		.catch((error) => {
 			res.status(500).json({
-				message: "Failure: Unable to update a dataset...",
+				message: "Failure: Unable to pull a dataset from chart...",
 				isIdValid: mongoose.Types.ObjectId.isValid(id),
 				serverError: error.message,
 				request: {
@@ -332,11 +335,11 @@ router.patch("/pull/:datasetId", (req, res, next) => {
 	
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
-///DELETE API endpoint: deletes chart dataset document by ID
+///DELETE API endpoint: deletes chart document by ID
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
-router.delete('/:datasetId', (req, res, next) => {
-	const id = req.params.datasetId;
+router.delete('/:chartId', (req, res, next) => {
+	const id = req.params.chartId;
 	Dataset.deleteOne({_id: id})
 		.exec()
 		.then(doc => {
@@ -350,7 +353,7 @@ router.delete('/:datasetId', (req, res, next) => {
 			});
 			if(doc.deletedCount === 1){
 				res.status(200).json({
-					message: `SUCCESS! Chart dataset for sensor ${req.body.sensorDescription}: ${req.body.sensorEID} was deleted from database`,
+					message: `SUCCESS! Chart document for sensor ${req.body.sensorDescription}: ${req.body.sensorEID} was deleted from database`,
 					deletedDataset: {
 						id,
 						sensorDescription: `${req.body.sensorDescription}: ${req.body.sensorEID}`
@@ -363,7 +366,7 @@ router.delete('/:datasetId', (req, res, next) => {
 				});        
 			}else{
 				res.status(400).json({
-					error: `Error: (Hint: chart dataset id ${id} was valid, but seems like not found in the database.`,
+					error: `Error: (Hint: chart document id ${id} was valid, but seems like not found in the database.`,
 					request: {
 						type: 'DELETE',
 						url: req.originalUrl                    
