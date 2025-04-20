@@ -23,7 +23,7 @@ function saveAndBeginNewChartPlot() {
 
 	//reset buttons and input css styling dynamically before starting a new dataset for the chart
 	addChartDatapointButton.style.backgroundColor = "grey";	
-	["fa-solid", "fa-check", "fa-3x"].forEach(classItem => iconErrorDatapoint.classList.remove(classItem));
+	["fa-solid", "fa-check",].forEach(classItem => iconErrorDatapoint.classList.remove(classItem));
 	iconErrorDatapoint.classList.add('fa-plus');
 	
 	addChartDatapointButton.disabled = true;
@@ -64,7 +64,7 @@ function disableAllSensorDataEntries() {
 	prepareDatasetButton.disabled = false;
 	
 	addChartDatapointButton.style.backgroundColor = "grey";	
-	["fa-solid", "fa-check", "fa-3x"].forEach(classItem => iconErrorDatapoint.classList.remove(classItem));
+	["fa-solid", "fa-check"].forEach(classItem => iconErrorDatapoint.classList.remove(classItem));
 	iconErrorDatapoint.classList.add('fa-plus');
 	addChartDatapointButton.disabled = true;
 	currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();

@@ -118,7 +118,7 @@ function inputHandler(e) {
 		if (inputSensorError.disabled)  inputSensorError.disabled = false;	
 		inputSensorError.value = null;
 		addChartDatapointButton.style.backgroundColor = "grey";	
-		["fa-solid", "fa-check", "fa-3x"].forEach(classItem => iconErrorDatapoint.classList.remove(classItem));
+		["fa-solid", "fa-check"].forEach(classItem => iconErrorDatapoint.classList.remove(classItem));
 		iconErrorDatapoint.classList.add('fa-plus');
 		addChartDatapointButton.disabled = false;
 		currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
@@ -192,7 +192,7 @@ function removeDatapointFromChart() {
 
 	if(Number(_chartfactory.newDatasetFormInputs.datasetSize.value) === _chartfactory.getSensorErrorLineDatasetCurrentLength() + 1){
 		addChartDatapointButton.style.backgroundColor = "grey";	
-		["fa-solid", "fa-check", "fa-3x"].forEach(classItem => iconErrorDatapoint.classList.remove(classItem));
+		["fa-solid", "fa-check"].forEach(classItem => iconErrorDatapoint.classList.remove(classItem));
 		iconErrorDatapoint.classList.add('fa-plus');		
 		addChartDatapointButton.disabled = false;
 		currentSensorDatasetSize.style.backgroundColor = 'rgb(5, 238, 94)';
@@ -211,17 +211,17 @@ function addNewDatapointToChart() {
 	
 	if(Number(_chartfactory.newDatasetFormInputs.datasetSize.value) === _chartfactory.getSensorErrorLineDatasetCurrentLength()){
 		addSensorDataPlotButton.disabled = false;
-		currentSensorDatasetSize.innerText = 'FULL';
+		currentSensorDatasetSize.innerText = 'MAX';
 		currentSensorDatasetSize.style.backgroundColor = 'red';
 		currentSensorDatasetSize.style.borderColor = 'red';
-		currentSensorDatasetSize.style.paddingTop = '12px';
-		currentSensorDatasetSize.style.paddingBottom = '12px';
+		currentSensorDatasetSize.style.paddingTop = '2px';
+		currentSensorDatasetSize.style.paddingBottom = '2px';
 		inputCalibratorOutput.disabled = true;
 		inputSensorError.disabled = true;
 		addChartDatapointButton.style.backgroundColor = "green";
 		iconErrorDatapoint.classList.remove('fa-plus');
 		addChartDatapointButton.disabled = true;
-		["fa-solid", "fa-check", "fa-3x"].forEach(classItem => iconErrorDatapoint.classList.add(classItem));
+		["fa-solid", "fa-check"].forEach(classItem => iconErrorDatapoint.classList.add(classItem));
 		iconErrorDatapoint.style.color = 'white';
 	}
 	else {
@@ -243,7 +243,7 @@ function addErrorLimitLinesToChart() {
 	inputErrorLimits.disabled = true;
 	addChartErrorLimitsButton.style.backgroundColor = "green";
 	iconErrorLimits.classList.remove('fa-plus');
-	["fa-solid", "fa-check", "fa-3x"].forEach(classItem => iconErrorLimits.classList.add(classItem));
+	["fa-solid", "fa-check"].forEach(classItem => iconErrorLimits.classList.add(classItem));
 	iconErrorLimits.style.color = 'white';
 }
 
