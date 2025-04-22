@@ -53,7 +53,7 @@
 
 										<div class="row mt-3">
 											<div class="form-group col text-center">
-												<p class="h3 text-uppercase" style="color:blueviolet;">Chart Labels</p>
+												<p class="h3 text-uppercase" style="color:blueviolet;">Edit Chart Labels</p>
 											</div>
 											
 										</div>
@@ -88,15 +88,174 @@
 
 										<div class="row mt-3">
 											<div class="form-group col text-center" style="color:blueviolet;">
-												<p class="h3 text-uppercase">Chart Series</p>
+												<p class="h3 text-uppercase">Delete Chart Series</p>
 											</div>
 											
 										</div>
 
-										<!-- chart datasets -->
+										<!-- delete chart datasets -->
 										<div class="card-body text-success">
 											<div class="accordion accordion-flush my-3" id="accordion-chart-datasets">
 												<!-- Javascript will create the datasets accordion here. -->
+											</div>
+										</div>
+
+										<!-- add new chart dataset -->
+										<div class="card-body text-success">
+											<div class="accordion accordion-flush my-3" id="push-new-chart-dataset">
+												<div class="accordion-item border border-2 border-success border-opacity-25 border-bottom-0 border-info my-3">
+													<h2 class="accordion-header">
+														<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#flush-collapse" aria-expanded="false" aria-controls="flush-collapse">
+															<h3>New Dataset<span class="badge badge-light"></span></h3>
+														</button>
+													</h2>
+													<div id="flush-collapse" class="accordion-collapse collapse" data-bs-parent="#accordionChartDatasets">
+														<div class="accordion-body">
+
+															<!-- User Control Form: New Dataset -->
+															<form id="new-dataset-form" class="form-inline">
+															
+																<div class="container">
+																	<div class="row">
+
+																		<div class="col-lg-3 col-sm-12 mb-sm-4">
+																			<label class="font-weight-bold" for="datasetSize">Dataset Size, N</label>
+																			<input
+																				name="datasetSize"
+																				min="5"
+																				max="20"
+																				type="number"
+																				class="form-control"
+																				id="datasetSize"
+																				aria-describedby="datasetSize#Help"
+																				placeholder="1"
+																				required
+																			/>
+																			<small
+																				id="datasetSize#Help"
+																				class="form-text text-muted"
+																			>
+																				Dataset size
+																			</small>
+																		</div>
+
+																		<div class="col-lg-3 col-sm-6 mb-sm-4">
+																			<label class="font-weight-bold" for="calibratorOutput">X-value</label>
+																			<input
+																				name="calibratorOutput"
+																				type="number"
+																				class="form-control"
+																				id="calibratorOutput"
+																				aria-describedby="calibratorOutput#Help"
+																				placeholder=""
+																				required
+																			/>
+																			<small
+																				id="calibratorOutput#Help"
+																				class="form-text text-muted"
+																			>
+																				Calibrator Output
+																			</small>
+																		</div>
+																		<div class="col-lg-3 col-sm-6 mb-sm-4">
+																			<label class="font-weight-bold" for="sensorError">Y-value</label>
+																			<input
+																				name="sensorError"
+																				type="number"
+																				class="form-control"
+																				id="sensorError"
+																				aria-describedby="sensorError#Help"
+																				placeholder=""
+																				required
+																			/>
+																			<small
+																				id="sensorError#Help"
+																				class="form-text text-muted"
+																			>
+																				Sensor Error
+																			</small>
+																		</div>
+																		<div class="d-flex align-items-center col-lg-3 col-sm-6">
+																			<button 
+																				id="add-chart-datapoint"
+																				type="button" 
+																				class="btn btn-secondary" 
+																				onclick=addNewDatapointToChart()
+																			>
+																				<i id="add-error-datapoint" class="fa fa-plus" aria-hidden="true"></i>
+																			</button>
+																			<button 
+																				id="remove-chart-datapoint"
+																				type="button" 
+																				class="btn btn-danger" 
+																				onclick=removeDatapointFromChart()
+																			>
+																				<i id="remove-error-datapoint" class="fa fa-minus" aria-hidden="true"></i>
+																			</button>
+																			<span id="current-sensor-error-dataset-size"></span>
+																		</div>
+																		
+											
+																		
+																	</div>
+																</div>
+
+																<div class="container">
+																	<div class="row">
+																		<div class="col mb-sm-4">
+																			<label for="seriesLabel">Series Label</label>
+																			<input
+																				name="seriesLabel"
+																				type="text"
+																				class="form-control"
+																				id="seriesLabel"
+																				aria-describedby="seriesLabel#Help"
+																				placeholder=""
+																				required
+																			/>
+																			<small id="seriesLabel#Help" class="form-text text-muted">
+																				Please, enter series label here
+																			</small>
+																		</div>
+																	</div>
+																	<div class="row">                            
+																		<div class="mb-sm-4">
+																			<label for="seriesDescription">Dataset Description</label>
+																			<input
+																				name="seriesDescription"
+																				type="text"
+																				class="form-control"
+																				id="seriesDescription"
+																				aria-describedby="seriesDescription#Help"
+																				placeholder=""
+																				required
+																			/>
+																			<small id="seriesDescription#Help" class="form-text text-muted">
+																				Please, enter a description for current chart dataset
+																			</small>
+																		</div>
+																	</div>
+																</div>
+
+																<div class="container">
+																	<div class="row">
+																		<div class="col text-center my-4 x-1">
+																			<button 
+																				id="submit-new-dataset-form-values"
+																				type="button" 
+																				class="btn btn-outline-info m-1" 
+																				onclick=pushNewChartDataset()
+																			>
+																				Add Dataset
+																			</button>
+																		</div>
+																	</div>
+																</div>
+															</form>
+
+														</div>
+													</div>
+												</div>
 											</div>
 										</div>
 										
@@ -110,13 +269,6 @@
 								
 								</div>
 
-								<div class="d-flex justify-content-center mb-3">
-
-									<a id="push-new-chart-series" href="">
-										<span class="btn btn-outline-primary btn-sm m-2 admin-classified">Add Dataset</span>
-									</a>
-									
-								</div>
 								<!-- Main Form Buttons -->
 								<button id="patch-chart-options" type="submit" class="btn btn-primary m-2" onclick=patchChartOptionsRecord() disabled>Update</button>
 								<a href="../index.html" class="btn btn-dark">Back</a>
@@ -150,6 +302,7 @@
 	
 	<script src="../js/datasets/fetchChartById.js"></script>
 	<script src="../js/datasets/utils/createChartDatasetsAccordion.js"></script>
+	<script src="../js/datasets/getNewDatasetFormValues.js"></script>
 
 	<script src="../js/datasets/utils/editChartIconClickEventCallback.js"></script>	
 	<script src="../js/datasets/utils/editChartInputChangeValueCallback.js"></script>

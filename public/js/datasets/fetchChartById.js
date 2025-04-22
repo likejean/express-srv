@@ -2,7 +2,6 @@ const sensorDescription = document.getElementById("sensor-full-description");
 const chartTitle = document.getElementById("editChartTitleSpan");
 const editChartXLabelSpan = document.getElementById("editChartXLabelSpan");
 const editChartYLabelSpan = document.getElementById("editChartYLabelSpan");
-const pushNewChartSeriesButton = document.getElementById("push-new-chart-series");
 
 
 const fetchChartById = async () => {
@@ -21,7 +20,6 @@ const fetchChartById = async () => {
 		chartTitle.innerText = result.data.dataset.chartTitle;
         editChartXLabelSpan.innerText = result.data.dataset.chartXLabel;
         editChartYLabelSpan.innerText = result.data.dataset.chartYLabel;
-		pushNewChartSeriesButton.href = `../html/pushNewDataset.html?id=${id}`;
 		createChartDatasetsAccordion();
 		
     })

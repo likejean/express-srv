@@ -12,8 +12,8 @@ const inputSensorError = document.getElementById("sensorError");
 const currentSensorDatasetSize = document.getElementById("current-sensor-error-dataset-size");
 
 //button HTML elements
-const prepareDatasetButton = document.getElementById("prepare-chart-dataset-form-values");
-const submitChartDatasets = document.getElementById("submit-chart-datasets")
+const prepareDatasetButton = document.getElementById("prepare-new-chart-form-values");
+const submitChartDatasets = document.getElementById("submit-new-chart-datasets")
 const addChartErrorLimitsButton = document.getElementById("add-chart-error-limits");
 const addChartDatapointButton = document.getElementById("add-chart-datapoint");
 const removeChartDatapointButton = document.getElementById("remove-chart-datapoint");
@@ -22,12 +22,15 @@ const doneSensorDataEntriesButton = document.getElementById("disable-sensor-data
 
 
 
-var newChartDatasetPostData = {}; //this object for storing POST request body
+var newChartPostData = {}; //this object for storing POST request body
 
 
-//Preset New Calibration Form fields with initial values using GLOBAL DATASET FACTORY
+//Preset NEW CHART Form fields with initial values using GLOBAL DATASET FACTORY
 Object.entries(_chartfactory.newDatasetFormInputs).forEach(([key, obj]) => {	
-	form.elements[key].value = obj.value;
+	
+	//if form elements exist, set their values to the corresponding values from the dataset factory
+	if(form.elements[key]) form.elements[key].value = obj.value;
+	else throw new Error(`Form element with name ${key} not found`);
 	
 	//sets the numerical decimals to 2 significant figures (fixed)
 	if (key === "errorLimit") form.elements[key].value = obj.value.toFixed(2);
@@ -45,7 +48,7 @@ Object.entries(_chartfactory.newDatasetFormInputs).forEach(([key, obj]) => {
 	addChartErrorLimitsButton.disabled = true;
 	doneSensorDataEntriesButton.disabled = true;
 
-
+	//disable buttons if the value is null or empty string
 	if (_chartfactory.newDatasetFormInputs.datasetUnits.value === "" || _chartfactory.newDatasetFormInputs.calibrationName.value === "") {
 		if (!inputCalibratorOutput.disabled) inputCalibratorOutput.disabled = true;
 		inputCalibratorOutput.value = null;
@@ -53,6 +56,7 @@ Object.entries(_chartfactory.newDatasetFormInputs).forEach(([key, obj]) => {
 		inputSensorError.value = null;
 	}
 
+	//disable buttons if current dataset size is zero
 	if(_chartfactory.currentSensorErrorLineDataset.length === 0) {
 		addSensorDataPlotButton.disabled = true;
 		removeChartDatapointButton.disabled = true;
@@ -67,7 +71,7 @@ for (i = 0; i < inputs.length; i++) {
 }
 
 
-//Prevent datasetSize input entries from negative values
+//prevent negative numbers from being entered into the datasetSize input field
 inputs.forEach((element) => {
 	if (element.name === "datasetSize"){
 		element.addEventListener('keydown', function(event) {
@@ -90,7 +94,7 @@ function inputHandler(e) {
 	
 	
 	_chartfactory.newDatasetFormInputs[name].value = e.target.value;	
-	newChartDatasetPostData[name] = value;
+	newChartPostData[name] = value;
 	
 	//BLOCK sensorError and calibratorOutput user entries if either datasetUnits or calibrationName (or both) not selected by a user
 	if (_chartfactory.newDatasetFormInputs.errorType.value
@@ -258,14 +262,14 @@ function prepareChartDatasets() {
 	
 	for (const [key, value] of formData.entries()) {	
 		if (key === "datasetStartAt" || key === "datasetEndAt" 
-		|| key === "errorLimit" || key === "datasetSize") newChartDatasetPostData[key] = Number(value);
+		|| key === "errorLimit" || key === "datasetSize") newChartPostData[key] = Number(value);
 		
-		else newChartDatasetPostData[key] = value;
+		else newChartPostData[key] = value;
 	}
 	
 	//adds new key-pairs to POST request object
-	newChartDatasetPostData["sensorId"] = _store.activeSensorCard._id;
-	newChartDatasetPostData["sensorDescription"] =`${_store.activeSensorCard.description} ${ _store.activeSensorCard.EID}`;
+	newChartPostData["sensorId"] = _store.activeSensorCard._id;
+	newChartPostData["sensorDescription"] =`${_store.activeSensorCard.description} ${ _store.activeSensorCard.EID}`;
 	
 	//stores array of sensor error output dataset(s). An array element contains the following object:
 	// {
@@ -275,14 +279,14 @@ function prepareChartDatasets() {
 	// 		calibrationId: [String],
 	// 		dataset: [Array]
 	// }
-	newChartDatasetPostData["sensorDatasets"] = _chartfactory.sensorDatasets;	
+	newChartPostData["sensorDatasets"] = _chartfactory.sensorDatasets;	
 
 	//stores arrays of error upper and lower limits
-	newChartDatasetPostData["errorUpperLimit"] = _chartfactory.errorUpperLimitLineDataset;
-	newChartDatasetPostData["errorLowerLimit"] = _chartfactory.errorLowerLimitLineDataset;
+	newChartPostData["errorUpperLimit"] = _chartfactory.errorUpperLimitLineDataset;
+	newChartPostData["errorLowerLimit"] = _chartfactory.errorLowerLimitLineDataset;
 
 	// Remove redundant keys form POST body object
-	DeleteKeys(newChartDatasetPostData, keysToRemove);
+	DeleteKeys(newChartPostData, keysToRemove);
 
 	// enable Submit Chart Dataset Button
 	submitChartDatasets.disabled = false; 

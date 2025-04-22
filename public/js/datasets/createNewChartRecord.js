@@ -3,7 +3,7 @@ function createNewChartDatasetRecord() {
 
 
     axios
-        .post(`../api/datasets`, newChartDatasetPostData)
+        .post(`../api/datasets`, newChartPostData)
         .then((response) => {
             console.log("New chart dataset record created successfully:", response);
             window.location.href = "../index.html";
