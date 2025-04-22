@@ -100,5 +100,11 @@ class dataStorage {
 	isDatasetChartsExist(sensorId) {
 		return this.datasets.data.payload.some(item => item.sensorId === sensorId);
 	}
+
+	
+	//verifies if any chart(s) exist for a selected sensor
+	datasetChartsCount(sensorId) {
+		return this.datasets.data.payload.filter(element => element.sensorId === sensorId).length;
+	}
 }
 
