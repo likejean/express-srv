@@ -4,6 +4,7 @@ class datasetFactory {
 			inputWrappers,
             newDatasetFormInputs,			
 			dataset,
+            calibrations,
 			currentDatasetSeries = 0,
 			currentChartDatapointEntry = {x: 0, y: 0},
             currentSensorErrorLineDataset = [],
@@ -15,6 +16,7 @@ class datasetFactory {
 		this.inputWrappers = inputWrappers,
         this.newDatasetFormInputs = newDatasetFormInputs,
 		this.dataset = dataset,
+        this.calibrations = calibrations,
 		this.currentDatasetSeries = currentDatasetSeries,
 		this.currentChartDatapointEntry = currentChartDatapointEntry,
         this.currentSensorErrorLineDataset = currentSensorErrorLineDataset,
@@ -91,5 +93,14 @@ class datasetFactory {
         }
         return false;
     }
+
+    //obtain sensor calibration names
+	getSensorCalibrationNames(){
+		return this.calibrations.reduce((obj, calibration) => {
+            obj[`${calibration.calibrationName}`] = calibration._id;
+            return obj;
+        }, {});;
+	}
+    
 
 }

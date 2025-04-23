@@ -21,7 +21,17 @@ const fetchChartById = async () => {
         editChartXLabelSpan.innerText = result.data.dataset.chartXLabel;
         editChartYLabelSpan.innerText = result.data.dataset.chartYLabel;
 		createChartDatasetsAccordion();
-		
+        
+        return axios
+        .get(`../api/calibrations/fetchBySensorId/${_chartfactory.dataset.sensorId._id}`)
+        .then((result) => {
+            _chartfactory.calibrations = result.data.calibrations;
+            generateCalibrationNameList(_chartfactory.getSensorCalibrationNames());
+        })
+        .catch((error) => {
+            //display error message if data fetch failure occurs or any other internal error detected
+            console.log(error);
+        })		
     })
     .catch((error) => {
         //display error message if data fetch failure occurs or any other internal error detected

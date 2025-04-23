@@ -96,10 +96,8 @@ function inputHandler(e) {
 	_chartfactory.newDatasetFormInputs[name].value = e.target.value;	
 	newChartPostData[name] = value;
 	
-	//BLOCK sensorError and calibratorOutput user entries if either datasetUnits or calibrationName (or both) not selected by a user
+	//DISABLE sensorError and calibratorOutput user input fields if either datasetUnits or calibrationName (or both) not selected by a user
 	if (_chartfactory.newDatasetFormInputs.errorType.value
-		&&_chartfactory.newDatasetFormInputs.datasetUnits.value 
-		&& _chartfactory.newDatasetFormInputs.calibrationName.value 
 		&& _chartfactory.newDatasetFormInputs.datasetUnits.value 
 		&& _chartfactory.newDatasetFormInputs.calibrationName.value){
 		if (inputCalibratorOutput.disabled) inputCalibratorOutput.disabled = false;
@@ -114,7 +112,7 @@ function inputHandler(e) {
 	if(_chartfactory.currentDatasetSeries.length === 0) addSensorDataPlotButton.disabled = true;
 
 	
-	// Allow a user to enter positive integers only
+	// In case if a user wants to change the dataset size while entering chart datapoints...
 	if(name === "datasetSize") {
 		e.target.value = Math.trunc(parseFloat(value));
 		if (inputCalibratorOutput.disabled)  inputCalibratorOutput.disabled = false;
@@ -163,7 +161,7 @@ function inputHandler(e) {
 		_chartfactory.insertChartDatapoint(value, "sensorError")
 	}
 	
-		//Check if both calibratorOutput and sensorError are non-zero numbers: if it's true, enables add button for sensor datapoint
+	//Check if both calibratorOutput and sensorError are non-zero numbers: if it's true, enables add button for sensor datapoint
 	if ((name === "calibratorOutput" && isNonZeroNumber(Number(value)) && isNonZeroNumber(Number(_chartfactory.newDatasetFormInputs.sensorError.value))
 		|| name === "sensorError" && isNonZeroNumber(Number(value)) && isNonZeroNumber(Number(_chartfactory.newDatasetFormInputs.calibratorOutput.value))))
 		addChartDatapointButton.disabled = false;	
@@ -189,25 +187,8 @@ function inputHandler(e) {
 }
 
 
-//Remove a datapoint from chart
-function removeDatapointFromChart() {
-	reduceCurrentChartLine(_chartfactory.currentDatasetSeries);
-	currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
 
-	if(Number(_chartfactory.newDatasetFormInputs.datasetSize.value) === _chartfactory.getSensorErrorLineDatasetCurrentLength() + 1){
-		addChartDatapointButton.style.backgroundColor = "grey";	
-		["fa-solid", "fa-check"].forEach(classItem => iconErrorDatapoint.classList.remove(classItem));
-		iconErrorDatapoint.classList.add('fa-plus');		
-		addChartDatapointButton.disabled = false;
-		currentSensorDatasetSize.style.backgroundColor = 'rgb(5, 238, 94)';
-		currentSensorDatasetSize.style.borderColor = 'rgb(5, 238, 94)';
-		currentSensorDatasetSize.style.paddingTop = '0px';
-		currentSensorDatasetSize.style.paddingBottom = '0px';
-	}
-	if(_chartfactory.getSensorErrorLineDatasetCurrentLength() === 0) {
-		removeChartDatapointButton.disabled = true;
-	}
-}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Adds a new datapoint to chart
 function addNewDatapointToChart() {
@@ -237,6 +218,27 @@ function addNewDatapointToChart() {
 	}
 }
 
+
+//Remove a datapoint from chart
+function removeDatapointFromChart() {
+	reduceCurrentChartLine(_chartfactory.currentDatasetSeries);
+	currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
+
+	if(Number(_chartfactory.newDatasetFormInputs.datasetSize.value) === _chartfactory.getSensorErrorLineDatasetCurrentLength() + 1){
+		addChartDatapointButton.style.backgroundColor = "grey";	
+		["fa-solid", "fa-check"].forEach(classItem => iconErrorDatapoint.classList.remove(classItem));
+		iconErrorDatapoint.classList.add('fa-plus');		
+		addChartDatapointButton.disabled = false;
+		currentSensorDatasetSize.style.backgroundColor = 'rgb(5, 238, 94)';
+		currentSensorDatasetSize.style.borderColor = 'rgb(5, 238, 94)';
+		currentSensorDatasetSize.style.paddingTop = '0px';
+		currentSensorDatasetSize.style.paddingBottom = '0px';
+	}
+	if(_chartfactory.getSensorErrorLineDatasetCurrentLength() === 0) {
+		removeChartDatapointButton.disabled = true;
+	}
+}
+
 //generates plots for upper and lower error limits based upon error limit percentage input
 function addErrorLimitLinesToChart() {
 	const errorType = 
@@ -250,6 +252,7 @@ function addErrorLimitLinesToChart() {
 	["fa-solid", "fa-check"].forEach(classItem => iconErrorLimits.classList.add(classItem));
 	iconErrorLimits.style.color = 'white';
 }
+
 
 //////Function handler on button submission
 function prepareChartDatasets() {
@@ -295,7 +298,7 @@ function prepareChartDatasets() {
 	inputs.forEach((item) => item.removeEventListener("input", inputHandler));
 }
 
-
+//function helper
 function isNonZeroNumber(input) {
 	if (typeof input !== 'number') {
 		return false;
