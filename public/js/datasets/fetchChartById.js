@@ -15,23 +15,24 @@ const fetchChartById = async () => {
     await axios
     .get(`../api/datasets/${id}`)
     .then((result) => {
-        _chartfactory.dataset = result.data.dataset;
-		sensorDescription.innerText = result.data.dataset.sensorDescription;
-		chartTitle.innerText = result.data.dataset.chartTitle;
-        editChartXLabelSpan.innerText = result.data.dataset.chartXLabel;
-        editChartYLabelSpan.innerText = result.data.dataset.chartYLabel;
+		const sensorId = result.data.chart.sensorId._id;
+        _chartfactory.chart = result.data.chart;
+		sensorDescription.innerText = result.data.chart.sensorDescription;
+		chartTitle.innerText = result.data.chart.chartTitle;
+        editChartXLabelSpan.innerText = result.data.chart.chartXLabel;
+        editChartYLabelSpan.innerText = result.data.chart.chartYLabel;
 		createChartDatasetsAccordion();
         
         return axios
-        .get(`../api/calibrations/fetchBySensorId/${_chartfactory.dataset.sensorId._id}`)
-        .then((result) => {
-            _chartfactory.calibrations = result.data.calibrations;
-            generateCalibrationNameList(_chartfactory.getSensorCalibrationNames());
-        })
-        .catch((error) => {
-            //display error message if data fetch failure occurs or any other internal error detected
-            console.log(error);
-        })		
+		.get(`../api/calibrations/fetchBySensorId/${sensorId}`)
+		.then((result) => {
+			_chartfactory.calibrations = result.data.calibrations;
+			generateCalibrationNameList(_chartfactory.getSensorCalibrationNames());
+		})
+		.catch((error) => {
+			//display error message if data fetch failure occurs or any other internal error detected
+			console.log(error);
+		})		
     })
     .catch((error) => {
         //display error message if data fetch failure occurs or any other internal error detected

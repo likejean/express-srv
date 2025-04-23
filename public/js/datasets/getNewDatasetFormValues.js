@@ -1,24 +1,25 @@
-//const form = document.getElementById("new-chart-dataset-form");
+//this file is responsible for getting the new dataset form values and updating the chart with the new dataset values
 const form = document.getElementById("new-dataset-form");
 
-//HTML label & icons
+//HTML labels and icons for current dataset size and add/remove datapoint buttons
 const currentSensorDatasetSize = document.getElementById("current-sensor-error-dataset-size");
 const iconErrorDatapoint = document.getElementById("add-error-datapoint");
 
-//HTML input elements
+//HTML inputs for calibrator output and sensor error
 const inputCalibratorOutput = document.getElementById("calibratorOutput");
 const inputSensorError = document.getElementById("sensorError");
 
-//HTML button elements
 
+//HTML buttons for adding/removing chart datapoints
 const addChartDatapointButton = document.getElementById("add-chart-datapoint");
 const removeChartDatapointButton = document.getElementById("remove-chart-datapoint");
 const submitNewDatasetButton = document.getElementById("submit-new-dataset-form-values");
 
+//post request body for creating a new dataset
+//NOTE: this object is used to store the values from the form inputs and is sent to the server when the form is submitted
+var newDatasetPostData = {}; 
 
-var newDatasetPostData = {}; //this object for storing POST request body
-
-//initialize the form inputs with the values from the _chartfactory object
+//Form Initializion
 Object.entries(_chartfactory.newDatasetFormInputs).forEach(([key, obj]) => {
 	
 	//check if the form element exists before assigning the value
@@ -35,7 +36,7 @@ Object.entries(_chartfactory.newDatasetFormInputs).forEach(([key, obj]) => {
 	addChartDatapointButton.disabled = true;
 	removeChartDatapointButton.disabled = true;
 
-	//disable buttons if the value is null or empty string
+	//diable the input fields if the calibration name is not selected
 	if (_chartfactory.newDatasetFormInputs.calibrationName.value === "") {
 		if (!inputCalibratorOutput.disabled) inputCalibratorOutput.disabled = true;
 		inputCalibratorOutput.value = null;
@@ -64,13 +65,14 @@ inputs.forEach((element) => {
 
 
 
-//input handler callback function
+//inputHandler function is called when the user inputs a value into the form inputs
+//this function updates the newDatasetPostData object with the new values and updates the chart with the new values
 function inputHandler(e) {
 	
 	let name = e.target.name;
 	let value = name === "datasetSize" ? Number(e.target.value) : e.target.value;
 
-	
+	//update the newDatasetPostData object with the new values
 	_chartfactory.newDatasetFormInputs[name].value = e.target.value;	
 	newDatasetPostData[name] = value;
 
@@ -85,10 +87,12 @@ function inputHandler(e) {
 		inputSensorError.value = null;
 	}
 
+	//disable the submit button if the dataset size is not a number or less than 1	
 	if(_chartfactory.currentDatasetSeries.length === 0) submitNewDatasetButton.disabled = true;
 
 
-	// In case if a user wants to change the dataset size while entering chart datapoints...
+	//update the current dataset size and enable the input fields for calibrator output and sensor error
+	//if the dataset size is not a number or less than 1, disable the submit button and set the current dataset size to 0
 	if(name === "datasetSize") {
 		e.target.value = Math.trunc(parseFloat(value));
 		if (inputCalibratorOutput.disabled)  inputCalibratorOutput.disabled = false;
@@ -139,7 +143,8 @@ function inputHandler(e) {
 }
 
 
-//Adds a new datapoint to chart
+//add a new datapoint to the chart
+//this function is called when the user clicks the add button for sensor error datapoint
 function addNewDatapointToChart() {
 	
 	//updates a chart global factory
@@ -147,8 +152,10 @@ function addNewDatapointToChart() {
 		x: Number(_chartfactory.currentChartDatapointEntry.x),
 		y: Number(_chartfactory.currentChartDatapointEntry.y)
 	});
+	//updates inner text of the current dataset size label
 	currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
 		
+	//if the dataset size is equal to the current dataset size, disable the add button and enable the submit button
 	if(Number(_chartfactory.newDatasetFormInputs.datasetSize.value) === _chartfactory.getSensorErrorLineDatasetCurrentLength()){
 		submitNewDatasetButton.disabled = false;
 		currentSensorDatasetSize.innerText = 'MAX';
@@ -164,6 +171,7 @@ function addNewDatapointToChart() {
 		["fa-solid", "fa-check"].forEach(classItem => iconErrorDatapoint.classList.add(classItem));
 		iconErrorDatapoint.style.color = 'white';
 	}
+	//if the dataset size is not equal to the current dataset size, update the current dataset size label and enable the remove button
 	else {
 		submitNewDatasetButton.disabled = true;
 		currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
@@ -174,7 +182,8 @@ function addNewDatapointToChart() {
 }
 
 
-//Remove a datapoint from chart
+
+//this function removes the last datapoint from the chart and updates the chart with the new values
 function removeDatapointFromChart() {
 	
 	//updates a chart global factory
@@ -198,8 +207,7 @@ function removeDatapointFromChart() {
 
 
 
-
-//helper
+//this function is used to check if the input is a non-zero number and is not NaN or Infinity
 function isNonZeroNumber(input) {
 	if (typeof input !== 'number') {
 		return false;

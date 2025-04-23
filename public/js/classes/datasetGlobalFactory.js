@@ -3,7 +3,7 @@ class datasetFactory {
     constructor(
 			inputWrappers,
             newDatasetFormInputs,			
-			dataset,
+			chart,
             calibrations,
 			currentDatasetSeries = 0,
 			currentChartDatapointEntry = {x: 0, y: 0},
@@ -15,7 +15,7 @@ class datasetFactory {
         ){
 		this.inputWrappers = inputWrappers,
         this.newDatasetFormInputs = newDatasetFormInputs,
-		this.dataset = dataset,
+		this.chart = chart,
         this.calibrations = calibrations,
 		this.currentDatasetSeries = currentDatasetSeries,
 		this.currentChartDatapointEntry = currentChartDatapointEntry,

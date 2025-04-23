@@ -99,7 +99,7 @@ router.get('/:chartId', (req, res, next) => {
 						status: "SUCCESS"
 					}});
 				return res.status(200).json({
-					dataset: doc,
+					chart: doc,
 					request: {
 						type: 'GET',
 						url: req.originalUrl                    
@@ -249,13 +249,15 @@ router.post('/', (req, res, next) => {
 
 //TBD
 
-router.patch("/push/:datasetId", (req, res, next) => {
-	const id = req.params.datasetId;
+router.patch("/push/:chartId", (req, res, next) => {
+	const id = req.params.chartId;
 	const newDataset = {
 		seriesDescription: req.body.seriesDescription,
 		calibrationId: req.body.calibrationId,
 		seriesLabel: req.body.seriesLabel,
-		dataset: req.body.dataset
+		dataset: req.body.dataset,
+		calibrationName: req.body.calibrationName,
+		plotId: req.body.plotId
 	};
 	Dataset.updateOne({ _id: id },
 		{ $push: { sensorDatasets: newDataset } })
@@ -269,7 +271,7 @@ router.patch("/push/:datasetId", (req, res, next) => {
 				},
 			});
 			res.status(200).json({
-				message: `Dataset record w/ id: '${id}' was updated successfully. A new dataset was push into dataset array`,
+				message: `Chart w/ id: '${id}' was updated successfully. A new dataset was push into its plot array`,
 				request: {
 					type: "PATCH",
 				},
@@ -278,7 +280,7 @@ router.patch("/push/:datasetId", (req, res, next) => {
 		})
 		.catch((error) => {
 			res.status(500).json({
-				message: "Failure: Unable to update a dataset...",
+				message: "Failure: Unable to update a chart...",
 				isIdValid: mongoose.Types.ObjectId.isValid(id),
 				serverError: error.message,
 				request: {

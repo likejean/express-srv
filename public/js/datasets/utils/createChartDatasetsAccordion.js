@@ -4,8 +4,8 @@ const chartAccordionWrapper = document.getElementById('accordion-chart-datasets'
 function createChartDatasetsAccordion() {
 	
 	let accordionHtmlItem;
-	const totalQtyDatasetsPerChart = _chartfactory.dataset.sensorDatasets.length;
-	const chartDatasets = _chartfactory.dataset.sensorDatasets;
+	const totalQtyDatasetsPerChart = _chartfactory.chart.sensorDatasets.length;
+	const chartDatasets = _chartfactory.chart.sensorDatasets;
 
     
 	for (let i = 0; i < totalQtyDatasetsPerChart; i++) {
