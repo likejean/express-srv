@@ -1,3 +1,5 @@
+//this class is used to store all the data that is used in the application
+//it is used to store the data that is fetched from the server and to store the data that is used in the application
 class dataStorage {
     constructor(
 			users,

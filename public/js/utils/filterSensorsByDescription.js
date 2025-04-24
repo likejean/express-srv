@@ -1,4 +1,6 @@
 function filterSensorsByDescription() {
+	// This function is used to filter the sensors in the main sensor table by their description.
+	// It creates a dropdown menu with the available sensor descriptions and allows the user to filter the table based on their selection.
 	const sensorDescriptionTableHeader = document.getElementById("sensorDescriptionTableHeader");
 	const textNode = sensorDescriptionTableHeader.firstChild;
 	sensorDescriptionTableHeader.removeAttribute("onclick");
@@ -11,6 +13,7 @@ function filterSensorsByDescription() {
 	select.style.height = "40px";
 	select.style.background = "#f4f5f2";
 
+	//get all sensor descriptions from the store and add them to the dropdown menu
 	["All", ..._store.getSensorDescriptionList(), "Clear Filter"].forEach(
 		(description) => {
 		const option = document.createElement("option");

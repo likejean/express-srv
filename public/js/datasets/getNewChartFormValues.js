@@ -300,11 +300,4 @@ function prepareChartDatasets() {
 	inputs.forEach((item) => item.removeEventListener("input", inputHandler));
 }
 
-//function helper
-function isNonZeroNumber(input) {
-	if (typeof input !== 'number') {
-		return false;
-	}
-	return input !== 0 && !isNaN(input) && isFinite(input);
-}
 

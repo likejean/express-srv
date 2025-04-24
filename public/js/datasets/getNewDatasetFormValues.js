@@ -206,13 +206,3 @@ function removeDatapointFromChart() {
 }
 
 
-
-//this function is used to check if the input is a non-zero number and is not NaN or Infinity
-function isNonZeroNumber(input) {
-	if (typeof input !== 'number') {
-		return false;
-	}
-	return input !== 0 && !isNaN(input) && isFinite(input);
-}
-
-

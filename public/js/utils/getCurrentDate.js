@@ -1,3 +1,5 @@
+//this function gets the current date in the format YYYY-MM-DD
+// and returns it as a string
 function getCurrentDate() {
 	let today = new Date();
 	let dd = today.getDate();

@@ -1,7 +1,9 @@
 const _store = new dataStorage();   //store all sensors and procedures data
 
+//this function generates the sensor EID and procedure name lists for the dropdown menu in the calibration record page
 const fetchSensorProcedureData = async () => {
-  // fetch all data using POST API endpoints: sensors, procedures
+	//this Promise.all() method is used to fetch all data from the server using GET API endpoints: sensors, procedures
+	//it returns an array of results, which are then stored in the _store object
 	await Promise.all([axios.get("/api/sensors", {
 			headers: getRequestHeaders()
 		}), axios.get("/api/procedures", {
@@ -15,7 +17,7 @@ const fetchSensorProcedureData = async () => {
 			_store[name] = elem;
 		});
 
-		
+		//store all data in local data storage
 		generateSensorProcedureNameLists(_store.getSensorEIDs(), _store.getCalProcedureNames());
 
 		})

@@ -1,6 +1,7 @@
 //example: startDate = '1990-01-15';
 //example: endDate = '2024-11-17';
 
+//this function calculates the difference between two dates in years, months, and days
 function calculateTimeDuration(startDate, endDate) {
 
 	const start = moment(startDate);
