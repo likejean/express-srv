@@ -1,3 +1,5 @@
+//this function creates new sensor record using the POST API endpoint
+//this function is called when the form is submitted
 function createNewSensorRecord() {
   //use POST API endpoint to create new sensor	
     axios

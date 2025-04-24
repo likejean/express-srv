@@ -2,6 +2,8 @@ const calPriorityOptions = [
 	"Mandatory", "Optional", "Unserviceable", "Broken"
 ];
 
+// This function generates the inner HTML string for a select element with options based on the calPriorityOptions array.
+// It also marks the selected option based on the selectedText parameter.
 function selectionOptionsInnerHtmlString (selectedText) {
 	let innerHTMLString = '';		
 

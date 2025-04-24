@@ -1,4 +1,5 @@
-
+//this callback is used to handle the click event of the edit icon in the sensor summary card
+//it is used to toggle the edit mode of the sensor summary card
 function editSensorIconClickEventCallback (event) {
 	
 	//construct wrapper name to access sensor factory collections

@@ -4,7 +4,8 @@ const submitButton = document.getElementById("get-sensor-form-values");
 
 var newSensorPostData = {};  //this object for storing POST request body
 
-//Preset NewSensorForm fields with initial values using GLOBAL SENSOR FACTORY
+//this method initializes the form inputs with the default values from the _sensfactory object
+//this method is called when the page is loaded
 Object.entries(_sensfactory.newSensorFormInputs).forEach(([key, obj]) => {
     form.elements[key].value = obj.value;
     submitButton.disabled = !_sensfactory.isSubmitButtonActive();
@@ -16,7 +17,8 @@ for (i=0; i<inputs.length; i++){
     inputs[i].oninput = inputHandler;
 }
 
-//callback input handler function for ONINPUT EventListener
+//this callback function is used to handle the input event of the form inputs
+//this function updates the newSensorPostData object with the new values and updates the submit button state
 function inputHandler (e) {
     let value = e.target.value;
     let name = e.target.name;
@@ -32,7 +34,8 @@ function inputHandler (e) {
 //Attach eventListener to New Sensor Form data Submission event
 form.addEventListener("submit", submitNewSensorData);
 
-//callback funciton for ONSUBMIT EventListener
+//callback function for ONSUBMIT eventListener in "getNewSensorFormValues.js"
+//this function is called when the user submits the form
 function submitNewSensorData (event) {
     event.preventDefault(); // Prevent default form submission
     const formData = new FormData(form);
@@ -45,5 +48,6 @@ function submitNewSensorData (event) {
         newSensorPostData[key] = value;
     }
 
+	//remove event listeners from all form inputs to prevent multiple submissions
     inputs.forEach((item) => item.removeEventListener("input", inputHandler));
 }
