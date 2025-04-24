@@ -124,6 +124,9 @@
 									id="add-chart-error-limits" 
 									class="btn btn-secondary" 
 									onclick=addErrorLimitLinesToChart()
+									data-bs-toggle="tooltip" 
+									data-bs-placement="top" 
+									title="Click this button to add plots for error limit lines. NOTE: this operation must be performed only after all sensor output plots are generated."
 								>
 									<i id="add-error-limits" class="fa fa-plus"></i></button>								
 							</div>      
@@ -269,6 +272,9 @@
 									type="button" 
 									class="btn btn-secondary" 
 									onclick=addNewDatapointToChart()
+									data-bs-toggle="tooltip" 
+									data-bs-placement="top" 
+									title="Click this button to add a new datapoint to the current plot."									
 								>
 									<i id="add-error-datapoint" class="fa fa-plus" aria-hidden="true"></i>
 								</button>
@@ -277,6 +283,9 @@
 									type="button" 
 									class="btn btn-danger" 
 									onclick=removeDatapointFromChart()
+									data-bs-toggle="tooltip" 
+									data-bs-placement="top" 
+									title="Click this button to remove last datapoint from the current plot."	
 								>
 									<i id="remove-error-datapoint" class="fa fa-minus" aria-hidden="true"></i>
 								</button>
@@ -284,7 +293,7 @@
 							</div>
 							
 
-							<div class="col-lg-4 col-sm-8 mb-sm-4">
+							<div class="col-lg-3 col-sm-8 mb-sm-4">
 								<label for="seriesLabel">Series Label</label>
 								<input
 									name="seriesLabel"
@@ -299,20 +308,28 @@
 									Please, enter series label here
 								</small>
 							</div>
-							<div class="col-lg-2 col-sm-4 mb-sm-4 my-4 x-1">
+							<div class="col-lg-3 col-sm-4 plot-operation-buttons">
 								<button 
 									id="add-current-line-plot"
 									type="button" 
 									class="btn btn-outline-info m-1" 
 									onclick=saveAndBeginNewChartPlot()
+									data-bs-toggle="tooltip" 
+									data-bs-placement="top" 
+									title="Click this button to add a new plot to the chart."
+
 								>
-									Create Plot
+									Add Plot
 								</button>
+								<span id="current-plot-quantity-count"></span>
 								<button 
 									id="disable-sensor-data-entries"
 									type="button" 
 									class="btn btn-outline-success m-1" 
 									onclick=disableAllSensorDataEntries()
+									data-bs-toggle="tooltip" 
+									data-bs-placement="top" 
+									title="Click this button to disable all sensor data entries for plots when you done with plot creation."
 								>
 									Done
 								</button>
@@ -522,6 +539,11 @@
         function resetNewChartDatasetForm() {
             window.location.reload();
         }
+
+		var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+		var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+			return new bootstrap.Tooltip(tooltipTriggerEl)
+		})
 
     </script>
 

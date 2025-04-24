@@ -10,6 +10,7 @@ const inputErrorLimits = document.getElementById("errorLimit");
 const inputCalibratorOutput = document.getElementById("calibratorOutput");
 const inputSensorError = document.getElementById("sensorError");
 const currentSensorDatasetSize = document.getElementById("current-sensor-error-dataset-size");
+const currentPlotSeriesCount = document.getElementById("current-plot-quantity-count");
 
 //button HTML elements
 const prepareDatasetButton = document.getElementById("prepare-new-chart-form-values");
@@ -39,6 +40,7 @@ Object.entries(_chartfactory.newDatasetFormInputs).forEach(([key, obj]) => {
 	prepareDatasetButton.disabled = !_chartfactory.isSubmitButtonActive();
 	submitChartDatasets.disabled = true;
 	currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
+	currentPlotSeriesCount.innerText = _chartfactory.currentDatasetSeries;
 	
 	
 	//disable buttons if calibrationOutput or sensorError input fields are empty

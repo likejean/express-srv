@@ -7,10 +7,11 @@ function saveAndBeginNewChartPlot() {
 	_chartfactory.currentSensorErrorLineDataset = [];
 
 	//get a size of the current dataset: must be ZERO at this point
-	currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
+	currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();	
 	
 	//update the chart series counter
 	_chartfactory.currentDatasetSeries = _chartfactory.currentDatasetSeries + 1;
+	currentPlotSeriesCount.innerText = _chartfactory.currentDatasetSeries;
 	
 	//enables user input fields for the next dataset series
 	if (inputCalibratorOutput.disabled)  inputCalibratorOutput.disabled = false;
@@ -26,6 +27,7 @@ function saveAndBeginNewChartPlot() {
 	["fa-solid", "fa-check",].forEach(classItem => iconErrorDatapoint.classList.remove(classItem));
 	iconErrorDatapoint.classList.add('fa-plus');
 	
+	//disable the add button for sensor datapoint
 	addChartDatapointButton.disabled = true;
 	currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
 	currentSensorDatasetSize.style.backgroundColor = 'rgb(5, 238, 94)';
