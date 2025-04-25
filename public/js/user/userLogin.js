@@ -5,11 +5,12 @@ function userLogin() {
 	const alertTitle = document.getElementById('user-login-alert-title');
 	const alertBody = document.getElementById('alert-body');
 
-	new bootstrap.Modal(modal).show();
-	
+	const bootstrapModal = new bootstrap.Modal(modal);
+	bootstrapModal.show();
 	if (alertBody.classList.contains('alert-danger')) alertBody.classList.replace('alert-danger', 'alert-success');
 	span.innerText = "Loading...";
 	alertTitle.innerText = "Please, Wait";
+	
 
 	axios.post(`../api/users/login`, loginUserPostData)
 		.then(response => {
@@ -24,6 +25,7 @@ function userLogin() {
 			window.localStorage.setItem("userId", id);
 
 			console.log('User logged in successfully:', response);
+			bootstrapModal.hide();
 
 			return axios.get(`../api/users/${id}`)				
 				.then(response => {
