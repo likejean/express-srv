@@ -28,6 +28,7 @@ function updateCurrentChartLine(datasetCount) {
 
 }
 
+// this function 
 function reduceCurrentChartLine(datasetCount) {
 	//updates a chart global factory
 	_chartfactory.currentSensorErrorLineDataset.pop();

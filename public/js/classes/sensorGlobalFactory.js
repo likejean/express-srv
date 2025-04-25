@@ -8,6 +8,7 @@ class sensorFactory {
         this.newSensorFormInputs = newSensorFormInputs
     }
 
+	// this function
     isSubmitButtonActive() {      
         for (const [item, obj] of Object.entries(this.newSensorFormInputs)) {			      
             if (obj.value === "") {
@@ -17,6 +18,7 @@ class sensorFactory {
         return true;
     }
 
+	// this function
     isFormInputFieldEmpty(inputName) {
         return this.newSensorFormInputs[inputName].value.length === 0
     }
