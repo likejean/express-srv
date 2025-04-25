@@ -28,13 +28,18 @@ function userLogin() {
 		})
 		.catch(error => {
 			console.error(error.response);
+
 			
 			const userLoginErrorTextContent = error.response.data.errorMessage;
 
 			const modal = document.getElementById('user-login-auth-error-modal');
 			const span = document.getElementById('error-text-content');
+			const details = document.getElementById('probable-root-cause');
 
 			new bootstrap.Modal(modal).show();
 			span.innerText = userLoginErrorTextContent;
+			if (error.response.data.errorStatusCode == 2) details.innerText = "Incorrect username or password";
+			if (error.response.data.errorStatusCode == 3) details.innerText = "Possible Root Cause: No Internet Connection. Unable to connect to database..";
+		
 	});
 }

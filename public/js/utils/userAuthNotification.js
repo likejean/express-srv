@@ -13,7 +13,7 @@ if(localStorage.getItem("userEmail")) {
     })
     .then(response => {
         const tokenValid = response.data.tokenValid;
-        tokenValid && userAuthNotification("auth-email-home-page", "auth-status-home-page", "green", localStorage.getItem("userEmail"), "logged in.")
+        tokenValid && userAuthNotification("auth-email-home-page", "auth-status-home-page", "green", localStorage.getItem("userEmail"), "logged in.");
         
 		return axios.get(`../api/users/${localStorage.getItem("userId")}`)
 			.then(response => {
