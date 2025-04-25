@@ -247,7 +247,11 @@ router.post('/', (req, res, next) => {
 
 
 
-//TBD
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+//PATCH endpoint: pushes a new dataset into Chart MongoDB document
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
 
 router.patch("/push/:chartId", (req, res, next) => {
 	const id = req.params.chartId;
