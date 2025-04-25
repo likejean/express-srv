@@ -1,6 +1,20 @@
 function userLogin() {
+	const modal = document.getElementById('user-login-auth-error-modal');	
+	const span = document.getElementById('error-text-content');
+	const details = document.getElementById('probable-root-cause');
+	const alertTitle = document.getElementById('user-login-alert-title');
+	const alertBody = document.getElementById('alert-body');
+
+	new bootstrap.Modal(modal).show();
+	
+	if (alertBody.classList.contains('alert-danger')) alertBody.classList.replace('alert-danger', 'alert-success');
+	span.innerText = "Loading...";
+	alertTitle.innerText = "Please, Wait";
+
 	axios.post(`../api/users/login`, loginUserPostData)
 		.then(response => {
+
+			
 			const token = response.data.token;
 			const email = response.data.user.email;
 			const id = response.data.user.userId;
@@ -26,20 +40,20 @@ function userLogin() {
 					console.error(error);
 			});
 		})
-		.catch(error => {
+		.catch(error => {			
 			console.error(error.response);
 
 			
 			const userLoginErrorTextContent = error.response.data.errorMessage;
 
-			const modal = document.getElementById('user-login-auth-error-modal');
-			const span = document.getElementById('error-text-content');
-			const details = document.getElementById('probable-root-cause');
-
-			new bootstrap.Modal(modal).show();
+			alertBody.classList.remove('alert-success');
+			alertBody.classList.add('alert-danger');
+			alertTitle.innerText = "Error!";
 			span.innerText = userLoginErrorTextContent;
-			if (error.response.data.errorStatusCode == 2) details.innerText = "Incorrect username or password";
-			if (error.response.data.errorStatusCode == 3) details.innerText = "Possible Root Cause: No Internet Connection. Unable to connect to database..";
+
+			if (error.response.data.errorStatusCode == 1) details.innerText = "Incorrect username entered";
+			else if (error.response.data.errorStatusCode == 2) details.innerText = "Incorrect password entered";
+			else if (error.response.data.errorStatusCode == 3) details.innerText = "Possible Root Cause: No Internet Connection. Unable to connect to database..";
 		
 	});
 }
