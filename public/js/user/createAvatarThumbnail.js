@@ -1,5 +1,6 @@
 
-//creates a table cell
+//this function creates a thumbnail image from a base64 encoded string
+//this function is used to render the image in the table cell
 function createAvatarThumbnail(tag, bufferArr, classArr, attrArr){ 
 	const tableCell = document.createElement(tag);                   
     const img = document.createElement("img");

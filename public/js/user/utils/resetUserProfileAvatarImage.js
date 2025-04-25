@@ -4,7 +4,8 @@ const img = document.getElementById('user-profile-avatar-image');
 
 btn.addEventListener("click", clearFileInput);
 
-//callback function for event listener to clear avatar image
+//this callback function is executed when the user clicks on the clear button
+//this function clears the file input and resets the image to its default state
 function clearFileInput() {
 	fileInput.value = ''; // This clears the file selection
 	img.src = "../../img/avatars/MissingAvatarIcon.png"; //sets image viewer to its default image icon

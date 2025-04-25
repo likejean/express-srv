@@ -220,7 +220,7 @@ router.post('/', (req, res, next) => {
         manufacturer        
     } = req.body;
 
-
+	//instatiate a new sensor object
     const sensor = new Sensor({
         _id,   
         calibrations:[],   // initializes array to store multiple MongoDB IDs for calibrations docs...         
