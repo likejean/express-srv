@@ -31,8 +31,8 @@ const upload = multer({ storage, fileFilter });
 /////////////COMPLETED and TESTED////////////////////////////////
 router.get("/", (req, res, next) => {
 	User.find()
-		.exec()
-		.then((docs) => {
+	.exec()
+	.then((docs) => {
 		console.log({
 			total: docs.length,
 			request: {
@@ -80,6 +80,7 @@ router.get("/", (req, res, next) => {
 			},
 		});
 	});
+	
 });
 
 /////////////COMPLETED and TESTED////////////////////////////////

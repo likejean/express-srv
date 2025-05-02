@@ -15,14 +15,14 @@ const router = express.Router();
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
 router.get('/', auth.verifyToken, (req, res, next) => {
-	jwt.verify(req.token, config.secretKey, (err) => {
-		if (err) {
+	jwt.verify(req.token, config.secretKey, (err) => {		
+		if (err) {			
 			console.log({
 				errorMessage: err.message,
 				request: {
 					type: 'GET',
 					url: req.originalUrl,
-					status: "SUCCESS"
+					status: "FAILURE"
 				}});
 			res.status(403).json({
 				authStatus: false,

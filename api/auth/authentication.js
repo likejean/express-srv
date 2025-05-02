@@ -25,17 +25,35 @@ function verifyToken (req, res, next) {
     //Get auth header value
     const bearerHeader = req.headers['authorization'];
     //Check if bearer is undefined
-    if (typeof bearerHeader !== 'undefined'){
-        const bearer = bearerHeader.split(' ');		
-        req.token = bearer[1];   //assigns token to API request
-        next();   //if a token found, then proceed to next API endpoint layer
-    } else {
-        //Forbidden
-        res.sendStatus(403).json({
-            message: 'Forbidden',
-            description: 'You do not have permission to perform this operation'
-        });
-    }
+	if (typeof bearerHeader !== 'undefined' && typeof bearerHeader === 'string'){
+		//Split at the space to get token from bearer token
+		const bearer = bearerHeader.split(' ');
+		//Get token from array
+		const bearerToken = bearer[1];
+		//Set the token to req object
+		req.token = bearerToken;
+		//Next middleware
+		next();
+	}
+
+
+	//If bearer is undefined
+	else {
+		console.log({
+			request: {
+				type: 'GET',
+				url: req.originalUrl,
+				status: "FAILED"
+			},
+			message: 'Invalid Bearer! Your login session is expired or you are not logged in! Sign in again to perform this action...'
+		});
+		res.status(403).json({
+			authStatus: false,
+			message: 'Invalid Bearer! Your login session is expired or you are not logged in! Sign in again to perform this action...'
+		});
+	}
+	
+   
 }
 
 

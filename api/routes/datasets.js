@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const Dataset = require("../models/dataset");
+const auth = require('../auth/authentication');
+const jwt = require('jsonwebtoken');
+const config = require('../auth/config');
 const router = express.Router();
 
 //Routers
@@ -8,67 +11,86 @@ const router = express.Router();
 
 // GET endpoint: get ALL sensor calibration datasets
 
-router.get('/', (req, res, next) => {
-	Dataset
-	.find()
-	.exec()
-	.then(docs => {
-		//Server Side Terminal Logs
-		console.log({
-			total: docs.length,
-			request: {
-				type: 'GET',
-				url: req.originalUrl,
-				status: "SUCCESS"
-			}
-		});
-
-		// Client Side Response 
-		res.status(200).json({
-			message: docs.length === 0 ? `MongoDB collection is EMPTY` : `Successfully fetched ${docs.length} sensor datasets`,
-			collectionName: "datasets",
-			payload: docs.map(doc => {
-				return {
-					_id: doc._id,
-					sensorId: doc.sensorId,
-					sensorDescription: doc.sensorDescription,
-					errorLimit: doc.errorLimit,
-					datasetUnits: doc.datasetUnits,
-					chartTitle: doc.chartTitle,
-					chartYLabel: doc.chartYLabel,
-					chartXLabel:  doc.chartXLabel,
-					sensorDatasets: doc.sensorDatasets.map(set => {
-						return {
-							plotId: set.plotId,
-							calibrationId: set.calibrationId,
-							calibrationName: set.calibrationName,
-							seriesLabel: set.seriesLabel,
-							seriesDescription: set.seriesDescription,
-							dataset: set.dataset.map(val => val)
-						}
-					}),	
-					errorUpperLimit: doc.errorUpperLimit.map(val => val),
-					errorLowerLimit: doc.errorLowerLimit.map(val => val),
-					createdAt: doc.createdAt
-				};                    
-			}),
-			total: docs.length,
-			request: {
-			type: 'GET',
-			url: req.originalUrl
+router.get('/', auth.verifyToken, (req, res, next) => {
+	jwt.verify(req.token, config.secretKey, (err) => {
+		if (err) {
+			console.log({
+				errorMessage: err.message,
+				request: {
+					type: 'GET',
+					url: req.originalUrl,
+					status: "FALURE"
+				}});
+			res.status(403).json({
+				authStatus: false,
+				err,
+				message: 'Your login session is expired or you are not logged in! Sign in again to perform this action...'
+			});
 		}
-		});
-	})
-	.catch((error) => {
-		res.status(500).json({
-			message: "Failure: Sensor datasets documents were not fetched... Something went wrong",
-			serverError: error.message,
-			request: {
-				type: 'GET',
-				url: req.originalUrl
-			}  
-		});
+		else{
+			Dataset
+			.find()
+			.exec()
+			.then(docs => {
+				//Server Side Terminal Logs
+				console.log({
+					total: docs.length,
+					request: {
+						type: 'GET',
+						url: req.originalUrl,
+						status: "SUCCESS"
+					}
+				});
+
+				// Client Side Response 
+				res.status(200).json({
+					message: docs.length === 0 ? `MongoDB collection is EMPTY` : `Successfully fetched ${docs.length} sensor datasets`,
+					collectionName: "datasets",
+					payload: docs.map(doc => {
+						return {
+							_id: doc._id,
+							sensorId: doc.sensorId,
+							sensorDescription: doc.sensorDescription,
+							errorLimit: doc.errorLimit,
+							datasetUnits: doc.datasetUnits,
+							chartTitle: doc.chartTitle,
+							chartYLabel: doc.chartYLabel,
+							chartXLabel:  doc.chartXLabel,
+							sensorDatasets: doc.sensorDatasets.map(set => {
+								return {
+									plotId: set.plotId,
+									calibrationId: set.calibrationId,
+									calibrationName: set.calibrationName,
+									seriesLabel: set.seriesLabel,
+									seriesDescription: set.seriesDescription,
+									dataset: set.dataset.map(val => val)
+								}
+							}),	
+							errorUpperLimit: doc.errorUpperLimit.map(val => val),
+							errorLowerLimit: doc.errorLowerLimit.map(val => val),
+							createdAt: doc.createdAt
+						};                    
+					}),
+					total: docs.length,
+					request: {
+					type: 'GET',
+					url: req.originalUrl
+				}
+				});
+			})
+			.catch((error) => {
+				res.status(500).json({
+					message: "Failure: Sensor datasets documents were not fetched... Something went wrong",
+					serverError: error.message,
+					request: {
+						type: 'GET',
+						url: req.originalUrl
+					}  
+				});
+			});
+		}
 	});
+	
 
 });
 
