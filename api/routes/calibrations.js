@@ -23,7 +23,7 @@ router.get("/", auth.verifyToken, (req, res, next) => {
 				request: {
 					type: 'GET',
 					url: req.originalUrl,
-					status: "SUCCESS"
+					status: "FAILURE"
 				}});
 			res.status(403).json({
 				authStatus: false,

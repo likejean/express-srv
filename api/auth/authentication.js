@@ -1,9 +1,10 @@
 const jwt = require('jsonwebtoken');
 
 
-//Generate Token for User Login
+// this function is used to sign the user and generate a token
+// it takes the user object, secret key, response object and request object as parameters
 function signUser(user, secretKey, res, req) {
-	return jwt.sign({user}, secretKey, {expiresIn: '120s'},(err, token) => {
+	return jwt.sign({user}, secretKey, {expiresIn: '3000s'},(err, token) => {
 		console.log({
 			request: {
 				type: 'POST',
@@ -20,7 +21,8 @@ function signUser(user, secretKey, res, req) {
 };
 
 
-// Verify Token for User Login
+// this function is used to verify the token and check if it is valid
+// it takes the request object, response object and next function as parameters
 function verifyToken (req, res, next) {
     //Get auth header value
     const bearerHeader = req.headers['authorization'];
@@ -45,15 +47,13 @@ function verifyToken (req, res, next) {
 				url: req.originalUrl,
 				status: "FAILED"
 			},
-			message: 'Invalid Bearer! Your login session is expired or you are not logged in! Sign in again to perform this action...'
+			message: 'Undefined Bearer! You are not logged in! Sign in again to perform this action...'
 		});
 		res.status(403).json({
 			authStatus: false,
-			message: 'Invalid Bearer! Your login session is expired or you are not logged in! Sign in again to perform this action...'
+			message: 'Undefined Bearer! You are not logged in! Sign in again to perform this action...'
 		});
 	}
-	
-   
 }
 
 

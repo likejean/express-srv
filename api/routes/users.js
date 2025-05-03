@@ -431,7 +431,7 @@ router.post("/verifyToken", auth.verifyToken, (req, res, next) => {
 				request: {
 					type: 'POST',
 					url: req.originalUrl,
-					status: "SUCCESS"
+					status: "FAILURE"
 				}});
 			res.status(403).json({
 				authStatus: "Forbidden",
