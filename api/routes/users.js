@@ -29,56 +29,75 @@ const upload = multer({ storage, fileFilter });
 // GET endpoint: get ALL user records
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
-router.get("/", (req, res, next) => {
-	User.find()
-	.exec()
-	.then((docs) => {
-		console.log({
-			total: docs.length,
-			request: {
-			type: "GET",
-			url: req.originalUrl,
-			status: "SUCCESS",
-			},
-		});
-		res.status(200).json({
-			message: `Successfully fetched ${docs.length} user record(s)`,
-			collectionName: "users",
-			payload: docs.map((doc) => {
-			return {
-				_id: doc._id,
-				email: doc.email,
-				password: doc.password,
-				username: doc.username,
-				firstname: doc.firstname,
-				lastname: doc.lastname,
-				age: doc.age,
-				aboutYourself: doc.aboutYourself,
-				avatarTitle: doc.image.title,
-				avatarDescription: doc.image.description,
-				avatarImageData: doc.image.avatar.data,
+router.get("/", auth.verifyToken, (req, res, next) => {
+	jwt.verify(req.token, config.secretKey, (err) => {
+		if (err) {
+			console.log({
+				errorMessage: err.message,
 				request: {
-				type: "GET",
-				url: req.originalUrl,
+					type: "GET",
+					url: req.originalUrl,
+					status: "FAILURE",
 				},
-			};
-			}),
-			total: docs.length,
-			request: {
-			type: "GET",
-			url: req.originalUrl,
-			},
-		});
-		})
-		.catch((error) => {
-		res.status(500).json({
-			message: "Failed to fetch user documents... Something went wrong",
-			serverError: error.message,
-			request: {
-			type: "GET",
-			url: req.originalUrl,
-			},
-		});
+			});
+			return res.status(403).json({
+				authStatus: false,
+				err,
+				message:
+					"Your login session is expired or you are not logged in! Sign in again to perform this action...",
+			});
+		} else {
+			User.find()
+			.exec()
+			.then((docs) => {
+				console.log({
+					total: docs.length,
+					request: {
+					type: "GET",
+					url: req.originalUrl,
+					status: "SUCCESS",
+					},
+				});
+				res.status(200).json({
+					message: `Successfully fetched ${docs.length} user record(s)`,
+					collectionName: "users",
+					payload: docs.map((doc) => {
+					return {
+						_id: doc._id,
+						email: doc.email,
+						password: doc.password,
+						username: doc.username,
+						firstname: doc.firstname,
+						lastname: doc.lastname,
+						age: doc.age,
+						aboutYourself: doc.aboutYourself,
+						avatarTitle: doc.image.title,
+						avatarDescription: doc.image.description,
+						avatarImageData: doc.image.avatar.data,
+						request: {
+						type: "GET",
+						url: req.originalUrl,
+						},
+					};
+					}),
+					total: docs.length,
+					request: {
+					type: "GET",
+					url: req.originalUrl,
+					},
+				});
+				})
+				.catch((error) => {
+				res.status(500).json({
+					message: "Failed to fetch user documents... Something went wrong",
+					serverError: error.message,
+					request: {
+					type: "GET",
+					url: req.originalUrl,
+					},
+				});
+			});
+		}
 	});
 	
 });

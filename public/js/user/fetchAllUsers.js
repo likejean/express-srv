@@ -2,7 +2,9 @@ const _store = new dataStorage();  //store all users data
 
 const fetchAllUsersData = async () => {
 		// fetch all user records using POST API endpoints: /users
-		await axios.get("/api/users")
+		await axios.get("/api/users", {
+				headers: getRequestHeaders()
+			})
 			.then((result) => {
 	
 			//store all data in local data storage		
