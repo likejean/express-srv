@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 //Generate Token for User Login
 function signUser(user, secretKey, res, req) {
-	return jwt.sign({user}, secretKey, {expiresIn: '30000s'},(err, token) => {
+	return jwt.sign({user}, secretKey, {expiresIn: '120s'},(err, token) => {
 		console.log({
 			request: {
 				type: 'POST',

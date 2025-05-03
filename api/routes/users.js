@@ -459,6 +459,7 @@ router.post("/verifyToken", auth.verifyToken, (req, res, next) => {
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
 router.post("/login", (req, res, next) => {
+	console.log(req.body)
 	const email = req.body.email;
 	User.find({ email })
 		.exec()
