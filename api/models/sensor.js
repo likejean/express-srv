@@ -16,7 +16,7 @@ const sensorSchema = mongoose.Schema(
             type: String,
             required: true,
             unique: true,
-            match: /^EID[0-9]+$/
+            match: /^(EID[0-9]+|FRAME [A-Z]+)$/
         },
         type: { 
             type: String, 
