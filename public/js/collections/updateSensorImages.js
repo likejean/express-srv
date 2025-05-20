@@ -1,6 +1,7 @@
 const sensorImageCollection = {
 	EID47: "load_transducer_EID47.jpg",
 	EID50: "load_transducer_EID50.jpg",
+	EID53: "load_transducer_EID53.jpg",
 	EID498: "load_transducer_EID498.jpg",
 	EID1798: "load_transducer_EID1798.jpg",
 	EID1722: "load_transducer_EID1722.jpg",
@@ -37,5 +38,6 @@ const sensorImageCollection = {
 	EID1145: "thermocouple_conditioner_EID1145.jpg",
 	EID1184: "thermocouple_conditioner_EID1184.jpg",
 	EID1345: "thermocouple_conditioner_EID1345.jpg",
-	EID1346: "thermocouple_conditioner_EID1346.jpg"
+	EID1346: "thermocouple_conditioner_EID1346.jpg",
+	FRAME_H: "alignment_fixture_Frame_H.jpg"
 };
