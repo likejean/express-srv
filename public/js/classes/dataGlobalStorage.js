@@ -98,6 +98,16 @@ class dataStorage {
         }, {});
     }
 
+	getCalExtendedCount(data){
+		//console.log(data)
+		return data.reduce((count, item) => {
+			if (item.calibrationExtended === true) { // Check if the 'active' property is true
+				count++; // Increment the count if true
+			}
+			return count; // Return the updated count
+		}, 0); // Initialize the accumulator 'count' to 0		
+	}
+
 	//verifies if any chart(s) exist for a selected sensor
 	isDatasetChartsExist(sensorId) {
 		return this.datasets.data.payload.some(item => item.sensorId === sensorId);
