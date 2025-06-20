@@ -14,12 +14,12 @@ const mapCalDueDatesAndBuildTableCell = function (data, sensorId) {
 			dueCalDate = moment.utc(data[i].dueCalibrationDate).unix();
 			iconHtmlText =
 				unixTimestamp > dueCalDate
-				? '<i style="color:red;" class="ms-2 fa-duotone fa-solid fa-bell" </i>'
+				? '<i style="color:red;" class="ms-2 fa-duotone fa-solid fa-bell" /i>'
 				: data[i].calibrationExtended === false
                     ?
-                    '<i style="color:lightgreen;" class="ms-2 fa-regular fa-circle-check" </i>'
+                    '<i style="color:lightgreen;" class="ms-2 fa-regular fa-circle-check" /i>'
                     :
-                    '<i style="color:orange;" class="ms-2 fa-regular fa-circle-check" </i>'
+                    '<i style="color:orange;" class="ms-2 fa-regular fa-circle-check" /i>'
 			cell.innerHTML += iconHtmlText;
         }
 		
