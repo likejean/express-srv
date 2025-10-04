@@ -1,10 +1,23 @@
 const sensorTable = document.querySelector(".data-result");
 const tableBody = document.createElement("tbody");
+const validCalibrationsTotal = document.querySelector(".valid-calibrations-total");
+const extendedCalibrationsTotal = document.querySelector(".extended-calibrations-total");
+const expiredCalibrationsTotal = document.querySelector(".expired-calibrations-total");
+
+//this function creates the <<<<<<MAIN FUNCTION>>>>>> for sensor table on the main page
+//it is the main function to render the sensor table
+//it is called to display all sensors, or a filtered/sorted list of sensors
 
 
 function createMainSensorTable(sensors, calibrations) {     //comes from fetchAllData.js
 
-    // creating all table cells	
+
+	//write total number of valid, extended and expired calibrations next to the legend
+	validCalibrationsTotal.innerText = `- ${_store.calibrations.data.payload.length - _store.getCalExpiredCount(_store.calibrations.data.payload) - _store.getCalExtendedCount(_store.calibrations.data.payload)}`;
+	extendedCalibrationsTotal.innerText = `- ${_store.getCalExtendedCount(_store.calibrations.data.payload)}`;
+	expiredCalibrationsTotal.innerText = `- ${_store.getCalExpiredCount(_store.calibrations.data.payload)}`;
+
+    //create table body for the sensor table
     for (let i = 0; i < sensors.length; i++) {
         // adds the row of cells to the end of the table body
         let row = document.createElement("tr");

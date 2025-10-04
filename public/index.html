@@ -77,16 +77,19 @@
 
 						<hr />
 						<div class="notification mb-3">
-							<div class="row justify-content-center">
-								<span style="color:lightgreen;"><i style="color:lightgreen;" class="ms-2 fa-regular fa-circle-check"></i> valid calibration</span>
+							<div class="justify-content-center">
+								<span style="color:lightgreen;"><i style="color:lightgreen;" class="ms-2 fa-regular fa-circle-check"></i> valid calibrations</span>
+								<span class="valid-calibrations-total" style="color:lightgreen;"></span>
 							</div>
 							
-							<div class="row justify-content-center ">
-								<span style="color:orange;"><i style="color:orange;" class="ms-2 fa-regular fa-circle-check"></i> extended calibration</span>
+							<div class="justify-content-center ">
+								<span style="color:orange;"><i style="color:orange;" class="ms-2 fa-regular fa-circle-check"></i> extended calibrations</span>
+								<span class="extended-calibrations-total" style="color:orange;"></span>
 							</div>
 
-							<div class="row justify-content-center ">
-								<span style="color:red;"><i style="color:red;" class="ms-2 fa-duotone fa-solid fa-bell"></i> expired calibration</span>
+							<div class="justify-content-center ">
+								<span style="color:red;"><i style="color:red;" class="ms-2 fa-duotone fa-solid fa-bell"></i> expired calibrations</span>
+								<span class="expired-calibrations-total" style="color:red;"></span>
 							</div>
 							
 						</div>
@@ -328,10 +331,13 @@
 	<script src="./js/sensor/deleteSensorById.js"></script>
 
 	<script>
+		//initialize bootstrap modal for delete dataset
 		var modal = new bootstrap.Modal(document.getElementById('deleteChartModal'));
 		const chartIcon = document.createElement("i");
+		//add classes to chart icon
 		chartIcon.classList.add("fas", "fa-chart-bar", "fa-2xl");
 
+		//open delete dataset modal
 		function closeModal() {
 			modal.hide();
 		}

@@ -92,20 +92,37 @@ class dataStorage {
 
 	//get object of all calibration records names
     getCalRecordNames(){
+		//this function returns an object with calibration names as keys and their _id as values
         return this.calibrations.data.payload.reduce((obj, calibration) => {
             obj[`${calibration.calibrationName}`] = calibration._id;
             return obj;
         }, {});
     }
 
+	//get count of all extended calibration records
 	getCalExtendedCount(data){
-		//console.log(data)
+		//data = this.calibrations.data.payload
+		//count all extended calibration records and display the total next to the legend
 		return data.reduce((count, item) => {
-			if (item.calibrationExtended === true) { // Check if the 'active' property is true
+			// Check if the calibrationExtended property is true
+			if (item.calibrationExtended === true) { 
 				count++; // Increment the count if true
 			}
 			return count; // Return the updated count
 		}, 0); // Initialize the accumulator 'count' to 0		
+	}
+
+	//get count of all expired calibration records
+	getCalExpiredCount(data){
+		//data = this.calibrations.data.payload
+		//count all expired calibration records and display the total next to the legend
+		return data.reduce((count, item) => {
+			// Check if the dueCalibrationDate is in the past
+			if (new Date(item.dueCalibrationDate) < new Date()) { 	
+				count++; // Increment the count if true
+			}
+			return count; // Return the updated count
+		}, 0); // Initialize the accumulator 'count' to 0
 	}
 
 	//verifies if any chart(s) exist for a selected sensor

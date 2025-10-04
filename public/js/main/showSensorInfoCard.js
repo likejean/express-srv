@@ -14,6 +14,7 @@ function showSensorInfoCard(
     comment,
 	sensorId
 ) {
+	//HTML elements collection for info card
 	var tableRow;
 	var deleteBtn = document.getElementById("delete-sensor-button");    
 
