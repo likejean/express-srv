@@ -10,7 +10,6 @@ const inputErrorLimits = document.getElementById("errorLimit");
 const inputCalibratorOutput = document.getElementById("calibratorOutput");
 const inputSensorError = document.getElementById("sensorError");
 const currentSensorDatasetSize = document.getElementById("current-sensor-error-dataset-size");
-const currentPlotSeriesCount = document.getElementById("current-plot-quantity-count");
 
 //button HTML elements
 const prepareDatasetButton = document.getElementById("prepare-new-chart-form-values");
@@ -19,7 +18,6 @@ const addChartErrorLimitsButton = document.getElementById("add-chart-error-limit
 const addChartDatapointButton = document.getElementById("add-chart-datapoint");
 const removeChartDatapointButton = document.getElementById("remove-chart-datapoint");
 const addSensorDataPlotButton = document.getElementById("add-current-line-plot");
-const doneSensorDataEntriesButton = document.getElementById("disable-sensor-data-entries");
 
 
 
@@ -33,14 +31,14 @@ Object.entries(_chartfactory.newDatasetFormInputs).forEach(([key, obj]) => {
 	if(form.elements[key]) form.elements[key].value = obj.value;
 	else throw new Error(`Form element with name ${key} not found`);
 	
-	//sets the numerical decimals to 2 significant figures (fixed)
+	//sets numerical decimals to 2 significant figures (fixed)
 	if (key === "errorLimit") form.elements[key].value = obj.value.toFixed(2);
 	if (key === "datasetStartAt") form.elements[key].value = obj.value.toFixed(2);
 	if (key === "datasetEndAt") form.elements[key].value = obj.value.toFixed(2);
 	prepareDatasetButton.disabled = !_chartfactory.isSubmitButtonActive();
 	submitChartDatasets.disabled = true;
 	currentSensorDatasetSize.innerText = _chartfactory.getSensorErrorLineDatasetCurrentLength();
-	currentPlotSeriesCount.innerText = _chartfactory.currentDatasetSeries;
+	
 	
 	
 	//disable buttons if calibrationOutput or sensorError input fields are empty
@@ -48,9 +46,9 @@ Object.entries(_chartfactory.newDatasetFormInputs).forEach(([key, obj]) => {
 		|| key === "sensorError" && (obj.value === null || obj.value === "")) 
 	addChartDatapointButton.disabled = true;
 	addChartErrorLimitsButton.disabled = true;
-	doneSensorDataEntriesButton.disabled = true;
+	
 
-	//disable buttons if the value is null or empty string
+	//disable sensorError and calibratorOutput user input fields if either datasetUnits or calibrationName (or both) not selected by a user
 	if (_chartfactory.newDatasetFormInputs.datasetUnits.value === "" || _chartfactory.newDatasetFormInputs.calibrationName.value === "") {
 		if (!inputCalibratorOutput.disabled) inputCalibratorOutput.disabled = true;
 		inputCalibratorOutput.value = null;
@@ -58,7 +56,7 @@ Object.entries(_chartfactory.newDatasetFormInputs).forEach(([key, obj]) => {
 		inputSensorError.value = null;
 	}
 
-	//disable buttons if current dataset size is zero
+	//disable input fields for sensorError and calibratorOutput
 	if(_chartfactory.currentSensorErrorLineDataset.length === 0) {
 		addSensorDataPlotButton.disabled = true;
 		removeChartDatapointButton.disabled = true;
@@ -144,7 +142,6 @@ function inputHandler(e) {
 			_chartfactory.newDatasetFormInputs.datasetUnits.value);
 	}
 
-	
 	
 
 	// Allow a user enter only valid positive or negative decimal numbers

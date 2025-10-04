@@ -293,7 +293,7 @@
 							</div>
 							
 
-							<div class="col-lg-3 col-sm-8 mb-sm-4">
+							<div class="col-lg-5 col-sm-8 mb-sm-4">
 								<label for="seriesLabel">Series Label</label>
 								<input
 									name="seriesLabel"
@@ -308,31 +308,20 @@
 									Please, enter series label here
 								</small>
 							</div>
-							<div class="col-lg-3 col-sm-4 plot-operation-buttons">
+							<div class="col-lg-1 col-sm-4 plot-operation-buttons">
 								<button 
 									id="add-current-line-plot"
 									type="button" 
 									class="btn btn-outline-info m-1" 
-									onclick=saveAndBeginNewChartPlot()
+									onclick=saveNewChartPlot()
 									data-bs-toggle="tooltip" 
 									data-bs-placement="top" 
 									title="Click this button to add a new plot to the chart."
 
 								>
-									Add Plot
+									+Plot
 								</button>
-								<span id="current-plot-quantity-count"></span>
-								<button 
-									id="disable-sensor-data-entries"
-									type="button" 
-									class="btn btn-outline-success m-1" 
-									onclick=disableAllSensorDataEntries()
-									data-bs-toggle="tooltip" 
-									data-bs-placement="top" 
-									title="Click this button to disable all sensor data entries for plots when you done with plot creation."
-								>
-									Done
-								</button>
+								
 							</div>
 							
 						</div>
