@@ -29,8 +29,8 @@ class dataStorage {
 	//sort sensors array by the calibration due date
 	sortSensorsByDate() {
 		this.sensors.data.payload.sort((a, b) => {
-			let a_dueDate = new Date(Math.max(...a.calibrations.map(e => new Date(e.dueCalibrationDate))));
-			let b_dueDate = new Date(Math.max(...b.calibrations.map(e => new Date(e.dueCalibrationDate))));
+			let a_dueDate = new Date(Math.min(...a.calibrations.map(e => new Date(e.dueCalibrationDate))));
+			let b_dueDate = new Date(Math.min(...b.calibrations.map(e => new Date(e.dueCalibrationDate))));
 			return a_dueDate - b_dueDate;
 		});
 		return this.sensors.data.payload;
