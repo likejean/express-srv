@@ -1,3 +1,6 @@
+//this function trims all occurrences of a specified substring from both the start and end of a given string
+//it is used to clean up strings by removing unwanted leading and trailing substrings
+//example usage: trimBySubstring("...Hello World...","...") returns "Hello World"
 function trimBySubstring(str, substr) {
     // Trim from the beginning
     while (str.startsWith(substr)) {

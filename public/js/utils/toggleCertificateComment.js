@@ -1,3 +1,5 @@
+//this function displays the certificate comment in the toast body section
+//it is called in generateToastHtmlItem.js
 function viewCertificateComment(id, comment) {
 	var commentText = document.createElement("p");
 	var minimizeIcon = document.createElement("i");
@@ -24,8 +26,9 @@ function viewCertificateComment(id, comment) {
 
 }
 
+//this function closes the certificate comment toast body section
+//it is called in viewCertificateComment.js
 function closeCertificateComment(id) {
-
 	const toastHtmlElement = document.getElementById(id);
 	const toastHtmlBody = toastHtmlElement.querySelector('.toast-body');
 	const certificationInfoComment = toastHtmlBody.querySelector('.alert-success');
