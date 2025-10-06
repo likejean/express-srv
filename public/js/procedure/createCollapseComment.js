@@ -14,7 +14,9 @@ function createCollapseComment (tag, idx, comment) {
     let closeBtn = document.createElement("button");
 	let articleBtn = document.createElement("button");
     let commentTextElem = document.createElement("div");
-  
+	let articleNavLinkWrap = document.createElement("a");
+
+	
 	//add classes to the buttons and comment text element
     ["btn", "btn-primary", "mt-2"].forEach(classItem => openBtn.classList.add(classItem));
 	["btn", "btn-info"].forEach(classItem => articleBtn.classList.add(classItem));
@@ -24,12 +26,9 @@ function createCollapseComment (tag, idx, comment) {
 	//set attributes and text for the buttons and comment text element
     openBtn.setAttribute("id", `open-button-${idx}`);
 	articleBtn.setAttribute("id", `article-button-${idx}`);
-	articleBtn.onclick = function() {
-		let id = getLastPart(this.id, "-");
-		let text = document.getElementById(`comment-text-${id}`).innerText;
-		alert(text);
-	}
+	articleNavLinkWrap.setAttribute("href", `../html/editArticle.html?id=${idx}`);
 	
+
 	// Create the icon element
 	const openIcon = document.createElement('i');	
 	openIcon.classList.add('fa-solid', 'fa-folder-closed'); // Font Awesome folder closed icon	
@@ -58,9 +57,10 @@ function createCollapseComment (tag, idx, comment) {
     commentTextElem.style.display = 'none';
 
 	const btnDiv = document.createElement("div");
+	articleNavLinkWrap.appendChild(articleBtn);
 	btnDiv.classList.add("d-flex", "justify-content-center", "align-items-center", "mb-2");
 	btnDiv.appendChild(openBtn);
-	btnDiv.appendChild(articleBtn);
+	btnDiv.appendChild(articleNavLinkWrap);
 	btnDiv.appendChild(closeBtn);
 
 	// Append the buttons and comment text element to the cell    
