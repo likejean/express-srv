@@ -2,7 +2,7 @@ function createUsersTable() {
 
 	const tableBody = document.querySelector(".user-records-data");
 	const data = _store.users.data.payload;
-	
+
 	for(let i = 0; i < data.length; i++){
 
 		// adds the row of cells to the end of the table body
@@ -26,7 +26,7 @@ function createUsersTable() {
 		row.appendChild(createTableCell("td",`${data[i].email}`, [],  [])); //email cell
 		row.appendChild(createTableCell("td",`${data[i].age}`, ["d-none", "d-sm-table-cell"],  [])); //age cell
 		row.appendChild(createTableCell("td",`${data[i].aboutYourself}`, ["d-none", "d-sm-table-cell"],  [])); //abourYourself cell
-		row.appendChild(createTrashIcon(`${i + 1}`, `${data[i]._id}`, [], false));
+		row.appendChild(createTrashIcon(`${i + 1}`, `${data[i]._id}`, [], data[i].level === "Admin"? true : false));
 
 		//append each constructed table row to the table body <tb></tb>
         tableBody.appendChild(row);

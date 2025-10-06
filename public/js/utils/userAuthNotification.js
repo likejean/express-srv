@@ -22,6 +22,8 @@ if(localStorage.getItem("userEmail")) {
         const tokenValid = response.data.tokenValid;
         tokenValid && userAuthNotification("auth-email-home-page", "auth-status-home-page", "green", localStorage.getItem("userEmail"), "logged in.");
         
+		//fetch user avatar image from the server and store it in localStorage
+		//this avatar image will be used in the navigation bar
 		return axios.get(`../api/users/${localStorage.getItem("userId")}`)
 			.then(response => {
 				const userAvatar = response.data.user.image.avatar.data;			
@@ -33,6 +35,7 @@ if(localStorage.getItem("userEmail")) {
 
     })
     .catch(() => {
+		//token is not valid or expired
             userAuthNotification("auth-email-home-page", "auth-status-home-page", "red", localStorage.getItem("userEmail"), "login session expired.");
         }
     );			

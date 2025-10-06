@@ -74,6 +74,7 @@ router.get("/", auth.verifyToken, (req, res, next) => {
 						avatarTitle: doc.image.title,
 						avatarDescription: doc.image.description,
 						avatarImageData: doc.image.avatar.data,
+						level: doc.level,
 						request: {
 						type: "GET",
 						url: req.originalUrl,
