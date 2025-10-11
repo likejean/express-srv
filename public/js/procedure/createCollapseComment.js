@@ -2,7 +2,7 @@
 // Usage: createCollapseComment(tag, idx, comment)
 // Example: createCollapseComment('td', 1, 'This is a comment')
 
-function createCollapseComment (tag, idx, comment) {    
+function createCollapseComment (tag, idx, comment, procedureId) {    
     
 	// create a table cell element with the specified tag
 	// and add the classes for responsive visibility
@@ -26,7 +26,9 @@ function createCollapseComment (tag, idx, comment) {
 	//set attributes and text for the buttons and comment text element
     openBtn.setAttribute("id", `open-button-${idx}`);
 	articleBtn.setAttribute("id", `article-button-${idx}`);
-	articleNavLinkWrap.setAttribute("href", `../html/editArticle.html?id=${idx}`);
+
+	// Link to the edit article page with the procedure ID as a query parameter	
+	articleNavLinkWrap.setAttribute("href", `../html/editArticle.html?id=${procedureId}`);
 	
 
 	// Create the icon element

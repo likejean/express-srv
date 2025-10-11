@@ -1,5 +1,6 @@
 function createProceduresTable() {
 
+	//function to create table cell elements
 	const tableBody = document.querySelector(".calibration-procedures-data");
 	const data = _store.procedures.data.payload;
 
@@ -22,7 +23,7 @@ function createProceduresTable() {
 		row.appendChild(createTableCell("td",`${data[i].measurementQuantity}`, ["d-none", "d-md-table-cell"],  [{attribute:"id", value: `quantity_${i + 1}`}])); //Measurement Quantity cell
 		row.appendChild(createTableCell("td",`${data[i].units}`, ["d-none", "d-md-table-cell"],  [{attribute:"id", value: `units_${i + 1}`}])); //Units cell		
 		row.appendChild(createDropDownList("td", data[i].calibrations, [])); //Calibrations drop-down list
-		row.appendChild(createCollapseComment("td", i + 1, data[i].comment)); //Comments Manufacturer cell
+		row.appendChild(createCollapseComment("td", i + 1, data[i].comment, data[i]._id)); //Comments Manufacturer cell
 		row.appendChild(createTrashIcon(`${i + 1}`, `${data[i]._id}`, [], data[i].calibrations.length !== 0))
 
 		//append each constructed table row to the table body <tb></tb>
