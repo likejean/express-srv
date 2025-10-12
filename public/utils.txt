@@ -213,3 +213,6 @@ router.delete('/:sensorId', (req, res, next) => {
 10. TO REMOVE LAST 2 GIT COMMITS LOCALLY: 
 git reset --hard HEAD^^
 
+
+11. MATHJAX CHEATSHEET LINK: https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference
+
