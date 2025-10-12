@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 require('dotenv').config();  //get access to environmental variables & secret keys
 
 
-//Establish DB connection
+//connect to MongoDB database using mongoose
+//the connection string is stored in the .env file
 mongoose.connect(
     process.env.NODE_ENV_ATLAS_DATABASE).then(connect => 
         console.log(`Successfully connected to MongoDB Database: ${process.env.NODE_ENV_ATLAS_CLUSTER_NAME}/${process.env.NODE_ENV_ATLAS_DATABASE_NAME}`))
@@ -22,6 +23,7 @@ app.use(express.urlencoded({extended: false}));
 //middleware: module parses incoming requests with JSON payloads and is based on body-parser
 app.use(express.json());
 
+//CORS middleware: to enable CORS (Cross-Origin Resource Sharing)
 app.use((req, res, next) => {
     //
     res.header('Access-Control-Allow-Origin', '*');
@@ -41,19 +43,25 @@ app.use((req, res, next) => {
 });
 
 
-//Intec Calibration, Procedure, Sensor, User and Dataset Routes
-
+//api routes: users, sensors, calibrations, procedures, datasets, articles
+//import route modules to handle requests
 const userRoutes = require('./api/routes/users');
 const sensorRoutes = require('./api/routes/sensors');
 const calibrationRoutes = require('./api/routes/calibrations');
 const procedureRoutes = require('./api/routes/procedures');
 const datasetRoutes = require('./api/routes/datasets');
+const articleRoutes = require('./api/routes/articles');
+
+
 
 //Mounts routes for user requests at specified paths
+//e.g. requests to /api/users will be handled by userRoutes
 app.use('/api/users', userRoutes);
 app.use('/api/sensors', sensorRoutes);
 app.use('/api/calibrations', calibrationRoutes);
 app.use('/api/procedures', procedureRoutes);
 app.use('/api/datasets', datasetRoutes);
+app.use('/api/articles', articleRoutes);
 
+//export the app module
 module.exports = app;

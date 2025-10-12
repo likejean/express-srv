@@ -6,6 +6,7 @@ const app = require('./app');
 const server = http.createServer(app);
 
 //server is listening...
+//starts the server
 server.listen(port, ()=>{
     console.log(`Server is listening on port ${port}....`);
 })

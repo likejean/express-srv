@@ -33,11 +33,12 @@ const fetchCalRecordById = async () => {
 			else dueCalibrationDate.style.color = "green"
 		}
 
+		//store sensor and procedure ids and calibration name in the _calfactory object
         _calfactory.sensor = result.data.calibration.sensorId;
         _calfactory.procedure = result.data.calibration.procedureId;
         _calfactory.calibrationName = result.data.calibration.calibrationName;
 
-        //populate fetched calibration data in Calibration Summary Card html elements
+        //populate html elements with data
         calibrationName.innerText = result.data.calibration.calibrationName;
         lastCalibrationDate.innerText = moment.utc(result.data.calibration.lastCalibrationDate).format("dddd, MM/DD/YYYY");
         dueCalibrationDate.innerText = moment.utc(result.data.calibration.dueCalibrationDate).format("dddd, MM/DD/YYYY");
