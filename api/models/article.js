@@ -16,6 +16,10 @@ const articleSchema = mongoose.Schema(
 			type: String, 
 			required: true
 		},
+		formula: { 
+			type: String, 
+			required: true
+		},
 		url: {
 			type: String,
 			required: true,

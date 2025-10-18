@@ -29,7 +29,7 @@ function showSensorInfoCard(
 
 	//construct .href value (url w/ query string containing sensor id) for "UPDATE" button
 	const createNewChart = document.getElementById("create-new-sensor-chart");
-	createNewChart.href = `./html/createChart.html?id=${sensorId}`;
+	createNewChart.href = `./html/createNewChart.html?id=${sensorId}`;
 
     //Updates html .src attribute to display sensor image
     updateSensorImage(EID);

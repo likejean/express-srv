@@ -112,7 +112,7 @@ router.get('/:procedureId', (req, res, next) => {
 						status: "SUCCESS"
 					}});
 				return res.status(200).json({
-					sensor: doc,
+					procedure: doc,
 					request: {
 						type: 'GET',
 						url: req.originalUrl                    

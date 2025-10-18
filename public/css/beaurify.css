@@ -48,7 +48,8 @@ label {
 .user-login-form-title,
 .new-calibration-form-title,
 .new-procedure-form-title,
-.user-account-title {
+.user-account-title 
+{
 	color: blue;
 }
 

@@ -57,13 +57,20 @@
 			</div>
 		</div>
 
+		
+		 <!--Buttons Container-->
 		<div class="container">
 			<div class="row m-5">
-				<div class="form-group col text-center">						
+				<div class="form-group col text-center">
+					<button type="button" class="btn btn-info">
+						<a href="./createNewArticle.html" style="color:white; text-decoration:none;">Add Article</a>
+					</button>
 					<a href="../html/editCalibrationProcedure.html" class="btn btn-dark">Back</a>
 				</div>
 			</div>
 		</div>
+		<!---->
+
         
     </body>
 
@@ -73,7 +80,11 @@
 		crossorigin="anonymous"></script>    
     </script>
 
-	<script src="../js/article/fetchArticleRecordById.js"></script>
+	<!-- global javascript classes -->
+    <script src="../js/utils/getRequestHeaders.js"></script>>
+	<script src="../js/classes/dataGlobalStorage.js"></script>
+
+	<script src="../js/article/fetchArticlesByProcedureId.js"></script>
 
 	
 </html>

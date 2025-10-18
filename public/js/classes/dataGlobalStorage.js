@@ -4,10 +4,12 @@ class dataStorage {
     constructor(
 			users,
 			sensors,
+			articles,
 			procedures,
             calibrations,
 			datasets,
 			activeSensorCard,
+			activeProcedure,
 			selectedTableRowProcedureId,
 			selectedTableRowUserId,
 			certificateInfoIcon,
@@ -15,10 +17,12 @@ class dataStorage {
         ){      
 			this.users = users,
             this.sensors = sensors,
+			this.articles = articles,
             this.procedures = procedures,
             this.calibrations = calibrations,
 			this.datasets = datasets,
 			this.activeSensorCard = activeSensorCard,
+			this.activeProcedure = activeProcedure,
 			this.selectedTableRowProcedureId = selectedTableRowProcedureId,
 			this.selectedTableRowUserId = selectedTableRowUserId,
 			this.certificateInfoIcon = certificateInfoIcon
