@@ -58,6 +58,7 @@ form.addEventListener("submit", submitNewCalibrationData);
 function submitNewCalibrationData(event) {
 	event.preventDefault(); // Prevent default form submission
 
+	//prepare POST request body data from New Calibration Form inputs using GLOBAL CALIBRATION FACTORY
 	const formData = new FormData(form);
 
 	//NOTE!!!!!!Unable to obtain data from checkboxes inside form, so get the "checked" status directly from the calibration factory

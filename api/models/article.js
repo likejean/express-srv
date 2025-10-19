@@ -20,7 +20,7 @@ const articleSchema = mongoose.Schema(
 			type: String, 
 			required: true
 		},
-		url: {
+		imageLink: {
 			type: String,
 			required: true,
 			// Optional: Add a custom validator for URL format

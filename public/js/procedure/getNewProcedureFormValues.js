@@ -21,9 +21,6 @@ for (i = 0; i < inputs.length; i++) {
 function inputHandler(e) {
     let value = e.target.value;
     let name = e.target.name;
-    
-    //TBD: Prevent decimal inputs for startRangeLevel and endRangeLevel form inputs. 
-    //if(name === "startRangeLevel" || name === "endRangeLevel") e.target.value = Math.trunc(parseFloat(value));
 
     _procfactory.newCalProcedureFormInputs[name].value = value;
     submitButton.disabled = !_procfactory.isSubmitButtonActive();

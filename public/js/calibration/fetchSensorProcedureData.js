@@ -11,6 +11,8 @@ const fetchSensorProcedureData = async () => {
 		})])
 		.then((result) => {
 
+			console.log(result);
+
 		//store all data in local data storage
 		result.forEach((elem) => {
 			let name = elem.data.collectionName;
@@ -27,7 +29,7 @@ const fetchSensorProcedureData = async () => {
 			
 		const userLoginErrorTextContent = error.response.data.message;
 
-		const modal = document.getElementById('new-cal-record-auth-error-modal');
+		const modal = document.getElementById('new-cal-record-auth-error-modal') || document.getElementById('new-article-auth-error-modal');
 		const span = document.getElementById('error-text-content');
 
 		new bootstrap.Modal(modal).show();
