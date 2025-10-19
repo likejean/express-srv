@@ -1,3 +1,4 @@
+//get html elements to populate procedure data
 const calibrationComment = document.querySelector(".procedure-comment");
 const procedureDescription = document.getElementById("procedure-description");
 const calibratorModel = document.getElementById("calibrator-model");
@@ -7,15 +8,16 @@ const procedureName = document.getElementById("procedure-name");
 //data storage object to hold all fetched calibration procedure articles data
 const _store = new dataStorage();   
 
+//obtain query string by id
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const id = urlParams.get("id");
+
 //function to fetch article record by id
 //id is obtained from query string
 const fetchArticlesByProcedureId = async () => {
 
-    //obtain query string by id
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    let id = urlParams.get("id");
-
+	// fetch all data using POST API endpoints: procedures, articles
 
 	await Promise.all([axios.get(`../api/procedures/${id}`, {
 			headers: getRequestHeaders()

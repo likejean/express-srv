@@ -42,4 +42,10 @@ class articleFactory {
     isFormInputFieldEmpty(inputName) {
         return this.newArticleFormInputs[inputName].value.length === 0
     }
+
+	resetNewArticleFormInputs() {
+		for (const [item, obj] of Object.entries(this.newArticleFormInputs)) {            
+			this.newArticleFormInputs[item].value = "";
+		}
+	}	
 }

@@ -32,6 +32,18 @@ const articleSchema = mongoose.Schema(
 				message: props => `${props.value} is not a valid URL!`
 			}
 		},
+		resourceLink: {
+			type: String,
+			required: true,
+			// Optional: Add a custom validator for URL format
+			validate: {
+			validator: function(v) {
+					// Basic URL validation using a regular expression
+					return /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i.test(v);
+				},
+				message: props => `${props.value} is not a valid URL!`
+			}
+		},
 		createdAt: { type: 
             Date, default: 
             Date.now, 

@@ -27,9 +27,15 @@ const newArticleFormContainer = {
 	imageLink: {
 		value: "",
 		validator: str => /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i.test(str),
-		inputRule: `Invalid URL format! Please enter a valid URL.`,
+		inputRule: `Invalid URL format! Please enter a valid URL for the image link.`,
 		regex:""
 	},
+	resourceLink: {
+		value: "",
+		validator: str => /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i.test(str),
+		inputRule: `Invalid URL format! Please enter a valid URL for the resource link.`,
+		regex:""
+	}
 }
 
 _articlefactory = new articleFactory(
