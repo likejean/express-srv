@@ -21,11 +21,15 @@ function createMainSensorTable(sensors, calibrations) {     //comes from fetchAl
     for (let i = 0; i < sensors.length; i++) {
         // adds the row of cells to the end of the table body
         let row = document.createElement("tr");
+        if (sensors[i].calibrationPriority === "Broken") {
+            row.classList.add("table-danger");
+        }
 
         //Filter calibration objects associated with current sensor
         let filteredCalibrations = calibrations.filter((item) => sensors[i].calibrations.some(calibration => calibration._id === item._id));
         
-        // create table row for each sensor
+        //create each cell and append to the row
+        //set row id attribute
         row.setAttribute("id", `row${i + 1}`);
         row.appendChild(createTableCell("th",`${i + 1}`, [], [{attribute:"scope", value:"row"}])); //# column cell
         row.appendChild(createTableCell("td",`${sensors[i].EID}`, [], [])); //EID cell
