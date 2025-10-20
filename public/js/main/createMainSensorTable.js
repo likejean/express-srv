@@ -31,7 +31,7 @@ function createMainSensorTable(sensors, calibrations) {     //comes from fetchAl
         row.appendChild(createTableCell("td",`${sensors[i].EID}`, [], [])); //EID cell
         row.appendChild(createTableCell("td",`${sensors[i].description}`, [], [])); //Description cell
         row.appendChild(createTableCell("td",`${sensors[i].capacityRange}`, ["d-none", "d-sm-table-cell"], [])); //Sensor Capacity cell
-        row.appendChild(mapCalDueDatesAndBuildTableCell(filteredCalibrations, sensors[i]._id)); //Calibration Expiry Status cell
+        row.appendChild(mapCalDueDatesAndBuildTableCell(filteredCalibrations, sensors[i]._id, sensors[i].calibrationPriority)); //Calibration Expiry Status cell
         row.appendChild(createGearIcon(i + 1, sensors[i])); //Gear Icon to view Sensor Details Card
 
         //append each constructed table row to the table body <tb></tb>

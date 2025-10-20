@@ -1,13 +1,15 @@
 // Build special table icon cell to display overall calibration due date status
-const mapCalDueDatesAndBuildTableCell = function (data, sensorId) {
+const mapCalDueDatesAndBuildTableCell = function (data, sensorId, sensorCalibrtionStatus) {
     const cell = document.createElement("td");
     const unixTimestamp = moment().unix();
     let dueCalDate, iconHtmlText;
 
+    console.log("sensorCalibrtionStatus:", sensorCalibrtionStatus);
+
     if (data.length === 0) {
-        cell.innerHTML = '<span class="badge bg-dark">NONE</span>';
-    } else {	
-        
+        (sensorCalibrtionStatus !== "Broken") ? cell.innerHTML = '<span class="badge bg-dark">NONE</span>' : cell.innerHTML = '<span class="badge bg-danger">BROKEN</span>';;        
+    }
+    else {	
 		_store.isDatasetChartsExist(sensorId) 
 		? cell.innerHTML += `<i style="color:#58C2FF; margin-left:-17px;" class="far fa-chart-bar"></i><span id="charts-count">${_store.datasetChartsCount(sensorId)}</span>` : '';	
         for (let i = 0; i < data.length; i++) {

@@ -9,14 +9,14 @@ const calibrationRangePercent = document.getElementById("calRangePercent");
 const calibrationAdjustmentMade = document.getElementById("calAdjustmentMade");
 const calComment = document.getElementById("calComment");
 
+//obtain query string by id
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const id = urlParams.get("id");
+
 //this function fetches the calibration record by its id and populates the html elements with the data
 //it also fetches the sensor and procedure data by their ids and populates the html elements with the data
 const fetchCalRecordById = async () => {
-    //obtain query string by id
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    let id = urlParams.get("id");
-
 	
   	//Get a current time in unix format
     const unixTimestamp = moment().unix();
