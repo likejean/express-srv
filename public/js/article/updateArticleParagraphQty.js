@@ -11,11 +11,15 @@ function updateArticleParagraphQty() {
     
 	// Count current paragraphs in the content
 	let currentParagraphs = articleContent.value.split("\n").filter(para => para.trim() !== "").length;
-	
+
 	// If the desired quantity is greater than current, add paragraphs
 	while (currentParagraphs < paragraphQuantity) {
 		articleContent.value += `§${currentParagraphs + 1}\n\n`;
 		currentParagraphs++;
+		currentParagraphs >= 1 ? articleContent.disabled = false : null;
+		_articlefactory.newArticleFormInputs["content"].value = articleContent.value;
+		_articlefactory.isFormInputFieldEmpty("content") ? articleContent.style.border = "3px solid red" : articleContent.style.border = "2px solid blue";
+		
 	}
 	// If the desired quantity is less than current, remove paragraphs
 	while (currentParagraphs > paragraphQuantity) {
@@ -23,6 +27,12 @@ function updateArticleParagraphQty() {
 		paragraphs.splice(-3, 2); // Remove last paragraph and its two newlines
 		articleContent.value = paragraphs.join("\n");
 		currentParagraphs--;
+		if (currentParagraphs === 0) {
+			articleContent.value = "";
+			_articlefactory.newArticleFormInputs["content"].value = articleContent.value;
+			articleContent.style.border = "3px solid red";
+			articleContent.disabled = true;
+		}
 	}
 
 	

@@ -1,9 +1,11 @@
+const limitChartTitleText = /^.{10,75}$/;
+
 const newArticleFormContainer = {
 
 	title: {
 		value: "Title",
-		validator: () => {},
-		inputRule: `Title cannot be empty`,
+		validator: (text) => (limitChartTitleText.test(text)) ? true : false,
+        inputRule: `Title must be between 10 and 75 characters long`,
 		regex:""
 	},
 	paragraphQuantity: {

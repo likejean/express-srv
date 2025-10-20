@@ -4,8 +4,9 @@ function createProceduresTable() {
 	const tableBody = document.querySelector(".calibration-procedures-data");
 	const data = _store.procedures.data.payload;
 
-	
+	//iterate through data array to create table rows and cells
 	for(let i = 0; i < data.length; i++){
+		
 		// adds the row of cells to the end of the table body
         let row = document.createElement("tr");
 

@@ -32,11 +32,7 @@ function inputHandler(e) {
 
 
 	//higlights field input border based upon emptiness of the input
-	if (_articlefactory.isFormInputFieldEmpty(name)) {
-		e.target.style.border = "3px solid red";
-	} else {
-		e.target.style.border = "2px solid blue";
-	}
+	_articlefactory.isFormInputFieldEmpty(name) ? e.target.style.border = "3px solid red" : e.target.style.border = "2px solid blue";
 }
 
 form.addEventListener("submit", submitNewArticleData);

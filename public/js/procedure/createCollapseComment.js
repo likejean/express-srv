@@ -57,6 +57,13 @@ function createCollapseComment (tag, idx, comment, procedureId) {
     commentTextElem.setAttribute("id", `comment-text-${idx}`);
     commentTextElem.innerText = comment;
     commentTextElem.style.display = 'none';
+	commentTextElem.style.fontSize = '0.7rem';
+	commentTextElem.style.whiteSpace = 'pre-wrap'; // Preserve whitespace and line breaks
+	commentTextElem.style.border = '3px solid #a1f9f0ff';
+	commentTextElem.style.backgroundColor = '#f0f8ff';
+	commentTextElem.style.padding = '10px';
+	commentTextElem.style.boxShadow = '2px 2px 5px rgba(0, 0, 0, 0.1)';
+	
 
 	const btnDiv = document.createElement("div");
 	articleNavLinkWrap.appendChild(articleBtn);

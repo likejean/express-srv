@@ -29,6 +29,8 @@ const fetchArticlesByProcedureId = async () => {
 		//store all fetched data in local data storage
 		_store.activeProcedure = result[0].data.procedure;
 		_store.articles = result[1].data;
+	
+		renderAllArticles(_store.articles);
 
 		//populate html elements with data
 			//populate fetched procedure data in Procedure Description Card html elements
