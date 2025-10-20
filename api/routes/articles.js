@@ -7,6 +7,12 @@ const config = require('../auth/config');
 const router = express.Router();
 //Routers
 
+
+////////////COMPLETED and TESTED////////////////////////////////
+////////////COMPLETED and TESTED////////////////////////////////
+// GET endpoint: retrieve all articles
+////////////COMPLETED and TESTED////////////////////////////////
+////////////COMPLETED and TESTED////////////////////////////////
 router.get('/', auth.verifyToken, (req, res, next) => {
 	jwt.verify(req.token, config.secretKey, (err) => {
 		if (err) {			
@@ -107,6 +113,58 @@ router.post('/', auth.verifyToken, (req, res, next) => {
 		});
 	}});
 
+});
+
+////////////COMPLETED and TESTED////////////////////////////////
+////////////COMPLETED and TESTED////////////////////////////////
+// DELETE endpoint: delete an article by ID
+////////////COMPLETED and TESTED////////////////////////////////
+////////////COMPLETED and TESTED////////////////////////////////
+router.delete('/:articleId', auth.verifyToken, (req, res, next) => {
+	jwt.verify(req.token, config.secretKey, (err) => {
+		if (err) {			
+			console.log({
+				errorMessage: err.message,	
+			});
+			res.status(403).json({
+				authStatus: false,
+				err,
+				message: 'Your login session is expired or you are not logged in! Sign in again to perform this action...'
+			});
+		} else {
+			const id = req.params.articleId;
+			Article.findByIdAndDelete(id).then((deletedArticle) => {
+				if (deletedArticle) {
+					res.status(200).json({
+						message: `Article with ID {${id}} has been successfully deleted.`,
+						deletedArticle,
+						request: {
+							type: 'DELETE',
+							url: req.originalUrl
+						}
+					});
+				} else {
+					res.status(400).json({
+						message: `Article with ID {${id}} was NOT found in the database.`,	
+						isIdValid: mongoose.Types.ObjectId.isValid(id),
+						request: {
+							type: 'DELETE',
+							url: req.originalUrl
+						}
+					});
+				}
+			}).catch((error) => {
+				res.status(500).json({
+					message: `Failed to delete article with ID {${id}} from Database`,
+					serverError: error.message,
+					request: {
+						type: 'DELETE',
+						url: req.originalUrl					
+					}  
+				});
+			});
+		}
+	});
 });
 
 module.exports = router;

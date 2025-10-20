@@ -13,33 +13,64 @@ function renderAllArticles(articles) {
 		articleCard.style.marginBottom = "30px";
 		articleCard.style.borderRadius = "20px";
 
+
 		// Create card body
 		const cardBody = document.createElement("div");
 		cardBody.classList.add("card-body");
 
+
+		// Create article title bootstrap row
+		const articleTitleRow = document.createElement("div");
+		articleTitleRow.classList.add("row");
+
+
+		// Create article title column
+		const articleTitleCol = document.createElement("div");
+		articleTitleCol.classList.add("col-lg-11", "col-sm-11", "d-flex", "align-self-center", "justify-content-center");
+		const deleteArticleCol= document.createElement("div");
+		deleteArticleCol.classList.add("col-lg-1", "col-sm-1", "d-flex", "align-self-center", "justify-content-end");
+
 		// Create article title
 		const articleTitle = document.createElement("h5");
-		articleTitle.classList.add("card-title", "article-title", "text-center");
+		articleTitle.classList.add("text-center");
 		articleTitle.style.fontWeight = "bold";
 		articleTitle.style.fontSize = "1.85rem";
-		articleTitle.style.marginBottom = "3rem";
+		articleTitle.style.marginBottom = "1rem";
 		articleTitle.innerText = article.title;
+		articleTitleCol.appendChild(articleTitle);
+		articleTitleRow.appendChild(articleTitleCol);
+  
+		// Create delete article button
+		const deleteArticleBtn = document.createElement("button");
+		deleteArticleBtn.classList.add("btn", "btn-danger", "mb-4", "mx-1");
+		deleteArticleBtn.style.marginTop = "1rem";
+		deleteArticleCol.appendChild(deleteArticleBtn);
+		const deleteIcon = document.createElement("i");
+		deleteIcon.classList.add("fas", "fa-trash-alt");
+		deleteArticleBtn.appendChild(deleteIcon);
+		articleTitleRow.appendChild(deleteArticleCol);
 
-		// Create main row
+
+		// Create article formula
+		const articleFormula = document.createElement("p");
+		articleFormula.classList.add("card-text", "article-formula");
+		articleFormula.innerText = article.formula;
+
+		// Create card body row
 		// <div class="col-lg-8 col-sm-12 mb-sm-4 mt-5">
-		const mainRow = document.createElement("div");
-		mainRow.classList.add("row");
-		mainRow.classList.add("mb-3");
-		mainRow.style.alignItems = "center";
-		mainRow.style.justifyContent = "center";
-		mainRow.style.border = "2px solid rgba(242, 238, 238, 1)";
-		mainRow.style.backgroundColor = "rgba(242, 238, 238, 1)";
-		mainRow.style.borderRadius = "20px";
+		const cardBodyRow = document.createElement("div");
+		cardBodyRow.classList.add("row", "d-flex", "mx-1");
+		cardBodyRow.style.alignItems = "center";
+		cardBodyRow.style.justifyContent = "center";
+		cardBodyRow.style.border = "2px solid rgba(242, 238, 238, 1)";
+		cardBodyRow.style.backgroundColor = "rgba(242, 238, 238, 1)";
+		cardBodyRow.style.borderRadius = "20px";
 		
+		// Create content bootstrap column
 		const contentCol = document.createElement("div");
 		contentCol.classList.add("col-lg-7", "col-sm-12", "mb-sm-4", "mt-5");
 		
-		
+		// Create image bootstrap column
 		const imageCol = document.createElement("div");
 		imageCol.classList.add("col-lg-5", "col-sm-12", "mb-sm-4", "mt-5");
 		
@@ -48,11 +79,6 @@ function renderAllArticles(articles) {
 		articleContent.classList.add("card-text", "article-content");
 		articleContent.innerText = article.content;
 		contentCol.appendChild(articleContent);
-
-		// Create article formula
-		const articleFormula = document.createElement("p");
-		articleFormula.classList.add("card-text", "article-formula");
-		articleFormula.innerText = article.formula;
 
 		// Create article image
 		const articleImage = document.createElement("img");
@@ -63,23 +89,25 @@ function renderAllArticles(articles) {
 		articleImage.alt = article.title;
 		imageCol.appendChild(articleImage);
 
-		// Append content and image columns to main row
-
-
-		mainRow.appendChild(contentCol);
-		mainRow.appendChild(imageCol);
-		
+		// Create main row to hold content and image columns
+		cardBodyRow.appendChild(contentCol);
+		cardBodyRow.appendChild(imageCol);		
 
 		// Create article resource link
 		const articleResourceLink = document.createElement("a");
 		articleResourceLink.classList.add("article-resource-link");
+		articleResourceLink.classList.add("text-center");
+		articleResourceLink.style.display = "block";
+		articleResourceLink.style.marginTop = "2rem";
+		articleResourceLink.style.fontWeight = "bold";
+		articleResourceLink.style.fontSize = "1.5rem";
 		articleResourceLink.href = article.resourceLink;
-		articleResourceLink.innerText = "View Resource";
+		articleResourceLink.innerText = "Resource Link";
 
 		// Append elements to card body
-		cardBody.appendChild(articleTitle);
+		cardBody.appendChild(articleTitleRow);
 		cardBody.appendChild(articleFormula);
-		cardBody.appendChild(mainRow);
+		cardBody.appendChild(cardBodyRow);
 		cardBody.appendChild(articleResourceLink);
 
 		// Append card body to article card
@@ -87,6 +115,7 @@ function renderAllArticles(articles) {
 
 		// Append article card to article container
 		articleContainer.appendChild(articleCard);
+		// Trigger MathJax typesetting for the newly added content
 		MathJax.typesetPromise([articleContainer]);
 	});
 }

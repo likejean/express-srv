@@ -381,6 +381,7 @@ router.delete("/:calibrationId", (req, res, next) => {
 						break;
 					}
 				}
+				//Save mutated sensor and procedure documents
 				Promise.all([sensor.save(), procedure.save()])
 					.then(() => {
 						console.log({
@@ -426,6 +427,7 @@ router.delete("/:calibrationId", (req, res, next) => {
 					});
 			});
 			} else {
+				//if document was NOT deleted
 			res.status(400).json({
 				message: `Document was NOT deleted. The calibration record associated with ID {${id}} is VALID, but most likley NOT found in the database.`,
 				isIdValid: mongoose.Types.ObjectId.isValid(id),
