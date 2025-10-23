@@ -7,8 +7,6 @@ const expiredCalibrationsTotal = document.querySelector(".expired-calibrations-t
 //this function creates the <<<<<<MAIN FUNCTION>>>>>> for sensor table on the main page
 //it is the main function to render the sensor table
 //it is called to display all sensors, or a filtered/sorted list of sensors
-
-
 function createMainSensorTable(sensors, calibrations) {     //comes from fetchAllData.js
 
 
@@ -19,6 +17,7 @@ function createMainSensorTable(sensors, calibrations) {     //comes from fetchAl
 
     //create table body for the sensor table
     for (let i = 0; i < sensors.length; i++) {
+
         // adds the row of cells to the end of the table body
         let row = document.createElement("tr");
         if (sensors[i].calibrationPriority === "Broken") {
@@ -29,7 +28,7 @@ function createMainSensorTable(sensors, calibrations) {     //comes from fetchAl
         let filteredCalibrations = calibrations.filter((item) => sensors[i].calibrations.some(calibration => calibration._id === item._id));
         
         //create each cell and append to the row
-        //set row id attribute
+        // Set row ID for later reference
         row.setAttribute("id", `row${i + 1}`);
         row.appendChild(createTableCell("th",`${i + 1}`, [], [{attribute:"scope", value:"row"}])); //# column cell
         row.appendChild(createTableCell("td",`${sensors[i].EID}`, [], [])); //EID cell

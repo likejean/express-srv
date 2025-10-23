@@ -120,7 +120,7 @@ router.post('/', auth.verifyToken, (req, res, next) => {
 // DELETE endpoint: delete an article by ID
 ////////////COMPLETED and TESTED////////////////////////////////
 ////////////COMPLETED and TESTED////////////////////////////////
-router.delete('/:articleId', auth.verifyToken, (req, res, next) => {
+router.delete('/:articleId', auth.verifyToken, (req, res, next) => {	
 	jwt.verify(req.token, config.secretKey, (err) => {
 		if (err) {			
 			console.log({
@@ -133,38 +133,55 @@ router.delete('/:articleId', auth.verifyToken, (req, res, next) => {
 			});
 		} else {
 			const id = req.params.articleId;
-			Article.findByIdAndDelete(id).then((deletedArticle) => {
-				if (deletedArticle) {
+			console.log(`Deleting article with id: ${id}`);
+			Article.deleteOne({_id: id})
+			.exec()
+			.then(doc => {
+				if(doc.deletedCount === 1){
+					//SUCCESS:
+					console.log({
+						request: {
+						type: "DELETE",
+						url: req.originalUrl,
+						status: "SUCCESS",
+						},
+					});
 					res.status(200).json({
-						message: `Article with ID {${id}} has been successfully deleted.`,
-						deletedArticle,
+						message: `SUCCESS! Article ${req.body.description} ${req.body.EID} was deleted.`,
+						deletedArticle: {
+							id: req.params.articleId,
+							EID: req.body.EID,
+							description: req.body.description
+						}, 
+						deletedCount: doc.deletedCount,                   
 						request: {
 							type: 'DELETE',
-							url: req.originalUrl
-						}
-					});
-				} else {
+							url: req.originalUrl                    
+						}    
+					});        
+				}else{
 					res.status(400).json({
-						message: `Article with ID {${id}} was NOT found in the database.`,	
-						isIdValid: mongoose.Types.ObjectId.isValid(id),
+						error: `Error: (Hint: the sensor ${req.body.EID} id {${id}} is valid, but seems like not found in the database.`,
 						request: {
 							type: 'DELETE',
-							url: req.originalUrl
-						}
-					});
+							url: req.originalUrl                    
+						}    
+					})
 				}
-			}).catch((error) => {
-				res.status(500).json({
-					message: `Failed to delete article with ID {${id}} from Database`,
+
+			}).catch((error)=>{                
+				res.status(400).json({
+					error: `Failed to delete article ${req.body.EID} with id {${id}}. (Hint: the article ${req.body.EID} id {${id}} format is INVALID; thus, not found in the database...)`,  
 					serverError: error.message,
 					request: {
 						type: 'DELETE',
-						url: req.originalUrl					
-					}  
+						url: req.originalUrl                    
+					}                      
 				});
 			});
 		}
 	});
 });
-
+    
+	
 module.exports = router;

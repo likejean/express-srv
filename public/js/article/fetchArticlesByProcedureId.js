@@ -18,7 +18,6 @@ const id = urlParams.get("id");
 const fetchArticlesByProcedureId = async () => {
 
 	// fetch all data using POST API endpoints: procedures, articles
-
 	await Promise.all([axios.get(`../api/procedures/${id}`, {
 			headers: getRequestHeaders()
 		}), axios.get("/api/articles", {

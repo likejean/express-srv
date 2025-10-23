@@ -1,11 +1,12 @@
 // Build special table icon cell to display overall calibration due date status
 // This function is called from public/js/main/mapBuildSensorTable.js
 const mapCalDueDatesAndBuildTableCell = function (data, sensorId, sensorCalibrtionStatus) {
+
+	//create table cell element
     const cell = document.createElement("td");
     const unixTimestamp = moment().unix();
     let dueCalDate, iconHtmlText;
 
-    console.log("sensorCalibrtionStatus:", sensorCalibrtionStatus);
 
     // If no calibration data, show NONE or BROKEN status
     if (data.length === 0) {

@@ -1,9 +1,11 @@
 const articleContainer = document.querySelector(".article-container");
 
-
+// Function to render all articles
 function renderAllArticles(articles) {
 	
+	//this function creates article cards and appends them to the article container
 	articles.forEach(article => {
+
 		// Create article card element
 		const articleCard = document.createElement("div");
 		articleCard.classList.add("card", "shadow-sm", "article-card", "p-3", "mb-5", "bg-white");
@@ -45,12 +47,18 @@ function renderAllArticles(articles) {
 		deleteArticleBtn.classList.add("btn", "btn-danger", "mb-4", "mx-1");
 		deleteArticleBtn.style.marginTop = "1rem";
 		deleteArticleCol.appendChild(deleteArticleBtn);
+
+		// Create delete icon for the button
 		const deleteIcon = document.createElement("i");
 		deleteIcon.classList.add("fas", "fa-trash-alt");
+
+		// Append delete icon to the button
 		deleteArticleBtn.appendChild(deleteIcon);
 		articleTitleRow.appendChild(deleteArticleCol);
 
-
+		// Add event listener to delete article button
+		deleteArticleBtn.addEventListener("click", () => deleteArticleById(article._id));
+		
 		// Create article formula
 		const articleFormula = document.createElement("p");
 		articleFormula.classList.add("card-text", "article-formula");
@@ -115,6 +123,7 @@ function renderAllArticles(articles) {
 
 		// Append article card to article container
 		articleContainer.appendChild(articleCard);
+		
 		// Trigger MathJax typesetting for the newly added content
 		MathJax.typesetPromise([articleContainer]);
 	});
