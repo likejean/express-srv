@@ -13,7 +13,7 @@ const articleSchema = mongoose.Schema(
 			type: String, 
 			required: true 
 		},
-		branch: { 
+		scienceBranch: { 
 			type: String, 
 			required: true,
 			enum: scienceBranch
@@ -22,7 +22,7 @@ const articleSchema = mongoose.Schema(
 			type: String, 
 			required: true
 		},
-		formula: { 
+		preface: { 
 			type: String, 
 			required: true
 		},

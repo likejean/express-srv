@@ -4,6 +4,7 @@ const Article = require("../models/article");
 const auth = require('../auth/authentication');
 const jwt = require('jsonwebtoken');
 const config = require('../auth/config');
+const { scienceBranch } = require("../../enums/modelEnums");
 const router = express.Router();
 //Routers
 
@@ -67,8 +68,8 @@ router.post('/', auth.verifyToken, (req, res, next) => {
 				procedureId,
 				title,
 				content,
-				branch,
-				formula,
+				scienceBranch,
+				preface,
 				imageLink,
 				resourceLink,
 			} = req.body;
@@ -78,8 +79,8 @@ router.post('/', auth.verifyToken, (req, res, next) => {
 				procedureId,
 				title,
 				content,
-				branch,
-				formula,
+				scienceBranch,
+				preface,
 				imageLink,
 				resourceLink,
 			});

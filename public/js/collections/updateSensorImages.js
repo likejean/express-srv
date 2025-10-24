@@ -1,3 +1,4 @@
+//This collection maps sensor EIDs to their corresponding image filenames
 const sensorImageCollection = {
 	EID47: "load_transducer_EID47.jpg",
 	EID50: "load_transducer_EID50.jpg",

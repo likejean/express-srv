@@ -21,6 +21,9 @@ for (i = 0; i < inputs.length; i++) {
 	inputs[i].oninput = inputHandler;
 }
 
+
+//this function handles New Article Form input events
+//updates GLOBAL ARTICLE FACTORY New Article Form Inputs object
 function inputHandler(e) {
 	let name = e.target.name;
 	let value = e.target.value;
@@ -37,11 +40,10 @@ function inputHandler(e) {
 	_articlefactory.isFormInputFieldEmpty(name) ? e.target.style.border = "3px solid red" : e.target.style.border = "2px solid blue";
 }
 
-//
+//Attach event listener to New Article Form submit event
 form.addEventListener("submit", submitNewArticleData);
 
 //this function prepares New Article Form data for POST request submission
-
 function submitNewArticleData(event) {
     event.preventDefault(); // Prevent default form submission
     const formData = new FormData(form);
@@ -50,11 +52,13 @@ function submitNewArticleData(event) {
 	for (const [key, value] of formData.entries()) {		
 		if (key !== "paragraphQuantity") newArticlePostData[key] = value;
 	}
-	_articlefactory.resetNewArticleFormInputs(); //reset GLOBAL ARTICLE FACTORY New Article Form Inputs object
+
+	//reset New Article Form Inputs object in GLOBAL ARTICLE FACTORY
+	_articlefactory.resetNewArticleFormInputs(); 
 
 	//add procedureId to POST request body
 	newArticlePostData["procedureId"] = procedureId;
-	console.log(newArticlePostData);
+
 	//send POST request to create new article record
     inputs.forEach((item) => item.removeEventListener("input", inputHandler));
 }

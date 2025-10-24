@@ -1,6 +1,7 @@
 
 var commentValidFormat = /[`'"]/;
 
+//New Sensor Form Inputs object container for sensorFactory
 const newSensorFormContainer = {
 	EID: {
 		value: "EIDXXX",

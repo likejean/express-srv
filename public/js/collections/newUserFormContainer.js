@@ -1,3 +1,5 @@
+
+//New User Form Inputs object container for userFactory
 const newUserFormContainer = {
 	email: {
 		value: "popachs@yahoo.com",

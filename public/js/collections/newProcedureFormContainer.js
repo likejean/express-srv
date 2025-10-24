@@ -1,3 +1,4 @@
+//New Procedure Form Inputs object container for procedureFactory
 const newCalProcedureFormContainer = {
     calibratorModel:{
         value:"1610AJH-50K", 

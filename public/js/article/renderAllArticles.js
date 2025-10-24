@@ -1,3 +1,4 @@
+
 const articleContainer = document.querySelector(".article-container");
 
 // Function to render all articles
@@ -5,6 +6,26 @@ function renderAllArticles(articles) {
 	
 	//this function creates article cards and appends them to the article container
 	articles.forEach(article => {
+					
+		
+		// Create science branch badge
+		const articleCategoryRow = document.createElement("div");
+		articleCategoryRow.classList.add("text-end");
+		const scienceBranchBadge = document.createElement("span");
+		scienceBranchBadge.classList.add("badge");
+		scienceBranchBadge.style.backgroundColor = "rgba(0, 123, 255, 0.8)";
+		scienceBranchBadge.style.color = "white";
+		scienceBranchBadge.style.fontSize = "0.75rem";
+		scienceBranchBadge.style.padding = "10px 20px";
+		scienceBranchBadge.style.fontWeight = "bold";
+		scienceBranchBadge.style.width = "165px";
+		scienceBranchBadge.style.boxShadow = "2px 2px 5px rgba(0, 0, 0, 0.3)";
+		scienceBranchBadge.style.margin = "-50px 0px 0px -150px";
+		scienceBranchBadge.style.textTransform = "uppercase";
+		scienceBranchBadge.style.borderRadius = "15px";
+		scienceBranchBadge.style.position = "absolute";
+		scienceBranchBadge.innerText = article.scienceBranch;
+		articleCategoryRow.appendChild(scienceBranchBadge);
 
 		// Create article card element
 		const articleCard = document.createElement("div");
@@ -57,12 +78,12 @@ function renderAllArticles(articles) {
 		articleTitleRow.appendChild(deleteArticleCol);
 
 		// Add event listener to delete article button
-		deleteArticleBtn.addEventListener("click", () => deleteArticleById(article._id));
+		deleteArticleBtn.addEventListener("click", () => deleteArticleById(article._id, article.title));
 		
-		// Create article formula
-		const articleFormula = document.createElement("p");
-		articleFormula.classList.add("card-text", "article-formula");
-		articleFormula.innerText = article.formula;
+		// Create article preface
+		const articlePreface = document.createElement("p");
+		articlePreface.classList.add("card-text", "article-preface", "text-center", "mb-4", "background-light");
+		articlePreface.innerText = article.preface;
 
 		// Create card body row
 		// <div class="col-lg-8 col-sm-12 mb-sm-4 mt-5">
@@ -113,8 +134,9 @@ function renderAllArticles(articles) {
 		articleResourceLink.innerText = "Resource Link";
 
 		// Append elements to card body
+		cardBody.appendChild(articleCategoryRow);
 		cardBody.appendChild(articleTitleRow);
-		cardBody.appendChild(articleFormula);
+		cardBody.appendChild(articlePreface);
 		cardBody.appendChild(cardBodyRow);
 		cardBody.appendChild(articleResourceLink);
 

@@ -1,5 +1,6 @@
 const limitChartTitleText = /^.{10,75}$/;
 
+//New Article Form Inputs object container for articleFactory
 const newArticleFormContainer = {
 
 	title: {
@@ -26,10 +27,10 @@ const newArticleFormContainer = {
 		inputRule: `Branch cannot be empty`,
 		regex:""
 	},
-	formula: {
+	preface: {
 		value: "",
 		validator: () => {},
-		inputRule: `Formula cannot be empty`,
+		inputRule: `Preface cannot be empty`,
 		regex:""
 	},
 	imageLink: {

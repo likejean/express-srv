@@ -1,6 +1,6 @@
 var commentValidFormat = /[`'"]/;
 
-// This is the new calibration form container
+//New Calibration Record Form Inputs object container for calibrationFactory
 const newCalRecordFormContainer = {
 	sensorId: {
 		value: "",

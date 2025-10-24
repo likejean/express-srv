@@ -1,6 +1,6 @@
-function deleteArticleById(articleId) {
+function deleteArticleById(articleId, articleTitle) {
 	// Confirm deletion with the user
-	if (confirm("Are you sure you want to delete this article? This action cannot be undone.")) {
+	if (confirm(`Are you sure you want to delete the article titled "${articleTitle}"? This action cannot be undone.`)) {
 		axios.delete(`/api/articles/${articleId}`, {
 			headers: getRequestHeaders()
 		})
@@ -15,7 +15,7 @@ function deleteArticleById(articleId) {
 		})
 		.catch((error) => {
 			console.error('Error:', error);
-			alert("Failed to delete article.");
+			alert(`Failed to delete the article titled "${articleTitle}".`);
 		});
 	}
     
