@@ -16,7 +16,7 @@ Object.entries(_articlefactory.newArticleFormInputs).forEach(([key, obj]) => {
 });
 
 //Attach eventListener callbacks to all New Article Form Inputs to guide input entry events
-var inputs = document.querySelectorAll("input, textarea");
+var inputs = document.querySelectorAll("input, textarea, select");
 for (i = 0; i < inputs.length; i++) {
 	inputs[i].oninput = inputHandler;
 }
@@ -25,8 +25,10 @@ function inputHandler(e) {
 	let name = e.target.name;
 	let value = e.target.value;
 
+	//display input validation rule message
 	inputValidationText.innerText = _articlefactory.isValidationRuleApplied(name, value).rule;
 
+	//update GLOBAL ARTICLE FACTORY New Article Form Inputs object
 	_articlefactory.newArticleFormInputs[name].value = value;
 	submitButton.disabled = !_articlefactory.isSubmitButtonActive();   //disables SUBMIT button if empty string detected for required user input
 
@@ -35,6 +37,7 @@ function inputHandler(e) {
 	_articlefactory.isFormInputFieldEmpty(name) ? e.target.style.border = "3px solid red" : e.target.style.border = "2px solid blue";
 }
 
+//
 form.addEventListener("submit", submitNewArticleData);
 
 //this function prepares New Article Form data for POST request submission

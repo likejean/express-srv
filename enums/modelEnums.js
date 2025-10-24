@@ -44,10 +44,25 @@ const userLevels = [
     'Quest'
 ];
 
+const scienceBranch = [
+    'Physics',
+    'Mathematics',
+    'Instrumentation',
+    'Automation',
+    'Electronics',
+    'Computer Science',
+    'Engineering',
+    'Chemistry',
+    'Biology',
+    'Geology',
+    'Astronomy'
+];
+
 module.exports = {
 	calibrationPrinciples,
 	calibrationPriorities,
 	calibrationFrequencies,
+    scienceBranch,
 	calibrationUnits,
 	userLevels
 }

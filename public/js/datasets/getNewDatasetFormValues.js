@@ -87,7 +87,7 @@ function inputHandler(e) {
 		inputSensorError.value = null;
 	}
 
-	//disable the submit button if the dataset size is not a number or less than 1	
+	//disable the submit button if the dataset size is not a number or less than 1		
 	if(_chartfactory.currentDatasetSeries.length === 0) submitNewDatasetButton.disabled = true;
 
 

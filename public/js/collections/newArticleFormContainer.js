@@ -20,6 +20,12 @@ const newArticleFormContainer = {
 		inputRule: `Content cannot be empty`,
 		regex:""
 	},
+	scienceBranch: {
+		value: "",
+		validator: () => {},
+		inputRule: `Branch cannot be empty`,
+		regex:""
+	},
 	formula: {
 		value: "",
 		validator: () => {},

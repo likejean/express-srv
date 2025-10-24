@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { scienceBranch } = require('../../enums/modelEnums');
 
 const articleSchema = mongoose.Schema(
 	{
@@ -11,6 +12,11 @@ const articleSchema = mongoose.Schema(
 		title: { 
 			type: String, 
 			required: true 
+		},
+		branch: { 
+			type: String, 
+			required: true,
+			enum: scienceBranch
 		},
 		content: { 
 			type: String, 
