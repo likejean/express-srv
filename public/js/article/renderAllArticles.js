@@ -98,6 +98,7 @@ function renderAllArticles(articles) {
 		// Create article preface
 		const articlePreface = document.createElement("p");
 		articlePreface.classList.add("card-text", "article-preface", "text-center", "mb-4", "background-light");
+		articlePreface.style.fontSize = "0.8rem";
 		articlePreface.innerText = article.preface;
 
 		// Create card body row
