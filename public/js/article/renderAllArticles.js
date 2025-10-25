@@ -5,7 +5,7 @@ const articleContainer = document.querySelector(".article-container");
 function renderAllArticles(articles) {
 	
 	//this function creates article cards and appends them to the article container
-	articles.forEach(article => {
+	articles.forEach((article, idx) => {
 					
 		
 		// Create science branch badge
@@ -13,13 +13,13 @@ function renderAllArticles(articles) {
 		articleCategoryRow.classList.add("text-end");
 		const scienceBranchBadge = document.createElement("span");
 		scienceBranchBadge.classList.add("badge");
-		scienceBranchBadge.style.backgroundColor = "rgba(0, 123, 255, 0.8)";
+		scienceBranchBadge.style.backgroundColor = "rgba(0, 123, 255, 1.0)";
 		scienceBranchBadge.style.color = "white";
 		scienceBranchBadge.style.fontSize = "0.75rem";
 		scienceBranchBadge.style.padding = "10px 20px";
 		scienceBranchBadge.style.fontWeight = "bold";
 		scienceBranchBadge.style.width = "165px";
-		scienceBranchBadge.style.boxShadow = "2px 2px 5px rgba(0, 0, 0, 0.3)";
+		scienceBranchBadge.style.boxShadow = "2px 2px 5px rgba(0, 0, 0, 0.5)";
 		scienceBranchBadge.style.margin = "-50px 0px 0px -150px";
 		scienceBranchBadge.style.textTransform = "uppercase";
 		scienceBranchBadge.style.borderRadius = "15px";
@@ -27,20 +27,35 @@ function renderAllArticles(articles) {
 		scienceBranchBadge.innerText = article.scienceBranch;
 		articleCategoryRow.appendChild(scienceBranchBadge);
 
+		// Create article card number badge
+		const articleCardNumberBadge = document.createElement("span");
+		articleCardNumberBadge.classList.add("badge", "d-flex", "justify-content-center", "align-items-center");
+		articleCardNumberBadge.style.backgroundColor = "rgba(40, 167, 69, 1.0)";
+		articleCardNumberBadge.style.color = "white";
+		articleCardNumberBadge.style.fontSize = "1rem";
+		articleCardNumberBadge.style.padding = "10px 18px";
+		articleCardNumberBadge.style.borderRadius = "20px";
+		articleCardNumberBadge.style.position = "absolute";
+		articleCardNumberBadge.style.margin = "-50px 0px 0px -10px";;
+		articleCardNumberBadge.style.fontWeight = "bold";
+		articleCardNumberBadge.style.width = "20px";
+		articleCardNumberBadge.style.boxShadow = "2px 2px 5px rgba(0, 0, 0, 0.5)";
+		articleCardNumberBadge.innerText = `${idx + 1}`;
+		
+
 		// Create article card element
 		const articleCard = document.createElement("div");
 		articleCard.classList.add("card", "shadow-sm", "article-card", "p-3", "mb-5", "bg-white");
-		articleCard.style.border = "2px solid rgba(242, 238, 238, 1)";
+		articleCard.style.border = "2px solid rgba(167, 162, 162, 1)";
 		articleCard.style.backgroundColor = "rgba(255, 255, 255, 0.9)";
+		articleCard.style.boxShadow = "4px 4px 25px rgba(0, 0, 0, 0.6)";
 		articleCard.style.padding = "20px";
-		articleCard.style.marginBottom = "30px";
 		articleCard.style.borderRadius = "20px";
 
 
 		// Create card body
 		const cardBody = document.createElement("div");
 		cardBody.classList.add("card-body");
-
 
 		// Create article title bootstrap row
 		const articleTitleRow = document.createElement("div");
@@ -134,6 +149,7 @@ function renderAllArticles(articles) {
 		articleResourceLink.innerText = "Resource Link";
 
 		// Append elements to card body
+		cardBody.appendChild(articleCardNumberBadge);
 		cardBody.appendChild(articleCategoryRow);
 		cardBody.appendChild(articleTitleRow);
 		cardBody.appendChild(articlePreface);
@@ -145,7 +161,7 @@ function renderAllArticles(articles) {
 
 		// Append article card to article container
 		articleContainer.appendChild(articleCard);
-		
+
 		// Trigger MathJax typesetting for the newly added content
 		MathJax.typesetPromise([articleContainer]);
 	});
