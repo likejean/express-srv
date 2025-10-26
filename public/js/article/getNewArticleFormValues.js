@@ -10,7 +10,7 @@ const urlParams = new URLSearchParams(queryString);
 const procedureId = urlParams.get("procedureId");
 
 //Preset New Article Form fields with initial values using GLOBAL ARTICLE FACTORY
-Object.entries(_articlefactory.newArticleFormInputs).forEach(([key, obj]) => {	
+Object.entries(_articlefactory.newArticleFormInputs).forEach(([key, obj]) => {
 	if (key === "procedureAssociated")
 		form.elements[key].checked = obj.checked;
 	else form.elements[key].value = obj.value;
@@ -20,7 +20,7 @@ Object.entries(_articlefactory.newArticleFormInputs).forEach(([key, obj]) => {
 //Attach eventListener callbacks to all New Article Form Inputs to guide input entry events
 var inputs = document.querySelectorAll("input, textarea, select");
 for (i = 0; i < inputs.length; i++) {
-	inputs[i].oninput = inputHandler;
+	if(inputs[i].getAttribute('class') !== "math-jax-script") inputs[i].oninput = inputHandler;
 }
 
 
@@ -30,6 +30,8 @@ function inputHandler(e) {
 	let name = e.target.name;
 	let value = e.target.value;
 
+	console.log(name, value)
+
 	//display input validation rule message
 	inputValidationText.innerText = _articlefactory.isValidationRuleApplied(name, value).rule;
 
@@ -38,6 +40,7 @@ function inputHandler(e) {
 		_articlefactory.newArticleFormInputs[name].checked = e.target.checked;   //use event.target.checked attribute for checkboxes only
 	} else {
 		_articlefactory.newArticleFormInputs[name].value = value;
+		console.log(value);
 		submitButton.disabled = !_articlefactory.isSubmitButtonActive();   //disables SUBMIT button if empty string detected for required user input
 	}
 

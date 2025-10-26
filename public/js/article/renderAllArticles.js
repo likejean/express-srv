@@ -128,7 +128,7 @@ function renderAllArticles(articles) {
 		const articleImage = document.createElement("img");
 		articleImage.classList.add("article-image");
 		articleImage.style.borderRadius = "20px";
-		articleImage.style.maxWidth = "20rem";
+		articleImage.style.maxWidth = "15rem";
 		articleImage.src = article.imageLink;
 		articleImage.alt = article.title;
 		imageCol.appendChild(articleImage);
