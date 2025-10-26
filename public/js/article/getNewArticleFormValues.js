@@ -11,7 +11,9 @@ const procedureId = urlParams.get("procedureId");
 
 //Preset New Article Form fields with initial values using GLOBAL ARTICLE FACTORY
 Object.entries(_articlefactory.newArticleFormInputs).forEach(([key, obj]) => {	
-	form.elements[key].value = obj.value;
+	if (key === "procedureAssociated")
+		form.elements[key].checked = obj.checked;
+	else form.elements[key].value = obj.value;
 	submitButton.disabled = !_articlefactory.isSubmitButtonActive();
 });
 
@@ -32,9 +34,12 @@ function inputHandler(e) {
 	inputValidationText.innerText = _articlefactory.isValidationRuleApplied(name, value).rule;
 
 	//update GLOBAL ARTICLE FACTORY New Article Form Inputs object
-	_articlefactory.newArticleFormInputs[name].value = value;
-	submitButton.disabled = !_articlefactory.isSubmitButtonActive();   //disables SUBMIT button if empty string detected for required user input
-
+	if (name === "procedureAssociated") {
+		_articlefactory.newArticleFormInputs[name].checked = e.target.checked;   //use event.target.checked attribute for checkboxes only
+	} else {
+		_articlefactory.newArticleFormInputs[name].value = value;
+		submitButton.disabled = !_articlefactory.isSubmitButtonActive();   //disables SUBMIT button if empty string detected for required user input
+	}
 
 	//higlights field input border based upon emptiness of the input
 	_articlefactory.isFormInputFieldEmpty(name) ? e.target.style.border = "3px solid red" : e.target.style.border = "2px solid blue";
@@ -57,7 +62,7 @@ function submitNewArticleData(event) {
 	_articlefactory.resetNewArticleFormInputs(); 
 
 	//add procedureId to POST request body
-	newArticlePostData["procedureId"] = procedureId;
+	if(_articlefactory.newArticleFormInputs["procedureAssociated"].checked) newArticlePostData["procedureId"] = procedureId;
 
 	//send POST request to create new article record
     inputs.forEach((item) => item.removeEventListener("input", inputHandler));

@@ -3,8 +3,10 @@
 const addArticleOnclickHandler = (procedureId) => {
 	document.getElementById("navigate-new-article-page").addEventListener("click", () => {
 		window.location.href = "./createNewArticle.html?procedureId=" + procedureId;
+	
 	});
 };
 
+
 //obtain query string by id
-addArticleOnclickHandler(id, procedureName);
+addArticleOnclickHandler(id);

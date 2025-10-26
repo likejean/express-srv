@@ -40,7 +40,9 @@ class articleFactory {
     }
 
     isFormInputFieldEmpty(inputName) {
-        return this.newArticleFormInputs[inputName].value.length === 0
+        if (inputName === "procedureAssociated")
+        return false;
+        else return this.newArticleFormInputs[inputName].value.length === 0;
     }
 
 	resetNewArticleFormInputs() {

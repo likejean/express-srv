@@ -20,14 +20,14 @@ const fetchArticlesByProcedureId = async () => {
 	// fetch all data using POST API endpoints: procedures, articles
 	await Promise.all([axios.get(`../api/procedures/${id}`, {
 			headers: getRequestHeaders()
-		}), axios.get("/api/articles", {
+		}), axios.get(`../api/articles/${id}`, {
 			headers: getRequestHeaders()
 		})])
 		.then((result) => {
 
 		//store all fetched data in local data storage
 		_store.activeProcedure = result[0].data.procedure;
-		_store.articles = result[1].data;
+		_store.articles = result[1].data.articles;
 	
 		renderAllArticles(_store.articles);
 
@@ -38,15 +38,11 @@ const fetchArticlesByProcedureId = async () => {
 			calibratorModel.innerText = _store.activeProcedure.calibratorModel;
 			calibratorManufacturer.innerText = _store.activeProcedure.manufacturer;
 			procedureName.innerText = _store.activeProcedure.procedureName;
-
-
 		})
 		.catch((error) => {
 			//display error message if data fetch failure occurs or any other internal error detected
 			console.log(error);
     });
-
-
 }
 
 //call fetchArticleRecordById function on page load

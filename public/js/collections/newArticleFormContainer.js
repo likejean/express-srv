@@ -9,6 +9,12 @@ const newArticleFormContainer = {
         inputRule: `Title must be between 10 and 75 characters long`,
 		regex:""
 	},
+	procedureAssociated: {
+		checked: true,
+		validator: () => {},
+		inputRule: ``,
+		regex:""
+	},
 	paragraphQuantity: {
 		value: 1,
 		validator: str => /^\d+$/.test(str) && Number(str) >= 0,

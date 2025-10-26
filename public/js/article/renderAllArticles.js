@@ -3,10 +3,9 @@ const articleContainer = document.querySelector(".article-container");
 
 // Function to render all articles
 function renderAllArticles(articles) {
-	
+
 	//this function creates article cards and appends them to the article container
-	articles.forEach((article, idx) => {
-					
+	articles.forEach((article, idx) => {					
 		
 		// Create science branch badge
 		const articleCategoryRow = document.createElement("div");

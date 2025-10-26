@@ -6,9 +6,9 @@ const jwt = require('jsonwebtoken');
 const config = require('../auth/config');
 const { scienceBranch } = require("../../enums/modelEnums");
 const router = express.Router();
+
+
 //Routers
-
-
 ////////////COMPLETED and TESTED////////////////////////////////
 ////////////COMPLETED and TESTED////////////////////////////////
 // GET endpoint: retrieve all articles
@@ -39,6 +39,65 @@ router.get('/', auth.verifyToken, (req, res, next) => {
 			});
 	});
 });	
+
+
+
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+// GET endpoint: get many article records by procedure ID
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+router.get("/:procedureId", (req, res, next) => {
+	Article.find({ procedureId: req.params.procedureId })
+	.exec()
+	.then((docs) => {
+		//To handle non-existing id error, but correct format...
+		if (docs) {
+			console.log({
+				request: {
+					type: "GET",
+					url: req.originalUrl,
+					status: "SUCCESS",
+				},
+			});
+			return res.status(200).json({
+				articles: docs,
+				request: {
+					type: "GET",
+					url: req.originalUrl,
+				},
+			});
+		} else {
+			console.log({
+				request: {
+					message: "Failed to fetch article record by procedure ID. Most likely the ID is not valid.",
+					isIdValid: mongoose.Types.ObjectId.isValid(id),
+					type: "GET",
+					url: req.originalUrl,
+					status: "FAILURE",
+				},
+			});
+			return res.status(400).json({
+				message: "Invalid Entry",
+				request: {
+					type: "GET",
+					url: req.originalUrl,
+				},
+			});
+		}
+	})
+	.catch((error) => {
+		res.status(500).json({
+			message: "Failure: Unable to fetch article records...",
+			serverError: error.message,
+			request: {
+			type: "GET",
+			url: req.originalUrl,
+			},
+		});
+	});
+	
+});
 
 
 ////////////COMPLETED and TESTED////////////////////////////////

@@ -7,7 +7,7 @@ const articleSchema = mongoose.Schema(
 		procedureId: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Procedure',
-			required: true
+			required: false
 		},
 		title: { 
 			type: String, 
