@@ -1,8 +1,7 @@
 // GLOBAL FACTORY for articles  
 class articleFactory {
-    constructor(
-        newArticleFormInputs
-        ){
+    constructor(inputWrappers, newArticleFormInputs){
+		this.inputWrappers = inputWrappers
         this.newArticleFormInputs = newArticleFormInputs
     }
 
@@ -50,4 +49,11 @@ class articleFactory {
 			this.newArticleFormInputs[item].value = "";
 		}
 	}	
+
+	isPatchButtonActive() {
+        for (const [item, value] of Object.entries(this.inputWrappers)) {
+            if (value.status) return true;
+        }
+        return false;
+    }
 }

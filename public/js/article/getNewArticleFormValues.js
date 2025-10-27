@@ -30,17 +30,15 @@ function inputHandler(e) {
 	let name = e.target.name;
 	let value = e.target.value;
 
-	console.log(name, value)
-
 	//display input validation rule message
 	inputValidationText.innerText = _articlefactory.isValidationRuleApplied(name, value).rule;
 
 	//update GLOBAL ARTICLE FACTORY New Article Form Inputs object
+	
 	if (name === "procedureAssociated") {
 		_articlefactory.newArticleFormInputs[name].checked = e.target.checked;   //use event.target.checked attribute for checkboxes only
 	} else {
-		_articlefactory.newArticleFormInputs[name].value = value;
-		console.log(value);
+		_articlefactory.newArticleFormInputs[name].value = value;		
 		submitButton.disabled = !_articlefactory.isSubmitButtonActive();   //disables SUBMIT button if empty string detected for required user input
 	}
 

@@ -1,9 +1,9 @@
 //get html elements to populate procedure data
-const calibrationComment = document.querySelector(".procedure-comment");
-const procedureDescription = document.getElementById("procedure-description");
-const calibratorModel = document.getElementById("calibrator-model");
-const calibratorManufacturer = document.getElementById("calibrator-manufacturer");
-const procedureName = document.getElementById("procedure-name");
+const calibratorDescription = document.getElementById("calibratorDescription");
+const calibratorModel = document.getElementById("calibratorModel");
+const calibratorManufacturer = document.getElementById("calibratorManufacturer");
+const procedureName = document.getElementById("procedureName");
+const procedureComment = document.getElementById("procedureComment");
 
 //data storage object to hold all fetched calibration procedure articles data
 const _store = new dataStorage();   
@@ -33,11 +33,11 @@ const fetchArticlesByProcedureId = async () => {
 
 		//populate html elements with data
 			//populate fetched procedure data in Procedure Description Card html elements
-			procedureDescription.innerText = _store.activeProcedure.description;
-			calibrationComment.innerText =  _store.activeProcedure.comment;
+			calibratorDescription.innerText = _store.activeProcedure.description;			
 			calibratorModel.innerText = _store.activeProcedure.calibratorModel;
 			calibratorManufacturer.innerText = _store.activeProcedure.manufacturer;
 			procedureName.innerText = _store.activeProcedure.procedureName;
+			procedureComment.innerText =  _store.activeProcedure.comment;
 		})
 		.catch((error) => {
 			//display error message if data fetch failure occurs or any other internal error detected

@@ -31,7 +31,7 @@ function inputHandler(e) {
 
 	inputValidationText.innerText = _calfactory.isValidationRuleApplied(name, value).rule;
 
-
+	
 	if (name === "calibrationExtended" || name === "adjustmentsMade") {
 		_calfactory.newCalRecordFormInputs[name].checked = e.target.checked;   //use event.target.checked attribute for checkboxes only
 	} else {

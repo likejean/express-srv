@@ -1,8 +1,6 @@
 // GLOBAL FACTORY for procedures  
 class procedureFactory {
-    constructor(
-        newCalProcedureFormInputs
-        ){
+    constructor(newCalProcedureFormInputs){
         this.newCalProcedureFormInputs = newCalProcedureFormInputs
     }
 

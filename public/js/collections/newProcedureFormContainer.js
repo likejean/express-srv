@@ -56,4 +56,6 @@ const newCalProcedureFormContainer = {
     }
 }
 
-var _procfactory = new procedureFactory(newCalProcedureFormContainer);
+var _procfactory = new procedureFactory(	
+	newCalProcedureFormContainer
+);

@@ -58,6 +58,7 @@ display: inline-block;
 }
 
 .cal-notice-span,
+.procedure-notice-span,
 .sensor-notice-span, 
 .user-notice-span {
 	font-weight: bold;
