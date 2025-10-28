@@ -11,8 +11,6 @@ const fetchSensorProcedureData = async () => {
 		})])
 		.then((result) => {
 
-		console.log(result);
-
 		//store all data in local data storage
 		result.forEach((elem) => {
 			let name = elem.data.collectionName;

@@ -109,7 +109,7 @@ function filterSensorsByDescription() {
 			sensorDescriptionTableHeader.setAttribute("onclick", "filterSensorsByDescription()");
 			sensorDescriptionTableHeader.setAttribute("scope", "col");
 			sensorDescriptionTableHeader.removeAttribute("style");
-			sensorDescriptionTableHeader.style.backgroundColor = "brown";
+			sensorDescriptionTableHeader.style.backgroundColor = "2E2E2E";
 			removeAllChildNodes(tableBody[0]);
 			createMainSensorTable(_store.sensors.data.payload, _store.calibrations.data.payload);
 

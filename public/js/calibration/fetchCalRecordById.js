@@ -23,7 +23,7 @@ const fetchCalRecordById = async () => {
 
  	 // fetch all data using POST API endpoints: sensors, calibrations, procedures
     await axios
-    .get(`../api/calibrations/${id}`)
+    .get(`../api/calibrations/${id}`, { headers: getRequestHeaders() })
     .then((result) => {
         //highlight calibration due date with red font color if expired...
         let unixCalibrationDueDate = moment.utc(result.data.calibration.dueCalibrationDate).unix();

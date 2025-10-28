@@ -6,7 +6,7 @@ const fetchProcedureById = async () => {
 
   	// fetch all data using POST API endpoints: sensors
     await axios
-		.get(`../api/procedures/${procedureId}`)
+		.get(`../api/procedures/${procedureId}`, { headers: getRequestHeaders() })
 		.then((result) => {
 			_store.activeProcedure = result.data.procedure;
 			document.querySelector(".procedure-name").innerText = "Procedure Name: " + _store.activeProcedure.procedureName;

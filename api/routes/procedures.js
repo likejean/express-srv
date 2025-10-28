@@ -92,59 +92,75 @@ router.get('/', auth.verifyToken, (req, res, next) => {
 // GET endpoint: get a procedure record by ID
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
-router.get('/:procedureId', (req, res, next) => {
-	const id = req.params.procedureId;
-	Procedure.findById(id)
-		.exec()
-		.then(doc => {
+router.get('/:procedureId', auth.verifyToken, (req, res, next) => {
+	jwt.verify(req.token, config.secretKey, (err) => {
+		if (err) {			
 			console.log({
+				errorMessage: err.message,
 				request: {
 					type: 'GET',
 					url: req.originalUrl,
-					status: "SUCCESS"
+					status: "FAILURE"
 				}});
-			//To handle non-existing id error, but correct format...
-			if (doc) {
+			res.status(403).json({
+				authStatus: false,
+				err,
+				message: 'Your login session is expired or you are not logged in! Sign in again to perform this action...'
+			});
+		}
+		const id = req.params.procedureId;
+		Procedure.findById(id)
+			.exec()
+			.then(doc => {
 				console.log({
 					request: {
 						type: 'GET',
 						url: req.originalUrl,
 						status: "SUCCESS"
 					}});
-				return res.status(200).json({
-					procedure: doc,
+				//To handle non-existing id error, but correct format...
+				if (doc) {
+					console.log({
+						request: {
+							type: 'GET',
+							url: req.originalUrl,
+							status: "SUCCESS"
+						}});
+					return res.status(200).json({
+						procedure: doc,
+						request: {
+							type: 'GET',
+							url: req.originalUrl                    
+						}  
+					});
+				} else {
+					console.log({
+						request: {
+							message: "Failed to fetch procedure record by ID. Most likely the document ID is not valid.",
+							isIdValid: mongoose.Types.ObjectId.isValid(id),
+							type: "GET",
+							url: req.originalUrl,
+							status: "FAILURE",
+						},
+					});
+					return res.status(400).json({
+						message: "Invalid Entry",
+						request: {
+							type: "GET",
+							url: req.originalUrl,
+						},
+					});
+				}
+			})
+			.catch((error) => {
+				res.status(500).json({
+					message: "Failure: Unable to fetch procedure records...",
+					serverError: error.message,
 					request: {
-						type: 'GET',
-						url: req.originalUrl                    
-					}  
-				});
-			} else {
-				console.log({
-					request: {
-						message: "Failed to fetch procedure record by ID. Most likely the document ID is not valid.",
-						isIdValid: mongoose.Types.ObjectId.isValid(id),
-						type: "GET",
-						url: req.originalUrl,
-						status: "FAILURE",
+					type: "GET",
+					url: req.originalUrl,
 					},
 				});
-				return res.status(400).json({
-					message: "Invalid Entry",
-					request: {
-						type: "GET",
-						url: req.originalUrl,
-					},
-				});
-			}
-		})
-		.catch((error) => {
-			res.status(500).json({
-				message: "Failure: Unable to fetch procedure records...",
-				serverError: error.message,
-				request: {
-				type: "GET",
-				url: req.originalUrl,
-				},
 			});
 		});
 	});
@@ -217,62 +233,132 @@ router.post('/', (req, res, next) => {
 
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
+//PATCH endpoint: update PARTIALLY existing calibration procedure record/document by ID
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+
+router.patch("/:procedureId", auth.verifyToken, (req, res, next) => {
+	jwt.verify(req.token, config.secretKey, (err) => {
+		if (err) {			
+			console.log({
+				errorMessage: err.message,
+				request: {
+					type: 'PATCH',
+					url: req.originalUrl,
+					status: "FAILURE"
+				}});
+			res.status(403).json({
+				authStatus: false,
+				err,
+				message: 'Your login session is expired or you are not logged in! Sign in again to perform this action...'
+			});
+		}
+		const id = req.params.procedureId;
+		Procedure.updateOne({ _id: id }, { $set: { ...req.body } })
+			.exec()
+			.then((result) => {
+				console.log({
+					request: {
+						type: "PATCH",
+						url: req.originalUrl,
+						status: "SUCCESS",
+					},
+				});
+				res.status(200).json({
+					message: `Calibration procedure record w/ id: '${id}' was updated successfully.`,
+					request: {
+						type: "PATCH",
+					},
+					result,
+				});
+			})
+			.catch((error) => {
+				res.status(500).json({
+					message: "Failure: Unable to update calibration procedure...",
+					isIdValid: mongoose.Types.ObjectId.isValid(id),
+					serverError: error.message,
+					request: {
+						type: "PATCH",
+						url: req.originalUrl,
+					},
+				});
+			});
+		});
+	});
+
+
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
 ///DELETE API endpoint: deletes procedure document by ID
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
 
-router.delete('/:procedureId', (req, res, next) => {
-    const id = req.params.procedureId;
-    Procedure.deleteOne({_id: id})
-        .exec()
-        .then(doc => {
-            //SUCCESS:
-            console.log({
-                request: {
-                type: "DELETE",
-                url: req.originalUrl,
-                status: "SUCCESS",
-                },
-            });
-            if(doc.deletedCount === 1){
-                res.status(200).json({
-					message: `SUCCESS! Calibration procedure ${req.body.procedureName} was deleted from calibration procedure`,
-					deletedProcedure: {
-						id: req.params.procedureId,
-						EID: req.body.procedureName,
-						description: req.body.description
-					}, 
-					deletedCount: doc.deletedCount,                   
-					request: {
-						type: 'DELETE',
-						url: req.originalUrl                    
-					}    
-				});        
-            }else{
-                res.status(400).json({
-                    error: `Error: (Hint: calibration procedure id ${req.body.procedureId} was valid, but seems like not found in the database.`,
-                    request: {
-                        type: 'DELETE',
-                        url: req.originalUrl                    
-                    }    
-                })
-            }
-
-        }).catch((error)=>{ 
-            res.status(400).json({
-				err,
-				message: `Failed to delete calibration procedure ${req.body.procedureName}. (Hint: the procedure id format is INVALID; thus, not found in the database...)`, 
-				isIdValid: mongoose.Types.ObjectId.isValid(id),
-                serverError: error.message,
+router.delete('/:procedureId', auth.verifyToken, (req, res, next) => {
+	jwt.verify(req.token, config.secretKey, (err) => {
+		if (err) {			
+			console.log({
+				errorMessage: err.message,
 				request: {
-				type: "DELETE",
-				url: req.originalUrl,
-				},
+					type: 'DELETE',
+					url: req.originalUrl,
+					status: "FAILURE"
+				}});
+			res.status(403).json({
+				authStatus: false,
+				err,
+				message: 'Your login session is expired or you are not logged in! Sign in again to perform this action...'
 			});
-        });
-    });
+		}
+		const id = req.params.procedureId;
+		Procedure.deleteOne({_id: id})
+			.exec()
+			.then(doc => {
+				//SUCCESS:
+				console.log({
+					request: {
+					type: "DELETE",
+					url: req.originalUrl,
+					status: "SUCCESS",
+					},
+				});
+				if(doc.deletedCount === 1){
+					res.status(200).json({
+						message: `SUCCESS! Calibration procedure ${req.body.procedureName} was deleted from calibration procedure`,
+						deletedProcedure: {
+							id: req.params.procedureId,
+							EID: req.body.procedureName,
+							description: req.body.description
+						}, 
+						deletedCount: doc.deletedCount,                   
+						request: {
+							type: 'DELETE',
+							url: req.originalUrl                    
+						}    
+					});        
+				}else{
+					res.status(400).json({
+						error: `Error: (Hint: calibration procedure id ${req.body.procedureId} was valid, but seems like not found in the database.`,
+						request: {
+							type: 'DELETE',
+							url: req.originalUrl                    
+						}    
+					})
+				}
 
-
+			}).catch((error)=>{ 
+				res.status(400).json({
+					err,
+					message: `Failed to delete calibration procedure ${req.body.procedureName}. (Hint: the procedure id format is INVALID; thus, not found in the database...)`, 
+					isIdValid: mongoose.Types.ObjectId.isValid(id),
+					serverError: error.message,
+					request: {
+					type: "DELETE",
+					url: req.originalUrl,
+					},
+				});
+			});
+		});
+	});
 
 module.exports = router;
 

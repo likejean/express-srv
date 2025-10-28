@@ -13,7 +13,9 @@ function deleteCalibrationRecord() {
     
 	//axios delete request to delete the calibration record from the server	
     axios
-        .delete(`../api/calibrations/${id}`, { data })
+        .delete(`../api/calibrations/${id}`, { data }, 
+            { headers: getRequestHeaders() }
+        )
         .then((response) => {
             console.log("Calibration record deleted successfully:", response.data);
             window.location.href = "../index.html";

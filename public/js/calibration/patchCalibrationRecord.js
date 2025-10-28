@@ -12,7 +12,9 @@ function patchCalibrationRecord() {
 
   //use PATCH API endpoint to update existing calibration record
     axios
-    .patch(`../api/calibrations/${id}`, calPatchRequestData)
+    .patch(`../api/calibrations/${id}`, calPatchRequestData,
+        { headers: getRequestHeaders() }
+    )
     .then((response) => {
         icons.forEach((icon) => {
             icon.removeEventListener("click", editCalibrationIconClickEventCallback);

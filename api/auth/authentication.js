@@ -43,7 +43,6 @@ function verifyToken (req, res, next) {
 	else {
 		console.log({
 			request: {
-				type: 'GET',
 				url: req.originalUrl,
 				status: "FAILED"
 			},
