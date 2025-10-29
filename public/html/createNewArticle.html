@@ -42,8 +42,6 @@
 				</div>
 
 
-				
-
 				<!-- New Article Form -->
                 <form id="new-article-form">
 
@@ -52,7 +50,7 @@
 							<div class="row">
 								<!--Associated with Calibration Procedure?-->                            
 
-								<div class="col-lg-12 col-sm-12 mb-sm-4">
+								<div class="col-lg-6 col-sm-12 mb-sm-4">
 									<div class="form-check">
 										<input
 											name="procedureAssociated"
@@ -75,7 +73,31 @@
 									>
 									Check this box if this article is associated to current calibration procedure.
 									</small>
-								</div>       
+								</div>   
+								
+								<div class="col-lg-6 col-sm-12 mb-sm-4 calibration-procedures-list">
+									<label for="calibrationProcedures"
+										>Calibration Procedures</label
+									>
+									<select
+										name="calibrationProcedures"
+										class="form-select"
+										aria-label="Please, select aa calibration procedures applicable to this article"
+										id="calibrationProcedures"
+										aria-describedby="calibrationProcedures#Help"
+										>
+										<!----->
+										
+									</select>
+									<small
+										id="calibrationProcedures#Help"
+										class="form-text text-muted"
+										>
+										Please, select all calibration procedures related to this article
+									</small>
+									
+
+								</div>
 							</div>
 						</div>
 					</div>
@@ -383,15 +405,15 @@
 		<script src="../js/collections/newArticleFormContainer.js"></script>	
 		
 		
-		<!--User Interface & API endpoint functions & utils-->
+		<!--User Interface & API endpoint functions & utils-->		
 		<script src="../js/article/utils/mathJaxInputChangeValueCallback.js"></script>
-		<script src="../js/article/utils/updateArticleParagraphQty.js"></script>
-		<script src="../js/article/getNewArticleFormValues.js"></script>
-		<script src="../js/article/createNewArticleRecord.js"></script>
+		<script src="../js/article/utils/updateArticleParagraphQty.js"></script>		
+		<script src="../js/article/getNewArticleFormValues.js"></script>		
+		<script src="../js/article/createNewArticleRecord.js"></script>		
 		<script src="../js/procedure/fetchProcedureById.js"></script>
+		<script src="../js/article/fetchAllCalProcedureData.js"></script>
+		<script src="../js/article/utils/toggleCalibrationProceduresListVisilibity.js"></script>
 		
-
-
         <script>
             function resetNewArticleForm() {
                 window.location.reload();

@@ -15,6 +15,12 @@ const newArticleFormContainer = {
 		inputRule: ``,
 		regex:""
 	},
+	calibrationProcedures: {
+		value: [],
+		validator: () => {},
+		inputRule: ``,
+		regex:""
+	},
 	paragraphQuantity: {
 		value: 1,
 		validator: str => /^\d+$/.test(str) && Number(str) >= 0,

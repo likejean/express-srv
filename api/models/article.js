@@ -3,12 +3,14 @@ const { scienceBranch } = require('../../enums/modelEnums');
 
 const articleSchema = mongoose.Schema(
 	{
-		_id: mongoose.Schema.Types.ObjectId,
-		procedureId: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Procedure',
-			required: false
-		},
+		_id: mongoose.Schema.Types.ObjectId,		
+		procedures: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: 'Procedure',
+				required: false,
+			},
+		],
 		title: { 
 			type: String, 
 			required: true 
