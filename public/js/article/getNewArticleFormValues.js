@@ -38,11 +38,10 @@ function inputHandler(e) {
 	if (name === "procedureAssociated") {
 		_articlefactory.newArticleFormInputs[name].checked = e.target.checked;   //use event.target.checked attribute for checkboxes only
 
-	} 
+	} 	
 	else if (name == "calibrationProcedures") {
 		if(!_articlefactory.newArticleFormInputs[name].value.includes(value)) _articlefactory.newArticleFormInputs[name].value.push(value);
 		calibrationProcedureQuantity.innerText = _articlefactory.newArticleFormInputs[name].value.length;
-		console.log(_articlefactory.newArticleFormInputs[name].value);
 	}
 	else {
 		_articlefactory.newArticleFormInputs[name].value = value;		
@@ -77,10 +76,6 @@ function submitNewArticleData(event) {
 
 	//reset New Article Form Inputs object in GLOBAL ARTICLE FACTORY
 	_articlefactory.resetNewArticleFormInputs(); 
-	
-	console.log(newArticlePostData);
-	//add procedureId to POST request body
-	//if(_articlefactory.newArticleFormInputs["procedureAssociated"].checked) newArticlePostData["procedureId"] = procedureId;
 
 	//send POST request to create new article record
     inputs.forEach((item) => item.removeEventListener("input", inputHandler));

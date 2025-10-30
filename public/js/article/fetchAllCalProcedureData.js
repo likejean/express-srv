@@ -1,3 +1,6 @@
+//data storage object to hold all fetched calibration procedure articles data
+const _store = new dataStorage();   
+
 const fetchAllCalProcedureData = async () => {
   // fetch all calibration procedures using POST API endpoints: /procedures
 	await axios.get("/api/procedures", {
