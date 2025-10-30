@@ -46,13 +46,13 @@ const newArticleFormContainer = {
 		regex:""
 	},
 	imageLink: {
-		value: "",
+		value: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM0rkxVzj-IYBGzsflQSLVpQGbU0JBJPdqDA&s",
 		validator: str => /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i.test(str),
 		inputRule: `Invalid URL format! Please enter a valid URL for the image link.`,
 		regex:""
 	},
 	resourceLink: {
-		value: "",
+		value: "https://www.yahoo.com/",
 		validator: str => /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i.test(str),
 		inputRule: `Invalid URL format! Please enter a valid URL for the resource link.`,
 		regex:""

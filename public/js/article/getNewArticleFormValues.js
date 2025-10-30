@@ -37,7 +37,14 @@ function inputHandler(e) {
 	
 	if (name === "procedureAssociated") {
 		_articlefactory.newArticleFormInputs[name].checked = e.target.checked;   //use event.target.checked attribute for checkboxes only
-	} else {
+
+	} 
+	else if (name == "calibrationProcedures") {
+		if(!_articlefactory.newArticleFormInputs[name].value.includes(value)) _articlefactory.newArticleFormInputs[name].value.push(value);
+		calibrationProcedureQuantity.innerText = _articlefactory.newArticleFormInputs[name].value.length;
+		console.log(_articlefactory.newArticleFormInputs[name].value);
+	}
+	else {
 		_articlefactory.newArticleFormInputs[name].value = value;		
 		submitButton.disabled = !_articlefactory.isSubmitButtonActive();   //disables SUBMIT button if empty string detected for required user input
 	}
@@ -55,15 +62,25 @@ function submitNewArticleData(event) {
     const formData = new FormData(form);
 
     //prepare POST request body data from New Article Form inputs using GLOBAL ARTICLE FACTORY
-	for (const [key, value] of formData.entries()) {		
-		if (key !== "paragraphQuantity") newArticlePostData[key] = value;
+	for (const [key, value] of formData.entries()) {
+			newArticlePostData[key] = value;
 	}
+
+	if(_articlefactory.newArticleFormInputs["calibrationProcedures"].value.length > 0) {
+		newArticlePostData["calibrationProcedures"] = _articlefactory.newArticleFormInputs["calibrationProcedures"].value;
+		DeleteKeys(newArticlePostData, ["paragraphQuantity", "procedureAssociated"]);
+	}else{
+		DeleteKeys(newArticlePostData, ["paragraphQuantity", "procedureAssociated", "calibrationProcedures"]);
+	}
+
+	
 
 	//reset New Article Form Inputs object in GLOBAL ARTICLE FACTORY
 	_articlefactory.resetNewArticleFormInputs(); 
-
+	
+	console.log(newArticlePostData);
 	//add procedureId to POST request body
-	if(_articlefactory.newArticleFormInputs["procedureAssociated"].checked) newArticlePostData["procedureId"] = procedureId;
+	//if(_articlefactory.newArticleFormInputs["procedureAssociated"].checked) newArticlePostData["procedureId"] = procedureId;
 
 	//send POST request to create new article record
     inputs.forEach((item) => item.removeEventListener("input", inputHandler));

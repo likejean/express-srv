@@ -20,16 +20,16 @@ const fetchArticlesByProcedureId = async () => {
 	// fetch all data using POST API endpoints: procedures, articles
 	await Promise.all([axios.get(`../api/procedures/${id}`, {
 			headers: getRequestHeaders()
-		}), axios.get(`../api/articles/${id}`, {
+		}), axios.get(`../api/articles`, {
 			headers: getRequestHeaders()
 		})])
 		.then((result) => {
 
 		//store all fetched data in local data storage
 		_store.activeProcedure = result[0].data.procedure;
-		_store.articles = result[1].data.articles;
-	
-		renderAllArticles(_store.articles);
+		_store.articles = result[1].data.payload;
+		
+		renderAllArticles(_store.articles.filter(item => item.calibrationProcedures.some(id => id === _store.activeProcedure._id)));
 
 		//populate html elements with data
 			//populate fetched procedure data in Procedure Description Card html elements

@@ -44,7 +44,6 @@
 
 				<!-- New Article Form -->
                 <form id="new-article-form">
-
 					<div class="control-form-field-box form-group my-4 p-2">
 						<div class="container">
 							<div class="row">
@@ -75,7 +74,7 @@
 									</small>
 								</div>   
 								
-								<div class="col-lg-6 col-sm-12 mb-sm-4 calibration-procedures-list">
+								<div class="col-lg-2 col-md-6 col-sm-6 mb-sm-4 calibration-procedures-list-wrapper">
 									<label for="calibrationProcedures"
 										>Calibration Procedures</label
 									>
@@ -89,13 +88,18 @@
 										<!----->
 										
 									</select>
-									<small
-										id="calibrationProcedures#Help"
-										class="form-text text-muted"
-										>
-										Please, select all calibration procedures related to this article
+									<small id="calibrationProcedures#Help" class="form-text text-muted">
+										Please, select procedures
 									</small>
 									
+								</div>
+
+								<div class="col-lg-3 col-md-4 col-sm-4 mb-sm-4 counter-wrapper">
+								Total: &nbsp<span style="margin-top: 30px; font-size: large;" 
+									class="badge bg-dark calibration-procedures-quantity"></span>
+								</div>
+								<div class="col-lg-1 col-md-2 col-sm-2 mb-sm-4 reset-button-wrapper">
+									<button class="btn mt-4 bg-body-secondary procedures-quantity-reset-button">Reset</button>
 
 								</div>
 							</div>
@@ -402,7 +406,8 @@
 		<script src="../js/classes/dataGlobalStorage.js"></script>
 		<script src="../js/collections/editCalibratorContainer.js"></script>	
 		<script src="../js/classes/articleGlobalFactory.js"></script>
-		<script src="../js/collections/newArticleFormContainer.js"></script>	
+		<script src="../js/collections/newArticleFormContainer.js"></script>
+		<script src="../js/utils/filterObjectFromKeyValuePairs.js"></script>
 		
 		
 		<!--User Interface & API endpoint functions & utils-->		
@@ -413,6 +418,7 @@
 		<script src="../js/procedure/fetchProcedureById.js"></script>
 		<script src="../js/article/fetchAllCalProcedureData.js"></script>
 		<script src="../js/article/utils/toggleCalibrationProceduresListVisilibity.js"></script>
+		<script src="../js/article/utils/updatePrcedureQuantitySelected.js"></script>
 		
         <script>
             function resetNewArticleForm() {

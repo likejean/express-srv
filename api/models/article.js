@@ -4,7 +4,7 @@ const { scienceBranch } = require('../../enums/modelEnums');
 const articleSchema = mongoose.Schema(
 	{
 		_id: mongoose.Schema.Types.ObjectId,		
-		procedures: [
+		calibrationProcedures: [
 			{
 				type: mongoose.Schema.Types.ObjectId,
 				ref: 'Procedure',

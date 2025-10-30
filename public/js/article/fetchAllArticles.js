@@ -9,8 +9,8 @@ const fetchAllArticles = async () => {
 			headers: getRequestHeaders()
 		})
 		.then((result) => {
-			_store.articles = result;	
-			renderAllArticles(_store.articles.data);
+			_store.articles = result.data.payload;	
+			renderAllArticles(_store.articles);
 
 		})
 		.catch((error) => {

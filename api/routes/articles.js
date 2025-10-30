@@ -30,13 +30,27 @@ router.get('/', auth.verifyToken, (req, res, next) => {
 				message: 'Your login session is expired or you are not logged in! Sign in again to perform this action...'
 			});
 		}
-		Article.find()
-			.then(articles => {
-				res.json(articles);
+		Article
+		.find()
+		.exec()
+		.then(docs => {
+				console.log({
+					total: docs.length,
+					request: {
+						type: 'GET',
+						url: req.originalUrl,
+						status: "SUCCESS"
+					}}
+				);
+				res.status(200).json({
+					message: `Successfully fetched ${docs.length} article record(s)`,
+					collectionName: "articles",
+					payload: docs
+				})
 			})
-			.catch(err => {
-				next(err);
-			});
+		.catch(err => {
+			next(err);
+		});
 	});
 });	
 
@@ -139,7 +153,7 @@ router.post('/', auth.verifyToken, (req, res, next) => {
 		} else {
 			const _id = new mongoose.Types.ObjectId();
 			const {
-				procedureId,
+				calibrationProcedures,
 				title,
 				content,
 				scienceBranch,
@@ -150,7 +164,7 @@ router.post('/', auth.verifyToken, (req, res, next) => {
 
 			const article = new Article({
 				_id,
-				procedureId,
+				calibrationProcedures,
 				title,
 				content,
 				scienceBranch,
