@@ -1,6 +1,7 @@
 const form = document.getElementById("new-article-form");
 const inputValidationText = document.querySelector(".new-article-valid-input");
 const submitButton = document.getElementById("get-article-form-values");
+const articleScienceBranch = document.getElementById("articleScienceBranch");
 
 var newArticlePostData = {}; //this object for storing POST request body
 
@@ -9,12 +10,34 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const procedureId = urlParams.get("procedureId");
 
+
 //Preset New Article Form fields with initial values using GLOBAL ARTICLE FACTORY
 Object.entries(_articlefactory.newArticleFormInputs).forEach(([key, obj]) => {
 	if (key === "procedureAssociated")
 		form.elements[key].checked = obj.checked;
 	else form.elements[key].value = obj.value;
 	submitButton.disabled = !_articlefactory.isSubmitButtonActive();
+});
+
+
+
+//Generate article category list
+// Create a new blank option
+const blankOption = document.createElement('option');
+blankOption.value = ''; // Set an empty value
+// Add the blank option to the beginning of the select element
+blankOption.innerText = "Select a category..."
+blankOption.style.fontStyle = "italic";
+articleScienceBranch.prepend(blankOption);
+// Make the blank option selected
+blankOption.selected = true;
+
+Object.entries(articleCategoryCollection).forEach(([key, obj]) => {
+	const option = document.createElement("option");
+	option.value = key;
+	option.textContent = key;
+	articleScienceBranch.appendChild(option);
+
 });
 
 //Attach eventListener callbacks to all New Article Form Inputs to guide input entry events
@@ -52,6 +75,10 @@ function inputHandler(e) {
 	_articlefactory.isFormInputFieldEmpty(name) ? e.target.style.border = "3px solid red" : e.target.style.border = "2px solid blue";
 }
 
+
+
+
+
 //Attach event listener to New Article Form submit event
 form.addEventListener("submit", submitNewArticleData);
 
@@ -71,8 +98,6 @@ function submitNewArticleData(event) {
 	}else{
 		DeleteKeys(newArticlePostData, ["paragraphQuantity", "procedureAssociated", "calibrationProcedures"]);
 	}
-
-	
 
 	//reset New Article Form Inputs object in GLOBAL ARTICLE FACTORY
 	_articlefactory.resetNewArticleFormInputs(); 

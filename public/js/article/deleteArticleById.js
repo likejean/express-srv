@@ -17,6 +17,5 @@ function deleteArticleById(articleId, articleTitle) {
 			console.error('Error:', error);
 			alert(`Failed to delete the article titled "${articleTitle}".`);
 		});
-	}
-    
+	}    
 }

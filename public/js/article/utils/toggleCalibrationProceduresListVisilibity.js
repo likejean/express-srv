@@ -18,19 +18,18 @@ checkBox.addEventListener('change', function() {
 function toggleCalibrationProceduresVisibility(checkedStatus) {	
 	if (checkedStatus) {
 		procedureListWrapper.style.display = "block"; // Or "initial", "flex", "grid", etc., depending on desired display
-		quantityCounterWrapper.style.display = "block";
-		quantityResetButtonWrapper.style.display = "block";
+		quantityCounterWrapper.classList.replace("d-none", "d-flex");
+		quantityResetButtonWrapper.classList.replace("d-none", "d-flex");
 	} else {
 		procedureListWrapper.style.display = "none";
-		quantityCounterWrapper.style.display = "none";
-		quantityResetButtonWrapper.style.display = "none";
+		quantityCounterWrapper.classList.replace("d-flex", "d-none");
+		quantityResetButtonWrapper.classList.replace("d-flex", "d-none");
 	}
 }
 
 function createSelectProcedureOptions () {
 	fetchAllCalProcedureData().then(() => {
 		const namesObject = _store.getCalProcedureNames();
-		
 		Object.keys(namesObject).forEach((key) => {
 			let option = document.createElement('option');
 			option.textContent = key;
