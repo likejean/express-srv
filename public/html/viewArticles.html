@@ -85,11 +85,24 @@
 	<!-- global javascript classes -->
     <script src="../js/utils/getRequestHeaders.js"></script>
 	<script src="../js/collections/articleCategoryContainer.js"></script>
+	<script src="../js/utils/attachEventListenersToHtml.js"></script>	
+	<script src="../js/utils/removeAllChildNodes.js"></script>	
 	<script src="../js/classes/dataGlobalStorage.js"></script>
+	
+	<script src="../js/article/utils/filterArticleListClickEventCallback.js"></script>
 	<script src="../js/article/fetchAllArticles.js"></script>
 	<script src="../js/article/renderAllArticles.js"></script>
 	<script src="../js/article/deleteArticleById.js"></script>
 	<script src="../js/article/utils/fillFilterArticleButtonContainer.js"></script>
+	
+
+	<script>
+
+		//attach event listener to all icons in Calibration Card for updates/edits
+		let buttons = document.querySelectorAll(".filter-button");
+		attachEventListenersToHtml(buttons, filterArticleListClickEventCallback);
+
+    </script>
 	
 	
 </html>

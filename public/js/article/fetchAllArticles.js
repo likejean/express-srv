@@ -11,6 +11,10 @@ const fetchAllArticles = async () => {
 		.then((result) => {
 			_store.articles = result.data.payload;	
 			renderAllArticles(_store.articles);
+			const span = document.createElement("span");
+			span.classList.add("position-absolute", "top-0", "start-100", "translate-middle", "badge", "rounded-pill", "bg-danger");
+			span.innerText = _store.articles.length;
+			document.getElementById("All").appendChild(span);
 
 		})
 		.catch((error) => {

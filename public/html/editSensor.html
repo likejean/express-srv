@@ -117,7 +117,7 @@
 	<script src="../js/sensor/fetchSensorById.js"></script>	
 	<script src="../js/utils/trimStringBySubstring.js"></script>
 	<script src="../js/utils/removeAllChildNodes.js"></script>
-	<script src="../js/utils/attachEventListenersToIcons.js"></script>
+	<script src="../js/utils/attachEventListenersToHtml.js"></script>
 	<script src="../js/utils/filterObjectAndTransform.js"></script>
 	<script src="../js/sensor/utils/selectOptionsInnerHTML.js"></script>	
 	<script src="../js/sensor/utils/editSensorIconClickEventCallback.js"></script>	
@@ -128,7 +128,7 @@
 
 		//attach event listener to all icons in Calibration Card for updates/edits
 		let icons = document.querySelectorAll(".fa-ellipsis-vertical");
-		attachEventListenersToIcons(icons, editSensorIconClickEventCallback);
+		attachEventListenersToHtml(icons, editSensorIconClickEventCallback);
 
     </script>
 </html>

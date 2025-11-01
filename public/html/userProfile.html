@@ -284,7 +284,7 @@
 	<script src="../js/collections/editUserProfileContainer.js"></script>
 	<script src="../js/collections/newUserFormContainer.js"></script>
 	<script src="../js/utils/toBase64Decoder.js"></script>
-	<script src="../js/utils/attachEventListenersToIcons.js"></script>
+	<script src="../js/utils/attachEventListenersToHtml.js"></script>
 	<script src="../js/utils/trimStringBySubstring.js"></script>
 	<script src="../js/utils/removeAllChildNodes.js"></script>
 	<script src="../js/utils/filterObjectAndTransform.js"></script>
@@ -323,7 +323,7 @@
 		//attach event listener to all icons in User Info flushlist for updates/edits
 		let icons = document.querySelectorAll(".fa-ellipsis-vertical");
 		
-		attachEventListenersToIcons(icons, editUserAccountInfoClickEventCallback);		
+		attachEventListenersToHtml(icons, editUserAccountInfoClickEventCallback);		
 
     </script>
 	

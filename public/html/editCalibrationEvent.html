@@ -172,13 +172,13 @@
     <script src="../js/calibration/utils/editCalibrationInputChangeValueCallback.js"></script>
     <script src="../js/calibration/patchCalibrationRecord.js"></script>
     <script src="../js/calibration/deleteCalRecordById.js"></script>
-	<script src="../js/utils/attachEventListenersToIcons.js"></script>
+	<script src="../js/utils/attachEventListenersToHtml.js"></script>
 
     <script>
 
 		//attach event listener to all icons in Calibration Card for updates/edits
 		let icons = document.querySelectorAll(".fa-ellipsis-vertical");
-		attachEventListenersToIcons(icons, editCalibrationIconClickEventCallback);
+		attachEventListenersToHtml(icons, editCalibrationIconClickEventCallback);
 
     </script>
 

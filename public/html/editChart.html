@@ -322,7 +322,7 @@
 	<!--get javascript helpers from global utils folter-->
 	<script src="../js/utils/removeAllChildNodes.js"></script>
 	<script src="../js/utils/trimStringBySubstring.js"></script>
-	<script src="../js/utils/attachEventListenersToIcons.js"></script>
+	<script src="../js/utils/attachEventListenersToHtml.js"></script>
 	<script src="../js/utils/filterObjectAndTransform.js"></script>
 	<script src="../js/utils/isNonZeroNumber.js"></script>
 	
@@ -348,7 +348,7 @@
 
 		 //attach event listener to all icons in Calibration Card for updates/edits
 		let icons = document.querySelectorAll(".fa-ellipsis-vertical");
-		attachEventListenersToIcons(icons, editChartIconClickEventCallback);
+		attachEventListenersToHtml(icons, editChartIconClickEventCallback);
 		
 
     </script>
