@@ -1,6 +1,8 @@
 const filterButtonContainer = document.getElementById("filter-button-container");
 const filterButtonActiveStatusObject = {};
 
+
+
 function fillFilterArticleButtonContainer() {
     Object.entries(articleCategoryCollection).forEach(([key, obj]) => {
         const filterButton = document.createElement("button");
@@ -23,5 +25,6 @@ function fillFilterArticleButtonContainer() {
 
 
 }
+
 
 fillFilterArticleButtonContainer(); 

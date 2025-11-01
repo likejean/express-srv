@@ -202,3 +202,9 @@ canvas {
 	border: 2px groove brown; 
 	background-color: rgb(80, 79, 80);
 }
+
+@media (max-width: 500px) {
+	.hide-badge-on-small-screen {
+		display: none; /* Hides the element completely */
+	}
+}

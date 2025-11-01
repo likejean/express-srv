@@ -11,7 +11,7 @@ function renderAllArticles(articles) {
 		const articleCategoryRow = document.createElement("div");
 		articleCategoryRow.classList.add("text-end");
 		const scienceBranchBadge = document.createElement("span");
-		scienceBranchBadge.classList.add("badge");
+		scienceBranchBadge.classList.add("badge", "hide-badge-on-small-screen");
 		scienceBranchBadge.style.backgroundColor = "rgba(0, 123, 255, 1.0)";
 		scienceBranchBadge.style.color = "white";
 		scienceBranchBadge.style.fontSize = "0.75rem";
@@ -61,35 +61,56 @@ function renderAllArticles(articles) {
 		articleTitleRow.classList.add("row");
 
 
-		// Create article title column
+		// Create article title columns: title & toolbar
 		const articleTitleCol = document.createElement("div");
 		articleTitleCol.classList.add("col-lg-11", "col-sm-11", "d-flex", "align-self-center", "justify-content-center");
-		const deleteArticleCol= document.createElement("div");
-		deleteArticleCol.classList.add("col-lg-1", "col-sm-1", "d-flex", "align-self-center", "justify-content-end");
+		const toolBarArticleCol= document.createElement("div");
+		toolBarArticleCol.classList.add("col-lg-1", "col-sm-1", "d-flex", "align-self-center", "justify-content-end");
+		
 
 		// Create article title
 		const articleTitle = document.createElement("h5");
-		articleTitle.classList.add("text-center");
+		articleTitle.classList.add("text-center", "px-1");
 		articleTitle.style.fontWeight = "bold";
 		articleTitle.style.fontSize = "1.85rem";
 		articleTitle.style.marginBottom = "1rem";
 		articleTitle.innerText = article.title;
 		articleTitleCol.appendChild(articleTitle);
 		articleTitleRow.appendChild(articleTitleCol);
+
+
+		// Create edit article anchor wrapper with href
+		const editArticleNavLinkWrap = document.createElement("a");
+		editArticleNavLinkWrap.setAttribute("href", `../html/editArticle.html?id=${article._id}`);
+		// Create navigation button: to => editArticle.html
+		const editArticleBtn = document.createElement("button");
+		editArticleBtn.classList.add("btn", "btn-info", "mb-4", "px-3");
+		editArticleBtn.style.marginTop = "1rem";
+		editArticleBtn.style.color = "white";		
+
+		// Create edit icon for the button
+		const editIcon = document.createElement("i");
+		editIcon.classList.add("fas", "fa-ellipsis-vertical");
+		editArticleNavLinkWrap.appendChild(editArticleBtn)
+		toolBarArticleCol.appendChild(editArticleNavLinkWrap);
   
 		// Create delete article button
 		const deleteArticleBtn = document.createElement("button");
 		deleteArticleBtn.classList.add("btn", "btn-danger", "mb-4", "mx-1");
 		deleteArticleBtn.style.marginTop = "1rem";
-		deleteArticleCol.appendChild(deleteArticleBtn);
+		toolBarArticleCol.appendChild(deleteArticleBtn);
 
 		// Create delete icon for the button
 		const deleteIcon = document.createElement("i");
 		deleteIcon.classList.add("fas", "fa-trash-alt");
 
-		// Append delete icon to the button
+
+
+		// Append edit icon to the button
+		editArticleBtn.appendChild(editIcon);
 		deleteArticleBtn.appendChild(deleteIcon);
-		articleTitleRow.appendChild(deleteArticleCol);
+		
+		articleTitleRow.appendChild(toolBarArticleCol);
 
 		// Add event listener to delete article button
 		deleteArticleBtn.addEventListener("click", () => deleteArticleById(article._id, article.title));
@@ -126,7 +147,7 @@ function renderAllArticles(articles) {
 
 		// Create article image
 		const articleImage = document.createElement("img");
-		articleImage.classList.add("article-image");
+		articleImage.classList.add("article-image", "d-none", "d-md-block");
 		articleImage.style.borderRadius = "20px";
 		articleImage.style.maxWidth = "25rem";
 		articleImage.src = article.imageLink;
@@ -160,9 +181,15 @@ function renderAllArticles(articles) {
 		articleCard.appendChild(cardBody);
 
 		// Append article card to article container
-		articleContainer.appendChild(articleCard);
+		articleContainer.appendChild(articleCard);		
 
 		// Trigger MathJax typesetting for the newly added content
 		MathJax.typesetPromise([articleContainer]);
 	});
+
 }
+
+
+
+
+

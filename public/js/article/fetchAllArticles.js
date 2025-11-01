@@ -11,11 +11,10 @@ const fetchAllArticles = async () => {
 		.then((result) => {
 			_store.articles = result.data.payload;	
 			renderAllArticles(_store.articles);
-			const span = document.createElement("span");
-			span.classList.add("position-absolute", "top-0", "start-100", "translate-middle", "badge", "rounded-pill", "bg-danger");
-			span.innerText = _store.articles.length;
-			document.getElementById("All").appendChild(span);
-
+			initializeFilterButtonActiveStatus();
+		})
+		.then(() => {
+			displayHideArticleBadgesPerScreenSize();			
 		})
 		.catch((error) => {
 			//display error message if data fetch failure occurs or any other internal error detected

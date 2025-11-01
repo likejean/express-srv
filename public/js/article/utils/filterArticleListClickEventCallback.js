@@ -7,6 +7,7 @@ function filterArticleListClickEventCallback(event) {
 	if (id === "All") {
 		updateFilterButtonActiveObject(id, _store.articles.length);
 		removeAllChildNodes(articleContainer);
+		if(_store.articles.length === 0) emptySearchResultsUserNotification(articleContainer);
 		renderAllArticles(_store.articles);
 	}  	
 	else {
@@ -14,11 +15,10 @@ function filterArticleListClickEventCallback(event) {
 		const filteredArticleByCategory = _store.articles.filter(article => article.scienceBranch === id);
 
 		updateFilterButtonActiveObject(id, filteredArticleByCategory.length);
-		removeAllChildNodes(articleContainer);
+		removeAllChildNodes(articleContainer);	
+		if(filteredArticleByCategory.length === 0) emptySearchResultsUserNotification(articleContainer);
 		renderAllArticles(filteredArticleByCategory);
 	}
-
-	
 
 }
 
@@ -44,5 +44,13 @@ function updateFilterButtonActiveObject(btnId, size) {
 	span.classList.add("position-absolute", "top-0", "start-100", "translate-middle", "badge", "rounded-pill", "bg-danger");
 	span.innerText = size;
 	button.appendChild(span);
-
 }
+
+function emptySearchResultsUserNotification (container) {
+	const alertWrapper = document.createElement("div");
+	alertWrapper.classList.add("alert", "alert-warning", "w-100", "mx-2");
+	alertWrapper.setAttribute("role", "alert");
+	alertWrapper.textContent = "No articles found for this category"
+	container.appendChild(alertWrapper);
+}
+

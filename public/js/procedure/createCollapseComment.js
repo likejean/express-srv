@@ -14,8 +14,7 @@ function createCollapseComment (tag, idx, comment, procedureId) {
     let closeBtn = document.createElement("button");
 	let articleBtn = document.createElement("button");
     let commentTextElem = document.createElement("div");
-	let articleNavLinkWrap = document.createElement("a");
-
+	let editProcedureNavLinkWrap = document.createElement("a");
 	
 	//add classes to the buttons and comment text element
     ["btn", "btn-primary", "mt-2"].forEach(classItem => openBtn.classList.add(classItem));
@@ -27,8 +26,8 @@ function createCollapseComment (tag, idx, comment, procedureId) {
     openBtn.setAttribute("id", `open-button-${idx}`);
 	articleBtn.setAttribute("id", `article-button-${idx}`);
 
-	// Link to the edit article page with the procedure ID as a query parameter	
-	articleNavLinkWrap.setAttribute("href", `../html/editArticle.html?id=${procedureId}`);
+	// Link to the edit procedure page with the procedure ID as a query parameter	
+	editProcedureNavLinkWrap.setAttribute("href", `../html/editProcedure.html?id=${procedureId}`);
 	
 
 	// Create the icon element
@@ -66,10 +65,10 @@ function createCollapseComment (tag, idx, comment, procedureId) {
 	
 
 	const btnDiv = document.createElement("div");
-	articleNavLinkWrap.appendChild(articleBtn);
+	editProcedureNavLinkWrap.appendChild(articleBtn);
 	btnDiv.classList.add("d-flex", "justify-content-center", "align-items-center", "mb-2");
 	btnDiv.appendChild(openBtn);
-	btnDiv.appendChild(articleNavLinkWrap);
+	btnDiv.appendChild(editProcedureNavLinkWrap);
 	btnDiv.appendChild(closeBtn);
 
 	// Append the buttons and comment text element to the cell    

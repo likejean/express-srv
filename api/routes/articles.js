@@ -58,30 +58,16 @@ router.get('/', auth.verifyToken, (req, res, next) => {
 
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
-// GET endpoint: get many article records by procedure ID
+// GET endpoint: get an article record by ID
 /////////////COMPLETED and TESTED////////////////////////////////
 /////////////COMPLETED and TESTED////////////////////////////////
-router.get("/:procedureId", auth.verifyToken, (req, res, next) => {
-	jwt.verify(req.token, config.secretKey, (err) => {
-		if (err) {			
-			console.log({
-				errorMessage: err.message,
-				request: {
-					type: 'GET',
-					url: req.originalUrl,
-					status: "FAILURE"
-				}});
-			res.status(403).json({
-				authStatus: false,
-				err,
-				message: 'Your login session is expired or you are not logged in! Sign in again to perform this action...'
-			});
-		}
-		Article.find({ procedureId: req.params.procedureId })
+router.get("/:articleId", (req, res, next) => {
+	const id = req.params.articleId;
+	Article.findById(id)
 		.exec()
-		.then((docs) => {
+		.then((doc) => {
 			//To handle non-existing id error, but correct format...
-			if (docs) {
+			if (doc) {
 				console.log({
 					request: {
 						type: "GET",
@@ -90,7 +76,7 @@ router.get("/:procedureId", auth.verifyToken, (req, res, next) => {
 					},
 				});
 				return res.status(200).json({
-					articles: docs,
+					article: doc,
 					request: {
 						type: "GET",
 						url: req.originalUrl,
@@ -99,7 +85,7 @@ router.get("/:procedureId", auth.verifyToken, (req, res, next) => {
 			} else {
 				console.log({
 					request: {
-						message: "Failed to fetch article record by procedure ID. Most likely the ID is not valid.",
+						message: "Failed to fetch an article by ID. Most likely the document ID is not valid.",
 						isIdValid: mongoose.Types.ObjectId.isValid(id),
 						type: "GET",
 						url: req.originalUrl,
@@ -117,7 +103,7 @@ router.get("/:procedureId", auth.verifyToken, (req, res, next) => {
 		})
 		.catch((error) => {
 			res.status(500).json({
-				message: "Failure: Unable to fetch article records...",
+				message: "Failure: Unable to fetch an article record...",
 				serverError: error.message,
 				request: {
 				type: "GET",
@@ -126,7 +112,6 @@ router.get("/:procedureId", auth.verifyToken, (req, res, next) => {
 			});
 		});
 	});
-});
 
 
 ////////////COMPLETED and TESTED////////////////////////////////
