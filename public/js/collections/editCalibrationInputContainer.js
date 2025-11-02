@@ -71,6 +71,7 @@ const editCalibrationInputContainer = {
         childNodes: [],
         databaseName: "maxCalibrationExtension",
     },
+
     calRangePercentWrapper: {
         tag: "input",
 		attributes: {type: "number", name: "calRangePercent", style:"border-color:blue;"},
@@ -82,6 +83,7 @@ const editCalibrationInputContainer = {
         validator: (number) => (number <= 100 && number >= 10 ? true : false),
         inputRule: `Error! Only positive integers allowed within range: 10%-100%`,
     },
+
     calAdjustmentMadeWrapper: {
         tag: "input",
 		attributes: {type: "checkbox", name: "calAdjustmentMade", style:"border-color:blue;"},
@@ -92,6 +94,7 @@ const editCalibrationInputContainer = {
         childNodes: [],
         databaseName: "adjustmentsMade",
     },
+	
     calCommentWrapper: {
         tag: "textarea",
 		attributes: {type: "text", name: "calComment", rows: "10", style:"border-color:blue;"},

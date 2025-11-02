@@ -5,7 +5,7 @@ const limitCalibratorManufacturerText = /^.{5,25}$/;
 const limitProcedureNameText = /^.{5,15}$/;
 const noSpecial = /^[^*|\"<>[\]{}`\\';@&$]+$/;
 
-const editCalibratorInputContainer = {
+const editProcedureInputContainer = {
 
     //Chart Options: Title, X-axis Label, Y-axis Lable
 	calibratorDescriptionWrapper: {

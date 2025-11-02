@@ -57,5 +57,6 @@ const newCalProcedureFormContainer = {
 }
 
 var _procfactory = new procedureFactory(	
+	editProcedureInputContainer,
 	newCalProcedureFormContainer
 );

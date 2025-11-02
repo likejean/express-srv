@@ -60,6 +60,7 @@ display: inline-block;
 .cal-notice-span,
 .procedure-notice-span,
 .sensor-notice-span, 
+.article-notice-span,
 .user-notice-span {
 	font-weight: bold;
 }

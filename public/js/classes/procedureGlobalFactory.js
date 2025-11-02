@@ -1,6 +1,7 @@
 // GLOBAL FACTORY for procedures  
 class procedureFactory {
-    constructor(newCalProcedureFormInputs){
+    constructor(inputWrappers, newCalProcedureFormInputs){
+		this.inputWrappers = inputWrappers
         this.newCalProcedureFormInputs = newCalProcedureFormInputs
     }
 
@@ -19,5 +20,12 @@ class procedureFactory {
 
     isFormInputFieldEmpty(inputName) {
         return this.newCalProcedureFormInputs[inputName].value.length === 0
+    }
+
+	isPatchButtonActive() {
+        for (const [item, value] of Object.entries(this.inputWrappers)) {
+            if (value.status) return true;
+        }
+        return false;
     }
 }

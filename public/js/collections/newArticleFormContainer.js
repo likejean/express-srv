@@ -60,6 +60,6 @@ const newArticleFormContainer = {
 }
 
 _articlefactory = new articleFactory(
-	editCalibratorInputContainer,
+	editArticleInputContainer,
 	newArticleFormContainer
 );

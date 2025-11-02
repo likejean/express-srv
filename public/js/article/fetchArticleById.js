@@ -1,4 +1,5 @@
 //data storage object to hold all fetched calibration procedure articles data
+//for editArticle.html page
 const _store = new dataStorage();   
 
 //data storage object to hold all fetched calibration procedure articles data
