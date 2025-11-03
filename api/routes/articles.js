@@ -191,6 +191,64 @@ router.post('/', auth.verifyToken, (req, res, next) => {
 
 });
 
+
+
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+//PATCH endpoint: update PARTIALLY existing article record/document by ID
+/////////////COMPLETED and TESTED////////////////////////////////
+/////////////COMPLETED and TESTED////////////////////////////////
+
+router.patch("/:articleId", auth.verifyToken, (req, res, next) => {
+	jwt.verify(req.token, config.secretKey, (err) => {
+		if (err) {			
+			console.log({
+				errorMessage: err.message,
+				request: {
+					type: 'PATCH',
+					url: req.originalUrl,
+					status: "FAILURE"
+				}});
+			res.status(403).json({
+				authStatus: false,
+				err,
+				message: 'Your login session is expired or you are not logged in! Sign in again to perform this action...'
+			});
+		}
+		const id = req.params.articleId;
+		Article.updateOne({ _id: id }, { $set: { ...req.body } })
+			.exec()
+			.then((result) => {
+				console.log({
+					request: {
+						type: "PATCH",
+						url: req.originalUrl,
+						status: "SUCCESS",
+					},
+				});
+				res.status(200).json({
+					message: `Article record w/ id: '${id}' was updated successfully.`,
+					request: {
+						type: "PATCH",
+					},
+					result,
+				});
+			})
+			.catch((error) => {
+				res.status(500).json({
+					message: "Failure: Unable to update article record...",
+					isIdValid: mongoose.Types.ObjectId.isValid(id),
+					serverError: error.message,
+					request: {
+						type: "PATCH",
+						url: req.originalUrl,
+					},
+				});
+			});
+		});
+	});
+
+
 ////////////COMPLETED and TESTED////////////////////////////////
 ////////////COMPLETED and TESTED////////////////////////////////
 // DELETE endpoint: delete an article by ID

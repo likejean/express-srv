@@ -9,7 +9,7 @@ const editArticleInputContainer = {
 	
 	articleTitleWrapper: {
 		tag: "input",
-		attributes: {type: "text", name: "articleTitle", style:"border-color:blue;"},
+		attributes: {type: "text", name: "articleTitle", style: "border-color:blue;"},
         classes: ["form-control"],
         status: false,
         value: "",

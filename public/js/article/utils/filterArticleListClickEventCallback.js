@@ -1,5 +1,3 @@
-
-
 function filterArticleListClickEventCallback(event) {
     // Get the new value from the input field
     const id = event.target.id;   

@@ -9,7 +9,7 @@ function editCalibratorIconClickEventCallback(event) {
 	let input = document.createElement(_procfactory.inputWrappers[wrapperName].tag);
 	let icon = document.getElementById(_procfactory.inputWrappers[wrapperName].attributes.name.concat("Icon"));
 
-	const patchButton = document.getElementById("patch-cal-record");
+	const patchButton = document.getElementById("patch-procedure-record");
 
 // 	creates toggle functionality for icons in Calibration Summary Card
 	if (!_procfactory.inputWrappers[wrapperName].status) {

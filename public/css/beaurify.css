@@ -53,6 +53,12 @@ label {
 	color: blue;
 }
 
+.article-category 
+{
+	color: blue;
+	font-family: 'Times New Roman', Times, serif;
+}
+
 .calibration-card-item {
 display: inline-block;
 }
