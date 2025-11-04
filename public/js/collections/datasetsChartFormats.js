@@ -1,17 +1,17 @@
 const chartFormats = {
 	"UPPER_ERROR_LIMIT": {
 		pointRadius: 0,
-		borderColor: 'rgba(247, 172, 172, 0.9)',
+		borderColor: 'rgba(241, 151, 151, 0.9)',
 		borderWidth: 1,
 		fill: true,
-		backgroundColor: 'rgba(186, 251, 203, 0.2)',
+		backgroundColor: 'rgba(141, 241, 168, 0.2)',
 	},
 	"LOWER_ERROR_LIMIT": {
 		pointRadius: 0,
-		borderColor: 'rgba(247, 172, 172, 0.9)',
+		borderColor: 'rgba(241, 151, 151, 0.9)',
 		borderWidth: 1,
 		fill: true,
-		backgroundColor: 'rgba(186, 251, 203, 0.2)',
+		backgroundColor: 'rgba(141, 241, 168, 0.2)',
 	},
 	"ABSOLUTE_ERROR_OUTPUT": {
 		borderColor: [

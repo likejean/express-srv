@@ -27,7 +27,7 @@ const editArticleInputContainer = {
         value: "",
         childNodes: [],
         databaseName: "content",        
-        validator: (text) => (limitArticleContentText.test(text)) ? (noSpecial.test(text)) ? true : false : false,
+        validator: (text) => (limitArticleContentText.test(text)) ? true : false,
         inputRule: `No special characters allowed and minimum 10 and maximum 5000 characters are allowed here...`,
 	},
 
