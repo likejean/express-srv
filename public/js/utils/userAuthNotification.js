@@ -2,9 +2,12 @@
 //it is called in this file (userAuthNotification.js)
 function userAuthNotification(emailSpan, authSpan, textColor, userEmail, authStatus) {
     document.getElementById(emailSpan).innerText = userEmail;
+	document.getElementById(emailSpan).style.color = "white";
+	document.getElementById(emailSpan).style.fontSize = "25px";
     document.getElementById(authSpan).innerText = authStatus;
     document.getElementById(authSpan).style.color = textColor;
     document.getElementById(authSpan).style.fontWeight = "bold";
+	document.getElementById(authSpan).style.fontSize = "25px";
 }
 
 
@@ -13,7 +16,7 @@ if(localStorage.getItem("userEmail")) {
 
 	//user is logged in
 	//display notification message on the home page
-    userAuthNotification("auth-email-home-page", "auth-status-home-page", localStorage.getItem("userEmail"), "logged in.");
+    userAuthNotification("auth-email-home-page", "auth-status-home-page", "white", localStorage.getItem("userEmail"), "logged in.");
                 
     axios.post("../api/users/verifyToken", {userEmail: localStorage.getItem("userEmail")}, {
         headers: getRequestHeaders()
@@ -42,5 +45,5 @@ if(localStorage.getItem("userEmail")) {
 }else{
 	//user is not logged in
 	//display notification message on the home page
-    userAuthNotification("auth-email-home-page", "auth-status-home-page", "black", "You are", "not logged in.");
+    userAuthNotification("auth-email-home-page", "auth-status-home-page", "red", "You are", "not logged in.");
 }

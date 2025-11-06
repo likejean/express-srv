@@ -215,3 +215,12 @@ canvas {
 		display: none; /* Hides the element completely */
 	}
 }
+
+.math-jax-formula {
+	border: 2px solid rgb(128, 156, 239);
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+	border-radius: 0.25rem;
+	padding: 10px;
+
+
+}
