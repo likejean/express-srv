@@ -17,6 +17,7 @@ function createSensorDatasetsChart(datasets) {
 		const noteDiv = document.createElement('div');
 		noteDiv.classList.add("container", "text-center");
 		btnDiv.setAttribute("display", "block");
+		btnDiv.style.marginBottom = "50px";
 
 		//create a button to delete entire chart/dataset
 		const deleteChartButton = document.createElement('button');
