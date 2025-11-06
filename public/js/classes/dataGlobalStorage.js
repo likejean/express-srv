@@ -34,12 +34,31 @@ class dataStorage {
 
 	//sort sensors array by the calibration due date
 	sortSensorsByDate() {
-		this.sensors.data.payload.sort((a, b) => {
+		return this.sensors.data.payload.sort((a, b) => {
+			// Handle empty 'calibration dates' arrays (place at the end)
+			if (a.calibrations.length === 0 && b.calibrations.length === 0) {
+				return 0; // Maintain original relative order
+			}
+			if (a.calibrations.length === 0) {
+				return 1; // a comes after b
+			}
+			if (b.calibrations.length === 0) {
+				return -1; // b comes after a
+			}
+
+			// Convert date strings to Date objects and find the earliest date
 			let a_dueDate = new Date(Math.min(...a.calibrations.map(e => new Date(e.dueCalibrationDate))));
 			let b_dueDate = new Date(Math.min(...b.calibrations.map(e => new Date(e.dueCalibrationDate))));
-			return a_dueDate - b_dueDate;
+			
+			// Compare the earliest dates
+			if (a_dueDate < b_dueDate) {
+				return -1;
+			}
+			if (a_dueDate > b_dueDate) {
+				return 1;
+			}
+			return 0;
 		});
-		return this.sensors.data.payload;
 	}
 
 	//generate the object to trace a user selected row in the sensor table

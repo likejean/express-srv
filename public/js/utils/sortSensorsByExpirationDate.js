@@ -13,7 +13,7 @@ function sortSensorsByExpirationDate() {
 			_store.sensorTableActiveRowObject[`${key}`] = "inactive";
 			tableRow = document.getElementById(key);
 			tableRow.classList.remove("table-active");
-			htmlElementCollection.card.style.visibility = "hidden";
+			htmlElementCollection.card.style.visibility = "hidden";			
 			removeAllChildNodes(htmlElementCollection.descriptionHeaderHtml);
 			removeAllChildNodes(htmlElementCollection.sensorCommentHtml);
 			removeAllChildNodes(htmlElementCollection.manufacturerNameHtml);
