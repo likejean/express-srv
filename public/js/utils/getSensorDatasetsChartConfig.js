@@ -4,7 +4,7 @@ const image = new Image(15, 15);
 image.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDQ4gEz0fLmF0a8tfFHFi8ReXsh6FZFXdpss_TawmpXAUSg5yWJVpaGMtbh_VJcN92fXE&usqp=CAU";
 
 
-function getSensorDatasetsChartConfig(data, options, errorLimit) {
+function getSensorDatasetsChartConfig(data, options) {
 
 	return {
 		type: 'line',
@@ -63,6 +63,20 @@ function getSensorDatasetsChartConfig(data, options, errorLimit) {
 					font: {
 						size: 25,
 						weight: 'bold'
+					}
+				},
+				subtitle: {
+					display: true,
+					text: `${options.sensorDescription}`,
+					font: {
+						family: 'Arial',
+						size: 17,
+						style: 'italic',
+						weight: 'normal'
+					},
+					padding: {
+						top: 5, // Adjust spacing between title and subtitle,
+						bottom: 3
 					}
 				},
 				legend: {

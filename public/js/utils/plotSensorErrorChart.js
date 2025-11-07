@@ -35,7 +35,7 @@ function createSensorDatasetsChart(datasets) {
 		}
 		
 	
-		//create a button to delete entire chart/dataset
+		//create a button to edit chart/dataset
 		const editChartButton = document.createElement('a');
 		editChartButton.setAttribute('href', `./html/editChart.html?id=${chart._id}`);
 		editChartButton.innerText = "Edit";
@@ -66,6 +66,7 @@ function createSensorDatasetsChart(datasets) {
 			chartTitle: chart.chartTitle,
 			chartXLabel: chart.chartXLabel,
 			chartYLabel: chart.chartYLabel,
+			sensorDescription: chart.sensorDescription
 		};
 
 		//Chart.js: creating an instance of a chart object. 
