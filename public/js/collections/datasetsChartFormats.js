@@ -28,7 +28,7 @@ const chartFormats = {
 			'rgba(31, 28, 36, 0.9)',
 			'rgba(139, 218, 12, 0.9)'
 		],
-		tension: 0.5
+		tension: 0.1
 	}
 
 }
