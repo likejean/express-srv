@@ -52,6 +52,16 @@ const editCalibrationInputContainer = {
         },
         inputRule: `Date must be valid format: 2020-01-01`,
     },
+    calActiveWrapper: {
+        tag: "input",
+		attributes: {type: "checkbox", name: "calActive", style:"border-color:blue;"},
+        classes: ["form-check-input"],
+        status: false,
+        value: "",
+        checked: false,
+        childNodes: [],
+        databaseName: "activeCalibration",
+    },
     calExtendedWrapper: {
         tag: "input",
 		attributes: {type: "checkbox", name: "calExtended", style:"border-color:blue;"},

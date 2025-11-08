@@ -41,6 +41,11 @@ const calibrationSchema = mongoose.Schema(
             type: Boolean, 
             required: true 
         },
+        activeCalibration: { 
+            type: Boolean, 
+            default: true,
+            required: true 
+        },
         maxCalibrationExtension: { 
             type: String, 
             required: false 

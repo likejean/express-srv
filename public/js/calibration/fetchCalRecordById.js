@@ -4,6 +4,7 @@ const calibrationName = document.getElementById("calName");
 const lastCalibrationDate = document.getElementById("lastCalDate");
 const dueCalibrationDate = document.getElementById("dueCalDate");
 const calibrationExtended = document.getElementById("calExtended");
+const isCalibrationActive = document.getElementById("calActive");
 const maxCalibrationExtention = document.getElementById("maxCalExtention");
 const calibrationRangePercent = document.getElementById("calRangePercent");
 const calibrationAdjustmentMade = document.getElementById("calAdjustmentMade");
@@ -43,6 +44,7 @@ const fetchCalRecordById = async () => {
         lastCalibrationDate.innerText = moment.utc(result.data.calibration.lastCalibrationDate).format("dddd, MM/DD/YYYY");
         dueCalibrationDate.innerText = moment.utc(result.data.calibration.dueCalibrationDate).format("dddd, MM/DD/YYYY");
         calibrationExtended.innerText = result.data.calibration.calibrationExtended ? "Yes" : "No";
+        isCalibrationActive.innerText = result.data.calibration.activeCalibration ? "Yes" : "No";
         maxCalibrationExtention.innerText = result.data.calibration.maxCalibrationExtension;
         calibrationRangePercent.innerText = result.data.calibration.calibrationRangePercent;
         calibrationAdjustmentMade.innerText = result.data.calibration.adjustmentsMade ? "Yes" : "No";

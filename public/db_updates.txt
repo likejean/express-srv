@@ -1,0 +1,27 @@
+1. DATABASE COLLECTION UPDATES USING MONGO DB ATLAS TRIGGER PAGE:  CLUSTERS -> STREAMING DATA -> TRIGGERS
+exports = async function() {
+      // Get a handle to the MongoDB Atlas service
+      const mongodb = context.services.get("intec-express-srv-cluster");
+
+      // Get a handle to the desired database
+      const db = mongodb.db("intec-sensors"); // Replace "yourDatabaseName" with your actual database name
+
+      // Now you can interact with collections within that database
+      const calibrations = db.collection("calibrations");
+
+      //
+      const update = { $set: { activeCalibration: true } }; 
+  
+      try {
+            const result = await calibrations.updateMany({}, update);
+            
+      } catch (error) {
+          console.error("Error updating documents:", error);
+          throw error;
+      }
+      
+      // Example: Find documents
+      const documents = await calibrations.find({}).toArray();
+
+      return documents;
+  };
