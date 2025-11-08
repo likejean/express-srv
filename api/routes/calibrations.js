@@ -56,7 +56,7 @@ router.get("/", auth.verifyToken, (req, res, next) => {
 							dueCalibrationDate: doc.dueCalibrationDate,
 							adjustmentsMade: doc.adjustmentsMade,
 							calibrationExtended: doc.calibrationExtended,
-							activeCalibration: doc.activeCalibraton,
+							activeCalibration: doc.activeCalibration,
 							maxCalibrationExtension: doc.maxCalibrationExtension,
 							calibrationRangePercent: doc.calibrationRangePercent,
 							comment: doc.comment,

@@ -48,5 +48,8 @@ function getColorBasedOnDueDate(data) {
 		? data.calibrationExtended 
 			? "orange" 
 			: "green"
-		: "red"
+		: 
+		! data.activeCalibration 
+			? "grey"
+			: "red"
 }

@@ -28,7 +28,11 @@ const fetchCalRecordById = async () => {
     .then((result) => {
         //highlight calibration due date with red font color if expired...
         let unixCalibrationDueDate = moment.utc(result.data.calibration.dueCalibrationDate).unix();
-        if (unixCalibrationDueDate < unixTimestamp) dueCalibrationDate.style.color = "red"
+        if (unixCalibrationDueDate < unixTimestamp) {
+            if (result.data.calibration.activeCalibration) dueCalibrationDate.style.color = "red";
+            else dueCalibrationDate.style.color = "grey";
+
+        }
 		else {
 			if (result.data.calibration.calibrationExtended) dueCalibrationDate.style.color = "orange"
 			else dueCalibrationDate.style.color = "green"

@@ -150,6 +150,19 @@ class dataStorage {
 		}, 0); // Initialize the accumulator 'count' to 0
 	}
 
+	//get count of all out-of-service calibration records
+	getCalOutOfServiceCount(data){
+		//data = this.calibrations.data.payload
+		//count all out-of-service records and display the total next to the legend
+		return data.reduce((count, item) => {
+			// Check if the dueCalibrationDate is in the past
+			if (!item.activeCalibration) { 	
+				count++; // Increment the count if true
+			}
+			return count; // Return the updated count
+		}, 0); // Initialize the accumulator 'count' to 0
+	}
+
 	//verifies if any chart(s) exist for a selected sensor
 	isDatasetChartsExist(sensorId) {
 		return this.datasets.data.payload.some(item => item.sensorId === sensorId);
