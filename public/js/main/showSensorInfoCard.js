@@ -19,7 +19,7 @@ function showSensorInfoCard(
 	var deleteBtn = document.getElementById("delete-sensor-button");    
 
 	//Filters calibrations and datasets associated with a selected sensor (from global storage)
-	var associatedCalibrations = _store.calibrations.data.payload.filter(item => item.sensorId === sensorId);
+	var associatedCalibrations = _store.calibrations.data.payload.filter(item => item.sensorId._id === sensorId);
 	var associatedDatasets = _store.datasets.data.payload.filter(item => item.sensorId === sensorId);
 
 	

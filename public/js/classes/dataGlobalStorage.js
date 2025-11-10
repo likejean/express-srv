@@ -32,7 +32,14 @@ class dataStorage {
 			this.sensorTableActiveRowObject = {}
     }
 
-	//sort sensors array by the calibration due date
+	//sort calibrations by due date
+	sortCalibrationByDate() {
+		return this.calibrations.sort((a, b) => {
+			return new Date(a.dueCalibrationDate).getTime() - new Date(b.dueCalibrationDate).getTime();
+		});
+	}
+
+	//sort sensors by the earliest calibration due date
 	sortSensorsByDate() {
 		return this.sensors.data.payload.sort((a, b) => {
 			// Handle empty 'calibration dates' arrays (place at the end)

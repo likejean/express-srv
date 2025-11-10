@@ -1,4 +1,4 @@
-const sensorTable = document.querySelector(".data-result");
+const sensorTable = document.querySelector(".sensors-data");
 const tableBody = document.createElement("tbody");
 const validCalibrationsTotal = document.querySelector(".valid-calibrations-total");
 const extendedCalibrationsTotal = document.querySelector(".extended-calibrations-total");
@@ -29,7 +29,8 @@ function createMainSensorTable(sensors, calibrations) {     //comes from fetchAl
         //Filter calibration objects associated with current sensor
         let filteredCalibrations = calibrations.filter((item) => sensors[i].calibrations.some(calibration => calibration._id === item._id));
         
-        //create each cell and append to the row
+        // create each cell and append to the row
+		// function createTableCell(tag, text, classArr, attrArr)
         // Set row ID for later reference
         row.setAttribute("id", `row${i + 1}`);
         row.appendChild(createTableCell("th",`${i + 1}`, [], [{attribute:"scope", value:"row"}])); //# column cell

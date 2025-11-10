@@ -36,14 +36,16 @@
 		</div>
 
 		<!-- Sensor Table List -->
-		<table class="table data-result">
+		<table class="table calibrations-data">
 			<thead class="table-dark">
 				<tr>
 					<th scope="col">#</th>
-					<th id="calibrationName" scope="col">Name</th>
-					<th id="calibrationDueDate" scope="col">Due Date</th>
-					<th id="isCalibrationActive" scope="col" class="d-none d-sm-table-cell">Active Status</th>
-					<th id="isCalibrationExtended" scope="col" class="d-none d-sm-table-cell">Extension Status</th>
+					<th id="calibrationName" scope="col">ID</th>
+					<th id="sensorEID" scope="col">Sensor EID</th>
+					<th id="procedureName" scope="col" class="d-none d-sm-table-cell">Procedure Name</th>
+					<th id="calibrationDueDate" scope="col" class="d-none d-sm-table-cell">Due Date</th>
+					<th id="isCalibrationActive" scope="col" class="d-none d-sm-table-cell">In Service</th>
+					<th id="isCalibrationExtended" scope="col" class="d-none d-sm-table-cell">Extended?</th>
 					<th id="isCalibrationExpired" scope="col">Expiration Status</th>   
 				</tr>
 				<!-- here is where dynamically generated table html cells are appended -->
@@ -86,10 +88,17 @@
 		crossorigin="anonymous"></script>    
     </script>
 
+	<!-- LIBS SCRIPTS -->
+	<script src="../libs/moment.min.js"></script>
+	<script src="../libs/moment-with-locales.min.js"></script>
+
 
 	<!-- global javascript classes -->
     <script src="../js/utils/getRequestHeaders.js"></script>
 	<script src="../js/classes/dataGlobalStorage.js"></script>
+	<script src="../js/utils/createTableCell.js"></script>
 	<script src="../js/calibration/fetchAllCalibrations.js"></script>
+	<script src="../js/calibration/createCalibrationsTable.js"></script>
+	<script src="../js/calibration/createCalExpirationStatusIcon.js"></script>
 
 </html>

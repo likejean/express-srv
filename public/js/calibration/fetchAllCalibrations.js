@@ -9,8 +9,8 @@ const fetchAllCalibrations = async () => {
 			headers: getRequestHeaders()
 		})
 		.then((result) => {
-			_store.calibrations = result.data.payload;	
-			console.log(_store.calibrations);
+			_store.calibrations = result.data.payload;
+			createCalibrationTable(_store.calibrations);
 		})
 		.then(() => {			
 		})

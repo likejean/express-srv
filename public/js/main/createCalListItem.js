@@ -1,7 +1,8 @@
 //this function creates and appends list items to the calibration list in the sensor info card
 //it is called in showSensorInfoCard.js
 function createCalibrationListItem (data, calLocation, calList) {     //called in showSensorInfoCard.js
-   
+
+	   
 	//data = array of calibration objects associated with selected sensor
 	//calLocation = location where calibration was performed (string)
 	//calList = HTML element where dynamically created list items are appended (HTML DOM element)
