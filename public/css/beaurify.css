@@ -71,6 +71,12 @@ display: inline-block;
 	font-weight: bold;
 }
 
+.article-notice-wrapper {
+	background-color: rgb(237, 249, 249);
+	border-radius: 10px;
+	padding: 12px 5px;
+}
+
 .chart-title-span,
 .chart-x-axis-label-span,
 .chart-y-axis-label-span,

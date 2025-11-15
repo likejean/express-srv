@@ -48,6 +48,7 @@ const scienceBranch = [
     'Physics',
     'Mathematics',
     'Instrumentation',
+	'Software',
     'Automation',
     'Electronics',
     'Computer Science',

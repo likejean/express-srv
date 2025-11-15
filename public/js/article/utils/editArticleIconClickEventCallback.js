@@ -13,16 +13,19 @@ function editArticleIconClickEventCallback(event) {
 
 // 	creates toggle functionality for icons in Calibration Summary Card
 	if (!_articlefactory.inputWrappers[wrapperName].status) {
+		
 		//replace ellipsis-vertical icon with file-open icon to signify edit mode
 		icon.classList.replace("fa-ellipsis-vertical", "fa-file-pen");
 
 		//reserve the previous html child nodes in the calibration factory
 		_articlefactory.inputWrappers[wrapperName].childNodes = Array.from(wrapper.childNodes);
+		
 		//initialize value of the edit input
-		input.value = wrapper.textContent;		
-
+		input.value = wrapper.textContent;	
+		
 		//remove all child nodes of the text wrapper
 		removeAllChildNodes(wrapper);
+		
 		//activate edit mode for targeted text wrapper
 		_articlefactory.inputWrappers[wrapperName].status = true;
 
@@ -33,6 +36,7 @@ function editArticleIconClickEventCallback(event) {
 			input.setAttribute(key, value);
 		});
 		
+		//append edit input to the wrapper
 		wrapper.appendChild(input);
 
 		//attach event listener to edit input
