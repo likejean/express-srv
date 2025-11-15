@@ -1,5 +1,6 @@
 function displayHideArticleBadgesPerScreenSize() {
 
+	// Select all badges with the class "hide-badge-on-small-screen"
 	const badges = document.querySelectorAll(".hide-badge-on-small-screen");
 	let originalDisplay = document.querySelector(".hide-badge-on-small-screen").style.display;
 	const handleResize = () => {

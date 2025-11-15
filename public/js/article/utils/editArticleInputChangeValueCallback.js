@@ -1,5 +1,6 @@
 //////////Callback function for ONCHANGE eventListener in "editArticleIconClickEventCallback.js"
 
+// This function updates the GLOBAL _articlefactory state upon each new value entered in the edit article form input fields
 function editArticleInputChangeValueCallback(event) {
     // Get the new value from the input field
     const newValue = event.target.value;  

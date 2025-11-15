@@ -1,3 +1,5 @@
+
+//this function initializes the active status of the "All Articles" filter button
 function initializeFilterButtonActiveStatus() {
 
 	const span = document.createElement("span");

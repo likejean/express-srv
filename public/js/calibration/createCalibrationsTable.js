@@ -8,6 +8,7 @@ const isCalibrationActive = document.querySelector(".isCalibrationActive");
 const isCalibrationExtended = document.querySelector(".isCalibrationExtended");
 const isCalibrationExpired = document.querySelector(".isCalibrationExpired");
 
+// this function creates the calibration table in the viewCalibrations.html file
 function createCalibrationTable(calibrations) {
 
 	const sortedCalibrations = _store.sortCalibrationByDate(calibrations);

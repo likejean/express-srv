@@ -6,6 +6,7 @@ const resetProcedureQuantityButton = document.querySelector(".procedures-quantit
 const quantityCounterWrapper = document.querySelector(".counter-wrapper");
 const quantityResetButtonWrapper = document.querySelector(".reset-button-wrapper");
 
+//
 checkBox.addEventListener('change', function() {
         if (this.checked) {
 			toggleCalibrationProceduresVisibility(true);
@@ -15,6 +16,7 @@ checkBox.addEventListener('change', function() {
 	});
 
 
+//this function toggles the visibility of the calibration procedures list
 function toggleCalibrationProceduresVisibility(checkedStatus) {	
 	if (checkedStatus) {
 		procedureListWrapper.style.display = "block"; // Or "initial", "flex", "grid", etc., depending on desired display
@@ -27,6 +29,7 @@ function toggleCalibrationProceduresVisibility(checkedStatus) {
 	}
 }
 
+//this function creates and appends options to the select element for calibration procedures
 function createSelectProcedureOptions () {
 	fetchAllCalProcedureData().then(() => {
 		const namesObject = _store.getCalProcedureNames();

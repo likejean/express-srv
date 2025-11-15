@@ -7,8 +7,9 @@ function createChartDatasetsAccordion() {
 	const totalQtyDatasetsPerChart = _chartfactory.chart.sensorDatasets.length;
 	const chartDatasets = _chartfactory.chart.sensorDatasets;
 
-    
+    // this loop creates accordion items for each dataset in the chart
 	for (let i = 0; i < totalQtyDatasetsPerChart; i++) {
+		
 		// Create a new accordion item for each dataset
 		// and append it to the accordion wrapper
 		let datasetId = chartDatasets[i]._id;

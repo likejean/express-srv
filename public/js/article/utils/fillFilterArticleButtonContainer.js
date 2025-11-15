@@ -2,7 +2,7 @@ const filterButtonContainer = document.getElementById("filter-button-container")
 const filterButtonActiveStatusObject = {};
 
 
-
+//this function fills the filter button container with buttons for each article category
 function fillFilterArticleButtonContainer() {
     Object.entries(articleCategoryCollection).forEach(([key, obj]) => {
         const filterButton = document.createElement("button");
@@ -13,6 +13,7 @@ function fillFilterArticleButtonContainer() {
 		filterButtonActiveStatusObject[key] = false;
     });
 
+	//create and append "All Articles" filter button
 	const filterButton = document.createElement("button");
 	filterButton.classList.add("btn", "btn-outline-secondary", "m-2", "filter-button", "position-relative");
 	filterButton.id = "All";
@@ -26,5 +27,5 @@ function fillFilterArticleButtonContainer() {
 
 }
 
-
+//invoke the function to fill the filter button container
 fillFilterArticleButtonContainer(); 
