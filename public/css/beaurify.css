@@ -68,7 +68,7 @@ display: inline-block;
 .sensor-notice-span, 
 .article-notice-span,
 .user-notice-span {
-	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .article-notice-wrapper {
