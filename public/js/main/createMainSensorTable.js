@@ -1,5 +1,6 @@
 const sensorTable = document.querySelector(".sensors-data");
 const tableBody = document.createElement("tbody");
+const totalCalibrationsQuantity = document.querySelector(".total-calibrations-quantity");
 const validCalibrationsTotal = document.querySelector(".valid-calibrations-total");
 const extendedCalibrationsTotal = document.querySelector(".extended-calibrations-total");
 const expiredCalibrationsTotal = document.querySelector(".expired-calibrations-total");
@@ -12,9 +13,10 @@ function createMainSensorTable(sensors, calibrations) {     //comes from fetchAl
 
 
 	//write total number of valid, extended and expired calibrations next to the legend
+    totalCalibrationsQuantity.innerText =  `- ${_store.calibrations.data.payload.length}`;
 	validCalibrationsTotal.innerText = `- ${_store.calibrations.data.payload.length - _store.getCalExpiredCount(_store.calibrations.data.payload) - _store.getCalExtendedCount(_store.calibrations.data.payload)}`;
 	extendedCalibrationsTotal.innerText = `- ${_store.getCalExtendedCount(_store.calibrations.data.payload)}`;
-	expiredCalibrationsTotal.innerText = `- ${_store.getCalExpiredCount(_store.calibrations.data.payload)}`;
+	expiredCalibrationsTotal.innerText = `- ${_store.getCalExpiredCount(_store.calibrations.data.payload) - _store.getCalOutOfServiceCount(_store.calibrations.data.payload)}`;
     outOfServiceCalibrationsTotal.innerText = `- ${_store.getCalOutOfServiceCount(_store.calibrations.data.payload)}`;
 
     //create table body for the sensor table
