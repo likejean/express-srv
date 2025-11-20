@@ -33,6 +33,7 @@ const fetchCalRecordById = async () => {
             else dueCalibrationDate.style.color = "grey";
 
         }
+		//...orange font color if extended but not yet expired...
 		else {
 			if (result.data.calibration.calibrationExtended) dueCalibrationDate.style.color = "orange"
 			else dueCalibrationDate.style.color = "green"
@@ -62,4 +63,5 @@ const fetchCalRecordById = async () => {
     });
 };
 
+//call fetchCalRecordById function
 fetchCalRecordById();

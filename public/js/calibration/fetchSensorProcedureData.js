@@ -27,12 +27,15 @@ const fetchSensorProcedureData = async () => {
 			
 		const userLoginErrorTextContent = error.response.data.message;
 
+		//display error modal with the error message
 		const modal = document.getElementById('new-cal-record-auth-error-modal') || document.getElementById('new-article-auth-error-modal');
 		const span = document.getElementById('error-text-content');
 
+		// Show the modal
 		new bootstrap.Modal(modal).show();
 		span.innerText = userLoginErrorTextContent;
     });
 };
 
+//call fetchSensorProcedureData function
 fetchSensorProcedureData();

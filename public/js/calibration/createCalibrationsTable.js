@@ -27,7 +27,7 @@ function createCalibrationTable(calibrations) {
         row.appendChild(createTableCell("td",`${sortedCalibrations[i].calibrationName}`, [], [], `../html/editCalibrationEvent.html?id=${sortedCalibrations[i]._id}`)); //Calibration Name Cell
         row.appendChild(createTableCell("td",`${sortedCalibrations[i].sensorId.EID}`, [], [{attribute:"style", value:"font-weight: bold;"}], `../html/editSensor.html?id=${sortedCalibrations[i].sensorId._id}`)); //Sensor EID cell
 		row.appendChild(createTableCell("td",`${sortedCalibrations[i].procedureId.procedureName}`, ["d-none", "d-sm-table-cell"], [], `../html/editProcedure.html?id=${sortedCalibrations[i].procedureId._id}`)); //Procedure Name Cell
-        row.appendChild(createTableCell("td",`${moment(sortedCalibrations[i].dueCalibrationDate).format("MM-DD-YYYY")}`, ["d-none", "d-sm-table-cell"], [])); //Sensor Capacity cell
+        row.appendChild(createTableCell("td",`${moment.utc(sortedCalibrations[i].dueCalibrationDate).format("MM/DD/YYYY")}`, ["d-none", "d-sm-table-cell"], [])); //Sensor Capacity cell
 		row.appendChild(createTableCell("td",`${sortedCalibrations[i].activeCalibration ? "Yes" : "Out of Service"}`, ["d-none", "d-sm-table-cell"], [])); //Active Calibration Status cell
 		row.appendChild(createTableCell("td",`${sortedCalibrations[i].calibrationExtended ? "Yes" : "No"}`, ["d-none", "d-sm-table-cell"], [])); //Extended Calibration Status cell
 		row.appendChild(createCalExpirationStatusIcon(sortedCalibrations[i].dueCalibrationDate, sortedCalibrations[i].activeCalibration, sortedCalibrations[i].calibrationExtended)); //Expired Calibration Status cell

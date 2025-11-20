@@ -3,7 +3,7 @@ const limitCommentText = /^.{10,300}$/;
 const validateDateFormat = /^\d{4}-\d{2}-\d{2}$/; 
 const noSpecial = /^[^*|\"<>[\]{}`\\';@&$]+$/;
 
-
+//this collection contains input wrappers for editing calibration record inputs
 const editCalibrationInputContainer = {
         
     //Calibration Record Card: Edit Input Wrappers
@@ -18,6 +18,7 @@ const editCalibrationInputContainer = {
         validator: (text) => (allowedChars.test(text) ? true : false),
         inputRule: `Error! No special characters allowed here (exception: dashes "-")`,
     },
+	//date format validator function
     lastCalDateWrapper: {
         tag: "input",
 		attributes: {type: "date", name: "lastCalDate", style:"border-color:blue;"},
@@ -93,7 +94,7 @@ const editCalibrationInputContainer = {
         validator: (number) => (number <= 100 && number >= 10 ? true : false),
         inputRule: `Error! Only positive integers allowed within range: 10%-100%`,
     },
-
+	//checkbox input wrapper
     calAdjustmentMadeWrapper: {
         tag: "input",
 		attributes: {type: "checkbox", name: "calAdjustmentMade", style:"border-color:blue;"},
