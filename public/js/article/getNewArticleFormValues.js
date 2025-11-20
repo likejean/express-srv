@@ -44,6 +44,11 @@ Object.entries(articleCategoryCollection).forEach(([key, obj]) => {
 var inputs = document.querySelectorAll("input, textarea, select");
 for (i = 0; i < inputs.length; i++) {
 	if(inputs[i].getAttribute('class') !== "math-jax-script") inputs[i].oninput = inputHandler;
+	inputs[i].addEventListener('keydown', function(event) {
+        if (event.key === '"') { // Check if the pressed key is '"'
+            event.preventDefault(); // Prevent the default action (typing the character)
+        }
+    });
 }
 
 

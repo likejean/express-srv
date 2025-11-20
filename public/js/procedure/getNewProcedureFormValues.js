@@ -15,6 +15,11 @@ Object.entries(_procfactory.newCalProcedureFormInputs).forEach(([key, obj]) => {
 var inputs = document.querySelectorAll("input, select, textarea");
 for (i = 0; i < inputs.length; i++) {
     inputs[i].oninput = inputHandler;
+    inputs[i].addEventListener('keydown', function(event) {
+        if (event.key === '"') { // Check if the pressed key is '"'
+            event.preventDefault(); // Prevent the default action (typing the character)
+        }
+    });
 }
 
 //callback input handler function for ONINPUT EventListener

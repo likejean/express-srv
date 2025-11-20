@@ -17,7 +17,14 @@ Object.entries(_sensfactory.newSensorFormInputs).forEach(([key, obj]) => {
 var inputs = document.querySelectorAll('input, select, textarea'); 
 for (i=0; i<inputs.length; i++){
     inputs[i].oninput = inputHandler;
+    inputs[i].addEventListener('keydown', function(event) {
+        if (event.key === '"') { // Check if the pressed key is '"'
+            event.preventDefault(); // Prevent the default action (typing the character)
+        }
+    });
 }
+
+
 
 //this callback function is used to handle input event of form inputs
 //this function updates newSensorPostData object with new values and updates submit button state
