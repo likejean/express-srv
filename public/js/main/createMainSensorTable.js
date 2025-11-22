@@ -31,13 +31,14 @@ function createMainSensorTable(sensors, calibrations) {     //comes from fetchAl
         //Filter calibration objects associated with current sensor
         let filteredCalibrations = calibrations.filter((item) => sensors[i].calibrations.some(calibration => calibration._id === item._id));
         
+		let sensorLocationStatus = sensors[i].location === "Portable" ? sensors[i].description : sensors[i].description + " (" + sensors[i].location + ")";
         // create each cell and append to the row
 		// function createTableCell(tag, text, classArr, attrArr)
         // Set row ID for later reference
         row.setAttribute("id", `row${i + 1}`);
         row.appendChild(createTableCell("th",`${i + 1}`, [], [{attribute:"scope", value:"row"}])); //# column cell
         row.appendChild(createTableCell("td",`${sensors[i].EID}`, [], [])); //EID cell
-        row.appendChild(createTableCell("td",`${sensors[i].description}`, [], [])); //Description cell
+        row.appendChild(createTableCell("td",`${sensorLocationStatus}`, [], [])); //Description cell
         row.appendChild(createTableCell("td",`${sensors[i].capacityRange}`, ["d-none", "d-sm-table-cell"], [])); //Sensor Capacity cell
         row.appendChild(mapCalDueDatesAndBuildTableCell(filteredCalibrations, sensors[i]._id, sensors[i].calibrationPriority)); //Calibration Expiry Status cell
         row.appendChild(createGearIcon(i + 1, sensors[i])); //Gear Icon to view Sensor Details Card
