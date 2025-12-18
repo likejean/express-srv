@@ -12,6 +12,7 @@ const outOfServiceCalibrationsTotal = document.querySelector(".out-of-service-ca
 function createMainSensorTable(sensors, calibrations) {     //comes from fetchAllData.js
 
 
+    let discriptionWithLocation;
 	//write total number of valid, extended and expired calibrations next to the legend
     totalCalibrationsQuantity.innerText =  `- ${_store.calibrations.data.payload.length}`;
 	validCalibrationsTotal.innerText = `- ${_store.calibrations.data.payload.length - _store.getCalExpiredCount(_store.calibrations.data.payload) - _store.getCalExtendedCount(_store.calibrations.data.payload)}`;
@@ -28,6 +29,8 @@ function createMainSensorTable(sensors, calibrations) {     //comes from fetchAl
             row.classList.add("table-danger");
         }
 
+        sensors[i].location !== "Portable" ? discriptionWithLocation = sensors[i].description + ` [${sensors[i].location}]` : discriptionWithLocation = sensors[i].description;
+
         //Filter calibration objects associated with current sensor
         let filteredCalibrations = calibrations.filter((item) => sensors[i].calibrations.some(calibration => calibration._id === item._id));
         
@@ -37,7 +40,7 @@ function createMainSensorTable(sensors, calibrations) {     //comes from fetchAl
         row.setAttribute("id", `row${i + 1}`);
         row.appendChild(createTableCell("th",`${i + 1}`, [], [{attribute:"scope", value:"row"}])); //# column cell
         row.appendChild(createTableCell("td",`${sensors[i].EID}`, [], [])); //EID cell
-        row.appendChild(createTableCell("td",`${sensors[i].description}`, [], [])); //Description cell
+        row.appendChild(createTableCell("td",`${discriptionWithLocation}`, [], [])); //Description cell
         row.appendChild(createTableCell("td",`${sensors[i].capacityRange}`, ["d-none", "d-sm-table-cell"], [])); //Sensor Capacity cell
         row.appendChild(mapCalDueDatesAndBuildTableCell(filteredCalibrations, sensors[i]._id, sensors[i].calibrationPriority)); //Calibration Expiry Status cell
         row.appendChild(createGearIcon(i + 1, sensors[i])); //Gear Icon to view Sensor Details Card
