@@ -1,11 +1,11 @@
 //////////Callback function for ONCHANGE eventListener in "editCalibrationIconClickEventCallback.js"
 
 // Convert the date input value into the date token format used in calibration names.
-// Example: 2025-03-15 => 15032025
+// Example: 2025-03-15 => 03152025
 function formatDateForCalibrationName(dateString) {
     const date = moment(dateString, "YYYY-MM-DD", true);
     if (!date.isValid()) return null;
-    return date.format("DDMMYYYY");
+    return date.format("MMDDYYYY");
 }
 
 // Derive an updated calibrationName when lastCalibrationDate changes.
