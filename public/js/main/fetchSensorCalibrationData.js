@@ -26,8 +26,9 @@ const fetchSensorCalibrationData = async () => {
 
 			
 			//function call to create all cells for main sensor table
+			// Sort sensors by expiration date on initial page load as well.
 			createMainSensorTable(
-				_store.sensors.data.payload,
+				_store.sortSensorsByDate(),
 				_store.calibrations.data.payload
 			);
 
