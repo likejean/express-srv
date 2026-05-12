@@ -8,7 +8,14 @@ function patchCalibrationRecord() {
 
 
   //get this helper function from utils...
-    calPatchRequestData = filterObjectAndTransform(_calfactory.inputWrappers, (item) => item.status === true);    
+    calPatchRequestData = filterObjectAndTransform(_calfactory.inputWrappers, (item) => item.status === true);
+
+    if (_calfactory.inputWrappers.lastCalDateWrapper.status) {
+        const derivedCalibrationName = deriveCalibrationNameFromDate(_calfactory.inputWrappers.lastCalDateWrapper.value);
+        if (derivedCalibrationName) {
+            calPatchRequestData.calibrationName = derivedCalibrationName;
+        }
+    }
 
   //use PATCH API endpoint to update existing calibration record
     axios

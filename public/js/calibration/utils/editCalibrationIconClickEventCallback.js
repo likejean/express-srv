@@ -16,8 +16,14 @@ function editCalibrationIconClickEventCallback(event) {
 
 		//reserve the previous html child nodes in the calibration factory
 		_calfactory.inputWrappers[wrapperName].childNodes = Array.from(wrapper.childNodes);
-		//initialize value of the edit input
-		input.value = wrapper.textContent;		
+
+		//initialize value of the edit input for date fields in ISO format
+		if (wrapperName === "lastCalDateWrapper" || wrapperName === "dueCalDateWrapper") {
+			const parsedDate = moment(wrapper.textContent, "dddd, MM/DD/YYYY", true);
+			input.value = parsedDate.isValid() ? parsedDate.format("YYYY-MM-DD") : "";
+		} else {
+			input.value = wrapper.textContent.trim();
+		}
 
 		//remove all child nodes of the text wrapper
 		removeAllChildNodes(wrapper);
