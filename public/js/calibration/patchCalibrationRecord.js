@@ -11,6 +11,7 @@ function patchCalibrationRecord() {
     calPatchRequestData = filterObjectAndTransform(_calfactory.inputWrappers, (item) => item.status === true);
 
     if (_calfactory.inputWrappers.lastCalDateWrapper.status) {
+        // If the last-date field is being patched, include the updated calibrationName too.
         const derivedCalibrationName = deriveCalibrationNameFromDate(_calfactory.inputWrappers.lastCalDateWrapper.value);
         if (derivedCalibrationName) {
             calPatchRequestData.calibrationName = derivedCalibrationName;

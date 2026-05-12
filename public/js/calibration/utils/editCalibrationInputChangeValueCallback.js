@@ -1,11 +1,15 @@
 //////////Callback function for ONCHANGE eventListener in "editCalibrationIconClickEventCallback.js"
 
+// Convert the date input value into the date token format used in calibration names.
+// Example: 2025-03-15 => 15032025
 function formatDateForCalibrationName(dateString) {
     const date = moment(dateString, "YYYY-MM-DD", true);
     if (!date.isValid()) return null;
     return date.format("DDMMYYYY");
 }
 
+// Derive an updated calibrationName when lastCalibrationDate changes.
+// Preserve the existing EID prefix and other suffix text, updating only the date part.
 function deriveCalibrationNameFromDate(dateString) {
     const dateToken = formatDateForCalibrationName(dateString);
     if (!dateToken) return null;
@@ -15,11 +19,13 @@ function deriveCalibrationNameFromDate(dateString) {
         : _calfactory.calibrationName;
     if (!currentName) return null;
 
+    // Split at the first dash to preserve any suffix after the calibration date.
     const suffixParts = currentName.split("-");
     const namePrefix = suffixParts[0];
     const suffix = suffixParts.slice(1).join("-");
 
     const sensorEID = _calfactory.sensor?.EID || "";
+    // If the current name begins with a known sensor EID, preserve that prefix.
     if (sensorEID && namePrefix.startsWith(sensorEID)) {
         return `${sensorEID}${dateToken}${suffix ? "-" + suffix : ""}`;
     }
@@ -58,12 +64,14 @@ function editCalibrationInputChangeValueCallback(event) {
     else _calfactory.inputWrappers[concatInputName].value = newValue;
 
     if (event.target.name === "lastCalDate") {
+        // When the last calibration date changes, update the visible calibration name immediately.
         const updatedName = deriveCalibrationNameFromDate(newValue);
         if (updatedName) {
             _calfactory.calibrationName = updatedName;
             const currentCalName = document.getElementById("calName");
             if (currentCalName) currentCalName.innerText = updatedName;
 
+            // If the name field is currently in edit mode, keep the input value in sync.
             if (_calfactory.inputWrappers.calNameWrapper.status) {
                 const calNameInput = document.querySelector('input[name="calName"]');
                 if (calNameInput) {
