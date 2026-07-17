@@ -25,18 +25,24 @@ function editCalibrationIconClickEventCallback(event) {
 			input.value = wrapper.textContent.trim();
 		}
 
-		//remove all child nodes of the text wrapper
-		removeAllChildNodes(wrapper);
-		//activate edit mode for targeted text wrapper
-		_calfactory.inputWrappers[wrapperName].status = true;
-
 		//add classes, attributes and append the edit input to empty wrapper
 		_calfactory.inputWrappers[wrapperName].classes.forEach(item => input.classList.add(item));
 
 		Object.entries(_calfactory.inputWrappers[wrapperName].attributes).forEach(([key, value]) => {
 			input.setAttribute(key, value);
 		});
-		
+
+		// initialize checkbox state from the current text content for checkbox wrappers
+		if (input.type === "checkbox") {
+			input.checked = wrapper.textContent.trim().toLowerCase() === "yes";
+			_calfactory.inputWrappers[wrapperName].checked = input.checked;
+		}
+
+		//remove all child nodes of the text wrapper
+		removeAllChildNodes(wrapper);
+		//activate edit mode for targeted text wrapper
+		_calfactory.inputWrappers[wrapperName].status = true;
+
 		wrapper.appendChild(input);
 
 		//attach event listener to edit input

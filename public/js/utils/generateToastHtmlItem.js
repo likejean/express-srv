@@ -40,16 +40,16 @@ function generateToastHtmlItem (link, certificateName, data, location) {
 	</div>`;
 }
 
-//this function returns color based on the due date of the calibration record
-//green = valid, orange = extended, red = expired
+//this function returns color based on the calibration record status
+//grey = out of service, green = valid, orange = extended, red = expired
 function getColorBasedOnDueDate(data) {
 	const unixTimestamp = moment().unix();
-	return moment.utc(data.dueCalibrationDate).unix() > unixTimestamp 
-		? data.calibrationExtended 
-			? "orange" 
+	if (!data.activeCalibration) {
+		return "grey";
+	}
+	return moment.utc(data.dueCalibrationDate).unix() > unixTimestamp
+		? data.calibrationExtended
+			? "orange"
 			: "green"
-		: 
-		! data.activeCalibration 
-			? "grey"
-			: "red"
+		: "red";
 }

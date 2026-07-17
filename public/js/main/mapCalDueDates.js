@@ -18,21 +18,19 @@ const mapCalDueDatesAndBuildTableCell = function (data, sensorId, sensorCalibrat
 		_store.isDatasetChartsExist(sensorId) 
 		? cell.innerHTML += `<i style="color:#58C2FF; margin-left:-17px;" class="far fa-chart-bar"></i><span id="charts-count">${_store.datasetChartsCount(sensorId)}</span>` : '';	
         for (let i = 0; i < data.length; i++) {
-			dueCalDate = moment.utc(data[i].dueCalibrationDate).unix();
-			iconHtmlText = unixTimestamp > dueCalDate
-				? data[i].activeCalibration 
-                    ? 
-                    '<i style="color:red;" class="ms-2 fa-duotone fa-solid fa-bell" /i>'
-                    :
-                    '<i style="color:grey;" class="ms-2 fa-ban fa-solid fa-grey" /i>'
-				: data[i].calibrationExtended === false
-                    ?
-                    '<i style="color:lightgreen;" class="ms-2 fa-regular fa-circle-check" /i>'
-                    :
-                    '<i style="color:orange;" class="ms-2 fa-regular fa-circle-check" /i>'
-			cell.innerHTML += iconHtmlText;
+            dueCalDate = moment.utc(data[i].dueCalibrationDate).unix();
+            if (!data[i].activeCalibration) {
+                iconHtmlText = '<i style="color:grey;" class="ms-2 fa-solid fa-ban"></i>';
+            } else if (unixTimestamp > dueCalDate) {
+                iconHtmlText = '<i style="color:red;" class="ms-2 fa-duotone fa-solid fa-bell"></i>';
+            } else if (data[i].calibrationExtended === false) {
+                iconHtmlText = '<i style="color:lightgreen;" class="ms-2 fa-regular fa-circle-check"></i>';
+            } else {
+                iconHtmlText = '<i style="color:orange;" class="ms-2 fa-regular fa-circle-check"></i>';
+            }
+            cell.innerHTML += iconHtmlText;
         }
-		
     }
     return cell;
-};
+}
+   

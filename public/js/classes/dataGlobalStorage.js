@@ -131,43 +131,52 @@ class dataStorage {
         }, {});
     }
 
+	//get counts for all calibration statuses used in dashboard counters
+	getCalStatusCounts(data){
+		const now = new Date();
+		return data.reduce((counts, item) => {
+			counts.total++;
+
+			if (!item.activeCalibration) {
+				counts.outOfService++;
+				return counts;
+			}
+
+			const dueDate = new Date(item.dueCalibrationDate);
+			if (dueDate < now) {
+				counts.expired++;
+				return counts;
+			}
+
+			if (item.calibrationExtended) {
+				counts.extended++;
+				return counts;
+			}
+
+			counts.valid++;
+			return counts;
+		}, {
+			total: 0,
+			valid: 0,
+			extended: 0,
+			expired: 0,
+			outOfService: 0,
+		});
+	}
+
 	//get count of all extended calibration records
 	getCalExtendedCount(data){
-		//data = this.calibrations.data.payload
-		//count all extended calibration records and display the total next to the legend
-		return data.reduce((count, item) => {
-			// Check if the calibrationExtended property is true
-			if (item.calibrationExtended === true) { 
-				count++; // Increment the count if true
-			}
-			return count; // Return the updated count
-		}, 0); // Initialize the accumulator 'count' to 0		
+		return this.getCalStatusCounts(data).extended;
 	}
 
 	//get count of all expired calibration records
 	getCalExpiredCount(data){
-		//data = this.calibrations.data.payload
-		//count all expired calibration records and display the total next to the legend
-		return data.reduce((count, item) => {
-			// Check if the dueCalibrationDate is in the past
-			if (new Date(item.dueCalibrationDate) < new Date()) { 	
-				count++; // Increment the count if true
-			}
-			return count; // Return the updated count
-		}, 0); // Initialize the accumulator 'count' to 0
+		return this.getCalStatusCounts(data).expired;
 	}
 
 	//get count of all out-of-service calibration records
 	getCalOutOfServiceCount(data){
-		//data = this.calibrations.data.payload
-		//count all out-of-service records and display the total next to the legend
-		return data.reduce((count, item) => {
-			// Check if the dueCalibrationDate is in the past
-			if (!item.activeCalibration) { 	
-				count++; // Increment the count if true
-			}
-			return count; // Return the updated count
-		}, 0); // Initialize the accumulator 'count' to 0
+		return this.getCalStatusCounts(data).outOfService;
 	}
 
 	//verifies if any chart(s) exist for a selected sensor

@@ -13,12 +13,13 @@ function createMainSensorTable(sensors, calibrations) {     //comes from fetchAl
 
 
     let discriptionWithLocation;
-	//write total number of valid, extended and expired calibrations next to the legend
-    totalCalibrationsQuantity.innerText =  `- ${_store.calibrations.data.payload.length}`;
-	validCalibrationsTotal.innerText = `- ${_store.calibrations.data.payload.length - _store.getCalExpiredCount(_store.calibrations.data.payload) - _store.getCalExtendedCount(_store.calibrations.data.payload)}`;
-	extendedCalibrationsTotal.innerText = `- ${_store.getCalExtendedCount(_store.calibrations.data.payload)}`;
-	expiredCalibrationsTotal.innerText = `- ${_store.getCalExpiredCount(_store.calibrations.data.payload) - _store.getCalOutOfServiceCount(_store.calibrations.data.payload)}`;
-    outOfServiceCalibrationsTotal.innerText = `- ${_store.getCalOutOfServiceCount(_store.calibrations.data.payload)}`;
+	//write total number of calibration events and its status breakdown next to the legend
+    const calibrationCounts = _store.getCalStatusCounts(_store.calibrations.data.payload);
+    totalCalibrationsQuantity.innerText = `- ${calibrationCounts.total}`;
+    validCalibrationsTotal.innerText = `- ${calibrationCounts.valid}`;
+    extendedCalibrationsTotal.innerText = `- ${calibrationCounts.extended}`;
+    expiredCalibrationsTotal.innerText = `- ${calibrationCounts.expired}`;
+    outOfServiceCalibrationsTotal.innerText = `- ${calibrationCounts.outOfService}`;
 
     //create table body for the sensor table
     for (let i = 0; i < sensors.length; i++) {
