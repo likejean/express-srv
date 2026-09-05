@@ -20,6 +20,7 @@
 			crossorigin="anonymous">
 		</script>
 		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		
 		
 		<title>Calibration Events</title>
@@ -32,6 +33,33 @@
 				style="background-color: rgb(213, 225, 246); padding: 2rem; border-radius: 25px;">
 				<h1 class="new-sensor-form-title">All Calibrations</h1>
 				<p> Review all calibrations. Use the current page to view the complete list.</p>
+			</div>
+		</div>
+
+		<!-- Calibration Due Date Chart -->
+		<div class="container-fluid my-4">
+			<div class="card">
+				<div class="card-body">
+					<h2 class="calibration-chart-title text-center">Calibration Due Date Timeline</h2>
+					<!-- Keep the canvas isolated from the external date-range controls. -->
+					<div class="calibration-chart-frame">
+						<div class="calibration-chart-canvas">
+							<canvas id="calibration-due-date-chart" aria-label="Calibration due dates timeline"></canvas>
+						</div>
+					</div>
+					<!-- These controls change the chart viewport without changing the calibration data. -->
+					<div class="calibration-date-range-controls" aria-label="Chart date range">
+						<div class="calibration-date-range-labels">
+							<span>Start: <strong id="calibration-range-start-label">-</strong></span>
+							<span>End: <strong id="calibration-range-end-label">-</strong></span>
+						</div>
+						<div class="calibration-date-range-slider">
+							<input id="calibration-range-start" type="range" aria-label="Timeline start date" disabled>
+							<input id="calibration-range-end" type="range" aria-label="Timeline end date" disabled>
+						</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -98,6 +126,7 @@
 	<script src="../js/classes/dataGlobalStorage.js"></script>
 	<script src="../js/utils/createTableCell.js"></script>
 	<script src="../js/calibration/fetchAllCalibrations.js"></script>
+	<script src="../js/calibration/createCalibrationDueDateChart.js"></script>
 	<script src="../js/calibration/createCalibrationsTable.js"></script>
 	<script src="../js/calibration/createCalExpirationStatusIcon.js"></script>
 

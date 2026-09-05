@@ -7,6 +7,7 @@ const fetchSensorCalibrationData = async () => {
 	let notification = document.querySelector(".notification");
 
 	// fetch all data using POST API endpoints: sensors, calibrations, and datasets
+	
 	await Promise.all([
 				axios.get("/api/sensors", {
 				headers: getRequestHeaders()
@@ -55,6 +56,7 @@ const fetchSensorCalibrationData = async () => {
 			}	
 					
 		})
+		//catch error if any of the three API endpoints fail to fetch data
 		.catch((error) => {
 			const errorCode = error.response.status;			
 						

@@ -10,6 +10,7 @@ const fetchAllCalibrations = async () => {
 		})
 		.then((result) => {
 			_store.calibrations = result.data.payload;
+			createCalibrationDueDateChart(_store.calibrations);
 			createCalibrationTable(_store.calibrations);
 		})
 		.then(() => {			

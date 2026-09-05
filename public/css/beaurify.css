@@ -88,6 +88,127 @@ display: inline-block;
 	color: #0e1d64;
 }
 
+/* Frame the chart independently from the date-range controls below it. */
+.calibration-chart-frame {
+	height: auto;
+	padding: 0.75rem;
+	border: 1px solid #b7dfc8;
+	border-radius: 0.5rem;
+	background: linear-gradient(135deg, #f8fffb, #ffffff);
+}
+
+/* Give Chart.js a stable, responsive drawing surface. */
+.calibration-chart-canvas {
+	position: relative;
+	width: 100%;
+	height: 420px;
+	margin: 0 auto;
+}
+
+.calibration-chart-canvas > canvas {
+	display: block;
+	width: 100% !important;
+	height: 100% !important;
+}
+
+/* Make the timeline heading prominent above the plot. */
+.calibration-chart-title {
+	font-size: 1.75rem;
+	font-weight: 600;
+}
+
+/* Visually separate the zoom controls from the chart grid. */
+.calibration-date-range-controls {
+	margin: 1.25rem 1.5rem 0.75rem;
+	padding: 0.75rem 1rem 0.5rem;
+	border: 1px solid #dee2e6;
+	border-radius: 0.75rem;
+	background: rgba(248, 249, 250, 0.9);
+}
+
+/* Keep the selected date endpoints aligned with their handles. */
+.calibration-date-range-labels {
+	display: flex;
+	justify-content: space-between;
+	color: #495057;
+	font-size: 0.9rem;
+}
+
+/* Layer one shared track behind both independently draggable inputs. */
+.calibration-date-range-slider {
+	position: relative;
+	height: 2.75rem;
+	margin: 0.35rem 0.25rem 0;
+}
+
+.calibration-date-range-slider::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 1.125rem;
+	height: 0.5rem;
+	border: 1px solid #adb5bd;
+	border-radius: 0.5rem;
+	background: linear-gradient(90deg, #b7dfc8, #9ec5fe, #b7dfc8);
+}
+
+.calibration-date-range-slider input[type="range"] {
+	position: absolute;
+	left: 0;
+	top: 0.5rem;
+	width: 100%;
+	height: 1.75rem;
+	margin: 0;
+	background: transparent;
+	pointer-events: none;
+	appearance: none;
+}
+
+#calibration-range-start {
+	z-index: 2;
+}
+
+#calibration-range-end {
+	z-index: 1;
+}
+
+.calibration-date-range-slider input[type="range"]::-webkit-slider-runnable-track {
+	height: 0.5rem;
+	border: 0;
+	background: transparent;
+}
+
+.calibration-date-range-slider input[type="range"]::-moz-range-track {
+	height: 0.5rem;
+	border: 0;
+	background: transparent;
+}
+
+.calibration-date-range-slider input[type="range"]::-webkit-slider-thumb {
+	width: 1.4rem;
+	height: 1.4rem;
+	margin-top: -0.5rem;
+	border: 3px solid #212529;
+	border-radius: 50%;
+	background: #ffffff;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	cursor: ew-resize;
+	pointer-events: auto;
+	appearance: none;
+}
+
+.calibration-date-range-slider input[type="range"]::-moz-range-thumb {
+	width: 1.4rem;
+	height: 1.4rem;
+	border: 3px solid #212529;
+	border-radius: 50%;
+	background: #ffffff;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	cursor: ew-resize;
+	pointer-events: auto;
+}
+
 #range-levels-validation,
 .new-chart-valid-input,
 .new-article-valid-input,

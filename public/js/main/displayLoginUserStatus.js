@@ -1,15 +1,19 @@
 var _userfactory = new userFactory();  //instantiate user factory;
 
+//This script handles user login status by checking local storage for a token and updating the UI accordingly
 const avatarImage = document.getElementById("main-bar-avatar-image");
 const userProfileImgAnchor = document.getElementById("user-profile-anchor");
 
+//get login and logout anchor elements from the DOM
 _userfactory.loginHtmlLabel = document.getElementById("login-anchor");
 _userfactory.logoutHtmlLabel = document.getElementById("logout-anchor");
 _userfactory.userId = window.localStorage.getItem("userId");
 _userfactory.userEmail = window.localStorage.getItem("userEmail");
 
+//get user avatar from local storage and set it in the user factory
 const userLabels = document.getElementById("user-labels");
 
+//function to convert binary data to base64 string
 function displayLoginUserStatus() {
 	//if a user logged in successfully and token exists in localStorage
 	if(window.localStorage.getItem("token") !== null) {	
