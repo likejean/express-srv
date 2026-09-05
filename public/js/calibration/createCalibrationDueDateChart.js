@@ -27,11 +27,15 @@ const calibrationTodayLinePlugin = {
 		context.setLineDash([]);
 		context.font = "600 12px sans-serif";
 		const labelWidth = context.measureText(label).width + 12;
-		const labelX = Math.min(xPosition + 6, chart.chartArea.right - labelWidth);
+		const labelX = Math.max(
+			chart.chartArea.left,
+			Math.min(xPosition - labelWidth / 2, chart.chartArea.right - labelWidth)
+		);
+		const labelY = top - 28;
 		context.fillStyle = "#198754";
-		context.fillRect(labelX, top + 6, labelWidth, 22);
+		context.fillRect(labelX, labelY, labelWidth, 22);
 		context.fillStyle = "#ffffff";
-		context.fillText(label, labelX + 6, top + 21);
+		context.fillText(label, labelX + 6, labelY + 15);
 		context.restore();
 	}
 };
@@ -142,10 +146,17 @@ function createCalibrationDueDateChart(calibrations) {
 				pointRadius: 7,
 				pointHoverRadius: 9,
 				pointStyle: "circle",
+				clip: false,
 			}]
 		},
 		options: {
 			maintainAspectRatio: false,
+			layout: {
+				padding: {
+					top: 40,
+					bottom: 12,
+				}
+			},
 			plugins: {
 				legend: { display: false },
 				tooltip: {
@@ -173,8 +184,9 @@ function createCalibrationDueDateChart(calibrations) {
 				},
 				y: {
 					display: false,
-					min: -1,
-					max: Math.max(chartData.length, 1),
+					min: -2,
+					max: Math.max(chartData.length + 1, 2),
+					grace: "10%",
 				}
 			}
 		}
