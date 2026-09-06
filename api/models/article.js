@@ -28,6 +28,10 @@ const articleSchema = mongoose.Schema(
 			type: String, 
 			required: true
 		},
+		mathJaxScript: {
+			type: String,
+			required: false,
+		},
 		imageLink: {
 			type: String,
 			required: true,

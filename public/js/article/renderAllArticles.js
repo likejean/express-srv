@@ -121,6 +121,13 @@ function renderAllArticles(articles) {
 		articlePreface.style.fontSize = "0.8rem";
 		articlePreface.innerText = article.preface;
 
+		let articleFormula;
+		if (article.mathJaxScript) {
+			articleFormula = document.createElement("div");
+			articleFormula.classList.add("article-math-formula", "text-center", "mb-4");
+			articleFormula.innerText = `$$${article.mathJaxScript}$$`;
+		}
+
 		// Create card body row
 		// <div class="col-lg-8 col-sm-12 mb-sm-4 mt-5">
 		const cardBodyRow = document.createElement("div");
@@ -175,6 +182,7 @@ function renderAllArticles(articles) {
 		cardBody.appendChild(articleCategoryRow);
 		cardBody.appendChild(articleTitleRow);
 		cardBody.appendChild(articlePreface);
+		if (articleFormula) cardBody.appendChild(articleFormula);
 		cardBody.appendChild(cardBodyRow);
 		cardBody.appendChild(articleResourceLink);
 

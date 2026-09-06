@@ -25,6 +25,7 @@
             crossorigin="anonymous"
         ></script>
 		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+		<script src="https://unpkg.com/mathlive"></script>
         <title>New Article Form</title>
     </head>
     <body>       
@@ -190,16 +191,16 @@
 						<div class="container">
 							<div class="row math-jax-translation justify-content-start align-content-center">
 								<div class="col-lg-12 col-sm-12 mb-sm-4">
-									<label for="mathJaxScript" class="form-label">Math Jax Script</label>
-									<input  
-										type="text"
-										id="mathJaxScript"
+									<label for="mathJaxEditor" class="form-label">Mathematical Formula</label>
+									<math-field
+										id="mathJaxEditor"
 										class="math-jax-script"
-										style="margin-top: 0.5rem; width: 100%; border-color: blue; border-radius: 3px; padding: 5px 3px;"
-										placeholder="Enter MathJax script here"
-									/>
+										aria-describedby="mathJaxScriptHelp"
+										placeholder="Enter a mathematical formula"
+									></math-field>
+									<input type="hidden" name="mathJaxScript" id="mathJaxScript" />
 									<small id="mathJaxScriptHelp" class="form-text text-muted"
-									>Enter Math JAX script here to display its translated output in blue box below...</small>
+									>Use the formula editor to enter roots, fractions, powers, integrals, sums, and symbols. The formula will be stored as MathJax-compatible LaTeX.</small>
 								</div>
 								<div class="col-lg-12 col-sm-12 mb-sm-4 d-flex">									
 									<span class="math-jax-formula m-2" id="mathJaxFormula"></span>		
@@ -374,7 +375,7 @@
                                 <button type="button" class="btn btn-secondary" onclick="resetNewArticleForm()">
                                     Reset
                                 </button>
-                                <a href="../html/viewCalibrationProcedures.html" class="btn btn-dark">Back</a>
+								<a href="../html/viewArticles.html" class="btn btn-dark">Back</a>
                             </div>
                         </div>
                     </div>
@@ -406,7 +407,7 @@
 		<script src="../js/article/utils/mathJaxInputChangeValueCallback.js"></script>
 		<script src="../js/article/utils/updateArticleParagraphQty.js"></script>		
 		<script src="../js/article/getNewArticleFormValues.js"></script>		
-		<script src="../js/article/createNewArticleRecord.js"></script>			
+		<script src="../js/article/createNewArticleRecord.js?v=2"></script>			
 		<script src="../js/article/utils/toggleCalibrationProceduresListVisilibity.js"></script>
 		<script src="../js/article/utils/updateProcedureQuantitySelected.js"></script>
 		

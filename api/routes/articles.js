@@ -143,6 +143,7 @@ router.post('/', auth.verifyToken, (req, res, next) => {
 				content,
 				scienceBranch,
 				preface,
+				mathJaxScript,
 				imageLink,
 				resourceLink,
 			} = req.body;
@@ -154,6 +155,7 @@ router.post('/', auth.verifyToken, (req, res, next) => {
 				content,
 				scienceBranch,
 				preface,
+				mathJaxScript,
 				imageLink,
 				resourceLink,
 			});

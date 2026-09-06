@@ -11,8 +11,8 @@ axios
         console.log("New article record created successfully:", response);
         //remove event listener to prevent multiple submissions
         form.removeEventListener("submit", submitNewArticleData);
-        //redirect to viewCalibrationProcedures.html to edit the newly created article
-        window.location.href = "../html/viewCalibrationProcedures.html";
+        //redirect to the article list after creating the article
+        window.location.href = "../html/viewArticles.html";
     })
     .catch((error) => {
         console.log("ERROR:", error);
