@@ -2,6 +2,7 @@ const articleCategory = document.querySelector(".article-category");
 const articleTitle = document.getElementById("articleTitle");
 const articlePreface = document.getElementById("articlePreface");
 const articleContent = document.getElementById("articleContent");
+const articleMathJax = document.getElementById("articleMathJax");
 const articleImageLink = document.getElementById("imageLink");
 const articleResourceLink = document.getElementById("resourceLink");
 
@@ -28,6 +29,13 @@ const fetchArticleById = async () => {
 			articleTitle.innerText = _store.activeArticle.title;
 			articlePreface.innerText = _store.activeArticle.preface;
 			articleContent.innerText = _store.activeArticle.content;
+			// Restore the saved LaTeX in both the MathLive field and the rendered preview.
+			const mathJaxScript = _store.activeArticle.mathJaxScript || "";
+			document.getElementById("mathJaxEditor").value = mathJaxScript;
+			document.getElementById("mathJaxScript").value = mathJaxScript;
+			articleMathJax.innerText = mathJaxScript ? `$$${mathJaxScript}$$` : "";
+			_articlefactory.inputWrappers.articleMathJaxWrapper.value = mathJaxScript;
+			if (window.MathJax) MathJax.typesetPromise([articleMathJax]);
 			articleImageLink.innerText = _store.activeArticle.imageLink;
 			articleResourceLink.innerText = _store.activeArticle.resourceLink;
 

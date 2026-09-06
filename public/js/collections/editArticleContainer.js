@@ -43,6 +43,19 @@ const editArticleInputContainer = {
         inputRule: `Minimum 10 and maximum 1000 characters are allowed here...`,
 	},
 
+    // Store the editable LaTeX separately so the generic PATCH builder can persist it.
+    articleMathJaxWrapper: {
+        tag: "math-field",
+        attributes: {name: "mathJaxScript", placeholder: "Enter a mathematical formula"},
+        classes: ["form-control", "math-jax-script"],
+        status: false,
+        value: "",
+        childNodes: [],
+        databaseName: "mathJaxScript",
+        validator: () => true,
+        inputRule: "",
+    },
+
 	imageLinkWrapper: {
 		tag: "input",
 		attributes: {type: "text", name: "imageLink", style:"border-color:darkblue;"},

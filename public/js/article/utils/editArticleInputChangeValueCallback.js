@@ -16,4 +16,11 @@ function editArticleInputChangeValueCallback(event) {
     //Update GLOBAL ARTICLE FACTORY state upon each new value entered
 	_articlefactory.inputWrappers[concatInputName].value = newValue;
 
+    if (concatInputName === "articleMathJaxWrapper") {
+        // Keep the rendered formula synchronized when this field uses the generic editor path.
+        const renderedFormula = document.getElementById("articleMathJax");
+        renderedFormula.innerText = newValue ? `$$${newValue}$$` : "No formula";
+        if (window.MathJax) MathJax.typesetPromise([renderedFormula]);
+    }
+
 }

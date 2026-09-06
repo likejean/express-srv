@@ -18,7 +18,20 @@
 			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
 			crossorigin="anonymous">
 		</script>
+		<!-- Register the Dirac commands used by the formula preview and cheat sheet. -->
+		<script>
+			window.MathJax = {
+				tex: {
+					macros: {
+						bra: ["\\left\\langle #1\\right|", 1],
+						ket: ["\\left| #1\\right\\rangle", 1],
+						braket: ["\\left\\langle #1 \\middle| #2 \\right\\rangle", 2]
+					}
+				}
+			};
+		</script>
 		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+		<script src="https://unpkg.com/mathlive"></script>
 		
 		<title>Eidt Article</title>
     </head>
@@ -55,6 +68,7 @@
 					</div>
 					
 					<div class="card-body text-success">
+						<!-- MathLive editor and rendered MathJax preview for the article formula. -->
 						<div class="row d-flex align-items-center">
 							<div class="col-3 d-none d-sm-flex">Article Title:</div>               
 							<div id="articleTitleWrapper" class="col-8 col-sm-6 mb-1 gutter article-notice-wrapper"><span class="article-notice-span" id="articleTitle"></span></div>                
@@ -66,6 +80,54 @@
 							<div class="col-3 d-none d-sm-flex">Article Preface:</div>               
 							<div id="articlePrefaceWrapper" class="col-8 col-sm-6 mb-1 gutter article-notice-wrapper"><span class="article-notice-span" id="articlePreface"></span></div>                
 							<div class="mx-3 p-2 col-2"><i id="articlePrefaceIcon" class="fa-solid float-end fa-2x fa-ellipsis-vertical"></i></div>							
+						</div>
+						<hr/>
+
+						<div class="row d-flex align-items-center">
+							<div class="col-3 d-none d-sm-flex">Mathematical Formula:</div>
+							<div id="articleMathJaxWrapper" class="col-8 col-sm-6 mb-1 gutter article-notice-wrapper">
+								<label for="mathJaxEditor" class="form-label">Mathematical Formula</label>
+								<math-field
+									id="mathJaxEditor"
+									class="math-jax-script"
+									aria-describedby="mathJaxScriptHelp"
+									placeholder="Enter a mathematical formula"
+								></math-field>
+								<input type="hidden" name="mathJaxScript" id="mathJaxScript" />
+								<small id="mathJaxScriptHelp" class="form-text text-muted">Use the formula editor to update the MathJax-compatible LaTeX.</small>
+								<div id="articleMathJax" class="math-jax-formula mt-2"></div>
+							</div>
+							<!-- Keep the advanced notation reference collapsed until requested. -->
+							<div class="mx-3 p-2 col-2">
+								<button id="mathJaxOptionsButton" type="button" class="btn btn-outline-secondary float-end" aria-expanded="false" aria-controls="diracNotationCheatSheet" title="Show Dirac notation cheat sheet">
+									<i class="fa-solid fa-sliders" aria-hidden="true"></i>
+									<span class="visually-hidden">Formula options</span>
+								</button>
+							</div>
+							<!-- Hard-coded examples use the same LaTeX syntax accepted by the editor. -->
+							<div class="col-12">
+								<section id="diracNotationCheatSheet" class="dirac-notation-cheat-sheet" hidden aria-labelledby="diracNotationTitle">
+									<h2 id="diracNotationTitle" class="h6">Dirac notation cheat sheet</h2>
+									<table class="table table-sm mb-0">
+										<tbody>
+											<tr><th scope="row">Ket</th><td>\(\ket{\psi}\)<code>\ket{\psi}</code></td></tr>
+											<tr><th scope="row">Bra</th><td>\(\bra{\phi}\)<code>\bra{\phi}</code></td></tr>
+											<tr><th scope="row">Inner product</th><td>\(\braket{\phi}{\psi}\)<code>\braket{\phi}{\psi}</code></td></tr>
+											<tr><th scope="row">Outer product</th><td>\(\ket{\psi}\bra{\phi}\)<code>\ket{\psi}\bra{\phi}</code></td></tr>
+											<tr><th scope="row">Expectation</th><td>\(\bra{\psi}\hat{H}\ket{\psi}\)<code>\bra{\psi}\hat{H}\ket{\psi}</code></td></tr>
+											<tr><th scope="row">Superposition</th><td>\(a\ket{0}+b\ket{1}\)<code>a\ket{0}+b\ket{1}</code></td></tr>
+											<tr><th scope="row">Orthonormality</th><td>\(\braket{m}{n}=\delta_{mn}\)<code>\braket{m}{n}=\delta_{mn}</code></td></tr>
+											<tr><th scope="row">Matrix element</th><td>\(\bra{m}\hat{A}\ket{n}\)<code>\bra{m}\hat{A}\ket{n}</code></td></tr>
+											<tr><th scope="row">Projector</th><td>\(\hat{P}_{\psi}=\ket{\psi}\bra{\psi}\)<code>\hat{P}_{\psi}=\ket{\psi}\bra{\psi}</code></td></tr>
+											<tr><th scope="row">Completeness</th><td>\(\sum_n\ket{n}\bra{n}=\mathbb{I}\)<code>\sum_n\ket{n}\bra{n}=\mathbb{I}</code></td></tr>
+											<tr><th scope="row">Tensor product</th><td>\(\ket{\psi}\otimes\ket{\phi}\)<code>\ket{\psi}\otimes\ket{\phi}</code></td></tr>
+											<tr><th scope="row">Time evolution</th><td>\(\ket{\psi(t)}=e^{-i\hat{H}t/\hbar}\ket{\psi(0)}\)<code>\ket{\psi(t)}=e^{-i\hat{H}t/\hbar}\ket{\psi(0)}</code></td></tr>
+											<tr><th scope="row">Commutator</th><td>\([\hat{A},\hat{B}]=\hat{A}\hat{B}-\hat{B}\hat{A}\)<code>[\hat{A},\hat{B}]=\hat{A}\hat{B}-\hat{B}\hat{A}</code></td></tr>
+											<tr><th scope="row">Density operator</th><td>\(\rho=\sum_i p_i\ket{i}\bra{i}\)<code>\rho=\sum_i p_i\ket{i}\bra{i}</code></td></tr>
+										</tbody>
+									</table>
+								</section>
+							</div>
 						</div>
 						<hr/>
 
@@ -136,6 +198,7 @@
 	<script src="../js/utils/attachEventListenersToHtml.js"></script>
 	<script src="../js/article/utils/editArticleIconClickEventCallback.js"></script>
 	<script src="../js/article/utils/editArticleInputChangeValueCallback.js"></script>
+	<script src="../js/article/utils/mathJaxInputChangeValueCallback.js"></script>
 	
 
 	<script src="../js/article/fetchArticleById.js"></script>
@@ -147,6 +210,17 @@
 		//attach event listener to all icons in Calibration Card for updates/edits
 		let icons = document.querySelectorAll(".fa-ellipsis-vertical");
 		attachEventListenersToHtml(icons, editArticleIconClickEventCallback);
+
+		// Toggle the optional Dirac notation reference and typeset it when opened.
+		const mathJaxOptionsButton = document.getElementById("mathJaxOptionsButton");
+		const diracNotationCheatSheet = document.getElementById("diracNotationCheatSheet");
+		mathJaxOptionsButton.addEventListener("click", () => {
+			const isOpen = !diracNotationCheatSheet.hidden;
+			diracNotationCheatSheet.hidden = isOpen;
+			mathJaxOptionsButton.setAttribute("aria-expanded", String(!isOpen));
+			mathJaxOptionsButton.title = isOpen ? "Show Dirac notation cheat sheet" : "Hide Dirac notation cheat sheet";
+			if (!isOpen && window.MathJax) MathJax.typesetPromise([diracNotationCheatSheet]);
+		});
 
     </script>
 </html>

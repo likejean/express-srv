@@ -22,6 +22,10 @@ function editArticleIconClickEventCallback(event) {
 		
 		//initialize value of the edit input
 		input.value = wrapper.textContent;	
+		if (wrapperName === "articleMathJaxWrapper") {
+			// MathLive exposes its value separately from the preview text.
+			input.value = _articlefactory.inputWrappers[wrapperName].value;
+		}
 		
 		//remove all child nodes of the text wrapper
 		removeAllChildNodes(wrapper);

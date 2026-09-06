@@ -350,3 +350,28 @@ canvas {
 
 
 }
+
+/* Collapsed Dirac reference panel shown from the formula options button. */
+.dirac-notation-cheat-sheet {
+	border: 1px solid rgb(190, 205, 232);
+	border-radius: 0.25rem;
+	margin-top: 0.75rem;
+	padding: 0.75rem;
+}
+
+.dirac-notation-cheat-sheet table {
+	font-size: 0.8rem;
+}
+
+.dirac-notation-cheat-sheet th {
+	white-space: nowrap;
+}
+
+.dirac-notation-cheat-sheet code {
+	display: block;
+	font-size: 0.7rem;
+	line-height: 1.2;
+	white-space: normal;
+	word-break: break-word;
+}
+
