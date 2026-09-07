@@ -19,6 +19,17 @@
 			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
 			crossorigin="anonymous">
 		</script>
+		<script>
+			window.MathJax = {
+				tex: {
+					macros: {
+						bra: ["\\left\\langle #1\\right|", 1],
+						ket: ["\\left| #1\\right\\rangle", 1],
+						braket: ["\\left\\langle #1 \\middle| #2 \\right\\rangle", 2]
+					}
+				}
+			};
+		</script>
 		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
 		
 		

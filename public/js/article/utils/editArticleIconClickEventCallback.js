@@ -44,6 +44,19 @@ function editArticleIconClickEventCallback(event) {
 		//append edit input to the wrapper
 		wrapper.appendChild(input);
 		if (wrapperName === "articleContentWrapper") {
+			input.style.display = "none";
+			const editorElement = document.createElement("div");
+			editorElement.id = "articleContentEditor";
+			wrapper.appendChild(editorElement);
+			window.articleContentEditor = initializeRichTextArticleContentEditor(
+				editorElement,
+				input,
+				input.value,
+				(value) => {
+					_articlefactory.inputWrappers.articleContentWrapper.value = value;
+					editArticleInputChangeValueCallback({ target: input });
+				}
+			);
 			const formulaControls = document.createElement("div");
 			formulaControls.className = "mt-3 p-2 border rounded bg-light";
 			formulaControls.innerHTML = `
@@ -67,6 +80,7 @@ function editArticleIconClickEventCallback(event) {
 		input.removeEventListener("input", editArticleInputChangeValueCallback);
 		document.getElementById("inputErrorMessage").textContent = "";
 		removeAllChildNodes(wrapper);
+		if (wrapperName === "articleContentWrapper") window.articleContentEditor = null;
 		icon.classList.replace("fa-file-pen", "fa-ellipsis-vertical");
 		_articlefactory.inputWrappers[wrapperName].status = false;
 		wrapper.append(..._articlefactory.inputWrappers[wrapperName].childNodes);

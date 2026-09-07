@@ -1,5 +1,5 @@
 // Update Article Paragraph Quantity Based on Input
-// Adjusts the content textarea to match the specified number of paragraphs
+// Adjusts the content editor to match the specified number of paragraphs
 // Each paragraph is denoted by a section symbol (§) followed by its number
 document.getElementById("articleParagraphQuantity").addEventListener("input", updateArticleParagraphQty);
 
@@ -8,30 +8,32 @@ document.getElementById("articleParagraphQuantity").addEventListener("input", up
 function updateArticleParagraphQty() {
     const paragraphQuantity = document.getElementById("articleParagraphQuantity").value;
     const articleContent = document.getElementById("articleContent");
+	const editor = window.articleContentEditor;
+	const currentText = editor ? editor.getText().trimEnd() : articleContent.value;
     
 	// Count current paragraphs in the content
-	let currentParagraphs = articleContent.value.split("\n").filter(para => para.trim() !== "").length;
+	let currentParagraphs = currentText.split("\n").filter(para => para.trim() !== "").length;
 
 	// If the desired quantity is greater than current, add paragraphs
 	while (currentParagraphs < paragraphQuantity) {
-		articleContent.value += `§${currentParagraphs + 1}\n\n`;
+		if (editor) {
+			editor.insertText(editor.getLength() - 1, `§${currentParagraphs + 1}\n\n`);
+		} else articleContent.value += `§${currentParagraphs + 1}\n\n`;
 		currentParagraphs++;
-		currentParagraphs >= 1 ? articleContent.disabled = false : null;
-		_articlefactory.newArticleFormInputs["content"].value = articleContent.value;
-		_articlefactory.isFormInputFieldEmpty("content") ? articleContent.style.border = "3px solid red" : articleContent.style.border = "2px solid blue";
+		_articlefactory.newArticleFormInputs["content"].value = editor ? editor.root.innerHTML : articleContent.value;
 		
 	}
 	// If the desired quantity is less than current, remove paragraphs
 	while (currentParagraphs > paragraphQuantity) {
-		const paragraphs = articleContent.value.split("\n");
+		const paragraphs = (editor ? editor.getText() : articleContent.value).split("\n");
 		paragraphs.splice(-3, 2); // Remove last paragraph and its two newlines
-		articleContent.value = paragraphs.join("\n");
+		if (editor) {
+			editor.setText(paragraphs.join("\n"));
+		} else articleContent.value = paragraphs.join("\n");
 		currentParagraphs--;
 		if (currentParagraphs === 0) {
-			articleContent.value = "";
-			_articlefactory.newArticleFormInputs["content"].value = articleContent.value;
-			articleContent.style.border = "3px solid red";
-			articleContent.disabled = true;
+			if (editor) editor.setText("");
+			else articleContent.value = "";
 		}
 	}
 

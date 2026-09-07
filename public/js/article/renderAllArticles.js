@@ -149,7 +149,8 @@ function renderAllArticles(articles) {
 		// Create article content
 		const articleContent = document.createElement("p");
 		articleContent.classList.add("card-text", "article-content");
-		articleContent.innerText = article.content;
+		articleContent.innerHTML = article.content
+			.replace(/\\\^\{([^{}]+)\}/g, "\\hat{$1}");
 		contentCol.appendChild(articleContent);
 
 		// Create article image
@@ -190,11 +191,22 @@ function renderAllArticles(articles) {
 		articleCard.appendChild(cardBody);
 
 		// Append article card to article container
-		articleContainer.appendChild(articleCard);		
-
-		// Trigger MathJax typesetting for the newly added content
-		MathJax.typesetPromise([articleContainer]);
+		articleContainer.appendChild(articleCard);
 	});
+
+	// Wait for the async MathJax CDN before typesetting dynamically added formulas.
+	const typesetArticles = () => {
+		if (!window.MathJax) return;
+
+		if (window.MathJax.startup?.promise) {
+			window.MathJax.startup.promise.then(() => window.MathJax.typesetPromise([articleContainer]));
+			return;
+		}
+
+		document.getElementById("MathJax-script")?.addEventListener("load", typesetArticles, { once: true });
+	};
+
+	typesetArticles();
 
 }
 
