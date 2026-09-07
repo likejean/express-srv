@@ -39,9 +39,23 @@ function editArticleIconClickEventCallback(event) {
 		Object.entries(_articlefactory.inputWrappers[wrapperName].attributes).forEach(([key, value]) => {
 			input.setAttribute(key, value);
 		});
+		if (wrapperName === "articleContentWrapper") input.id = "articleContent";
 		
 		//append edit input to the wrapper
 		wrapper.appendChild(input);
+		if (wrapperName === "articleContentWrapper") {
+			const formulaControls = document.createElement("div");
+			formulaControls.className = "mt-3 p-2 border rounded bg-light";
+			formulaControls.innerHTML = `
+				<label for="articleContentFormulaEditor" class="form-label">Insert formula into content</label>
+				<div class="d-flex gap-2 align-items-center">
+					<math-field id="articleContentFormulaEditor" class="form-control math-jax-script" placeholder="Build an inline formula"></math-field>
+					<button id="insertArticleContentFormula" type="button" class="btn btn-outline-primary text-nowrap">Insert formula</button>
+				</div>
+				<small class="form-text text-muted">Place the cursor in the article text, build a formula, then insert it there.</small>`;
+			wrapper.appendChild(formulaControls);
+			attachArticleContentFormulaInsertion();
+		}
 
 		//attach event listener to edit input
 		input.addEventListener("input", editArticleInputChangeValueCallback);

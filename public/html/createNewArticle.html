@@ -246,6 +246,18 @@
 										></textarea>
 										<small id="articleContentHelp" class="form-text text-muted"
 											>The main content of the article.</small>
+										<div class="mt-3 p-2 border rounded bg-light">
+											<label for="articleContentFormulaEditor" class="form-label">Insert formula into content</label>
+											<div class="d-flex gap-2 align-items-center">
+												<math-field
+													id="articleContentFormulaEditor"
+													class="form-control math-jax-script"
+													placeholder="Build an inline formula"
+												></math-field>
+												<button id="insertArticleContentFormula" type="button" class="btn btn-outline-primary text-nowrap">Insert formula</button>
+											</div>
+											<small class="form-text text-muted">Place the cursor in the article text, build a formula, then insert it there.</small>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -405,6 +417,7 @@
 		<!--User Interface & API endpoint functions & utils-->		
 		<script src="../js/article/fetchAllCalProcedureData.js"></script>
 		<script src="../js/article/utils/mathJaxInputChangeValueCallback.js"></script>
+		<script src="../js/article/utils/insertFormulaIntoArticleContent.js"></script>
 		<script src="../js/article/utils/updateArticleParagraphQty.js"></script>		
 		<script src="../js/article/getNewArticleFormValues.js"></script>		
 		<script src="../js/article/createNewArticleRecord.js?v=2"></script>			
