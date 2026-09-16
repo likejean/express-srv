@@ -255,6 +255,59 @@ display: inline-block;
 	pointer-events: auto;
 }
 
+.calibration-print-report {
+	display: none;
+}
+
+.calibration-print-controls {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.75rem;
+	min-height: 3.5rem;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+@media print {
+	.calibration-print-controls,
+	.calibration-print-controls + .modal,
+	body > *:not(.calibration-print-report) {
+		display: none !important;
+	}
+
+	.calibration-print-report {
+		display: block !important;
+		padding: 1rem;
+		color: #000;
+	}
+
+	.calibration-print-report h1 {
+		font-size: 1.5rem;
+		margin-bottom: 0.25rem;
+	}
+
+	.calibration-print-report p {
+		margin-bottom: 1rem;
+	}
+
+	.calibration-print-report table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	.calibration-print-report th,
+	.calibration-print-report td {
+		border: 1px solid #000;
+		padding: 0.4rem;
+		text-align: left;
+	}
+
+	.calibration-print-report thead {
+		display: table-header-group;
+	}
+}
+
 #range-levels-validation,
 .new-chart-valid-input,
 .new-article-valid-input,
